@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="reciver_tb" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="16" />
+   <wave_markers>
+      <marker time="564917000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/reciver_tb/iclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk</obj_property>
+      <obj_property name="ObjectShortName">iclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/inrst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inrst</obj_property>
+      <obj_property name="ObjectShortName">inrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/irx" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">irx</obj_property>
+      <obj_property name="ObjectShortName">irx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/itc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">itc</obj_property>
+      <obj_property name="ObjectShortName">itc</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/ifull" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ifull</obj_property>
+      <obj_property name="ObjectShortName">ifull</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/odata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">odata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">odata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/orx_done" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">orx_done</obj_property>
+      <obj_property name="ObjectShortName">orx_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/iclk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk_period</obj_property>
+      <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/snext_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">snext_state</obj_property>
+      <obj_property name="ObjectShortName">snext_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/snext_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">snext_state</obj_property>
+      <obj_property name="ObjectShortName">snext_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/stc_cnt_done" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_cnt_done</obj_property>
+      <obj_property name="ObjectShortName">stc_cnt_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/sshw_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sshw_en</obj_property>
+      <obj_property name="ObjectShortName">sshw_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/stc_cnt_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">stc_cnt_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/sdata_cnt_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sdata_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">sdata_cnt_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/sshw_reg" type="array" db_ref_id="1">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">sshw_reg[8:0]</obj_property>
+      <obj_property name="ObjectShortName">sshw_reg[8:0]</obj_property>
+      <obj_property name="label">sshw_reg[8:0]</obj_property>
+   </wvobject>
+</wave_config>

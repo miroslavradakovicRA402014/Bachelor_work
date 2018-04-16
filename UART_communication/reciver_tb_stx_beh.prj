@@ -1,0 +1,2 @@
+vhdl isim_temp "reciver.vhd"
+vhdl isim_temp "reciver_tb.vhd"

@@ -30,9 +30,11 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity reciver is
-	 Generic(
-		DATA_WIDTH : integer := 8;
-		TC_NUMBER  : integer := 16;
+	 Generic (
+		DATA_WIDTH 		: integer := 8;
+		TC_PERIOD  		: integer := 16;
+		DATA_CNT_WIDTH : integer := 4;
+		TC_CNT_WIDTH	: integer := 4
 	 );
     Port ( iCLK     : in   std_logic;
            inRST    : in   std_logic;
@@ -44,18 +46,22 @@ entity reciver is
 end reciver;
 
 architecture Behavioral of reciver is
+
+	type tSTATES is (IDLE, START, DATA, STOP); 							     -- Reciver FSM state type
+
+	signal sCURRENT_STATE 	 : tSTATES; 										  -- Reciver FSM current state 
+	signal sNEXT_STATE    	 : tSTATES;	   						      	  -- Reciver FSM next state 
 	
-	type tSTATES is (IDLE, START, DATA, STOP); 							  -- Reciver FSM state type
-
-	-- Reciver signals
-	signal sCURRENT_STATE : tSTATES; 										  -- Reciver FSM current state signal
-	signal sNEXT_STATE    : tSTATES;	   						      	  -- Reciver FSM next state signal
+	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   -- Recived data bits counter 
+	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH - 1   downto 0);	  -- Terminal count counter
 	
-	signal sDATA_CNT      : unsigned( downto 0); 	    				  -- Recived data bits counter 
-	signal sTC_CNT        : unsigned( downto 0);							  -- Terminal count counter
-	signal sSHW_REG 		 : std_logic_vector(DATA_WIDTH-1 downto 0); -- Shift register 
+	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   -- Shift register 
 
+	signal sDATA_CNT_EN 		 : std_logic;										  -- Data counter enable
+	signal sTC_CNT_EN 		 : std_logic;										  -- Terminal count counter enable
+	signal sSHW_EN				 : std_logic;										  -- Shifter enable
 
+	signal sTC_CNT_DONE 		 : std_logic;										  -- Terminal count counter count done
  
 begin
 
@@ -66,10 +72,10 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			sCURRENT_STATE <= sNEXT_STATE; -- Move to next state
 		end if;
-	end process;
+	end process fsm_reg;
 
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iRX, sTC_CNT, sDATA_CNT) begin
+	fsm_next : process (sCURRENT_STATE, iRX, sTC_CNT_DONE, sDATA_CNT) begin
 		case (sCURRENT_STATE) is 
 			when IDLE =>
 				-- Wait for RX 
@@ -80,11 +86,11 @@ begin
 				end if;
 			when START =>
 				-- Check if sampling period done
-				if (sTC_CNT = TC_NUMBER - 1) begin
+				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
 			   else
 					sNEXT_STATE <= START;
-				end process;
+				end if;
 			when DATA =>
 				-- Check if all data bits with parity bit recived 
 				if (sDATA_CNT = DATA_WIDTH) then
@@ -94,46 +100,91 @@ begin
 				end if;
 			when STOP =>
 				-- Check if sampling period done 
-				if (sTC_CNT = TC_NUMBER - 1) begin
+				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Recive next data 
 			   else
 					sNEXT_STATE <= STOP;
-				end process;			
+				end if;			
 		end case;
-	end process;
+	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE) is
-			when IDLE | START | DATA  =>
-				oRX_DONE <= '0';
-			when STOP =>	
-				oRX_DONE <= '1';
-	end case;
+	fsm_out: process (sCURRENT_STATE, iFULL) begin
+		case (sCURRENT_STATE) is
+			when IDLE  =>
+				sTC_CNT_EN	 <= '0';
+				sDATA_CNT_EN <= '0';
+				sSHW_EN		 <= '0';
+				oRX_DONE 	 <= '0';
+			when START =>	
+				sTC_CNT_EN	 <= '1';
+				sDATA_CNT_EN <= '0';
+				sSHW_EN		 <= '0';
+				oRX_DONE 	 <= '0';			
+			when DATA  =>	
+				sTC_CNT_EN	 <= '1';
+				sDATA_CNT_EN <= '1';
+				sSHW_EN		 <= '1';
+				oRX_DONE 	 <= '0';
+			when STOP  =>	
+				sTC_CNT_EN	 <= '1';
+				sDATA_CNT_EN <= '0';
+				sSHW_EN		 <= '0';
+				if (iFULL = '1') then -- FIFO is full, 
+					oRX_DONE  <= '0';
+				else 
+					oRX_DONE  <= '1';
+				end if;	
+		end case;		
+	end process fsm_out;
 	
 	-- Terminal count counter process
 	tc_cnt: process (iCLK, inRST) begin
 		if (inRST = '0') then
-			sTC_CNT <= (others => '0');
-		elsif (iCLK'event and iCLK = '1') then		
-			if (sTC = TC_NUMBER - 1) then
-				sTC_CNT <= (others => '0');	
-			else
-				sTC_CNT <= sTC_CNT + 1;
-			end if;
+			sTC_CNT <= (others => '0'); -- Reset counter
+		elsif (iCLK'event and iCLK = '1') then
+			if (sTC_CNT_EN = '1') then -- Check for counter enable
+				if (sTC_CNT = TC_PERIOD - 1) then
+					sTC_CNT <= (others => '0'); 
+				else
+					sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
+				end if;
+			end if;		
 		end if;
-	end process;
+	end process tc_cnt;
 	
+	-- Terminal count done statement
+	sTC_CNT_DONE <= '1' when sTC_CNT = TC_PERIOD - 1 else 
+						 '0';
+						 
 	-- Data bits counter process
 	data_cnt: process (iCLK, inRST) begin
 		if (inRST = '0') then
-			sDATA_CNT <= (others => '0');
+			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sDATA_CNT_EN = '1') then
-	
-	
+			if (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
+				if (sDATA_CNT = DATA_WIDTH) then
+					sDATA_CNT <= (others => '0');
+				else
+					sDATA_CNT <= sDATA_CNT + 1; -- Count data bits
+				end if;				
 			end if;
 		end if;
-	end process;
+	end process data_cnt;
+	
+	-- Shift register process
+	shift_reg : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sSHW_REG <= (others => '0'); -- Reset shifter
+		elsif (iCLK'event and iCLK = '1') then
+			if (sSHW_EN = '1' and sTC_CNT_DONE = '1') then -- Check for shift enable
+				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH downto 1); -- Shift data bits
+			end if;
+		end if;
+	end process shift_reg;
+	
+	-- Reciver data output
+	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0);
 	
 end Behavioral;
 
