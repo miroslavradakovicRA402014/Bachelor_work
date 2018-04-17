@@ -100,11 +100,16 @@ BEGIN
       -- insert stimulus here 
 		inRST <= '1';
 		
-		iDATA  <= "10101010";
-		iSTART <= '1';
+		iDATA  <= "10101011";
+		iSTART <= '0';
 		
 		iTC    <= '1';
-
+		
+      wait for iCLK_period*10;
+		
+		iSTART <= '1';
+		
+      wait for iCLK_period*100;
 
 
       wait;

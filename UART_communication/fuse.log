@@ -7,7 +7,7 @@ Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/transmitter
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/transmitter_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 195672 KB
+Fuse Memory Usage: 196056 KB
 Fuse CPU Usage: 186 ms
 Compiling package standard
 Compiling package std_logic_1164
@@ -18,5 +18,5 @@ Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 6 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/UART_communication/transmitter_tb_isim_beh.exe
-Fuse Memory Usage: 212088 KB
+Fuse Memory Usage: 211448 KB
 Fuse CPU Usage: 296 ms

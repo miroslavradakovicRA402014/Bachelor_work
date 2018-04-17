@@ -48,7 +48,7 @@ end transmitter;
 
 architecture Behavioral of transmitter is
 
-	type tSTATES is (IDLE, START, DATA, STOP); 							     		-- Reciver FSM state type
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     		-- Reciver FSM state type
 
 	signal sCURRENT_STATE 	 : tSTATES; 										  		-- Reciver FSM current state 
 	signal sNEXT_STATE    	 : tSTATES;	   						      	  		-- Reciver FSM next state
@@ -66,6 +66,8 @@ architecture Behavioral of transmitter is
 	
 	signal sSHW_LOAD		    : std_logic;										 		-- Shift register load 
 	
+	signal sPARITY				 : std_logic;												-- Odd parity
+	
 begin
 
 	-- FSM state register process
@@ -80,28 +82,35 @@ begin
 	-- Reciver FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iSTART, sTC_CNT_DONE, sDATA_CNT) begin
 		case (sCURRENT_STATE) is 
-			when IDLE =>
+			when IDLE   =>
 				-- Wait for FIFO 
 				if (iSTART = '1') then 
 					sNEXT_STATE <= START; -- Get for start bit
 				else 
 					sNEXT_STATE <= IDLE;
 				end if;
-			when START =>
+			when START  =>
 				-- Check if sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
 			   else
 					sNEXT_STATE <= START;
 				end if;
-			when DATA =>
+			when DATA   =>
 				-- Check if all data bits sent
-				if (sDATA_CNT = DATA_WIDTH) then
-					sNEXT_STATE <= STOP; -- Get for stop bit  
+				if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then
+					sNEXT_STATE <= PARITY; -- Get for stop bit  
 				else 
 					sNEXT_STATE <= DATA;
 				end if;
-			when STOP =>
+			when PARITY =>
+				-- Check if sampling period done 
+				if (sTC_CNT_DONE = '1') then
+					sNEXT_STATE <= STOP; -- Recive next data 
+			   else
+					sNEXT_STATE <= PARITY;
+				end if;				
+			when STOP   =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Recive next data 
@@ -135,6 +144,13 @@ begin
 				sSHW_LOAD	 <= '0';
 				oTX_READY 	 <= '0';	
 				oTX 			 <= sSHW_REG(0);
+			when PARITY  =>	
+				sTC_CNT_EN	 <= '1';
+				sDATA_CNT_EN <= '0';
+				sSHW_EN		 <= '0';
+				sSHW_LOAD	 <= '0';
+			   oTX_READY 	 <= '0';	
+				oTX			 <= sPARITY;				
 			when STOP  =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
@@ -169,12 +185,10 @@ begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
-				if (sDATA_CNT = DATA_WIDTH) then
-					sDATA_CNT <= (others => '0');
-				else
-					sDATA_CNT <= sDATA_CNT + 1; -- Count data bits
-				end if;				
+			if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then -- Reset counter if all bits was sent
+				sDATA_CNT <= (others => '0');
+			elsif (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
+				sDATA_CNT <= sDATA_CNT + 1; -- Count data bits			
 			end if;
 		end if;
 	end process data_cnt;
@@ -191,6 +205,10 @@ begin
 			end if;
 		end if;
 	end process shift_reg;
+	
+	-- Parity bit 
+	sPARITY <= iDATA(0) xor iDATA(1) xor iDATA(2) xor iDATA(3) xor iDATA(4) xor iDATA(5) xor iDATA(6) xor iDATA(7);
+	
 	
 end Behavioral;
 
