@@ -2,14 +2,14 @@ Command line:
    transmitter_tb_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  61937
+     -socket  62187
 
-Tue Apr 17 11:42:27 2018
+Tue Apr 17 12:05:04 2018
 
 
- Elaboration Time: 0.09375 sec
+ Elaboration Time: 0.125 sec
 
- Current Memory Usage: 1510.18 Meg
+ Current Memory Usage: 1509.52 Meg
 
  Total Signals          : 25
  Total Nets             : 38
@@ -20,9 +20,9 @@ Tue Apr 17 11:42:27 2018
  Total Traceable Variables  : 18
  Total Scalar Nets and Variables : 526
 
- Total Simulation Time: 0.921875 sec
+ Total Simulation Time: 0.328125 sec
 
- Current Memory Usage: 1037.53 Meg
+ Current Memory Usage: 1510.57 Meg
 
-Tue Apr 17 11:44:22 2018
+Tue Apr 17 12:05:16 2018
 

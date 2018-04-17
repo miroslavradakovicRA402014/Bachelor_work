@@ -1,0 +1,2 @@
+vhdl work "reciver.vhd"
+vhdl work "reciver_tb.vhd"

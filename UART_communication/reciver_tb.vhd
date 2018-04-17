@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   10:48:32 04/15/2018
+-- Create Date:   10:48:32 04/16/2018
 -- Design Name:   
 -- Module Name:   D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb.vhd
 -- Project Name:  UART_communication
@@ -101,56 +101,61 @@ BEGIN
       -- insert stimulus here 
 		inRST <= '1';
 		
-		iTC   <= '0';
+		iTC   <= '1';
 		iFULL <= '0';
 		
-		wait for iCLK_period*5;
+		wait for iCLK_period*10;
 		
-	   -- Start bit
-		
+	   -- Start bit	
 		iRX   <= '0';	
-		iTC   <= '1';
+		--iTC   <= '1';
 	  
-		wait for iCLK_period*15;
+		wait for iCLK_period*17;
 		
 	   -- Data bits
 		
+		-- 0
 		iRX  <= '1';
 		
-		wait for iCLK_period*15;
-		
+		wait for iCLK_period*17;
+		-- 1
 		iRX  <= '0';
 		
-		wait for iCLK_period*15;
-
+		wait for iCLK_period*16;
+		-- 2
 		iRX  <= '1';
 		
-		wait for iCLK_period*15;		
-
+		wait for iCLK_period*16;		
+		-- 3
 		iRX  <= '0';
 		
-		wait for iCLK_period*15;
-		
+		wait for iCLK_period*16;
+		-- 4
 		iRX  <= '1';
 		
-		wait for iCLK_period*15;	
-
+		wait for iCLK_period*16;	
+		-- 5
 		iRX  <= '0';
 		
-		wait for iCLK_period*15;		
-	
+		wait for iCLK_period*16;		
+		-- 6
 		iRX  <= '1';
 		
-		wait for iCLK_period*15;	
-		
+		wait for iCLK_period*16;	
+		-- 7
 		iRX  <= '0';
 		
-		wait for iCLK_period*15;
+		wait for iCLK_period*17;
 
+--		-- parity
+--		iRX  <= '1';
+--		
+--		wait for iCLK_period*16;		
+		
 		-- Stop bit
 		iRX <= '0';
 
-		wait for iCLK_period*15;
+		wait for iCLK_period*16;
 
 		iRX <= '1';
 

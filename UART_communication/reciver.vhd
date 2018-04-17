@@ -55,14 +55,14 @@ architecture Behavioral of reciver is
 	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   -- Recived data bits counter 
 	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  -- Terminal count counter
 	
-	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   -- Shift register 
+	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register 
 
 	signal sDATA_CNT_EN 		 : std_logic;										  -- Data counter enable
 	signal sTC_CNT_EN 		 : std_logic;										  -- Terminal count counter enable
 	signal sSHW_EN				 : std_logic;										  -- Shifter enable
 
 	signal sTC_CNT_DONE 		 : std_logic;										  -- Terminal count counter count done
- 
+	 
 begin
 
 	-- FSM state register process
@@ -91,9 +91,9 @@ begin
 			   else
 					sNEXT_STATE <= START;
 				end if;
-			when DATA =>
-				-- Check if all data bits with parity bit recived 
-				if (sDATA_CNT = DATA_WIDTH + 1) then
+			when DATA   =>
+				-- Check if all data bits sent
+				if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= STOP; -- Get for stop bit  
 				else 
 					sNEXT_STATE <= DATA;
@@ -162,12 +162,10 @@ begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
-				if (sDATA_CNT = DATA_WIDTH + 1) then
-					sDATA_CNT <= (others => '0');
-				else
-					sDATA_CNT <= sDATA_CNT + 1; -- Count data bits
-				end if;				
+			if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then -- Reset counter if all bits was sent
+				sDATA_CNT <= (others => '0');
+			elsif (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
+				sDATA_CNT <= sDATA_CNT + 1; -- Count data bits			
 			end if;
 		end if;
 	end process data_cnt;
@@ -178,7 +176,7 @@ begin
 			sSHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sSHW_EN = '1' and sTC_CNT_DONE = '1') then -- Check for shift enable
-				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH downto 1); -- Shift data bits
+				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH - 1 downto 1); -- Shift data bits
 			end if;
 		end if;
 	end process shift_reg;

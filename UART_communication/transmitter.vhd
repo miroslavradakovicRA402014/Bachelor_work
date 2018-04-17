@@ -48,7 +48,7 @@ end transmitter;
 
 architecture Behavioral of transmitter is
 
-	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     		-- Reciver FSM state type
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							-- Reciver FSM state type
 
 	signal sCURRENT_STATE 	 : tSTATES; 										  		-- Reciver FSM current state 
 	signal sNEXT_STATE    	 : tSTATES;	   						      	  		-- Reciver FSM next state

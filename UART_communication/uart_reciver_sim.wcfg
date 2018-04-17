@@ -11,9 +11,9 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="16" />
+   <WVObjectSize size="15" />
    <wave_markers>
-      <marker time="564917000" label="" />
+      <marker time="1672000000" label="" />
    </wave_markers>
    <wvobject fp_name="/reciver_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -47,17 +47,9 @@
       <obj_property name="ElementShortName">iclk_period</obj_property>
       <obj_property name="ObjectShortName">iclk_period</obj_property>
    </wvobject>
-   <wvobject fp_name="/reciver_tb/uut/snext_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">snext_state</obj_property>
-      <obj_property name="ObjectShortName">snext_state</obj_property>
-   </wvobject>
    <wvobject fp_name="/reciver_tb/uut/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>
       <obj_property name="ObjectShortName">scurrent_state</obj_property>
-   </wvobject>
-   <wvobject fp_name="/reciver_tb/uut/snext_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">snext_state</obj_property>
-      <obj_property name="ObjectShortName">snext_state</obj_property>
    </wvobject>
    <wvobject fp_name="/reciver_tb/uut/stc_cnt_done" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">stc_cnt_done</obj_property>
@@ -77,8 +69,12 @@
    </wvobject>
    <wvobject fp_name="/reciver_tb/uut/sshw_reg" type="array" db_ref_id="1">
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">sshw_reg[8:0]</obj_property>
-      <obj_property name="ObjectShortName">sshw_reg[8:0]</obj_property>
+      <obj_property name="ElementShortName">sshw_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sshw_reg[7:0]</obj_property>
       <obj_property name="label">sshw_reg[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/reciver_tb/uut/sshw_next" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sshw_next[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sshw_next[7:0]</obj_property>
    </wvobject>
 </wave_config>
