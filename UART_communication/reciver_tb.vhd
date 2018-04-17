@@ -139,7 +139,7 @@ BEGIN
 		
 		wait for iCLK_period*16;		
 		-- 6
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16;	
 		-- 7
@@ -147,10 +147,10 @@ BEGIN
 		
 		wait for iCLK_period*17;
 
---		-- parity
---		iRX  <= '1';
---		
---		wait for iCLK_period*16;		
+		-- parity
+		iRX  <= '1';
+		
+		wait for iCLK_period*17;		
 		
 		-- Stop bit
 		iRX <= '0';

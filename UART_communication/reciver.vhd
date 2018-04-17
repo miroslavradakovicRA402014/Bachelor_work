@@ -47,21 +47,23 @@ end reciver;
 
 architecture Behavioral of reciver is
 
-	type tSTATES is (IDLE, START, DATA, STOP); 							     -- Reciver FSM state type
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     -- Reciver FSM state type
 
-	signal sCURRENT_STATE 	 : tSTATES; 										  -- Reciver FSM current state 
-	signal sNEXT_STATE    	 : tSTATES;	   						      	  -- Reciver FSM next state 
+	signal sCURRENT_STATE 	 : tSTATES; 										  			  -- Reciver FSM current state 
+	signal sNEXT_STATE    	 : tSTATES;	   						      	  			  -- Reciver FSM next state 
 	
-	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   -- Recived data bits counter 
-	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  -- Terminal count counter
+	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  -- Recived data bits counter 
+	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  -- Terminal count counter
 	
-	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register 
+	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   	 		  -- Shift register for recived data
 
-	signal sDATA_CNT_EN 		 : std_logic;										  -- Data counter enable
-	signal sTC_CNT_EN 		 : std_logic;										  -- Terminal count counter enable
-	signal sSHW_EN				 : std_logic;										  -- Shifter enable
+	signal sDATA_CNT_EN 		 : std_logic;										  			  -- Data counter enable
+	signal sTC_CNT_EN 		 : std_logic;										  			  -- Terminal count counter enable
+	signal sSHW_EN				 : std_logic;										  			  -- Shifter enable
 
-	signal sTC_CNT_DONE 		 : std_logic;										  -- Terminal count counter count done
+	signal sTC_CNT_DONE 		 : std_logic;										  			  -- Terminal count counter count done
+	
+	signal sPARITY_OK 		 : std_logic;													  -- Parity check signal
 	 
 begin
 
@@ -77,14 +79,14 @@ begin
 	-- Reciver FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iRX, sTC_CNT_DONE, sDATA_CNT) begin
 		case (sCURRENT_STATE) is 
-			when IDLE =>
+			when IDLE   =>
 				-- Wait for RX 
 				if (iRX = '0') then 
 					sNEXT_STATE <= START; -- Get for start bit
 				else 
 					sNEXT_STATE <= IDLE;
 				end if;
-			when START =>
+			when START  =>
 				-- Check if sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
@@ -94,11 +96,18 @@ begin
 			when DATA   =>
 				-- Check if all data bits sent
 				if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= STOP; -- Get for stop bit  
+					sNEXT_STATE <= PARITY; -- Get for parity bit  
 				else 
 					sNEXT_STATE <= DATA;
 				end if;
-			when STOP =>
+			when PARITY =>
+				-- Check if sampling period done
+				if (sTC_CNT_DONE = '1') then
+					sNEXT_STATE <= STOP; -- Get for stop bit
+			   else
+					sNEXT_STATE <= PARITY;
+				end if;
+			when STOP   =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Recive next data 
@@ -111,22 +120,27 @@ begin
 	-- Reciver FSM output logic
 	fsm_out: process (sCURRENT_STATE, iFULL) begin
 		case (sCURRENT_STATE) is
-			when IDLE  =>
+			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
 				oRX_DONE 	 <= '0';
-			when START =>	
+			when START  =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
 				oRX_DONE 	 <= '0';			
-			when DATA  =>	
+			when DATA   =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '1';
 				sSHW_EN		 <= '1';
 				oRX_DONE 	 <= '0';
-			when STOP  =>	
+			when PARITY =>
+				sTC_CNT_EN	 <= '1';
+				sDATA_CNT_EN <= '0';
+				sSHW_EN		 <= '1';
+				oRX_DONE 	 <= '0';			
+			when STOP   =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
@@ -176,10 +190,13 @@ begin
 			sSHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sSHW_EN = '1' and sTC_CNT_DONE = '1') then -- Check for shift enable
-				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH - 1 downto 1); -- Shift data bits
+				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH downto 1); -- Shift data bits
 			end if;
 		end if;
 	end process shift_reg;
+	
+	-- Parity check signal generator
+	sPARITY_OK <= not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7)) xor sSHW_REG(8));
 	
 	-- Reciver data output
 	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0);
