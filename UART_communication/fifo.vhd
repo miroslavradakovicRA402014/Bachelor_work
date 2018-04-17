@@ -34,8 +34,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity fifo is
 	 Generic (
-		DATA_WIDTH   : integer := 8;
-		NUM_OF_WORDS : integer := 16
+		DATA_WIDTH   : integer := 8; -- Widht of FIFO word
+		NUM_OF_WORDS : integer := 16 -- Number of FIFO locations
 	 );
     Port ( iCLK   : in  std_logic;
            inRST  : in  std_logic;

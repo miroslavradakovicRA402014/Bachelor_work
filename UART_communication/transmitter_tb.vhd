@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   10:48:32 04/15/2018
+-- Create Date:   09:59:56 04/17/2018
 -- Design Name:   
--- Module Name:   D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb.vhd
+-- Module Name:   D:/BSc_workspace/Bachelor_work/UART_communication/transmitter_tb.vhd
 -- Project Name:  UART_communication
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: reciver
+-- VHDL Test Bench Created by ISE for module: transmitter
 -- 
 -- Dependencies:
 -- 
@@ -32,22 +32,22 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY reciver_tb IS
-END reciver_tb;
+ENTITY transmitter_tb IS
+END transmitter_tb;
  
-ARCHITECTURE behavior OF reciver_tb IS 
+ARCHITECTURE behavior OF transmitter_tb IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT reciver
+    COMPONENT transmitter
     PORT(
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
-         iRX : IN  std_logic;
          iTC : IN  std_logic;
-         iFULL : IN  std_logic;
-         oDATA : OUT  std_logic_vector(7 downto 0);
-         oRX_DONE : OUT  std_logic
+         iDATA : IN  std_logic_vector(7 downto 0);
+         iSTART : IN  std_logic;
+         oTX_READY : OUT  std_logic;
+         oTX : OUT  std_logic
         );
     END COMPONENT;
     
@@ -55,13 +55,13 @@ ARCHITECTURE behavior OF reciver_tb IS
    --Inputs
    signal iCLK : std_logic := '0';
    signal inRST : std_logic := '0';
-   signal iRX : std_logic := '1';
    signal iTC : std_logic := '0';
-   signal iFULL : std_logic := '0';
+   signal iDATA : std_logic_vector(7 downto 0) := (others => '0');
+   signal iSTART : std_logic := '0';
 
  	--Outputs
-   signal oDATA : std_logic_vector(7 downto 0);
-   signal oRX_DONE : std_logic;
+   signal oTX_READY : std_logic;
+   signal oTX : std_logic;
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -69,14 +69,14 @@ ARCHITECTURE behavior OF reciver_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: reciver PORT MAP (
+   uut: transmitter PORT MAP (
           iCLK => iCLK,
           inRST => inRST,
-          iRX => iRX,
           iTC => iTC,
-          iFULL => iFULL,
-          oDATA => oDATA,
-          oRX_DONE => oRX_DONE
+          iDATA => iDATA,
+          iSTART => iSTART,
+          oTX_READY => oTX_READY,
+          oTX => oTX
         );
 
    -- Clock process definitions
@@ -93,7 +93,6 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-		
       wait for 100 ns;	
 
       wait for iCLK_period*10;
@@ -101,58 +100,12 @@ BEGIN
       -- insert stimulus here 
 		inRST <= '1';
 		
-		iTC   <= '0';
-		iFULL <= '0';
+		iDATA  <= "10101010";
+		iSTART <= '1';
 		
-		wait for iCLK_period*5;
-		
-	   -- Start bit
-		
-		iRX   <= '0';	
-		iTC   <= '1';
-	  
-		wait for iCLK_period*15;
-		
-	   -- Data bits
-		
-		iRX  <= '1';
-		
-		wait for iCLK_period*15;
-		
-		iRX  <= '0';
-		
-		wait for iCLK_period*15;
+		iTC    <= '1';
 
-		iRX  <= '1';
-		
-		wait for iCLK_period*15;		
 
-		iRX  <= '0';
-		
-		wait for iCLK_period*15;
-		
-		iRX  <= '1';
-		
-		wait for iCLK_period*15;	
-
-		iRX  <= '0';
-		
-		wait for iCLK_period*15;		
-	
-		iRX  <= '1';
-		
-		wait for iCLK_period*15;	
-		
-		iRX  <= '0';
-		
-		wait for iCLK_period*15;
-
-		-- Stop bit
-		iRX <= '0';
-
-		wait for iCLK_period*15;
-
-		iRX <= '1';
 
       wait;
    end process;

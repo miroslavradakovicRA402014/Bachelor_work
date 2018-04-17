@@ -32,8 +32,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity baud_freq_div is
 	 Generic (
-		CLK_PERIOD_NUM : integer := 156;
-		CLK_CNT_WIDTH  : integer := 8
+		CLK_PERIOD_NUM : integer := 156; -- Number of clock periods
+		CLK_CNT_WIDTH  : integer := 8		-- Width of clock counter
 	 );
     Port ( iCLK   : in  std_logic;
            inRST  : in  std_logic;
