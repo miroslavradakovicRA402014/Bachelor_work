@@ -57,7 +57,7 @@ architecture Behavioral of uart is
 	signal sSEND_DATA 	: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Data for send
 	signal sTX_DONE		: std_logic;											-- Send process done indicator
 	signal sSEND_EMPTY	: std_logic;											-- FIFO empty inidator
-	signal snSEND_EMPTY	: std_logic;
+	signal snSEND_EMPTY	: std_logic;											-- Negate empty signal
 	
 	-- Baud frequency divider	
 	signal sTC 		   	: std_logic;								   		-- Baud frequency divider terminal count
@@ -121,7 +121,8 @@ begin
          oEMPTY => sSEND_EMPTY,
          oDATA  => sSEND_DATA
 		);		
-		
+	
+	-- Negate empty FIFO signal
 	snSEND_EMPTY <= not (sSEND_EMPTY);	
 
 end Behavioral;

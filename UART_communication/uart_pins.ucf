@@ -1,0 +1,26 @@
+NET "iCLK"  			LOC = M21;
+NET "inRST"				LOC = AE24;
+
+NET "iRX"				LOC = A21;
+NET "oTX"				LOC = A20;
+
+NET "inREAD"   		LOC = AA24;
+NET "inWRITE"  		LOC = AC23;
+
+NET "iSW_DATA(0)" 	LOC = W19;
+NET "iSW_DATA(1)" 	LOC = Y24;
+NET "iSW_DATA(2)" 	LOC = K19;
+NET "iSW_DATA(3)" 	LOC = V24;
+NET "iSW_DATA(4)" 	LOC = U20;
+NET "iSW_DATA(5)" 	LOC = U23;
+NET "iSW_DATA(6)" 	LOC = U24;
+NET "iSW_DATA(7)" 	LOC = U19;
+
+NET "oLED_DATA(0)" 	LOC = N24;
+NET "oLED_DATA(1)" 	LOC = N23;
+NET "oLED_DATA(2)" 	LOC = M24;
+NET "oLED_DATA(3)" 	LOC = L24;
+NET "oLED_DATA(4)" 	LOC = L23;
+NET "oLED_DATA(5)" 	LOC = K24;
+NET "oLED_DATA(6)" 	LOC = H24;
+NET "oLED_DATA(7)" 	LOC = D24;

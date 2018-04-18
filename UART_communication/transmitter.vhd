@@ -34,7 +34,7 @@ entity transmitter is
 	 Generic (
 		DATA_WIDTH 		: integer := 8;  -- Data bit number
 		TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH : integer := 4;  -- Width of data bit counter
+		DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
 		TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
 	 );
     Port ( iCLK 		 : in   std_logic;
@@ -121,7 +121,7 @@ begin
 	end process fsm_next;	
 	
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, sSHW_REG(0)) begin
+	fsm_out: process (sCURRENT_STATE, sSHW_REG(0), sPARITY, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE  =>
 				sTC_CNT_EN	 <= '0';
@@ -134,8 +134,13 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				sSHW_LOAD	 <= '1';
-				oTX_READY 	 <= '1';	
+				if (sTC_CNT_DONE = '1') then 
+					sSHW_LOAD	 <= '1';
+					oTX_READY 	 <= '1';
+				else			
+					sSHW_LOAD	 <= '0';
+					oTX_READY 	 <= '0';					
+				end if;
 				oTX 			 <= '0';				
 			when DATA  =>	
 				sTC_CNT_EN	 <= '1';
@@ -166,12 +171,10 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTC_CNT_EN = '1') then -- Check for counter enable
-				if (sTC_CNT = TC_PERIOD - 1) then
-					sTC_CNT <= (others => '0'); 
-				else
-					sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
-				end if;
+			if (sTC_CNT = TC_PERIOD - 1) then
+				sTC_CNT <= (others => '0'); 
+			elsif (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
+				sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
 			end if;		
 		end if;
 	end process tc_cnt;

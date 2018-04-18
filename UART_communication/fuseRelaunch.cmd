@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_beh.prj" "work.reciver_tb" 
+-intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_tb_beh.prj" "work.uart_verification_tb" 

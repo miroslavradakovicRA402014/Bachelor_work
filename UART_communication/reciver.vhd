@@ -33,7 +33,7 @@ entity reciver is
 	 Generic (
 		DATA_WIDTH 		: integer := 8;  -- Data bit number
 		TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH : integer := 4;  -- Width of data bit counter
+		DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
 		TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
 	 );
     Port ( iCLK     : in   std_logic;
@@ -118,7 +118,7 @@ begin
 	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, iFULL) begin
+	fsm_out: process (sCURRENT_STATE, iFULL, sPARITY_OK) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
@@ -144,10 +144,10 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				if (iFULL = '1') then -- FIFO is full, 
-					oRX_DONE  <= '0';
-				else 
+				if (iFULL = '0' and sPARITY_OK = '1') then -- FIFO is not full, and parity is ok
 					oRX_DONE  <= '1';
+				else 
+					oRX_DONE  <= '0';
 				end if;	
 		end case;		
 	end process fsm_out;
@@ -157,7 +157,7 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTC_CNT_EN = '1') then -- Check for counter enable
+			if (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
 				if (sTC_CNT = TC_PERIOD - 1) then
 					sTC_CNT <= (others => '0'); 
 				else

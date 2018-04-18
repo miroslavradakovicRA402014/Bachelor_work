@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="uart_components" />
+            <top_module name="uart_verification_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="24" />
+   <wvobject fp_name="/uart_verification_tb/iclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk</obj_property>
+      <obj_property name="ObjectShortName">iclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/inrst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inrst</obj_property>
+      <obj_property name="ObjectShortName">inrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/irx" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">irx</obj_property>
+      <obj_property name="ObjectShortName">irx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/inread" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inread</obj_property>
+      <obj_property name="ObjectShortName">inread</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/inwrite" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inwrite</obj_property>
+      <obj_property name="ObjectShortName">inwrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/isw_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">isw_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">isw_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/otx" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">otx</obj_property>
+      <obj_property name="ObjectShortName">otx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/oled_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">oled_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">oled_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/iclk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk_period</obj_property>
+      <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/srecv_data_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">srecv_data_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">srecv_data_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/siuart_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">siuart_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">siuart_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/suart_full" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">suart_full</obj_property>
+      <obj_property name="ObjectShortName">suart_full</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/suart_empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">suart_empty</obj_property>
+      <obj_property name="ObjectShortName">suart_empty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eSEND_FIFO/oempty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">oempty</obj_property>
+      <obj_property name="ObjectShortName">oempty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eSEND_FIFO/sfifo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eSEND_FIFO/odata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">odata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">odata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/sshw_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sshw_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sshw_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/sshw_load" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sshw_load</obj_property>
+      <obj_property name="ObjectShortName">sshw_load</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eBAUD_FREQ_DIV/otc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">otc</obj_property>
+      <obj_property name="ObjectShortName">otc</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/sdata_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sdata_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sdata_cnt[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/stc_cnt_done" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_cnt_done</obj_property>
+      <obj_property name="ObjectShortName">stc_cnt_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/stc_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">stc_cnt[3:0]</obj_property>
+   </wvobject>
+</wave_config>

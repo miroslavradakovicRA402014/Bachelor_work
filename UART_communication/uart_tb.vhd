@@ -107,7 +107,7 @@ BEGIN
       wait for iCLK_period*10;
 
       -- insert stimulus here 
-		inRST <= '0';
+		inRST <= '1';
 		
 		
 		
