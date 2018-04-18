@@ -1,1 +1,6 @@
+work	"baud_freq_div.vhd"
+work	"fifo.vhd"
+work	"reciver.vhd"
 work	"transmitter.vhd"
+work	"uart.vhd"
+work	"uart_components.vhd"
