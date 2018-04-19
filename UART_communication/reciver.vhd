@@ -157,12 +157,10 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
-				if (sTC_CNT = TC_PERIOD - 1) then
-					sTC_CNT <= (others => '0'); 
-				else
-					sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
-				end if;
+			if (sTC_CNT = TC_PERIOD - 1) then -- Check counted periods 
+				sTC_CNT <= (others => '0'); 
+			elsif (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
+				sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
 			end if;		
 		end if;
 	end process tc_cnt;

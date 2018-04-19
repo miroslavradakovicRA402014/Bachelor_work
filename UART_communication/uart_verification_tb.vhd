@@ -104,7 +104,7 @@ BEGIN
 		inRST <= '1';
 		
 		iRX   	<= '1';
-		iSW_DATA <= x"61";
+		iSW_DATA <= x"60";
 
 		inREAD   <= '1';
 		inWRITE  <= '1';

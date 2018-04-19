@@ -64,8 +64,9 @@ architecture Behavioral of transmitter is
 
 	signal sTC_CNT_DONE 		 : std_logic;										  		-- Terminal count counter count done	
 	
-	signal sSHW_LOAD		    : std_logic;										 		-- Shift register load 
+	signal sDATA_LOAD		    : std_logic;										 		-- Registers data load signal
 	
+	signal sPARITY_REG 		 : std_logic_vector(DATA_WIDTH - 1 downto 0);	-- Parity register
 	signal sPARITY				 : std_logic;												-- Odd parity
 	
 begin
@@ -106,7 +107,7 @@ begin
 			when PARITY =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= STOP; -- Recive next data 
+					sNEXT_STATE <= STOP; -- Recive stop bit
 			   else
 					sNEXT_STATE <= PARITY;
 				end if;				
@@ -127,18 +128,18 @@ begin
 				sTC_CNT_EN	 <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				sSHW_LOAD	 <= '0';
+				sDATA_LOAD	 <= '0';
 				oTX_READY 	 <= '0';
 				oTX 			 <= '1';
 			when START =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				if (sTC_CNT_DONE = '1') then 
-					sSHW_LOAD	 <= '1';
+				if (sTC_CNT_DONE = '1') then -- Load form FIFO 
+					sDATA_LOAD	 <= '1';
 					oTX_READY 	 <= '1';
 				else			
-					sSHW_LOAD	 <= '0';
+					sDATA_LOAD	 <= '0';
 					oTX_READY 	 <= '0';					
 				end if;
 				oTX 			 <= '0';				
@@ -146,21 +147,21 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '1';
 				sSHW_EN		 <= '1';
-				sSHW_LOAD	 <= '0';
+				sDATA_LOAD	 <= '0';
 				oTX_READY 	 <= '0';	
 				oTX 			 <= sSHW_REG(0);
 			when PARITY  =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				sSHW_LOAD	 <= '0';
+				sDATA_LOAD	 <= '0';
 			   oTX_READY 	 <= '0';	
 				oTX			 <= sPARITY;				
 			when STOP  =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				sSHW_LOAD	 <= '0';
+				sDATA_LOAD	 <= '0';
 			   oTX_READY 	 <= '0';	
 				oTX			 <= '0';
 		end case;		
@@ -171,7 +172,7 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTC_CNT = TC_PERIOD - 1) then
+			if (sTC_CNT = TC_PERIOD - 1) then -- Check counted periods 
 				sTC_CNT <= (others => '0'); 
 			elsif (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
 				sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
@@ -201,7 +202,7 @@ begin
 		if (inRST = '0') then
 			sSHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sSHW_LOAD = '1') then -- Load from FIFO
+			if (sDATA_LOAD = '1') then -- Load data from FIFO
 				sSHW_REG <= iDATA;
 			elsif (sSHW_EN = '1' and sTC_CNT_DONE = '1') then -- Check for shift enable
 				sSHW_REG <= '0' & sSHW_REG(DATA_WIDTH - 1 downto 1); -- Shift data bits
@@ -209,9 +210,22 @@ begin
 		end if;
 	end process shift_reg;
 	
-	-- Parity bit 
-	sPARITY <= iDATA(0) xor iDATA(1) xor iDATA(2) xor iDATA(3) xor iDATA(4) xor iDATA(5) xor iDATA(6) xor iDATA(7);
 	
+	-- Parity bit generator contains register for data and parity generator
+	
+	-- Parity register process
+	parity_reg : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sPARITY_REG <= (others => '0'); -- Reset register
+		elsif (iCLK'event and iCLK = '1') then
+			if (sDATA_LOAD = '1') then -- Load data from input
+				sPARITY_REG <= iDATA;
+			end if;	
+		end if;	
+	end process parity_reg;
+	
+	-- Parity bit generator
+	sPARITY <=	sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);
 	
 end Behavioral;
 

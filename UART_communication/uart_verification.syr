@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Reading design: uart_verification.prj
 
@@ -276,7 +276,7 @@ Synthesizing Unit <transmitter>.
     | States             | 5                                              |
     | Transitions        | 11                                             |
     | Inputs             | 3                                              |
-    | Outputs            | 7                                              |
+    | Outputs            | 6                                              |
     | Clock              | iCLK (rising_edge)                             |
     | Reset              | inRST (negative)                               |
     | Reset type         | asynchronous                                   |
@@ -290,7 +290,7 @@ Synthesizing Unit <transmitter>.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  16 D-type flip-flop(s).
-	inferred   6 Multiplexer(s).
+	inferred   7 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <transmitter> synthesized.
 
@@ -306,8 +306,8 @@ Macro Statistics
  4-bit register                                        : 6
  8-bit register                                        : 35
  9-bit register                                        : 1
-# Multiplexers                                         : 42
- 1-bit 2-to-1 multiplexer                              : 4
+# Multiplexers                                         : 43
+ 1-bit 2-to-1 multiplexer                              : 5
  4-bit 2-to-1 multiplexer                              : 4
  8-bit 2-to-1 multiplexer                              : 34
 # Tristates                                            : 16
@@ -353,8 +353,8 @@ Macro Statistics
  8-bit up counter                                      : 1
 # Registers                                            : 281
  Flip-Flops                                            : 281
-# Multiplexers                                         : 37
- 1-bit 2-to-1 multiplexer                              : 4
+# Multiplexers                                         : 38
+ 1-bit 2-to-1 multiplexer                              : 5
  8-bit 2-to-1 multiplexer                              : 33
 # FSMs                                                 : 3
 # Xors                                                 : 2
@@ -443,21 +443,21 @@ Top Level Output File Name         : uart_verification.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 402
+# BELS                             : 589
 #      GND                         : 1
 #      INV                         : 4
 #      LUT1                        : 3
-#      LUT2                        : 8
-#      LUT3                        : 133
-#      LUT4                        : 24
-#      LUT5                        : 23
-#      LUT6                        : 188
+#      LUT2                        : 9
+#      LUT3                        : 29
+#      LUT4                        : 28
+#      LUT5                        : 110
+#      LUT6                        : 388
 #      MUXCY                       : 7
-#      MUXF7                       : 3
+#      MUXF7                       : 2
 #      XORCY                       : 8
 # FlipFlops/Latches                : 319
-#      FDC                         : 140
-#      FDCE                        : 179
+#      FDC                         : 245
+#      FDCE                        : 74
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
 # IO Buffers                       : 21
@@ -472,15 +472,15 @@ Selected Device : 6slx45fgg676-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:             319  out of  54576     0%  
- Number of Slice LUTs:                  383  out of  27288     1%  
-    Number used as Logic:               383  out of  27288     1%  
+ Number of Slice LUTs:                  571  out of  27288     2%  
+    Number used as Logic:               571  out of  27288     2%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    395
-   Number with an unused Flip Flop:      76  out of    395    19%  
-   Number with an unused LUT:            12  out of    395     3%  
-   Number of fully used LUT-FF pairs:   307  out of    395    77%  
-   Number of unique control sets:        26
+ Number of LUT Flip Flop pairs used:    583
+   Number with an unused Flip Flop:     264  out of    583    45%  
+   Number with an unused LUT:            12  out of    583     2%  
+   Number of fully used LUT-FF pairs:   307  out of    583    52%  
+   Number of unique control sets:        14
 
 IO Utilization: 
  Number of IOs:                          22
@@ -523,7 +523,7 @@ Speed Grade: -2
 
    Minimum period: 5.263ns (Maximum Frequency: 190.006MHz)
    Minimum input arrival time before clock: 5.161ns
-   Maximum output required time after clock: 8.673ns
+   Maximum output required time after clock: 8.713ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -533,7 +533,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 5.263ns (frequency: 190.006MHz)
-  Total number of paths / destination ports: 4735 / 489
+  Total number of paths / destination ports: 5861 / 384
 -------------------------------------------------------------------------
 Delay:               5.263ns (Levels of Logic = 3)
   Source:            eUART/eUART_RECIVER/sSHW_REG_0 (FF)
@@ -576,9 +576,9 @@ Offset:              5.161ns (Levels of Logic = 2)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
-  Total number of paths / destination ports: 32 / 9
+  Total number of paths / destination ports: 40 / 9
 -------------------------------------------------------------------------
-Offset:              8.673ns (Levels of Logic = 5)
+Offset:              8.713ns (Levels of Logic = 5)
   Source:            eUART/eSEND_FIFO/sFIFO_0_0 (FF)
   Destination:       oTX (PAD)
   Source Clock:      iCLK rising
@@ -587,15 +587,15 @@ Offset:              8.673ns (Levels of Logic = 5)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             2   0.525   1.181  eUART/eSEND_FIFO/sFIFO_0_0 (eUART/eSEND_FIFO/sFIFO_0_0)
-     LUT6:I0->O            1   0.254   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX13_SW0 (N423)
-     LUT2:I0->O            1   0.250   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX15_SW0_SW0 (N427)
-     LUT6:I4->O            1   0.250   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX15_SW0 (N425)
+     FDC:C->Q              3   0.525   1.221  eUART/eSEND_FIFO/sFIFO_0_0 (eUART/eSEND_FIFO/sFIFO_0_0)
+     LUT6:I0->O            1   0.254   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX13_SW0 (N729)
+     LUT2:I0->O            1   0.250   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX15_SW0_SW0 (N733)
+     LUT6:I4->O            1   0.250   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX15_SW0 (N731)
      LUT6:I4->O            1   0.250   0.681  eUART/eUART_TRANSMITTER/Mmux_oTX15 (oTX_OBUF)
      OBUF:I->O                 2.912          oTX_OBUF (oTX)
     ----------------------------------------
-    Total                      8.673ns (4.441ns logic, 4.232ns route)
-                                       (51.2% logic, 48.8% route)
+    Total                      8.713ns (4.441ns logic, 4.272ns route)
+                                       (51.0% logic, 49.0% route)
 
 =========================================================================
 
@@ -613,12 +613,12 @@ iCLK           |    5.263|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.25 secs
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 4.86 secs
  
 --> 
 
-Total memory usage is 282684 kilobytes
+Total memory usage is 283388 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    3 (   0 filtered)

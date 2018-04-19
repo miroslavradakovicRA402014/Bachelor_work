@@ -52,7 +52,7 @@ begin
 			sCLK_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sCLK_CNT = CLK_PERIOD_NUM - 1) then
-				sCLK_CNT <= (others => '0'); 
+				sCLK_CNT <= (others => '0'); -- Resrt counter if was counted period cycles 
 			else
 				sCLK_CNT <= sCLK_CNT + 1; -- Count clock periods
 			end if;

@@ -13,7 +13,10 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="24" />
+   <WVObjectSize size="25" />
+   <wave_markers>
+      <marker time="210805000000" label="" />
+   </wave_markers>
    <wvobject fp_name="/uart_verification_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
       <obj_property name="ObjectShortName">iclk</obj_property>
@@ -109,5 +112,9 @@
    <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/stc_cnt" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">stc_cnt[3:0]</obj_property>
       <obj_property name="ObjectShortName">stc_cnt[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uart_verification_tb/uut/eUART/eUART_TRANSMITTER/sparity" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sparity</obj_property>
+      <obj_property name="ObjectShortName">sparity</obj_property>
    </wvobject>
 </wave_config>
