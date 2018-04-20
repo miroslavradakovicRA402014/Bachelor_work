@@ -1,5 +1,6 @@
 ISim log file
-Running: D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_tb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_tb_isim_beh.wdb 
+Running: D:\BSc_workspace\Bachelor_work\UART_communication\fifo_tb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb D:/BSc_workspace/Bachelor_work/UART_communication/fifo_tb_isim_beh.wdb 
+INFO: There is another simulation running in the same directory. Using database file name isim1.wdb.
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -19,23 +20,8 @@ Time resolution is 1 ps
 # wave add /
 # run 1000 ns
 Simulator is doing circuit initialization process.
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # restart
 # run 1.00us
 Simulator is doing circuit initialization process.
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /uart_verification_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 1.00us
-# run 1.00us
-# run 1.00us
-# run 1.00us
-# run 1.00us
-# run 1.00us
-# run 1.00us
-# run all
-Stopped at time : 5388795 ns : File "D:/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd" Line 72

@@ -118,7 +118,7 @@ begin
 	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, iFULL, sPARITY_OK) begin
+	fsm_out: process (sCURRENT_STATE, iFULL, sPARITY_OK, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
@@ -144,7 +144,7 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				if (iFULL = '0' and sPARITY_OK = '1') then -- FIFO is not full, and parity is ok
+				if (iFULL = '0' and sPARITY_OK = '1' and sTC_CNT_DONE = '1') then -- FIFO is not full, and parity is ok store to it
 					oRX_DONE  <= '1';
 				else 
 					oRX_DONE  <= '0';

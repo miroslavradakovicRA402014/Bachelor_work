@@ -60,6 +60,9 @@ architecture Behavioral of uart_verification is
 	
 	signal sUART_FULL		 : std_logic;
 	signal sUART_EMPTY	 : std_logic;
+	-- Debounced buttons
+	signal snDREAD		 	 : std_logic; 											  
+	signal snDWRITE 		 : std_logic;
 	
 	
 	component uart is
@@ -77,24 +80,52 @@ architecture Behavioral of uart_verification is
 				  oUART_EMPTY      : out  std_logic;
 				  oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
 	end component uart;	
+	
+	component debouncer is
+	 Generic (
+		 DEBOUNCE_PERIOD : integer := 48000
+	 );
+    Port ( iCLK 		: in  STD_LOGIC;
+           inRST 		: in  STD_LOGIC;
+           iBUTT 		: in  STD_LOGIC;
+           oDEB_BUTT : out  STD_LOGIC);
+	end component debouncer;
 
 begin
 
 	-- UART
 	eUART : uart 
-	Port map (
-		iCLK        		 => iCLK,
-		inRST       		 => inRST,
-		iRX         		 => iRX,
-		iUART_DATA		 	 => sOUART_DATA,
-		iUART_WR 			 => sUART_WRITE,
-		iUART_RD    		 => sUART_READ,
-		oTX         		 => oTX,
-		oUART_FULL         => sUART_FULL,
-		oUART_EMPTY      	 => sUART_EMPTY,
-		oUART_DATA       	 => sIUART_DATA
-	);
-
+		Port map (
+			iCLK        		 => iCLK,
+			inRST       		 => inRST,
+			iRX         		 => iRX,
+			iUART_DATA		 	 => sOUART_DATA,
+			iUART_WR 			 => sUART_WRITE,
+			iUART_RD    		 => sUART_READ,
+			oTX         		 => oTX,
+			oUART_FULL         => sUART_FULL,
+			oUART_EMPTY      	 => sUART_EMPTY,
+			oUART_DATA       	 => sIUART_DATA
+		);
+	
+	-- Button debouncers
+	eREAD_BUTT_DEBOUNCER : debouncer 
+		Port map (
+			iCLK 			=> iCLK,
+         inRST 		=> inRST,
+         iBUTT 		=> inREAD, 
+         oDEB_BUTT 	=>	snDREAD	
+		);
+		
+	eWRITE_BUTT_DEBOUNCER : debouncer 
+		Port map (
+			iCLK 			=> iCLK,
+         inRST 		=> inRST,
+         iBUTT 		=> inWRITE, 
+         oDEB_BUTT 	=>	snDWRITE	
+		);	
+	
+	
 	-- FSM register
 	fsm_reg : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -105,12 +136,12 @@ begin
 	end process fsm_reg;
 	
 	-- Next state logic
-	fsm_next : process (sCURRENT_STATE, inWRITE, inREAD) begin
+	fsm_next : process (sCURRENT_STATE, snDWRITE, snDREAD) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
-				if (inREAD = '0') then
+				if (snDREAD = '0') then
 					sNEXT_STATE <= RECIVE;
-				elsif (inWRITE = '0') then
+				elsif (snDWRITE = '0') then
 					sNEXT_STATE <= SEND;
 				else 
 					sNEXT_STATE <= IDLE;
@@ -159,7 +190,9 @@ begin
 	sOUART_DATA <= iSW_DATA when sUART_FULL = '0' else
 						(others => '1');
 	-- LED output
-	oLED_DATA   <= sRECV_DATA_REG;
+	---ssoLED_DATA   <= sRECV_DATA_REG;
+	oLED_DATA <= "11110000" when sUART_EMPTY = '0' else 
+			       "00001111";
 
 end Behavioral;
 

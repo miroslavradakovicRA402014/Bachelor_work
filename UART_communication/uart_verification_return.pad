@@ -1,7 +1,7 @@
 Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Wed Apr 18 17:13:36 2018
+Fri Apr 20 09:08:26 2018
 
 
 # NOTE: This file is designed to be imported into a spreadsheet program
@@ -9,8 +9,8 @@ Wed Apr 18 17:13:36 2018
 # character is used as the data field separator. This file is also designed
 # to support parsing.
 #
-INPUT FILE:       uart_verification_map.ncd
-OUTPUT FILE:      uart_verification.pad
+INPUT FILE:       uart_verification_return_map.ncd
+OUTPUT FILE:      uart_verification_return.pad
 PART TYPE:        xc6slx45
 SPEED GRADE:      -2
 PACKAGE:          fgg676
@@ -68,7 +68,7 @@ AA20|||NC||||||||||||
 AA21|||VCCAUX||||||||2.5||||
 AA22||IOBS|IO_L73N_1|UNUSED||1|||||||||
 AA23||IOBM|IO_L63P_1|UNUSED||1|||||||||
-AA24|inREAD|IOB|IO_L63N_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+AA24||IOBS|IO_L63N_1|UNUSED||1|||||||||
 AA25||IOBM|IO_L51P_M1DQ12_1|UNUSED||1|||||||||
 AA26||IOBS|IO_L51N_M1DQ13_1|UNUSED||1|||||||||
 AB1||IOBS|IO_L32N_M3DQ15_3|UNUSED||3|||||||||
@@ -119,7 +119,7 @@ AC19||IOBM|IO_L7P_2|UNUSED||2|||||||||
 AC20||IOBM|IO_L5P_2|UNUSED||2|||||||||
 AC21|||VCCO_2|||2|||||any******||||
 AC22|||CMPCS_B_2||||||||||||
-AC23|inWRITE|IOB|IO_L65P_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+AC23||IOBM|IO_L65P_1|UNUSED||1|||||||||
 AC24||IOBS|IO_L65N_1|UNUSED||1|||||||||
 AC25||IOBM|IO_L50P_M1UDQS_1|UNUSED||1|||||||||
 AC26||IOBS|IO_L50N_M1UDQSN_1|UNUSED||1|||||||||
@@ -427,7 +427,7 @@ K15|||NC||||||||||||
 K16|||GND||||||||||||
 K17|||VCCINT||||||||1.2||||
 K18||IOBS|IO_L32N_A16_M1A9_1|UNUSED||1|||||||||
-K19|iSW_DATA<2>|IOB|IO_L28N_VREF_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+K19||IOBS|IO_L28N_VREF_1|UNUSED||1|||||||||
 K20|||NC||||||||||||
 K21|||NC||||||||||||
 K22|||NC||||||||||||
@@ -609,12 +609,12 @@ U15||IOBM|IO_L42P_2|UNUSED||2|||||||||
 U16|||VCCINT||||||||1.2||||
 U17||IOBM|IO_L62P_1|UNUSED||1|||||||||
 U18|||VCCO_1|||1|||||2.50||||
-U19|iSW_DATA<7>|IOB|IO_L70P_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
-U20|iSW_DATA<4>|IOB|IO_L64N_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+U19||IOBM|IO_L70P_1|UNUSED||1|||||||||
+U20||IOBS|IO_L64N_1|UNUSED||1|||||||||
 U21||IOBM|IO_L61P_1|UNUSED||1|||||||||
 U22||IOBS|IO_L61N_1|UNUSED||1|||||||||
-U23|iSW_DATA<5>|IOB|IO_L59N_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
-U24|iSW_DATA<6>|IOB|IO_L53N_VREF_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+U23||IOBS|IO_L59N_1|UNUSED||1|||||||||
+U24||IOBS|IO_L53N_VREF_1|UNUSED||1|||||||||
 U25||IOBM|IO_L43P_GCLK5_M1DQ4_1|UNUSED||1|||||||||
 U26||IOBS|IO_L43N_GCLK4_M1DQ5_1|UNUSED||1|||||||||
 V1||IOBS|IO_L39N_M3LDQSN_3|UNUSED||3|||||||||
@@ -640,7 +640,7 @@ V20||IOBS|IO_L70N_1|UNUSED||1|||||||||
 V21|||VCCO_1|||1|||||2.50||||
 V22||IOBM|IO_L71P_1|UNUSED||1|||||||||
 V23||IOBM|IO_L42P_GCLK7_M1UDM_1|UNUSED||1|||||||||
-V24|iSW_DATA<3>|IOB|IO_L45P_A1_M1LDQS_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+V24||IOBM|IO_L45P_A1_M1LDQS_1|UNUSED||1|||||||||
 V25|||GND||||||||||||
 V26||IOBS|IO_L45N_A0_M1LDQSN_1|UNUSED||1|||||||||
 W1||IOBS|IO_L38N_M3DQ3_3|UNUSED||3|||||||||
@@ -661,7 +661,7 @@ W15|||GND||||||||||||
 W16||IOBS|IO_L18N_2|UNUSED||2|||||||||
 W17||IOBS|IO_L8N_2|UNUSED||2|||||||||
 W18||IOBM|IO_L68P_1|UNUSED||1|||||||||
-W19|iSW_DATA<0>|IOB|IO_L68N_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+W19||IOBS|IO_L68N_1|UNUSED||1|||||||||
 W20|||GND||||||||||||
 W21|||NC||||||||||||
 W22||IOBS|IO_L71N_1|UNUSED||1|||||||||
@@ -692,7 +692,7 @@ Y20||IOBM|IO_L72P_1|UNUSED||1|||||||||
 Y21||IOBS|IO_L72N_1|UNUSED||1|||||||||
 Y22||IOBM|IO_L73P_1|UNUSED||1|||||||||
 Y23|||GND||||||||||||
-Y24|iSW_DATA<1>|IOB|IO_L47P_FWE_B_M1DQ0_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
+Y24||IOBM|IO_L47P_FWE_B_M1DQ0_1|UNUSED||1|||||||||
 Y25|||VCCO_1|||1|||||2.50||||
 Y26||IOBS|IO_L47N_LDC_M1DQ1_1|UNUSED||1|||||||||
 

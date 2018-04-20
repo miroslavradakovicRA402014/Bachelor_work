@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.ncd
+OUTFILE=D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.bit
+FAMILY=Spartan6
+PART=xc6slx45-2fgg676
+WORKINGDIR=D:\BSc_workspace\Bachelor_work\UART_communication
+LICENSE=ISE
+USER_INFO=209858334_178080923_210593072_268

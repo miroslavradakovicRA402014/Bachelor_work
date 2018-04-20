@@ -1,0 +1,626 @@
+Release 14.6 - xst P.68d (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> Reading design: uart_verification_return.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "uart_verification_return.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "uart_verification_return"
+Output Format                      : NGC
+Target Device                      : xc6slx45-2-fgg676
+
+---- Source Options
+Top Module Name                    : uart_verification_return
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart_components.vhd" into library work
+Parsing package <uart_components>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd" into library work
+Parsing entity <transmitter>.
+Parsing architecture <Behavioral> of entity <transmitter>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd" into library work
+Parsing entity <reciver>.
+Parsing architecture <Behavioral> of entity <reciver>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd" into library work
+Parsing entity <fifo>.
+Parsing architecture <Behavioral> of entity <fifo>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd" into library work
+Parsing entity <baud_freq_div>.
+Parsing architecture <Behavioral> of entity <baud_freq_div>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd" into library work
+Parsing entity <uart>.
+Parsing architecture <Behavioral> of entity <uart>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" into library work
+Parsing entity <uart_verification_return>.
+Parsing architecture <Behavioral> of entity <uart_verification_return>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <uart_verification_return> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <uart> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <baud_freq_div> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <reciver> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <fifo> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <transmitter> (architecture <Behavioral>) with generics from library <work>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <uart_verification_return>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd".
+        DATA_WIDTH = 8
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" line 81: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
+    Found 8-bit register for signal <sOUART_DATA>.
+    Found 2-bit register for signal <sCURRENT_STATE>.
+    Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 4                                              |
+    | Inputs             | 1                                              |
+    | Outputs            | 2                                              |
+    | Clock              | iCLK (rising_edge)                             |
+    | Reset              | inRST (negative)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Summary:
+	inferred   8 D-type flip-flop(s).
+	inferred   1 Finite State Machine(s).
+Unit <uart_verification_return> synthesized.
+
+Synthesizing Unit <uart>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd".
+        DATA_WIDTH = 8
+    Summary:
+	no macro.
+Unit <uart> synthesized.
+
+Synthesizing Unit <baud_freq_div>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd".
+        CLK_PERIOD_NUM = 156
+        CLK_CNT_WIDTH = 8
+    Found 8-bit register for signal <sCLK_CNT>.
+    Found 8-bit adder for signal <sCLK_CNT[7]_GND_7_o_add_1_OUT> created at line 1241.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   8 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <baud_freq_div> synthesized.
+
+Synthesizing Unit <reciver>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd".
+        DATA_WIDTH = 8
+        TC_PERIOD = 16
+        DATA_CNT_WIDTH = 4
+        TC_CNT_WIDTH = 4
+    Found 4-bit register for signal <sTC_CNT>.
+    Found 4-bit register for signal <sDATA_CNT>.
+    Found 9-bit register for signal <sSHW_REG>.
+    Found 3-bit register for signal <sCURRENT_STATE>.
+    Found finite state machine <FSM_1> for signal <sCURRENT_STATE>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 11                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 4                                              |
+    | Clock              | iCLK (rising_edge)                             |
+    | Reset              | inRST (negative)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit adder for signal <sTC_CNT[3]_GND_8_o_add_11_OUT> created at line 1241.
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_8_o_add_17_OUT> created at line 1241.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  17 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <reciver> synthesized.
+
+Synthesizing Unit <fifo>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd".
+        DATA_WIDTH = 8
+        NUM_OF_WORDS = 16
+    Found 8-bit register for signal <sFIFO<14>>.
+    Found 8-bit register for signal <sFIFO<13>>.
+    Found 8-bit register for signal <sFIFO<12>>.
+    Found 8-bit register for signal <sFIFO<11>>.
+    Found 8-bit register for signal <sFIFO<10>>.
+    Found 8-bit register for signal <sFIFO<9>>.
+    Found 8-bit register for signal <sFIFO<8>>.
+    Found 8-bit register for signal <sFIFO<7>>.
+    Found 8-bit register for signal <sFIFO<6>>.
+    Found 8-bit register for signal <sFIFO<5>>.
+    Found 8-bit register for signal <sFIFO<4>>.
+    Found 8-bit register for signal <sFIFO<3>>.
+    Found 8-bit register for signal <sFIFO<2>>.
+    Found 8-bit register for signal <sFIFO<1>>.
+    Found 8-bit register for signal <sFIFO<0>>.
+    Found 8-bit register for signal <sFIFO<15>>.
+    Found 4-bit register for signal <sWR_PTR>.
+    Found 4-bit adder for signal <sWR_PTR[3]_GND_10_o_add_65_OUT> created at line 95.
+    Found 4-bit subtractor for signal <GND_10_o_GND_10_o_sub_67_OUT<3:0>> created at line 97.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 107
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 107
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 132 D-type flip-flop(s).
+	inferred  15 Multiplexer(s).
+	inferred   8 Tristate(s).
+Unit <fifo> synthesized.
+
+Synthesizing Unit <transmitter>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd".
+        DATA_WIDTH = 8
+        TC_PERIOD = 16
+        DATA_CNT_WIDTH = 4
+        TC_CNT_WIDTH = 4
+    Found 4-bit register for signal <sTC_CNT>.
+    Found 4-bit register for signal <sDATA_CNT>.
+    Found 8-bit register for signal <sSHW_REG>.
+    Found 8-bit register for signal <sPARITY_REG>.
+    Found 3-bit register for signal <sCURRENT_STATE>.
+    Found finite state machine <FSM_2> for signal <sCURRENT_STATE>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 11                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 6                                              |
+    | Clock              | iCLK (rising_edge)                             |
+    | Reset              | inRST (negative)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit adder for signal <sTC_CNT[3]_GND_19_o_add_15_OUT> created at line 1241.
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_19_o_add_21_OUT> created at line 1241.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  24 D-type flip-flop(s).
+	inferred   7 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <transmitter> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 7
+ 4-bit adder                                           : 4
+ 4-bit addsub                                          : 2
+ 8-bit adder                                           : 1
+# Registers                                            : 43
+ 4-bit register                                        : 6
+ 8-bit register                                        : 36
+ 9-bit register                                        : 1
+# Multiplexers                                         : 41
+ 1-bit 2-to-1 multiplexer                              : 5
+ 4-bit 2-to-1 multiplexer                              : 4
+ 8-bit 2-to-1 multiplexer                              : 32
+# Tristates                                            : 16
+ 1-bit tristate buffer                                 : 16
+# FSMs                                                 : 3
+# Xors                                                 : 2
+ 1-bit xor8                                            : 1
+ 1-bit xor9                                            : 1
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <baud_freq_div>.
+The following registers are absorbed into counter <sCLK_CNT>: 1 register on signal <sCLK_CNT>.
+Unit <baud_freq_div> synthesized (advanced).
+
+Synthesizing (advanced) Unit <fifo>.
+The following registers are absorbed into counter <sWR_PTR>: 1 register on signal <sWR_PTR>.
+Unit <fifo> synthesized (advanced).
+
+Synthesizing (advanced) Unit <reciver>.
+The following registers are absorbed into counter <sTC_CNT>: 1 register on signal <sTC_CNT>.
+The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
+Unit <reciver> synthesized (advanced).
+
+Synthesizing (advanced) Unit <transmitter>.
+The following registers are absorbed into counter <sTC_CNT>: 1 register on signal <sTC_CNT>.
+The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
+Unit <transmitter> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 7
+ 4-bit up counter                                      : 4
+ 4-bit updown counter                                  : 2
+ 8-bit up counter                                      : 1
+# Registers                                            : 289
+ Flip-Flops                                            : 289
+# Multiplexers                                         : 36
+ 1-bit 2-to-1 multiplexer                              : 5
+ 8-bit 2-to-1 multiplexer                              : 31
+# FSMs                                                 : 3
+# Xors                                                 : 2
+ 1-bit xor8                                            : 1
+ 1-bit xor9                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <sCURRENT_STATE[1:2]> with user encoding.
+--------------------
+ State  | Encoding
+--------------------
+ idle   | 00
+ recive | 01
+ send   | 10
+--------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <eUART/eUART_RECIVER/FSM_1> on signal <sCURRENT_STATE[1:3]> with user encoding.
+--------------------
+ State  | Encoding
+--------------------
+ idle   | 000
+ start  | 001
+ data   | 010
+ parity | 011
+ stop   | 100
+--------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <eUART/eUART_TRANSMITTER/FSM_2> on signal <sCURRENT_STATE[1:3]> with user encoding.
+--------------------
+ State  | Encoding
+--------------------
+ idle   | 000
+ start  | 001
+ data   | 010
+ parity | 011
+ stop   | 100
+--------------------
+WARNING:Xst:2042 - Unit fifo: 8 internal tristates are replaced by logic (pull-up yes): oDATA<0>, oDATA<1>, oDATA<2>, oDATA<3>, oDATA<4>, oDATA<5>, oDATA<6>, oDATA<7>.
+
+Optimizing unit <uart_verification_return> ...
+
+Optimizing unit <fifo> ...
+
+Optimizing unit <reciver> ...
+
+Optimizing unit <transmitter> ...
+WARNING:Xst:1710 - FF/Latch <eUART/eUART_RECIVER/sDATA_CNT_3> (without init value) has a constant value of 0 in block <uart_verification_return>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <eUART/eUART_TRANSMITTER/sDATA_CNT_3> (without init value) has a constant value of 0 in block <uart_verification_return>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block uart_verification_return, actual ratio is 1.
+FlipFlop sCURRENT_STATE_FSM_FFd2 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 328
+ Flip-Flops                                            : 328
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : uart_verification_return.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 393
+#      GND                         : 1
+#      INV                         : 4
+#      LUT1                        : 3
+#      LUT2                        : 4
+#      LUT3                        : 136
+#      LUT4                        : 35
+#      LUT5                        : 9
+#      LUT6                        : 186
+#      MUXCY                       : 7
+#      XORCY                       : 8
+# FlipFlops/Latches                : 328
+#      FDC                         : 146
+#      FDCE                        : 182
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 11
+#      IBUF                        : 2
+#      OBUF                        : 9
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45fgg676-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             328  out of  54576     0%  
+ Number of Slice LUTs:                  377  out of  27288     1%  
+    Number used as Logic:               377  out of  27288     1%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    393
+   Number with an unused Flip Flop:      65  out of    393    16%  
+   Number with an unused LUT:            16  out of    393     4%  
+   Number of fully used LUT-FF pairs:   312  out of    393    79%  
+   Number of unique control sets:        27
+
+IO Utilization: 
+ Number of IOs:                          12
+ Number of bonded IOBs:                  12  out of    358     3%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+iCLK                               | BUFGP                  | 328   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 5.599ns (Maximum Frequency: 178.603MHz)
+   Minimum input arrival time before clock: 5.162ns
+   Maximum output required time after clock: 8.045ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'iCLK'
+  Clock period: 5.599ns (frequency: 178.603MHz)
+  Total number of paths / destination ports: 6107 / 509
+-------------------------------------------------------------------------
+Delay:               5.599ns (Levels of Logic = 3)
+  Source:            eUART/eUART_RECIVER/sSHW_REG_0 (FF)
+  Destination:       eUART/eRECV_FIFO/sWR_PTR_3 (FF)
+  Source Clock:      iCLK rising
+  Destination Clock: iCLK rising
+
+  Data Path: eUART/eUART_RECIVER/sSHW_REG_0 to eUART/eRECV_FIFO/sWR_PTR_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            17   0.525   1.639  eUART/eUART_RECIVER/sSHW_REG_0 (eUART/eUART_RECIVER/sSHW_REG_0)
+     LUT6:I1->O           10   0.254   1.008  eUART/eUART_RECIVER/Mmux_oRX_DONE1_SW0 (N4)
+     LUT6:I5->O            1   0.254   0.682  eUART/eUART_RECIVER/Mmux_oRX_DONE1_2 (eUART/eUART_RECIVER/Mmux_oRX_DONE1_1)
+     LUT6:I5->O            1   0.254   0.681  eUART/eRECV_FIFO/_n0181_inv1 (eUART/eRECV_FIFO/_n0181_inv)
+     FDCE:CE                   0.302          eUART/eRECV_FIFO/sWR_PTR_3
+    ----------------------------------------
+    Total                      5.599ns (1.589ns logic, 4.010ns route)
+                                       (28.4% logic, 71.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
+  Total number of paths / destination ports: 330 / 330
+-------------------------------------------------------------------------
+Offset:              5.162ns (Levels of Logic = 2)
+  Source:            inRST (PAD)
+  Destination:       sRECV_DATA_REG_0 (FF)
+  Destination Clock: iCLK rising
+
+  Data Path: inRST to sRECV_DATA_REG_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.681  inRST_IBUF (inRST_IBUF)
+     INV:I->O            328   0.255   2.439  inRST_inv1_INV_0 (eUART/eRECV_FIFO/inRST_inv)
+     FDCE:CLR                  0.459          eUART/eRECV_FIFO/sFIFO_15_0
+    ----------------------------------------
+    Total                      5.162ns (2.042ns logic, 3.120ns route)
+                                       (39.6% logic, 60.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
+  Total number of paths / destination ports: 22 / 9
+-------------------------------------------------------------------------
+Offset:              8.045ns (Levels of Logic = 4)
+  Source:            eUART/eUART_TRANSMITTER/sPARITY_REG_2 (FF)
+  Destination:       oTX (PAD)
+  Source Clock:      iCLK rising
+
+  Data Path: eUART/eUART_TRANSMITTER/sPARITY_REG_2 to oTX
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             1   0.525   1.137  eUART/eUART_TRANSMITTER/sPARITY_REG_2 (eUART/eUART_TRANSMITTER/sPARITY_REG_2)
+     LUT6:I0->O            1   0.254   1.137  eUART/eUART_TRANSMITTER/Mmux_oTX11 (eUART/eUART_TRANSMITTER/Mmux_oTX1)
+     LUT6:I0->O            1   0.254   0.910  eUART/eUART_TRANSMITTER/Mmux_oTX12 (eUART/eUART_TRANSMITTER/Mmux_oTX12)
+     LUT4:I1->O            1   0.235   0.681  eUART/eUART_TRANSMITTER/Mmux_oTX13 (oTX_OBUF)
+     OBUF:I->O                 2.912          oTX_OBUF (oTX)
+    ----------------------------------------
+    Total                      8.045ns (4.180ns logic, 3.865ns route)
+                                       (52.0% logic, 48.0% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock iCLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+iCLK           |    5.599|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 4.20 secs
+ 
+--> 
+
+Total memory usage is 283260 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

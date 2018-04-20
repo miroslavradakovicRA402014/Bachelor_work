@@ -4,17 +4,17 @@ NET "inRST"				LOC = AE24;
 NET "iRX"				LOC = A21;
 NET "oTX"				LOC = A20;
 
-NET "inREAD"   		LOC = AA24;
-NET "inWRITE"  		LOC = AC23;
+#NET "inREAD"   		LOC = AA24;
+#NET "inWRITE"  		LOC = AC23;s
 
-NET "iSW_DATA(0)" 	LOC = W19;
-NET "iSW_DATA(1)" 	LOC = Y24;
-NET "iSW_DATA(2)" 	LOC = K19;
-NET "iSW_DATA(3)" 	LOC = V24;
-NET "iSW_DATA(4)" 	LOC = U20;
-NET "iSW_DATA(5)" 	LOC = U23;
-NET "iSW_DATA(6)" 	LOC = U24;
-NET "iSW_DATA(7)" 	LOC = U19;
+#NET "iSW_DATA(0)" 	LOC = W19;
+#NET "iSW_DATA(1)" 	LOC = Y24;
+#NET "iSW_DATA(2)" 	LOC = K19;
+#NET "iSW_DATA(3)" 	LOC = V24;
+#NET "iSW_DATA(4)" 	LOC = U20;
+#NET "iSW_DATA(5)" 	LOC = U23;
+#NET "iSW_DATA(6)" 	LOC = U24;
+#NET "iSW_DATA(7)" 	LOC = U19;
 
 NET "oLED_DATA(0)" 	LOC = N24;
 NET "oLED_DATA(1)" 	LOC = N23;
