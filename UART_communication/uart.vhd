@@ -43,6 +43,7 @@ entity uart is
 			  oTX         		 : out  std_logic;
 			  oUART_FULL       : out  std_logic;
            oUART_EMPTY      : out  std_logic;
+			  oPARITY_REG 		 : out  std_logic_vector(DATA_WIDTH - 1 downto 0);
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart;
 
@@ -98,7 +99,7 @@ begin
 		);
 	
 	-- UART transmitter 
-	eUART_TRANSMITTER: transmitter 
+	eUART_TRANSMITTER : transmitter 
 		Port map(
 			iCLK 	 	  => iCLK,
 			inRST  	  => inRST,

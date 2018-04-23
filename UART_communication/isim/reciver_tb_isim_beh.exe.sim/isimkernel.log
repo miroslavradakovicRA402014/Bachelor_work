@@ -2,14 +2,14 @@ Command line:
    reciver_tb_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  55392
+     -socket  64773
 
-Wed Apr 18 12:34:17 2018
+Fri Apr 20 10:30:35 2018
 
 
  Elaboration Time: 0.109375 sec
 
- Current Memory Usage: 1509.52 Meg
+ Current Memory Usage: 1510.38 Meg
 
  Total Signals          : 24
  Total Nets             : 37
@@ -17,12 +17,12 @@ Wed Apr 18 12:34:17 2018
  Total Blocks           : 4
  Total Primitive Blocks : 3
  Total Processes        : 11
- Total Traceable Variables  : 18
- Total Scalar Nets and Variables : 525
+ Total Traceable Variables  : 19
+ Total Scalar Nets and Variables : 533
 
- Total Simulation Time: 0.3125 sec
+ Total Simulation Time: 1.4375 sec
 
- Current Memory Usage: 1037.93 Meg
+ Current Memory Usage: 407.536 Meg
 
-Wed Apr 18 12:46:15 2018
+Fri Apr 20 11:09:11 2018
 

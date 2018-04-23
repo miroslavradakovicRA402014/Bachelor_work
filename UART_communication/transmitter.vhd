@@ -40,7 +40,7 @@ entity transmitter is
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
            iTC    	 : in   std_logic;
-           iDATA  	 : in   std_logic_vector (7 downto 0);
+           iDATA  	 : in   std_logic_vector (DATA_WIDTH - 1 downto 0);
            iSTART 	 : in   std_logic;
 			  oTX_READY  : out  std_logic;
            oTX    	 : out  std_logic);
@@ -135,7 +135,7 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				if (sTC_CNT_DONE = '1') then -- Load form FIFO 
+				if (sTC_CNT_DONE = '1') then -- Load form data from FIFO 
 					sDATA_LOAD	 <= '1';
 					oTX_READY 	 <= '1';
 				else			
@@ -225,7 +225,7 @@ begin
 	end process parity_reg;
 	
 	-- Parity bit generator
-	sPARITY <=	sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);
-	
+	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7));
+		
 end Behavioral;
 

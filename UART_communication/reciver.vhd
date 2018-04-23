@@ -47,23 +47,25 @@ end reciver;
 
 architecture Behavioral of reciver is
 
-	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     -- Reciver FSM state type
+	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";	-- Wrong parity character
 
-	signal sCURRENT_STATE 	 : tSTATES; 										  			  -- Reciver FSM current state 
-	signal sNEXT_STATE    	 : tSTATES;	   						      	  			  -- Reciver FSM next state 
-	
-	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  -- Recived data bits counter 
-	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  -- Terminal count counter
-	
-	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   	 		  -- Shift register for recived data
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     		-- Reciver FSM state type
 
-	signal sDATA_CNT_EN 		 : std_logic;										  			  -- Data counter enable
-	signal sTC_CNT_EN 		 : std_logic;										  			  -- Terminal count counter enable
-	signal sSHW_EN				 : std_logic;										  			  -- Shifter enable
-
-	signal sTC_CNT_DONE 		 : std_logic;										  			  -- Terminal count counter count done
+	signal sCURRENT_STATE 	 : tSTATES; 										  			  		-- Reciver FSM current state 
+	signal sNEXT_STATE    	 : tSTATES;	   						      	  			 		-- Reciver FSM next state 
 	
-	signal sPARITY_OK 		 : std_logic;													  -- Parity check signal
+	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  		-- Recived data bits counter 
+	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  		-- Terminal count counter
+	
+	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   	 		  		-- Shift register for recived data
+
+	signal sDATA_CNT_EN 		 : std_logic;										  			  		-- Data counter enable
+	signal sTC_CNT_EN 		 : std_logic;										  			 	   -- Terminal count counter enable
+	signal sSHW_EN				 : std_logic;										  			  		-- Shifter enable
+
+	signal sTC_CNT_DONE 		 : std_logic;										  			  		-- Terminal count counter count done
+	
+	signal sPARITY_OK 		 : std_logic;													  		-- Parity check signal
 	 
 begin
 
@@ -118,7 +120,7 @@ begin
 	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, iFULL, sPARITY_OK, sTC_CNT_DONE) begin
+	fsm_out: process (sCURRENT_STATE, iFULL, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
@@ -144,7 +146,7 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				if (iFULL = '0' and sPARITY_OK = '1' and sTC_CNT_DONE = '1') then -- FIFO is not full, and parity is ok store to it
+				if (iFULL = '0' and sTC_CNT_DONE = '1') then -- FIFO is not full, store to it
 					oRX_DONE  <= '1';
 				else 
 					oRX_DONE  <= '0';
@@ -194,10 +196,11 @@ begin
 	end process shift_reg;
 	
 	-- Parity check signal generator
-	sPARITY_OK <= not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7)) xor sSHW_REG(8));
+	sPARITY_OK <= not ( not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))) xor sSHW_REG(8));
 	
 	-- Reciver data output
-	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0);
+	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0) when sPARITY_OK = '1' else
+				cWRONG_DATA;
 	
 end Behavioral;
 
