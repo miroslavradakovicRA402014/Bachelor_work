@@ -100,7 +100,7 @@ BEGIN
       -- insert stimulus here 
 		inRST <= '1';
 		
-		iDATA  <= "00100001";
+		iDATA  <= "01100111";
 		iSTART <= '0';
 		
 		iTC    <= '1';

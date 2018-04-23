@@ -32,10 +32,10 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity transmitter is
 	 Generic (
-		DATA_WIDTH 		: integer := 8;  -- Data bit number
-		TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
+		DATA_WIDTH 		 : integer := 8;  -- Data bit number
+		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
+		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
+		TC_CNT_WIDTH	 : integer := 4   -- Width of terminal count counter
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
@@ -55,6 +55,7 @@ architecture Behavioral of transmitter is
 	
 	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   		-- Recived data bits counter 
 	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  		-- Terminal count counter
+	
 	
    signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register
 	
@@ -91,7 +92,7 @@ begin
 					sNEXT_STATE <= IDLE;
 				end if;
 			when START  =>
-				-- Check if sampling period done
+				-- Check if start sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
 			   else
@@ -125,16 +126,16 @@ begin
 	fsm_out: process (sCURRENT_STATE, sSHW_REG(0), sPARITY, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE  =>
-				sTC_CNT_EN	 <= '0';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
-				sDATA_LOAD	 <= '0';
-				oTX_READY 	 <= '0';
-				oTX 			 <= '1';
+				sTC_CNT_EN	 		<= '0';
+				sDATA_CNT_EN 		<= '0';
+				sSHW_EN		 		<= '0';
+				sDATA_LOAD	 		<= '0';
+				oTX_READY 	 		<= '0';
+				oTX 			 		<= '1';
 			when START =>	
-				sTC_CNT_EN	 <= '1';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
+				sTC_CNT_EN	 		<= '1';
+				sDATA_CNT_EN 		<= '0';
+				sSHW_EN		 		<= '0';
 				if (sTC_CNT_DONE = '1') then -- Load form data from FIFO 
 					sDATA_LOAD	 <= '1';
 					oTX_READY 	 <= '1';
@@ -142,28 +143,28 @@ begin
 					sDATA_LOAD	 <= '0';
 					oTX_READY 	 <= '0';					
 				end if;
-				oTX 			 <= '0';				
+				oTX 			 		<= '0';				
 			when DATA  =>	
-				sTC_CNT_EN	 <= '1';
-				sDATA_CNT_EN <= '1';
-				sSHW_EN		 <= '1';
-				sDATA_LOAD	 <= '0';
-				oTX_READY 	 <= '0';	
-				oTX 			 <= sSHW_REG(0);
+				sTC_CNT_EN	 		<= '1';
+				sDATA_CNT_EN 		<= '1';
+				sSHW_EN		 		<= '1';
+				sDATA_LOAD	 		<= '0';
+				oTX_READY 	 		<= '0';	
+				oTX 			 		<= sSHW_REG(0);
 			when PARITY  =>	
-				sTC_CNT_EN	 <= '1';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
-				sDATA_LOAD	 <= '0';
-			   oTX_READY 	 <= '0';	
-				oTX			 <= sPARITY;				
+				sTC_CNT_EN	 		<= '1';
+				sDATA_CNT_EN 		<= '0';
+				sSHW_EN		 		<= '0';
+				sDATA_LOAD	 		<= '0';
+			   oTX_READY 	 		<= '0';	
+				oTX			 		<= sPARITY;				
 			when STOP  =>	
-				sTC_CNT_EN	 <= '1';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
-				sDATA_LOAD	 <= '0';
-			   oTX_READY 	 <= '0';	
-				oTX			 <= '0';
+				sTC_CNT_EN	 		<= '1';
+				sDATA_CNT_EN 		<= '0';
+				sSHW_EN		 		<= '0';
+				sDATA_LOAD	 		<= '0';
+			   oTX_READY 	 		<= '0';	
+				oTX			 		<= '1';
 		end case;		
 	end process fsm_out;	
 	
