@@ -16,7 +16,7 @@ package uart_components is
 	
 	component baud_freq_div is
 		 Generic (
-			CLK_PERIOD_NUM : integer := 156; -- Number of clock periods
+			CLK_PERIOD_NUM : integer := 159; -- Number of clock periods
 			CLK_CNT_WIDTH  : integer := 8		-- Width of clock counter
 		 );
 		 Port ( iCLK   : in  std_logic;
@@ -28,7 +28,7 @@ package uart_components is
 		 Generic (
 			DATA_WIDTH 		: integer := 8;  -- Data bit number
 			TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-			DATA_CNT_WIDTH : integer := 4;  -- Width of data bit counter
+			DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
 			TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
 		 );
 		 Port ( iCLK     : in   std_logic;
@@ -44,7 +44,7 @@ package uart_components is
 		 Generic (
 			DATA_WIDTH 		: integer := 8;  -- Data bit number
 			TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-			DATA_CNT_WIDTH : integer := 4;  -- Width of data bit counter
+			DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
 			TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
 		 );
 		 Port ( iCLK 		 : in   std_logic;

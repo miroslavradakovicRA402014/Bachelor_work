@@ -1,0 +1,8 @@
+vhdl isim_temp "uart_components.vhd"
+vhdl isim_temp "transmitter.vhd"
+vhdl isim_temp "reciver.vhd"
+vhdl isim_temp "fifo.vhd"
+vhdl isim_temp "baud_freq_div.vhd"
+vhdl isim_temp "uart.vhd"
+vhdl isim_temp "uart_verification_return.vhd"
+vhdl isim_temp "uart_verification_return_tb.vhd"

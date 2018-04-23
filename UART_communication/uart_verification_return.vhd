@@ -59,6 +59,8 @@ architecture Behavioral of uart_verification_return is
 	signal sUART_EMPTY	 : std_logic;
 
 	signal sPARITY_REG    : std_logic_vector(DATA_WIDTH - 1 downto 0); 
+	
+	signal sDATA : std_logic_vector(DATA_WIDTH - 1 downto 0); 
 
 		
 	component uart is

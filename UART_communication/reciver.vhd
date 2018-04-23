@@ -34,7 +34,7 @@ entity reciver is
 		DATA_WIDTH 		: integer := 8;  -- Data bit number
 		TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
 		DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
+		TC_CNT_WIDTH	: integer := 3   -- Width of terminal count counter
 	 );
     Port ( iCLK     : in   std_logic;
            inRST    : in   std_logic;

@@ -34,13 +34,13 @@ entity transmitter is
 	 Generic (
 		DATA_WIDTH 		 : integer := 8;  -- Data bit number
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	 : integer := 4   -- Width of terminal count counter
+		DATA_CNT_WIDTH  : integer := 4;  -- Width of data bit counter
+		TC_CNT_WIDTH	 : integer := 3   -- Width of terminal count counter
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
            iTC    	 : in   std_logic;
-           iDATA  	 : in   std_logic_vector (DATA_WIDTH - 1 downto 0);
+           iDATA  	 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
            iSTART 	 : in   std_logic;
 			  oTX_READY  : out  std_logic;
            oTX    	 : out  std_logic);
@@ -69,6 +69,7 @@ architecture Behavioral of transmitter is
 	
 	signal sPARITY_REG 		 : std_logic_vector(DATA_WIDTH - 1 downto 0);	-- Parity register
 	signal sPARITY				 : std_logic;												-- Odd parity
+	
 	
 begin
 
@@ -123,7 +124,7 @@ begin
 	end process fsm_next;	
 	
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, sSHW_REG(0), sPARITY, sTC_CNT_DONE) begin
+	fsm_out: process (sCURRENT_STATE, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
 		case (sCURRENT_STATE) is
 			when IDLE  =>
 				sTC_CNT_EN	 		<= '0';
