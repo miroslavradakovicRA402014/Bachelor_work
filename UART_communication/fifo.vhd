@@ -37,14 +37,14 @@ entity fifo is
 		DATA_WIDTH   : integer := 8; -- Widht of FIFO word
 		NUM_OF_WORDS : integer := 16 -- Number of FIFO locations
 	 );
-    Port ( iCLK   : in  std_logic;
-           inRST  : in  std_logic;
-           iDATA  : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
-           iWR    : in  std_logic;
-           iRD    : in  std_logic;
-           oFULL  : out std_logic;
-           oEMPTY : out std_logic;
-           oDATA  : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK    : in  std_logic;
+           inRST   : in  std_logic;
+           iDATA   : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
+           iWR     : in  std_logic;
+           iRD     : in  std_logic;
+           oFULL   : out std_logic;
+           oEMPTY  : out std_logic;
+           oDATA   : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end fifo;
 
 architecture Behavioral of fifo is

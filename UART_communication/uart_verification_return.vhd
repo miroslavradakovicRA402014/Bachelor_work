@@ -34,12 +34,13 @@ entity uart_verification_return is
 		BAUD_RATE_SEL : integer := 2;
 		DATA_WIDTH    : integer := 8
 	 );
-    Port ( iCLK  		: in  std_logic;
-           inRST 		: in  std_logic;
-			  iRX 		: in  std_logic;
-			  iBAUD_SW	: in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
-			  oTX			: out std_logic;
-           oLED_DATA : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		 : in  std_logic;
+           inRST 		 : in  std_logic;
+			  iPARITY_SW : in  std_logic;
+			  iRX 		 : in  std_logic;
+			  iBAUD_SW	 : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
+			  oTX			 : out std_logic;
+           oLED_DATA  : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart_verification_return;
 
 architecture Behavioral of uart_verification_return is
@@ -68,6 +69,7 @@ architecture Behavioral of uart_verification_return is
 		 );
 		 Port ( iCLK        		 : in   std_logic;
 				  inRST       		 : in   std_logic;
+				  iPARITY			 : in   std_logic;
 				  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
 				  iRX         		 : in   std_logic;
 				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
@@ -86,6 +88,7 @@ begin
 		Port map (
 			iCLK        		 => iCLK,
 			inRST       		 => inRST,
+			iPARITY				 => iPARITY_SW,
 			iBAUD_SEL			 => iBAUD_SW,
 			iRX         		 => iRX,
 			iUART_DATA		 	 => sOUART_DATA,

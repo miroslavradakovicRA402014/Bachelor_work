@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.07 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.07 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Reading design: uart_verification_return.prj
 
@@ -150,7 +150,7 @@ Synthesizing Unit <uart_verification_return>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd".
         BAUD_RATE_SEL = 2
         DATA_WIDTH = 8
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" line 85: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" line 87: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
     Found 8-bit register for signal <sOUART_DATA>.
     Found 2-bit register for signal <sCURRENT_STATE>.
     Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
@@ -227,7 +227,7 @@ Synthesizing Unit <reciver>.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  16 D-type flip-flop(s).
-	inferred   4 Multiplexer(s).
+	inferred   5 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <reciver> synthesized.
 
@@ -296,11 +296,11 @@ Synthesizing Unit <transmitter>.
     -----------------------------------------------------------------------
     Found 4-bit adder for signal <sTC_CNT[3]_GND_20_o_add_15_OUT> created at line 1241.
     Found 3-bit adder for signal <sDATA_CNT[2]_GND_20_o_add_21_OUT> created at line 1241.
-    Found 1-bit 4-to-1 multiplexer for signal <oTX> created at line 128.
+    Found 1-bit 4-to-1 multiplexer for signal <oTX> created at line 129.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  23 D-type flip-flop(s).
-	inferred   5 Multiplexer(s).
+	inferred   6 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <transmitter> synthesized.
 
@@ -323,8 +323,8 @@ Macro Statistics
  9-bit register                                        : 3
 # Comparators                                          : 1
  9-bit comparator equal                                : 1
-# Multiplexers                                         : 40
- 1-bit 2-to-1 multiplexer                              : 2
+# Multiplexers                                         : 42
+ 1-bit 2-to-1 multiplexer                              : 4
  1-bit 4-to-1 multiplexer                              : 1
  3-bit 2-to-1 multiplexer                              : 2
  4-bit 2-to-1 multiplexer                              : 2
@@ -333,8 +333,8 @@ Macro Statistics
 # Tristates                                            : 16
  1-bit tristate buffer                                 : 16
 # FSMs                                                 : 3
-# Xors                                                 : 3
- 1-bit xor2                                            : 1
+# Xors                                                 : 4
+ 1-bit xor2                                            : 2
  1-bit xor8                                            : 2
 
 =========================================================================
@@ -370,8 +370,8 @@ The following registers are absorbed into counter <sDATA_CNT>: 1 register on sig
 Unit <reciver> synthesized (advanced).
 
 Synthesizing (advanced) Unit <transmitter>.
-The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
 The following registers are absorbed into counter <sTC_CNT>: 1 register on signal <sTC_CNT>.
+The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
 Unit <transmitter> synthesized (advanced).
 
 =========================================================================
@@ -391,13 +391,13 @@ Macro Statistics
  Flip-Flops                                            : 298
 # Comparators                                          : 1
  9-bit comparator equal                                : 1
-# Multiplexers                                         : 35
- 1-bit 2-to-1 multiplexer                              : 2
+# Multiplexers                                         : 37
+ 1-bit 2-to-1 multiplexer                              : 4
  1-bit 4-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 32
 # FSMs                                                 : 3
-# Xors                                                 : 3
- 1-bit xor2                                            : 1
+# Xors                                                 : 4
+ 1-bit xor2                                            : 2
  1-bit xor8                                            : 2
 
 =========================================================================
@@ -436,7 +436,8 @@ Optimizing FSM <eUART/eUART_TRANSMITTER/FSM_2> on signal <sCURRENT_STATE[1:3]> w
  parity | 011
  stop   | 100
 --------------------
-INFO:Xst:2261 - The FF/Latch <sBAUD_RATE_REG_0> in Unit <baud_freq_div> is equivalent to the following 2 FFs/Latches, which will be removed : <sBAUD_RATE_REG_1> <sBAUD_RATE_REG_8> 
+INFO:Xst:2261 - The FF/Latch <sBAUD_RATE_REG_1> in Unit <baud_freq_div> is equivalent to the following FF/Latch, which will be removed : <sBAUD_RATE_REG_8> 
+INFO:Xst:2261 - The FF/Latch <sBAUD_RATE_REG_0> in Unit <baud_freq_div> is equivalent to the following FF/Latch, which will be removed : <sBAUD_RATE_REG_3> 
 WARNING:Xst:2042 - Unit fifo: 8 internal tristates are replaced by logic (pull-up yes): oDATA<0>, oDATA<1>, oDATA<2>, oDATA<3>, oDATA<4>, oDATA<5>, oDATA<6>, oDATA<7>.
 
 Optimizing unit <uart_verification_return> ...
@@ -483,16 +484,17 @@ Top Level Output File Name         : uart_verification_return.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 433
+# BELS                             : 435
 #      GND                         : 1
 #      INV                         : 7
-#      LUT2                        : 9
-#      LUT3                        : 143
-#      LUT4                        : 20
-#      LUT5                        : 145
-#      LUT6                        : 90
+#      LUT2                        : 10
+#      LUT3                        : 140
+#      LUT4                        : 22
+#      LUT5                        : 15
+#      LUT6                        : 216
 #      MUXCY                       : 8
-#      MUXF7                       : 1
+#      MUXF7                       : 6
+#      VCC                         : 1
 #      XORCY                       : 9
 # FlipFlops/Latches                : 335
 #      FDC                         : 25
@@ -500,8 +502,8 @@ Primitive and Black Box Usage:
 #      FDPE                        : 2
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 13
-#      IBUF                        : 4
+# IO Buffers                       : 14
+#      IBUF                        : 5
 #      OBUF                        : 9
 
 Device utilization summary:
@@ -512,19 +514,19 @@ Selected Device : 6slx45fgg676-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:             335  out of  54576     0%  
- Number of Slice LUTs:                  414  out of  27288     1%  
-    Number used as Logic:               414  out of  27288     1%  
+ Number of Slice LUTs:                  410  out of  27288     1%  
+    Number used as Logic:               410  out of  27288     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    429
-   Number with an unused Flip Flop:      94  out of    429    21%  
-   Number with an unused LUT:            15  out of    429     3%  
-   Number of fully used LUT-FF pairs:   320  out of    429    74%  
+ Number of LUT Flip Flop pairs used:    423
+   Number with an unused Flip Flop:      88  out of    423    20%  
+   Number with an unused LUT:            13  out of    423     3%  
+   Number of fully used LUT-FF pairs:   322  out of    423    76%  
    Number of unique control sets:        42
 
 IO Utilization: 
- Number of IOs:                          14
- Number of bonded IOBs:                  14  out of    358     3%  
+ Number of IOs:                          15
+ Number of bonded IOBs:                  15  out of    358     4%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -561,10 +563,10 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 6.579ns (Maximum Frequency: 151.999MHz)
+   Minimum period: 6.778ns (Maximum Frequency: 147.536MHz)
    Minimum input arrival time before clock: 5.162ns
-   Maximum output required time after clock: 6.549ns
-   Maximum combinational path delay: No path found
+   Maximum output required time after clock: 6.850ns
+   Maximum combinational path delay: 9.294ns
 
 Timing Details:
 ---------------
@@ -572,42 +574,33 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 6.579ns (frequency: 151.999MHz)
-  Total number of paths / destination ports: 10790 / 637
+  Clock period: 6.778ns (frequency: 147.536MHz)
+  Total number of paths / destination ports: 11281 / 637
 -------------------------------------------------------------------------
-Delay:               6.579ns (Levels of Logic = 14)
-  Source:            eUART/eBAUD_FREQ_DIV/sCLK_CNT_4 (FF)
-  Destination:       eUART/eBAUD_FREQ_DIV/sCLK_CNT_8 (FF)
+Delay:               6.778ns (Levels of Logic = 5)
+  Source:            eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 (FF)
+  Destination:       eUART/eUART_RECIVER/sTC_CNT_3 (FF)
   Source Clock:      iCLK rising
   Destination Clock: iCLK rising
 
-  Data Path: eUART/eBAUD_FREQ_DIV/sCLK_CNT_4 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
+  Data Path: eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 to eUART/eUART_RECIVER/sTC_CNT_3
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              6   0.525   1.104  eUART/eBAUD_FREQ_DIV/sCLK_CNT_4 (eUART/eBAUD_FREQ_DIV/sCLK_CNT_4)
-     LUT4:I1->O            2   0.235   0.726  eUART/eBAUD_FREQ_DIV/oTC9411 (eUART/eBAUD_FREQ_DIV/oTC941)
-     LUT6:I5->O            1   0.254   0.682  eUART/eBAUD_FREQ_DIV/oTC94 (eUART/eBAUD_FREQ_DIV/oTC94)
-     LUT6:I5->O            1   0.254   0.000  eUART/eBAUD_FREQ_DIV/oTC96_F (N64)
-     MUXF7:I0->O          18   0.163   1.235  eUART/eBAUD_FREQ_DIV/oTC96 (eUART/eBAUD_FREQ_DIV/oTC96)
-     LUT6:I5->O            1   0.254   0.681  eUART/eBAUD_FREQ_DIV/oTC_inv1 (eUART/eBAUD_FREQ_DIV/oTC_inv)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<0> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<0>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<1> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<1>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<2> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<2>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<4> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<4>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<5> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<5>)
-     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<6> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<6>)
-     MUXCY:CI->O           0   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>)
-     XORCY:CI->O           1   0.206   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<8> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT8)
-     FDC:D                     0.074          eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
+     FDC:C->Q              4   0.525   1.080  eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 (eUART/eBAUD_FREQ_DIV/sCLK_CNT_0)
+     LUT4:I0->O            1   0.254   1.112  eUART/eBAUD_FREQ_DIV/oTC9611 (eUART/eBAUD_FREQ_DIV/oTC961)
+     LUT6:I1->O           14   0.254   1.127  eUART/eBAUD_FREQ_DIV/oTC91 (eUART/eBAUD_FREQ_DIV/oTC9)
+     LUT5:I4->O            4   0.254   0.912  eUART/eBAUD_FREQ_DIV/oTC910_SW4 (N36)
+     LUT6:I4->O            1   0.250   0.682  eUART/eUART_RECIVER/_n0075_inv1 (eUART/eUART_RECIVER/_n0075_inv)
+     LUT5:I4->O            1   0.254   0.000  eUART/eUART_RECIVER/sTC_CNT_3_rstpot (eUART/eUART_RECIVER/sTC_CNT_3_rstpot)
+     FDC:D                     0.074          eUART/eUART_RECIVER/sTC_CNT_3
     ----------------------------------------
-    Total                      6.579ns (2.151ns logic, 4.428ns route)
-                                       (32.7% logic, 67.3% route)
+    Total                      6.778ns (1.865ns logic, 4.913ns route)
+                                       (27.5% logic, 72.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 349 / 344
+  Total number of paths / destination ports: 477 / 472
 -------------------------------------------------------------------------
 Offset:              5.162ns (Levels of Logic = 2)
   Source:            inRST (PAD)
@@ -629,22 +622,42 @@ Offset:              5.162ns (Levels of Logic = 2)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
   Total number of paths / destination ports: 19 / 9
 -------------------------------------------------------------------------
-Offset:              6.549ns (Levels of Logic = 3)
-  Source:            eUART/eUART_TRANSMITTER/sPARITY_REG_5 (FF)
+Offset:              6.850ns (Levels of Logic = 3)
+  Source:            eUART/eUART_TRANSMITTER/sPARITY_REG_7 (FF)
   Destination:       oTX (PAD)
   Source Clock:      iCLK rising
 
-  Data Path: eUART/eUART_TRANSMITTER/sPARITY_REG_5 to oTX
+  Data Path: eUART/eUART_TRANSMITTER/sPARITY_REG_7 to oTX
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             1   0.525   1.137  eUART/eUART_TRANSMITTER/sPARITY_REG_5 (eUART/eUART_TRANSMITTER/sPARITY_REG_5)
-     LUT6:I0->O            1   0.254   0.790  eUART/eUART_TRANSMITTER/Mmux_oTX1_SW0 (N8)
-     LUT6:I4->O            1   0.250   0.681  eUART/eUART_TRANSMITTER/Mmux_oTX1 (oTX_OBUF)
+     FDCE:C->Q             1   0.525   1.112  eUART/eUART_TRANSMITTER/sPARITY_REG_7 (eUART/eUART_TRANSMITTER/sPARITY_REG_7)
+     LUT6:I1->O            1   0.254   1.112  eUART/eUART_TRANSMITTER/oTX1 (eUART/eUART_TRANSMITTER/oTX)
+     LUT5:I0->O            1   0.254   0.681  eUART/eUART_TRANSMITTER/oTX3 (oTX_OBUF)
      OBUF:I->O                 2.912          oTX_OBUF (oTX)
     ----------------------------------------
-    Total                      6.549ns (3.941ns logic, 2.608ns route)
-                                       (60.2% logic, 39.8% route)
+    Total                      6.850ns (3.945ns logic, 2.905ns route)
+                                       (57.6% logic, 42.4% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               9.294ns (Levels of Logic = 4)
+  Source:            iPARITY_SW (PAD)
+  Destination:       oTX (PAD)
+
+  Data Path: iPARITY_SW to oTX
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           129   1.328   2.753  iPARITY_SW_IBUF (iPARITY_SW_IBUF)
+     LUT6:I0->O            1   0.254   1.112  eUART/eUART_TRANSMITTER/oTX1 (eUART/eUART_TRANSMITTER/oTX)
+     LUT5:I0->O            1   0.254   0.681  eUART/eUART_TRANSMITTER/oTX3 (oTX_OBUF)
+     OBUF:I->O                 2.912          oTX_OBUF (oTX)
+    ----------------------------------------
+    Total                      9.294ns (4.748ns logic, 4.546ns route)
+                                       (51.1% logic, 48.9% route)
 
 =========================================================================
 
@@ -656,20 +669,20 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    6.579|         |         |         |
+iCLK           |    6.778|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.52 secs
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.77 secs
  
 --> 
 
-Total memory usage is 282940 kilobytes
+Total memory usage is 283324 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)
-Number of infos    :    4 (   0 filtered)
+Number of infos    :    5 (   0 filtered)
 

@@ -39,6 +39,7 @@ entity transmitter is
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
+			  iPARITY	 : in   std_logic;
            iTC    	 : in   std_logic;
            iDATA  	 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
            iSTART 	 : in   std_logic;
@@ -227,7 +228,8 @@ begin
 	end process parity_reg;
 	
 	-- Parity bit generator
-	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7));
+	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7)) when iPARITY = '1' else
+						  sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);
 		
 end Behavioral;
 

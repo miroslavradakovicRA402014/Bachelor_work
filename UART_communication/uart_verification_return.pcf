@@ -1,11 +1,12 @@
 //! **************************************************************************
-// Written by: Map P.68d on Tue Apr 24 15:43:17 2018
+// Written by: Map P.68d on Tue Apr 24 16:39:32 2018
 //! **************************************************************************
 
 SCHEMATIC START;
 COMP "iRX" LOCATE = SITE "A21" LEVEL 1;
 COMP "oTX" LOCATE = SITE "A20" LEVEL 1;
 COMP "iCLK" LOCATE = SITE "M21" LEVEL 1;
+COMP "iPARITY_SW" LOCATE = SITE "K19" LEVEL 1;
 COMP "inRST" LOCATE = SITE "AE24" LEVEL 1;
 COMP "oLED_DATA<0>" LOCATE = SITE "N24" LEVEL 1;
 COMP "oLED_DATA<1>" LOCATE = SITE "N23" LEVEL 1;

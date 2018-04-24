@@ -35,6 +35,7 @@ package uart_components is
 		 );
 		Port ( iCLK     : in   std_logic;
 			   inRST    : in   std_logic;
+			   iPARITY  : in   std_logic;
 			   iRX      : in   std_logic;
 			   iTC      : in   std_logic;
 			   iFULL 	  : in   std_logic;
@@ -52,6 +53,7 @@ package uart_components is
 		 );
 		 Port ( iCLK 		 : in   std_logic;
 				  inRST  	 : in   std_logic;
+				  iPARITY  	 : in   std_logic;
 				  iTC    	 : in   std_logic;
 				  iDATA  	 : in   std_logic_vector (7 downto 0);
 				  iSTART 	 : in   std_logic;

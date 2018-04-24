@@ -37,6 +37,7 @@ entity uart is
 	 );
     Port ( iCLK        		 : in   std_logic;
            inRST       		 : in   std_logic;
+			  iPARITY			 : in   std_logic;
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
            iRX         		 : in   std_logic;
 			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
@@ -82,6 +83,7 @@ begin
 		Port map(
          iCLK 		=> iCLK,
          inRST 	=> inRST,
+			iPARITY  => iPARITY,
          iRX   	=> iRX,
          iTC   	=> sTC,
          iFULL 	=> sRECV_FULL,
@@ -108,6 +110,7 @@ begin
 		Port map(
 			iCLK 	 	  => iCLK,
 			inRST  	  => inRST,
+			iPARITY    => iPARITY,
 			iTC    	  => sTC,
 		   iDATA  	  => sSEND_DATA, 
 			iSTART 	  => snSEND_EMPTY,

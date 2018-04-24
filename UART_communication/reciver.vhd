@@ -38,6 +38,7 @@ entity reciver is
 	 );
     Port ( iCLK     : in   std_logic;
            inRST    : in   std_logic;
+			  iPARITY  : in   std_logic;
            iRX      : in   std_logic;
            iTC      : in   std_logic;
            iFULL 	  : in   std_logic;
@@ -202,7 +203,8 @@ begin
 	end process shift_reg;
 	
 	-- Parity check signal generator
-	sPARITY_OK <= not ( not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))) xor sSHW_REG(8));
+	sPARITY_OK <= not ( not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))) xor sSHW_REG(8)) when iPARITY = '1' else
+					  not (		 (sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))  xor sSHW_REG(8));
 	
 	-- Reciver data output
 	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0) when sPARITY_OK = '1' else

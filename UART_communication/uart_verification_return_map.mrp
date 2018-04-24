@@ -11,7 +11,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Tue Apr 24 15:43:08 2018
+Mapped Date    : Tue Apr 24 16:39:23 2018
 
 Design Summary
 --------------
@@ -23,21 +23,25 @@ Slice Logic Utilization:
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                        324 out of  27,288    1%
-    Number used as logic:                      324 out of  27,288    1%
-      Number using O6 output only:             235
+  Number of Slice LUTs:                        330 out of  27,288    1%
+    Number used as logic:                      326 out of  27,288    1%
+      Number using O6 output only:             242
       Number using O5 output only:               1
-      Number using O5 and O6:                   88
+      Number using O5 and O6:                   83
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
+    Number used exclusively as route-thrus:      4
+      Number with same-slice register load:      4
+      Number with same-slice carry load:         0
+      Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   102 out of   6,822    1%
+  Number of occupied Slices:                   110 out of   6,822    1%
   Number of MUXCYs used:                        12 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          339
-    Number with an unused Flip Flop:            71 out of     339   20%
-    Number with an unused LUT:                  15 out of     339    4%
-    Number of fully used LUT-FF pairs:         253 out of     339   74%
+  Number of LUT Flip Flop pairs used:          337
+    Number with an unused Flip Flop:            78 out of     337   23%
+    Number with an unused LUT:                   7 out of     337    2%
+    Number of fully used LUT-FF pairs:         252 out of     337   74%
     Number of unique control sets:              42
     Number of slice register sites lost
       to control set restrictions:              33 out of  54,576    1%
@@ -49,8 +53,8 @@ Slice Logic Distribution:
   over-mapped for a non-slice resource or if Placement fails.
 
 IO Utilization:
-  Number of bonded IOBs:                        14 out of     358    3%
-    Number of LOCed IOBs:                       14 out of      14  100%
+  Number of bonded IOBs:                        15 out of     358    4%
+    Number of LOCed IOBs:                       15 out of      15  100%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of     116    0%
@@ -77,10 +81,10 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                5.20
+Average Fanout of Non-Clock Nets:                5.63
 
 Peak Memory Usage:  424 MB
-Total REAL time to MAP completion:  8 secs 
+Total REAL time to MAP completion:  9 secs 
 Total CPU time to MAP completion:   8 secs 
 
 Table of Contents
@@ -131,7 +135,7 @@ INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-   1 block(s) optimized away
+   2 block(s) optimized away
 
 Section 5 - Removed Logic
 -------------------------
@@ -139,6 +143,7 @@ Section 5 - Removed Logic
 Optimized Block(s):
 TYPE 		BLOCK
 GND 		XST_GND
+VCC 		XST_VCC
 
 To enable printing of redundant blocks removed and signals merged, set the
 detailed map report option and rerun map.
@@ -153,6 +158,7 @@ Section 6 - IOB Properties
 | iBAUD_SW<0>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iBAUD_SW<1>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iCLK                               | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| iPARITY_SW                         | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iRX                                | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | inRST                              | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | oLED_DATA<0>                       | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |

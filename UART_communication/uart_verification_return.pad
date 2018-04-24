@@ -1,7 +1,7 @@
 Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Tue Apr 24 15:43:26 2018
+Tue Apr 24 16:39:41 2018
 
 
 # NOTE: This file is designed to be imported into a spreadsheet program
@@ -427,7 +427,7 @@ K15|||NC||||||||||||
 K16|||GND||||||||||||
 K17|||VCCINT||||||||1.2||||
 K18||IOBS|IO_L32N_A16_M1A9_1|UNUSED||1|||||||||
-K19||IOBS|IO_L28N_VREF_1|UNUSED||1|||||||||
+K19|iPARITY_SW|IOB|IO_L28N_VREF_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
 K20|||NC||||||||||||
 K21|||NC||||||||||||
 K22|||NC||||||||||||
