@@ -16,12 +16,14 @@ package uart_components is
 	
 	component baud_freq_div is
 		 Generic (
-			CLK_PERIOD_NUM : integer := 159; -- Number of clock periods
-			CLK_CNT_WIDTH  : integer := 8		-- Width of clock counter
+			BAUD_RATE_SEL	: integer := 2;		 -- Num of select bits
+			CLK_CNT_WIDTH  : integer := 9		    -- Width of clock counter
 		 );
-		 Port ( iCLK   : in  std_logic;
-				  inRST  : in  std_logic;
-				  oTC 	: out std_logic);
+		Port ( iCLK   	: in  std_logic;
+			   inRST  	: in  std_logic;
+			   iBAUD_SEL : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			   iBAUD_EN  : in  std_logic;
+			   oTC 		: out std_logic);
 	end component baud_freq_div;	
 
 	component reciver is
@@ -31,13 +33,14 @@ package uart_components is
 			DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
 			TC_CNT_WIDTH	: integer := 4   -- Width of terminal count counter
 		 );
-		 Port ( iCLK     : in   std_logic;
-				  inRST    : in   std_logic;
-				  iRX      : in   std_logic;
-				  iTC      : in   std_logic;
-				  iFULL 	  : in   std_logic;
-				  oDATA 	  : out  std_logic_vector(DATA_WIDTH - 1 downto 0);
-				  oRX_DONE : out  std_logic);
+		Port ( iCLK     : in   std_logic;
+			   inRST    : in   std_logic;
+			   iRX      : in   std_logic;
+			   iTC      : in   std_logic;
+			   iFULL 	  : in   std_logic;
+			   oBAUD_EN : out  std_logic;
+			   oDATA 	  : out  std_logic_vector(DATA_WIDTH - 1 downto 0);
+			   oRX_DONE : out  std_logic);
 	end component reciver;
 	
 	component transmitter is

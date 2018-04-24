@@ -1,7 +1,7 @@
 #Release 14.6 - par P.68d (nt)
 #Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-#Mon Apr 23 15:46:21 2018
+#Tue Apr 24 15:43:26 2018
 
 #
 ## NOTE: This file is designed to be imported into a spreadsheet program
@@ -661,7 +661,7 @@ W15,,,GND,,,,,,,,,,,,
 W16,,IOBS,IO_L18N_2,UNUSED,,2,,,,,,,,,
 W17,,IOBS,IO_L8N_2,UNUSED,,2,,,,,,,,,
 W18,,IOBM,IO_L68P_1,UNUSED,,1,,,,,,,,,
-W19,,IOBS,IO_L68N_1,UNUSED,,1,,,,,,,,,
+W19,iBAUD_SW<0>,IOB,IO_L68N_1,INPUT,LVCMOS25*,1,,,,NONE,,LOCATED,NO,NONE,
 W20,,,GND,,,,,,,,,,,,
 W21,,,NC,,,,,,,,,,,,
 W22,,IOBS,IO_L71N_1,UNUSED,,1,,,,,,,,,
@@ -692,7 +692,7 @@ Y20,,IOBM,IO_L72P_1,UNUSED,,1,,,,,,,,,
 Y21,,IOBS,IO_L72N_1,UNUSED,,1,,,,,,,,,
 Y22,,IOBM,IO_L73P_1,UNUSED,,1,,,,,,,,,
 Y23,,,GND,,,,,,,,,,,,
-Y24,,IOBM,IO_L47P_FWE_B_M1DQ0_1,UNUSED,,1,,,,,,,,,
+Y24,iBAUD_SW<1>,IOB,IO_L47P_FWE_B_M1DQ0_1,INPUT,LVCMOS25*,1,,,,NONE,,LOCATED,NO,NONE,
 Y25,,,VCCO_1,,,1,,,,,2.50,,,,
 Y26,,IOBS,IO_L47N_LDC_M1DQ1_1,UNUSED,,1,,,,,,,,,
 

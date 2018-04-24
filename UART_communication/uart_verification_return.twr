@@ -37,8 +37,10 @@ Setup/Hold to clock iCLK
             |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------+------------+------------------+--------+
-iRX         |    2.970(R)|      SLOW  |   -1.493(R)|      FAST  |iCLK_BUFGP        |   0.000|
-inRST       |   13.366(R)|      SLOW  |   -2.920(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<0> |    4.328(R)|      SLOW  |   -1.904(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<1> |    2.281(R)|      SLOW  |   -0.343(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iRX         |    4.812(R)|      SLOW  |   -1.810(R)|      FAST  |iCLK_BUFGP        |   0.000|
+inRST       |   10.983(R)|      SLOW  |   -1.827(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+------------+------------+------------+------------+------------------+--------+
 
 Clock iCLK to Pad
@@ -46,15 +48,15 @@ Clock iCLK to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-oLED_DATA<0>|        11.532(R)|      SLOW  |         5.052(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<1>|        12.291(R)|      SLOW  |         5.562(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<2>|        10.535(R)|      SLOW  |         4.505(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<3>|        10.599(R)|      SLOW  |         4.550(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<4>|        10.998(R)|      SLOW  |         4.762(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<5>|        10.558(R)|      SLOW  |         4.511(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<6>|        10.823(R)|      SLOW  |         4.663(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<7>|        11.026(R)|      SLOW  |         4.772(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oTX         |        13.337(R)|      SLOW  |         5.373(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<0>|        10.200(R)|      SLOW  |         4.327(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<1>|        11.308(R)|      SLOW  |         4.938(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<2>|        11.187(R)|      SLOW  |         4.873(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<3>|        10.553(R)|      SLOW  |         4.516(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<4>|        10.297(R)|      SLOW  |         4.371(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<5>|        11.066(R)|      SLOW  |         4.791(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<6>|        11.306(R)|      SLOW  |         4.923(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<7>|        11.709(R)|      SLOW  |         5.158(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oTX         |        14.637(R)|      SLOW  |         5.825(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock iCLK
@@ -62,18 +64,18 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.310|         |         |         |
+iCLK           |    6.017|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Mon Apr 23 15:46:26 2018 
+Analysis completed Tue Apr 24 15:43:31 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 245 MB
+Peak Memory Usage: 246 MB
 
 
 

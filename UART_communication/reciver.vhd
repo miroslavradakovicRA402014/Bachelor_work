@@ -41,6 +41,7 @@ entity reciver is
            iRX      : in   std_logic;
            iTC      : in   std_logic;
            iFULL 	  : in   std_logic;
+			  oBAUD_EN : out  std_logic;
            oDATA 	  : out  std_logic_vector(DATA_WIDTH - 1 downto 0);
            oRX_DONE : out  std_logic);
 end reciver;
@@ -120,32 +121,37 @@ begin
 	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, iFULL, sTC_CNT_DONE) begin
+	fsm_out : process (sCURRENT_STATE, iFULL, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
+				oBAUD_EN 	 <= '1';
 				oRX_DONE 	 <= '0';
 			when START  =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
+				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when DATA   =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '1';
 				sSHW_EN		 <= '1';
+				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';
 			when PARITY =>
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '1';
+				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when STOP   =>	
 				sTC_CNT_EN	 <= '1';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
+				oBAUD_EN 	 <= '0';
 				if (iFULL = '0' and sTC_CNT_DONE = '1') then -- FIFO is not full, store to it
 					oRX_DONE  <= '1';
 				else 
@@ -155,7 +161,7 @@ begin
 	end process fsm_out;
 	
 	-- Terminal count counter process
-	tc_cnt: process (iCLK, inRST) begin
+	tc_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
@@ -172,7 +178,7 @@ begin
 						 '0';
 						 
 	-- Data bits counter process
-	data_cnt: process (iCLK, inRST) begin
+	data_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then

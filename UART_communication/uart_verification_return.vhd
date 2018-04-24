@@ -31,11 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity uart_verification_return is
 	 Generic (
-		DATA_WIDTH : integer := 8
+		BAUD_RATE_SEL : integer := 2;
+		DATA_WIDTH    : integer := 8
 	 );
     Port ( iCLK  		: in  std_logic;
            inRST 		: in  std_logic;
 			  iRX 		: in  std_logic;
+			  iBAUD_SW	: in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
 			  oTX			: out std_logic;
            oLED_DATA : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart_verification_return;
@@ -58,19 +60,17 @@ architecture Behavioral of uart_verification_return is
 	signal sUART_FULL		 : std_logic;
 	signal sUART_EMPTY	 : std_logic;
 
-	signal sPARITY_REG    : std_logic_vector(DATA_WIDTH - 1 downto 0); 
-	
-	signal sDATA : std_logic_vector(DATA_WIDTH - 1 downto 0); 
-
 		
 	component uart is
 		 Generic (
-			DATA_WIDTH : integer := 8
+			BAUD_RATE_SEL : integer := 2;
+			DATA_WIDTH    : integer := 8
 		 );
 		 Port ( iCLK        		 : in   std_logic;
 				  inRST       		 : in   std_logic;
+				  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
 				  iRX         		 : in   std_logic;
-				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
+				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
 				  iUART_WR 			 : in	  std_logic;
 				  iUART_RD    		 : in   std_logic;
 				  oTX         		 : out  std_logic;
@@ -86,6 +86,7 @@ begin
 		Port map (
 			iCLK        		 => iCLK,
 			inRST       		 => inRST,
+			iBAUD_SEL			 => iBAUD_SW,
 			iRX         		 => iRX,
 			iUART_DATA		 	 => sOUART_DATA,
 			iUART_WR 			 => sUART_WRITE,
@@ -155,6 +156,9 @@ begin
 		
 	-- LED output
 	oLED_DATA   <= sRECV_DATA_REG;
+	
+	
+	
 --	oLED_DATA <= "11110000" when sUART_EMPTY = '0' else 
 --			       "00001111";
 

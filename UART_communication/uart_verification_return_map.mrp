@@ -11,36 +11,36 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Mon Apr 23 15:46:03 2018
+Mapped Date    : Tue Apr 24 15:43:08 2018
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    0
 Slice Logic Utilization:
-  Number of Slice Registers:                   333 out of  54,576    1%
-    Number used as Flip Flops:                 333
+  Number of Slice Registers:                   335 out of  54,576    1%
+    Number used as Flip Flops:                 335
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                        397 out of  27,288    1%
-    Number used as logic:                      397 out of  27,288    1%
-      Number using O6 output only:             322
-      Number using O5 output only:               3
-      Number using O5 and O6:                   72
+  Number of Slice LUTs:                        324 out of  27,288    1%
+    Number used as logic:                      324 out of  27,288    1%
+      Number using O6 output only:             235
+      Number using O5 output only:               1
+      Number using O5 and O6:                   88
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   133 out of   6,822    1%
-  Number of MUXCYs used:                         8 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          408
-    Number with an unused Flip Flop:           138 out of     408   33%
-    Number with an unused LUT:                  11 out of     408    2%
-    Number of fully used LUT-FF pairs:         259 out of     408   63%
-    Number of unique control sets:              36
+  Number of occupied Slices:                   102 out of   6,822    1%
+  Number of MUXCYs used:                        12 out of  13,644    1%
+  Number of LUT Flip Flop pairs used:          339
+    Number with an unused Flip Flop:            71 out of     339   20%
+    Number with an unused LUT:                  15 out of     339    4%
+    Number of fully used LUT-FF pairs:         253 out of     339   74%
+    Number of unique control sets:              42
     Number of slice register sites lost
-      to control set restrictions:              35 out of  54,576    1%
+      to control set restrictions:              33 out of  54,576    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -49,8 +49,8 @@ Slice Logic Distribution:
   over-mapped for a non-slice resource or if Placement fails.
 
 IO Utilization:
-  Number of bonded IOBs:                        12 out of     358    3%
-    Number of LOCed IOBs:                       12 out of      12  100%
+  Number of bonded IOBs:                        14 out of     358    3%
+    Number of LOCed IOBs:                       14 out of      14  100%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of     116    0%
@@ -77,9 +77,9 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                5.41
+Average Fanout of Non-Clock Nets:                5.20
 
-Peak Memory Usage:  426 MB
+Peak Memory Usage:  424 MB
 Total REAL time to MAP completion:  8 secs 
 Total CPU time to MAP completion:   8 secs 
 
@@ -150,6 +150,8 @@ Section 6 - IOB Properties
 | IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew | Reg (s)      | Resistor | IOB      |
 |                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
 +---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| iBAUD_SW<0>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| iBAUD_SW<1>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iCLK                               | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iRX                                | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | inRST                              | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |

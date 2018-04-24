@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.68d on Mon Apr 23 15:46:12 2018
+// Written by: Map P.68d on Tue Apr 24 15:43:17 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -15,5 +15,7 @@ COMP "oLED_DATA<4>" LOCATE = SITE "L23" LEVEL 1;
 COMP "oLED_DATA<5>" LOCATE = SITE "K24" LEVEL 1;
 COMP "oLED_DATA<6>" LOCATE = SITE "H24" LEVEL 1;
 COMP "oLED_DATA<7>" LOCATE = SITE "D24" LEVEL 1;
+COMP "iBAUD_SW<0>" LOCATE = SITE "W19" LEVEL 1;
+COMP "iBAUD_SW<1>" LOCATE = SITE "Y24" LEVEL 1;
 SCHEMATIC END;
 

@@ -32,12 +32,14 @@ use work.uart_components.ALL;
 
 entity uart is
 	 Generic (
-		DATA_WIDTH : integer := 8
+		BAUD_RATE_SEL : integer := 2;
+		DATA_WIDTH    : integer := 8
 	 );
     Port ( iCLK        		 : in   std_logic;
            inRST       		 : in   std_logic;
+			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
            iRX         		 : in   std_logic;
-			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
+			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
 			  iUART_WR 			 : in	  std_logic;
            iUART_RD    		 : in   std_logic;
 			  oTX         		 : out  std_logic;
@@ -52,6 +54,7 @@ architecture Behavioral of uart is
 	signal sRECV_DATA    : std_logic_vector(DATA_WIDTH - 1 downto 0); -- Recived data
 	signal sRX_DONE      : std_logic;											-- Recive process done indicator
 	signal sRECV_FULL		: std_logic;											-- FIFO full indicatior
+	signal sBAUD_EN		: std_logic;											-- Baud rate input enabled
 			
 	-- UART transmitter signals
 	signal sSEND_DATA 	: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Data for send
@@ -67,9 +70,11 @@ begin
 	-- Baud frequency divider
 	eBAUD_FREQ_DIV : baud_freq_div 
 		Port map(
-			iCLK  => iCLK,
-         inRST => inRST,
-         oTC 	=> sTC
+			iCLK  	 => iCLK,
+         inRST 	 => inRST,
+			iBAUD_SEL => iBAUD_SEL,
+			iBAUD_EN  => sBAUD_EN,
+         oTC 		 => sTC
 		);
 
 	-- UART reciver
@@ -80,6 +85,7 @@ begin
          iRX   	=> iRX,
          iTC   	=> sTC,
          iFULL 	=> sRECV_FULL,
+			oBAUD_EN => sBAUD_EN,
          oDATA 	=> sRECV_DATA,
          oRX_DONE => sRX_DONE
 		);

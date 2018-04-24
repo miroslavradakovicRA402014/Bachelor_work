@@ -34,8 +34,8 @@ entity transmitter is
 	 Generic (
 		DATA_WIDTH 		 : integer := 8;  -- Data bit number
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH  : integer := 4;  -- Width of data bit counter
-		TC_CNT_WIDTH	 : integer := 3   -- Width of terminal count counter
+		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
+		TC_CNT_WIDTH	 : integer := 4   -- Width of terminal count counter
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
@@ -124,7 +124,7 @@ begin
 	end process fsm_next;	
 	
 	-- Reciver FSM output logic
-	fsm_out: process (sCURRENT_STATE, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
+	fsm_out : process (sCURRENT_STATE, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
 		case (sCURRENT_STATE) is
 			when IDLE  =>
 				sTC_CNT_EN	 		<= '0';
@@ -170,7 +170,7 @@ begin
 	end process fsm_out;	
 	
 	-- Terminal count counter process
-	tc_cnt: process (iCLK, inRST) begin
+	tc_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
@@ -187,7 +187,7 @@ begin
 						 '0';			
 						 
 	-- Data bits counter process
-	data_cnt: process (iCLK, inRST) begin
+	data_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then

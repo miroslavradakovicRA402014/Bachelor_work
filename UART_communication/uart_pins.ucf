@@ -4,11 +4,9 @@ NET "inRST"				LOC = AE24;
 NET "iRX"				LOC = A21;
 NET "oTX"				LOC = A20;
 
-#NET "inREAD"   		LOC = AA24;
-#NET "inWRITE"  		LOC = AC23;s
+NET "iBAUD_SW(0)" 	LOC = W19;
+NET "iBAUD_SW(1)" 	LOC = Y24;
 
-#NET "iSW_DATA(0)" 	LOC = W19;
-#NET "iSW_DATA(1)" 	LOC = Y24;
 #NET "iSW_DATA(2)" 	LOC = K19;
 #NET "iSW_DATA(3)" 	LOC = V24;
 #NET "iSW_DATA(4)" 	LOC = U20;

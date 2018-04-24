@@ -1,8 +1,0 @@
-vhdl work "uart_components.vhd"
-vhdl work "transmitter.vhd"
-vhdl work "reciver.vhd"
-vhdl work "fifo.vhd"
-vhdl work "baud_freq_div.vhd"
-vhdl work "uart.vhd"
-vhdl work "uart_verification_return.vhd"
-vhdl work "uart_verification_return_tb.vhd"
