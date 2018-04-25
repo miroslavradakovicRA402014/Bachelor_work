@@ -1,22 +1,22 @@
-Running: C:\Xilinx\14.6\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib secureip -o D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div_tb_isim_beh.exe -prj D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div_tb_beh.prj work.baud_freq_div_tb 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_beh.prj" "work.reciver_tb" 
 ISim P.68d (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 8
 Turning on mult-threading, number of parallel sub-compilation jobs: 16 
 Determining compilation order of HDL files
-Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" into library work
-Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div_tb.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 196120 KB
-Fuse CPU Usage: 155 ms
+Fuse Memory Usage: 195928 KB
+Fuse CPU Usage: 312 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
-Compiling architecture behavioral of entity baud_freq_div [\baud_freq_div(2,9)\]
-Compiling architecture behavior of entity baud_freq_div_tb
+Compiling architecture behavioral of entity reciver [\reciver(8,8,16,3,4)\]
+Compiling architecture behavior of entity reciver_tb
 Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 6 VHDL Units
-Built simulation executable D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div_tb_isim_beh.exe
-Fuse Memory Usage: 211512 KB
-Fuse CPU Usage: 249 ms
+Built simulation executable D:/BSc_workspace/Bachelor_work/UART_communication/reciver_tb_isim_beh.exe
+Fuse Memory Usage: 211160 KB
+Fuse CPU Usage: 406 ms

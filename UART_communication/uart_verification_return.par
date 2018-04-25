@@ -1,7 +1,7 @@
 Release 14.6 par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-RTRKW866::  Tue Apr 24 16:39:34 2018
+RTRKW866::  Wed Apr 25 08:56:24 2018
 
 par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd
 uart_verification_return.ncd uart_verification_return.pcf 
@@ -45,11 +45,11 @@ Slice Logic Utilization:
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                        330 out of  27,288    1%
-    Number used as logic:                      326 out of  27,288    1%
-      Number using O6 output only:             242
+  Number of Slice LUTs:                        331 out of  27,288    1%
+    Number used as logic:                      327 out of  27,288    1%
+      Number using O6 output only:             244
       Number using O5 output only:               1
-      Number using O5 and O6:                   83
+      Number using O5 and O6:                   82
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
     Number used exclusively as route-thrus:      4
@@ -60,10 +60,10 @@ Slice Logic Utilization:
 Slice Logic Distribution:
   Number of occupied Slices:                   110 out of   6,822    1%
   Number of MUXCYs used:                        12 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          337
-    Number with an unused Flip Flop:            78 out of     337   23%
-    Number with an unused LUT:                   7 out of     337    2%
-    Number of fully used LUT-FF pairs:         252 out of     337   74%
+  Number of LUT Flip Flop pairs used:          339
+    Number with an unused Flip Flop:            81 out of     339   23%
+    Number with an unused LUT:                   8 out of     339    2%
+    Number of fully used LUT-FF pairs:         250 out of     339   73%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -112,13 +112,13 @@ Finished initial Timing Analysis.  REAL time: 3 secs
 Starting Router
 
 
-Phase  1  : 2131 unrouted;      REAL time: 3 secs 
+Phase  1  : 2123 unrouted;      REAL time: 3 secs 
 
-Phase  2  : 1962 unrouted;      REAL time: 4 secs 
+Phase  2  : 1957 unrouted;      REAL time: 4 secs 
 
-Phase  3  : 997 unrouted;      REAL time: 5 secs 
+Phase  3  : 947 unrouted;      REAL time: 4 secs 
 
-Phase  4  : 997 unrouted; (Par is working to improve performance)     REAL time: 5 secs 
+Phase  4  : 947 unrouted; (Par is working to improve performance)     REAL time: 5 secs 
 
 Updating file: uart_verification_return.ncd with current fully routed design.
 
@@ -154,8 +154,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  Autotimespec constraint for clock net iCL | SETUP       |         N/A|     6.606ns|     N/A|           0
-  K_BUFGP                                   | HOLD        |     0.426ns|            |       0|           0
+  Autotimespec constraint for clock net iCL | SETUP       |         N/A|     6.506ns|     N/A|           0
+  K_BUFGP                                   | HOLD        |     0.430ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -172,7 +172,7 @@ Generating Pad Report.
 All signals are completely routed.
 
 Total REAL time to PAR completion: 7 secs 
-Total CPU time to PAR completion: 7 secs 
+Total CPU time to PAR completion: 6 secs 
 
 Peak Memory Usage:  395 MB
 

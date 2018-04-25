@@ -69,7 +69,7 @@ architecture Behavioral of transmitter is
 	signal sDATA_LOAD		    : std_logic;										 		-- Registers data load signal
 	
 	signal sPARITY_REG 		 : std_logic_vector(DATA_WIDTH - 1 downto 0);	-- Parity register
-	signal sPARITY				 : std_logic;												-- Odd parity
+	signal sPARITY				 : std_logic;												-- Parity signals
 	
 	
 begin
@@ -228,8 +228,8 @@ begin
 	end process parity_reg;
 	
 	-- Parity bit generator
-	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7)) when iPARITY = '1' else
-						  sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);
+	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7)) when iPARITY = '1' else -- Odd parity
+						  sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);								 -- Even parity
 		
 end Behavioral;
 

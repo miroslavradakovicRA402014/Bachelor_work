@@ -37,11 +37,11 @@ Setup/Hold to clock iCLK
             |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------+------------+------------------+--------+
-iBAUD_SW<0> |    4.595(R)|      SLOW  |   -2.300(R)|      FAST  |iCLK_BUFGP        |   0.000|
-iBAUD_SW<1> |    2.264(R)|      SLOW  |   -0.628(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iPARITY_SW  |    3.176(R)|      SLOW  |   -0.183(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iRX         |    4.922(R)|      SLOW  |   -1.850(R)|      FAST  |iCLK_BUFGP        |   0.000|
-inRST       |   10.575(R)|      SLOW  |   -2.025(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<0> |    4.512(R)|      SLOW  |   -2.328(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<1> |    2.324(R)|      SLOW  |   -0.701(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iPARITY_SW  |    3.917(R)|      SLOW  |   -0.154(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iRX         |    5.550(R)|      SLOW  |   -1.451(R)|      FAST  |iCLK_BUFGP        |   0.000|
+inRST       |   11.447(R)|      SLOW  |   -2.040(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+------------+------------+------------+------------+------------------+--------+
 
 Clock iCLK to Pad
@@ -49,15 +49,15 @@ Clock iCLK to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-oLED_DATA<0>|        10.473(R)|      SLOW  |         4.460(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<1>|        11.830(R)|      SLOW  |         5.232(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<2>|        11.321(R)|      SLOW  |         4.899(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<3>|        10.415(R)|      SLOW  |         4.400(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<4>|        10.512(R)|      SLOW  |         4.477(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<5>|        11.511(R)|      SLOW  |         5.026(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<6>|        11.564(R)|      SLOW  |         5.031(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED_DATA<7>|        11.845(R)|      SLOW  |         5.196(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oTX         |        14.749(R)|      SLOW  |         6.046(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<0>|        10.479(R)|      SLOW  |         4.459(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<1>|        11.582(R)|      SLOW  |         5.090(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<2>|        10.857(R)|      SLOW  |         4.697(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<3>|        10.329(R)|      SLOW  |         4.376(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<4>|        10.388(R)|      SLOW  |         4.422(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<5>|        11.027(R)|      SLOW  |         4.753(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<6>|        11.289(R)|      SLOW  |         4.937(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED_DATA<7>|        11.372(R)|      SLOW  |         4.949(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oTX         |        14.650(R)|      SLOW  |         6.182(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock iCLK
@@ -65,25 +65,25 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    6.606|         |         |         |
+iCLK           |    6.506|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-iPARITY_SW     |oTX            |   16.281|
+iPARITY_SW     |oTX            |   15.432|
 ---------------+---------------+---------+
 
 
-Analysis completed Tue Apr 24 16:39:46 2018 
+Analysis completed Wed Apr 25 08:56:36 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 245 MB
+Peak Memory Usage: 246 MB
 
 
 

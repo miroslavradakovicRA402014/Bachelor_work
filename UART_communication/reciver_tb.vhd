@@ -45,7 +45,9 @@ ARCHITECTURE behavior OF reciver_tb IS
          inRST : IN  std_logic;
          iRX : IN  std_logic;
          iTC : IN  std_logic;
+			iPARITY : IN  std_logic;
          iFULL : IN  std_logic;
+			oBAUD_EN : OUT std_logic;
          oDATA : OUT  std_logic_vector(7 downto 0);
          oRX_DONE : OUT  std_logic
         );
@@ -58,10 +60,12 @@ ARCHITECTURE behavior OF reciver_tb IS
    signal iRX : std_logic := '1';
    signal iTC : std_logic := '0';
    signal iFULL : std_logic := '0';
+	signal iPARITY : std_logic := '0';
 
  	--Outputs
    signal oDATA : std_logic_vector(7 downto 0);
    signal oRX_DONE : std_logic;
+	signal oBAUD_EN : std_logic;
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -75,6 +79,8 @@ BEGIN
           iRX => iRX,
           iTC => iTC,
           iFULL => iFULL,
+			 iPARITY => iPARITY,
+			 oBAUD_EN => oBAUD_EN,
           oDATA => oDATA,
           oRX_DONE => oRX_DONE
         );
@@ -99,10 +105,11 @@ BEGIN
       wait for iCLK_period*10;
 
       -- insert stimulus here 
-		inRST <= '1';
+		inRST   <= '1';
 		
-		iTC   <= '1';
-		iFULL <= '0';
+		iPARITY <= '1';
+		iTC     <= '1';
+		iFULL   <= '0';
 		
 		wait for iCLK_period*10;
 		

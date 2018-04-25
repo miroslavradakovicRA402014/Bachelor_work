@@ -31,10 +31,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity reciver is
 	 Generic (
-		DATA_WIDTH 		: integer := 8;  -- Data bit number
-		TC_PERIOD  		: integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	: integer := 3   -- Width of terminal count counter
+		DATA_WIDTH 		 : integer := 8;  -- Data bit number
+		START_TC_PERIOD : integer := 8;  -- Start terminal count period for oversampling
+		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
+		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
+		TC_CNT_WIDTH	 : integer := 4   -- Width of terminal count counter
 	 );
     Port ( iCLK     : in   std_logic;
            inRST    : in   std_logic;
@@ -49,25 +50,28 @@ end reciver;
 
 architecture Behavioral of reciver is
 
-	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";	-- Wrong parity character
+	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";		-- Wrong parity character
 
-	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     		-- Reciver FSM state type
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     			-- Reciver FSM state type
 
-	signal sCURRENT_STATE 	 : tSTATES; 										  			  		-- Reciver FSM current state 
-	signal sNEXT_STATE    	 : tSTATES;	   						      	  			 		-- Reciver FSM next state 
+	signal sCURRENT_STATE 	 	: tSTATES; 										  			  			-- Reciver FSM current state 
+	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 		-- Reciver FSM next state 
 	
-	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  		-- Recived data bits counter 
-	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  		-- Terminal count counter
+	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  		-- Recived data bits counter 
+	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  		-- Terminal count counter
 	
-	signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH downto 0);   	 		  		-- Shift register for recived data
-
-	signal sDATA_CNT_EN 		 : std_logic;										  			  		-- Data counter enable
-	signal sTC_CNT_EN 		 : std_logic;										  			 	   -- Terminal count counter enable
-	signal sSHW_EN				 : std_logic;										  			  		-- Shifter enable
-
-	signal sTC_CNT_DONE 		 : std_logic;										  			  		-- Terminal count counter count done
+	signal sTC_CNT_RST       	: std_logic;	  			  											-- Terminal count counter reset
 	
-	signal sPARITY_OK 		 : std_logic;													  		-- Parity check signal
+	signal sSHW_REG 		 	 	: std_logic_vector(DATA_WIDTH downto 0);   	 		  		-- Shift register for recived data
+
+	signal sDATA_CNT_EN 		 	: std_logic;										  			  		-- Data counter enable
+	signal sTC_CNT_EN 		 	: std_logic;										  			 	   -- Terminal count counter enable
+	signal sSHW_EN				 	: std_logic;										  			  		-- Shifter enable
+
+	signal sSTART_TC_CNT_DONE 	: std_logic;										  			  		-- Start terminal count counter count done
+	signal sTC_CNT_DONE 		 	: std_logic;										  			  		-- Terminal count counter count done
+	
+	signal sPARITY_OK 		 	: std_logic;													  		-- Parity check signal
 	 
 begin
 
@@ -81,7 +85,7 @@ begin
 	end process fsm_reg;
 
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iRX, sTC_CNT_DONE, sDATA_CNT) begin
+	fsm_next : process (sCURRENT_STATE, iRX, sSTART_TC_CNT_DONE, sTC_CNT_DONE, sDATA_CNT) begin
 		case (sCURRENT_STATE) is 
 			when IDLE   =>
 				-- Wait for RX 
@@ -92,7 +96,7 @@ begin
 				end if;
 			when START  =>
 				-- Check if sampling period done
-				if (sTC_CNT_DONE = '1') then
+				if (sSTART_TC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
 			   else
 					sNEXT_STATE <= START;
@@ -122,34 +126,43 @@ begin
 	end process fsm_next;
 
 	-- Reciver FSM output logic
-	fsm_out : process (sCURRENT_STATE, iFULL, sTC_CNT_DONE) begin
+	fsm_out : process (sCURRENT_STATE, iFULL, sSTART_TC_CNT_DONE, sTC_CNT_DONE) begin
 		case (sCURRENT_STATE) is
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
+				sTC_CNT_RST  <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '1';
 				oRX_DONE 	 <= '0';
 			when START  =>	
 				sTC_CNT_EN	 <= '1';
+				if (sSTART_TC_CNT_DONE = '1') then
+					sTC_CNT_RST  <= '1'; -- Reset counter
+			   else
+					sTC_CNT_RST  <= '0';
+				end if;			
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when DATA   =>	
 				sTC_CNT_EN	 <= '1';
+				sTC_CNT_RST	 <= '0';
 				sDATA_CNT_EN <= '1';
 				sSHW_EN		 <= '1';
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';
 			when PARITY =>
 				sTC_CNT_EN	 <= '1';
+				sTC_CNT_RST	 <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '1';
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when STOP   =>	
 				sTC_CNT_EN	 <= '1';
+				sTC_CNT_RST	 <= '0';
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '0';
@@ -166,13 +179,17 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTC_CNT = TC_PERIOD - 1) then -- Check counted periods 
+			if (sTC_CNT_RST = '1' or sTC_CNT = TC_PERIOD - 1) then -- Check counted periods 
 				sTC_CNT <= (others => '0'); 
 			elsif (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
 				sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
 			end if;		
 		end if;
 	end process tc_cnt;
+	
+	-- Terminal count done for start bit
+	sSTART_TC_CNT_DONE <= '1' when sTC_CNT = START_TC_PERIOD - 1 else
+								 '0';
 	
 	-- Terminal count done statement
 	sTC_CNT_DONE <= '1' when sTC_CNT = TC_PERIOD - 1 else 
@@ -203,8 +220,8 @@ begin
 	end process shift_reg;
 	
 	-- Parity check signal generator
-	sPARITY_OK <= not ( not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))) xor sSHW_REG(8)) when iPARITY = '1' else
-					  not (		 (sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))  xor sSHW_REG(8));
+	sPARITY_OK <= not ( not ((sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))) xor sSHW_REG(8)) when iPARITY = '1' else -- Odd parity 
+					  not (		 (sSHW_REG(0) xor sSHW_REG(1) xor sSHW_REG(2) xor sSHW_REG(3) xor sSHW_REG(4) xor sSHW_REG(5) xor sSHW_REG(6) xor sSHW_REG(7))  xor sSHW_REG(8));								 -- Even parity
 	
 	-- Reciver data output
 	oDATA <= sSHW_REG(DATA_WIDTH - 1 downto 0) when sPARITY_OK = '1' else
