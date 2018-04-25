@@ -11,40 +11,36 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Wed Apr 25 08:56:13 2018
+Mapped Date    : Wed Apr 25 09:55:40 2018
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    0
 Slice Logic Utilization:
-  Number of Slice Registers:                   335 out of  54,576    1%
-    Number used as Flip Flops:                 335
+  Number of Slice Registers:                   339 out of  54,576    1%
+    Number used as Flip Flops:                 339
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
   Number of Slice LUTs:                        331 out of  27,288    1%
-    Number used as logic:                      327 out of  27,288    1%
-      Number using O6 output only:             244
-      Number using O5 output only:               1
-      Number using O5 and O6:                   82
+    Number used as logic:                      331 out of  27,288    1%
+      Number using O6 output only:             237
+      Number using O5 output only:               0
+      Number using O5 and O6:                   94
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
-    Number used exclusively as route-thrus:      4
-      Number with same-slice register load:      4
-      Number with same-slice carry load:         0
-      Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   110 out of   6,822    1%
+  Number of occupied Slices:                   104 out of   6,822    1%
   Number of MUXCYs used:                        12 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          339
-    Number with an unused Flip Flop:            81 out of     339   23%
-    Number with an unused LUT:                   8 out of     339    2%
-    Number of fully used LUT-FF pairs:         250 out of     339   73%
+  Number of LUT Flip Flop pairs used:          341
+    Number with an unused Flip Flop:            77 out of     341   22%
+    Number with an unused LUT:                  10 out of     341    2%
+    Number of fully used LUT-FF pairs:         254 out of     341   74%
     Number of unique control sets:              42
     Number of slice register sites lost
-      to control set restrictions:              33 out of  54,576    1%
+      to control set restrictions:              37 out of  54,576    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -53,8 +49,8 @@ Slice Logic Distribution:
   over-mapped for a non-slice resource or if Placement fails.
 
 IO Utilization:
-  Number of bonded IOBs:                        15 out of     358    4%
-    Number of LOCed IOBs:                       15 out of      15  100%
+  Number of bonded IOBs:                        16 out of     358    4%
+    Number of LOCed IOBs:                       16 out of      16  100%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of     116    0%
@@ -81,9 +77,9 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                5.62
+Average Fanout of Non-Clock Nets:                5.51
 
-Peak Memory Usage:  426 MB
+Peak Memory Usage:  425 MB
 Total REAL time to MAP completion:  8 secs 
 Total CPU time to MAP completion:   8 secs 
 
@@ -135,7 +131,7 @@ INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-   2 block(s) optimized away
+   1 block(s) optimized away
 
 Section 5 - Removed Logic
 -------------------------
@@ -143,7 +139,6 @@ Section 5 - Removed Logic
 Optimized Block(s):
 TYPE 		BLOCK
 GND 		XST_GND
-VCC 		XST_VCC
 
 To enable printing of redundant blocks removed and signals merged, set the
 detailed map report option and rerun map.
@@ -157,6 +152,7 @@ Section 6 - IOB Properties
 +---------------------------------------------------------------------------------------------------------------------------------------------------------+
 | iBAUD_SW<0>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iBAUD_SW<1>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| iBAUD_SW<2>                        | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iCLK                               | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iPARITY_SW                         | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
 | iRX                                | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |

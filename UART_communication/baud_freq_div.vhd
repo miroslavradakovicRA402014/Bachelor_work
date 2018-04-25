@@ -32,8 +32,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity baud_freq_div is
 	 Generic (
-		BAUD_RATE_SEL	: integer := 2;		 -- Num of select bits
-		CLK_CNT_WIDTH  : integer := 9		    -- Width of clock counter
+		BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
+		CLK_CNT_WIDTH  : integer := 10		    -- Width of clock counter
 	 );
     Port ( iCLK   	: in  std_logic;
            inRST  	: in  std_logic;
@@ -44,10 +44,14 @@ end baud_freq_div;
 
 architecture Behavioral of baud_freq_div is
 
-	constant cBAUD_4800_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(315, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 4800
-	constant cBAUD_9600_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(160, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 9600
+	constant cBAUD_2400_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(650, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 2400
+	constant cBAUD_4800_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(340, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 4800
+	constant cBAUD_9600_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(165, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 9600
+	constant cBAUD_14400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(110, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 14400
 	constant cBAUD_19200_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(80 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 19200
+	constant cBAUD_38400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(40 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 38400
 	constant cBAUD_115200_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(14 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 115200
+	constant cBAUD_128000_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(12 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 128000
 
 	signal 	sCLK_CNT 			  : unsigned(CLK_CNT_WIDTH - 1 downto 0); 			-- Clock counter signal
 	signal   sBAUD_RATE			  : unsigned(CLK_CNT_WIDTH - 1 downto 0);				-- Baud rate period of clock signal 
@@ -85,16 +89,24 @@ begin
 	
 	-- Baud rate period signal generator 
 	baud_gen : process (iBAUD_SEL) begin
-		-- Generate baud rate depends of input configurarion
+		-- Generate baud rate depend on input configurarion
 		case (iBAUD_SEL) is
-			when "00" 	=> 
-				sBAUD_RATE <= cBAUD_4800_PERIOD;  
-			when "01" 	=> 
+			when "000" 	=> 
+				sBAUD_RATE <= cBAUD_2400_PERIOD;  
+			when "001" 	=> 
+				sBAUD_RATE <= cBAUD_4800_PERIOD;
+			when "010" 	=>	
 				sBAUD_RATE <= cBAUD_9600_PERIOD;
-			when "10" 	=>	
+			when "011" 	=>	
+				sBAUD_RATE <= cBAUD_14400_PERIOD;	
+			when "100" 	=>	
 				sBAUD_RATE <= cBAUD_19200_PERIOD;
-			when others =>
-				sBAUD_RATE <= cBAUD_115200_PERIOD;	
+			when "101" 	=>	
+				sBAUD_RATE <= cBAUD_38400_PERIOD;		
+			when "110"	=>
+				sBAUD_RATE <= cBAUD_115200_PERIOD;
+			when others =>	
+				sBAUD_RATE <= cBAUD_128000_PERIOD;
 		end case;
 	end process baud_gen;
 	

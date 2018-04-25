@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> Reading design: uart_verification_return.prj
 
@@ -148,7 +148,7 @@ Elaborating entity <transmitter> (architecture <Behavioral>) with generics from 
 
 Synthesizing Unit <uart_verification_return>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd".
-        BAUD_RATE_SEL = 2
+        BAUD_RATE_SEL = 3
         DATA_WIDTH = 8
 INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" line 87: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
     Found 8-bit register for signal <sOUART_DATA>.
@@ -174,7 +174,7 @@ Unit <uart_verification_return> synthesized.
 
 Synthesizing Unit <uart>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd".
-        BAUD_RATE_SEL = 2
+        BAUD_RATE_SEL = 3
         DATA_WIDTH = 8
     Summary:
 	no macro.
@@ -182,18 +182,18 @@ Unit <uart> synthesized.
 
 Synthesizing Unit <baud_freq_div>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd".
-        BAUD_RATE_SEL = 2
-        CLK_CNT_WIDTH = 9
-    Found 9-bit register for signal <sCLK_CNT>.
-    Found 9-bit register for signal <sBAUD_RATE_REG>.
-    Found 9-bit adder for signal <sCLK_CNT[8]_GND_7_o_add_2_OUT> created at line 1241.
-    Found 9-bit subtractor for signal <GND_7_o_GND_7_o_sub_6_OUT<8:0>> created at line 1308.
-    Found 4x9-bit Read Only RAM for signal <sBAUD_RATE>
-    Found 9-bit comparator equal for signal <oTC> created at line 72
+        BAUD_RATE_SEL = 3
+        CLK_CNT_WIDTH = 10
+    Found 10-bit register for signal <sCLK_CNT>.
+    Found 10-bit register for signal <sBAUD_RATE_REG>.
+    Found 10-bit adder for signal <sCLK_CNT[9]_GND_7_o_add_2_OUT> created at line 1241.
+    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_6_OUT<9:0>> created at line 1308.
+    Found 8x10-bit Read Only RAM for signal <sBAUD_RATE>
+    Found 10-bit comparator equal for signal <oTC> created at line 76
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
-	inferred  18 D-type flip-flop(s).
+	inferred  20 D-type flip-flop(s).
 	inferred   1 Comparator(s).
 	inferred   1 Multiplexer(s).
 Unit <baud_freq_div> synthesized.
@@ -310,27 +310,28 @@ HDL Synthesis Report
 
 Macro Statistics
 # RAMs                                                 : 1
- 4x9-bit single-port Read Only RAM                     : 1
+ 8x10-bit single-port Read Only RAM                    : 1
 # Adders/Subtractors                                   : 8
+ 10-bit adder                                          : 1
+ 10-bit subtractor                                     : 1
  3-bit adder                                           : 2
  4-bit adder                                           : 2
  4-bit addsub                                          : 2
- 9-bit adder                                           : 1
- 9-bit subtractor                                      : 1
 # Registers                                            : 44
+ 10-bit register                                       : 2
  3-bit register                                        : 2
  4-bit register                                        : 4
  8-bit register                                        : 35
- 9-bit register                                        : 3
+ 9-bit register                                        : 1
 # Comparators                                          : 1
- 9-bit comparator equal                                : 1
+ 10-bit comparator equal                               : 1
 # Multiplexers                                         : 43
  1-bit 2-to-1 multiplexer                              : 5
  1-bit 4-to-1 multiplexer                              : 1
+ 10-bit 2-to-1 multiplexer                             : 1
  3-bit 2-to-1 multiplexer                              : 2
  4-bit 2-to-1 multiplexer                              : 2
  8-bit 2-to-1 multiplexer                              : 32
- 9-bit 2-to-1 multiplexer                              : 1
 # Tristates                                            : 16
  1-bit tristate buffer                                 : 16
 # FSMs                                                 : 3
@@ -353,7 +354,7 @@ INFO:Xst:3217 - HDL ADVISOR - Register <sBAUD_RATE_REG> currently described with
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 4-word x 9-bit                      |          |
+    |     aspect ratio   | 8-word x 10-bit                     |          |
     |     weA            | connected to signal <GND>           | high     |
     |     addrA          | connected to signal <iBAUD_SEL>     |          |
     |     diA            | connected to signal <GND>           |          |
@@ -380,18 +381,18 @@ Advanced HDL Synthesis Report
 
 Macro Statistics
 # RAMs                                                 : 1
- 4x9-bit single-port distributed Read Only RAM         : 1
+ 8x10-bit single-port distributed Read Only RAM        : 1
 # Adders/Subtractors                                   : 1
- 9-bit subtractor                                      : 1
+ 10-bit subtractor                                     : 1
 # Counters                                             : 7
+ 10-bit up counter                                     : 1
  3-bit up counter                                      : 2
  4-bit up counter                                      : 2
  4-bit updown counter                                  : 2
- 9-bit up counter                                      : 1
-# Registers                                            : 298
- Flip-Flops                                            : 298
+# Registers                                            : 299
+ Flip-Flops                                            : 299
 # Comparators                                          : 1
- 9-bit comparator equal                                : 1
+ 10-bit comparator equal                               : 1
 # Multiplexers                                         : 38
  1-bit 2-to-1 multiplexer                              : 5
  1-bit 4-to-1 multiplexer                              : 1
@@ -437,8 +438,6 @@ Optimizing FSM <eUART/eUART_TRANSMITTER/FSM_2> on signal <sCURRENT_STATE[1:3]> w
  parity | 011
  stop   | 100
 --------------------
-INFO:Xst:2261 - The FF/Latch <sBAUD_RATE_REG_1> in Unit <baud_freq_div> is equivalent to the following FF/Latch, which will be removed : <sBAUD_RATE_REG_3> 
-INFO:Xst:2261 - The FF/Latch <sBAUD_RATE_REG_0> in Unit <baud_freq_div> is equivalent to the following FF/Latch, which will be removed : <sBAUD_RATE_REG_8> 
 WARNING:Xst:2042 - Unit fifo: 8 internal tristates are replaced by logic (pull-up yes): oDATA<0>, oDATA<1>, oDATA<2>, oDATA<3>, oDATA<4>, oDATA<5>, oDATA<6>, oDATA<7>.
 
 Optimizing unit <uart_verification_return> ...
@@ -461,8 +460,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 335
- Flip-Flops                                            : 335
+# Registers                                            : 339
+ Flip-Flops                                            : 339
 
 =========================================================================
 
@@ -485,26 +484,25 @@ Top Level Output File Name         : uart_verification_return.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 434
+# BELS                             : 440
 #      GND                         : 1
-#      INV                         : 7
+#      INV                         : 5
 #      LUT2                        : 12
-#      LUT3                        : 141
-#      LUT4                        : 18
-#      LUT5                        : 18
-#      LUT6                        : 214
-#      MUXCY                       : 8
-#      MUXF7                       : 5
-#      VCC                         : 1
-#      XORCY                       : 9
-# FlipFlops/Latches                : 335
-#      FDC                         : 25
-#      FDCE                        : 308
-#      FDPE                        : 2
+#      LUT3                        : 148
+#      LUT4                        : 30
+#      LUT5                        : 16
+#      LUT6                        : 206
+#      MUXCY                       : 9
+#      MUXF7                       : 3
+#      XORCY                       : 10
+# FlipFlops/Latches                : 339
+#      FDC                         : 26
+#      FDCE                        : 309
+#      FDPE                        : 4
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 14
-#      IBUF                        : 5
+# IO Buffers                       : 15
+#      IBUF                        : 6
 #      OBUF                        : 9
 
 Device utilization summary:
@@ -514,20 +512,20 @@ Selected Device : 6slx45fgg676-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             335  out of  54576     0%  
- Number of Slice LUTs:                  410  out of  27288     1%  
-    Number used as Logic:               410  out of  27288     1%  
+ Number of Slice Registers:             339  out of  54576     0%  
+ Number of Slice LUTs:                  417  out of  27288     1%  
+    Number used as Logic:               417  out of  27288     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    424
-   Number with an unused Flip Flop:      89  out of    424    20%  
-   Number with an unused LUT:            14  out of    424     3%  
-   Number of fully used LUT-FF pairs:   321  out of    424    75%  
+ Number of LUT Flip Flop pairs used:    431
+   Number with an unused Flip Flop:      92  out of    431    21%  
+   Number with an unused LUT:            14  out of    431     3%  
+   Number of fully used LUT-FF pairs:   325  out of    431    75%  
    Number of unique control sets:        42
 
 IO Utilization: 
- Number of IOs:                          15
- Number of bonded IOBs:                  15  out of    358     4%  
+ Number of IOs:                          16
+ Number of bonded IOBs:                  16  out of    358     4%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -553,7 +551,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-iCLK                               | BUFGP                  | 335   |
+iCLK                               | BUFGP                  | 339   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -564,8 +562,8 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 6.720ns (Maximum Frequency: 148.810MHz)
-   Minimum input arrival time before clock: 5.162ns
+   Minimum period: 6.880ns (Maximum Frequency: 145.344MHz)
+   Minimum input arrival time before clock: 5.163ns
    Maximum output required time after clock: 6.850ns
    Maximum combinational path delay: 9.294ns
 
@@ -575,35 +573,44 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 6.720ns (frequency: 148.810MHz)
-  Total number of paths / destination ports: 11098 / 637
+  Clock period: 6.880ns (frequency: 145.344MHz)
+  Total number of paths / destination ports: 14496 / 641
 -------------------------------------------------------------------------
-Delay:               6.720ns (Levels of Logic = 5)
-  Source:            eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 (FF)
-  Destination:       eUART/eUART_TRANSMITTER/sTC_CNT_3 (FF)
+Delay:               6.880ns (Levels of Logic = 14)
+  Source:            eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (FF)
+  Destination:       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
   Source Clock:      iCLK rising
   Destination Clock: iCLK rising
 
-  Data Path: eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 to eUART/eUART_TRANSMITTER/sTC_CNT_3
+  Data Path: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              4   0.525   1.080  eUART/eBAUD_FREQ_DIV/sCLK_CNT_0 (eUART/eBAUD_FREQ_DIV/sCLK_CNT_0)
-     LUT4:I0->O            1   0.254   1.112  eUART/eBAUD_FREQ_DIV/oTC9611 (eUART/eBAUD_FREQ_DIV/oTC961)
-     LUT6:I1->O           12   0.254   1.069  eUART/eBAUD_FREQ_DIV/oTC91 (eUART/eBAUD_FREQ_DIV/oTC9)
-     LUT5:I4->O            4   0.254   0.912  eUART/eBAUD_FREQ_DIV/oTC910_SW4 (N36)
-     LUT6:I4->O            1   0.250   0.682  eUART/eUART_TRANSMITTER/_n0075_inv1 (eUART/eUART_TRANSMITTER/_n0075_inv)
-     LUT5:I4->O            1   0.254   0.000  eUART/eUART_TRANSMITTER/sTC_CNT_3_rstpot (eUART/eUART_TRANSMITTER/sTC_CNT_3_rstpot)
-     FDC:D                     0.074          eUART/eUART_TRANSMITTER/sTC_CNT_3
+     FDPE:C->Q             9   0.525   1.084  eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0)
+     LUT4:I2->O            3   0.250   0.874  eUART/eBAUD_FREQ_DIV/oTC10331 (eUART/eBAUD_FREQ_DIV/oTC1033)
+     LUT6:I4->O            1   0.250   0.958  eUART/eBAUD_FREQ_DIV/oTC1041 (eUART/eBAUD_FREQ_DIV/oTC104)
+     LUT6:I2->O           19   0.254   1.261  eUART/eBAUD_FREQ_DIV/oTC105 (eUART/eBAUD_FREQ_DIV/oTC107)
+     LUT3:I2->O            1   0.254   0.681  eUART/eBAUD_FREQ_DIV/oTC_inv1 (eUART/eBAUD_FREQ_DIV/oTC_inv)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<0> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<1> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<2> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<4> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<5> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<5>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<6> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<6>)
+     MUXCY:CI->O           1   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>)
+     MUXCY:CI->O           0   0.023   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<8> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<8>)
+     XORCY:CI->O           1   0.206   0.000  eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9> (eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT9)
+     FDC:D                     0.074          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
     ----------------------------------------
-    Total                      6.720ns (1.865ns logic, 4.855ns route)
-                                       (27.8% logic, 72.2% route)
+    Total                      6.880ns (2.022ns logic, 4.858ns route)
+                                       (29.4% logic, 70.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 477 / 472
+  Total number of paths / destination ports: 498 / 479
 -------------------------------------------------------------------------
-Offset:              5.162ns (Levels of Logic = 2)
+Offset:              5.163ns (Levels of Logic = 2)
   Source:            inRST (PAD)
   Destination:       sRECV_DATA_REG_0 (FF)
   Destination Clock: iCLK rising
@@ -613,10 +620,10 @@ Offset:              5.162ns (Levels of Logic = 2)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   1.328   0.681  inRST_IBUF (inRST_IBUF)
-     INV:I->O            335   0.255   2.439  inRST_inv1_INV_0 (eUART/eBAUD_FREQ_DIV/inRST_inv)
-     FDCE:CLR                  0.459          eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
+     INV:I->O            339   0.255   2.440  inRST_inv1_INV_0 (eUART/eBAUD_FREQ_DIV/inRST_inv)
+     FDPE:PRE                  0.459          eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
     ----------------------------------------
-    Total                      5.162ns (2.042ns logic, 3.120ns route)
+    Total                      5.163ns (2.042ns logic, 3.121ns route)
                                        (39.6% logic, 60.4% route)
 
 =========================================================================
@@ -670,20 +677,20 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    6.720|         |         |         |
+iCLK           |    6.880|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
 Total REAL time to Xst completion: 6.00 secs
-Total CPU time to Xst completion: 6.10 secs
+Total CPU time to Xst completion: 5.29 secs
  
 --> 
 
-Total memory usage is 282940 kilobytes
+Total memory usage is 283900 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)
-Number of infos    :    5 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
 

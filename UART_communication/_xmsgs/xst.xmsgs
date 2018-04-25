@@ -14,12 +14,6 @@
 <msg type="info" file="Xst" num="3217" delta="old" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sBAUD_RATE_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sBAUD_RATE</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">sBAUD_RATE_REG_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">baud_freq_div</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;sBAUD_RATE_REG_3&gt; </arg>
-</msg>
-
-<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">sBAUD_RATE_REG_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">baud_freq_div</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;sBAUD_RATE_REG_8&gt; </arg>
-</msg>
-
 <msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">fifo</arg>: <arg fmt="%d" index="2">8</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
 
 </messages>

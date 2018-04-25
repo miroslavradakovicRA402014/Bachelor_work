@@ -1,7 +1,7 @@
 Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Wed Apr 25 08:56:31 2018
+Wed Apr 25 09:55:57 2018
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -428,7 +428,7 @@ Pinout by Pin Number:
 |K16       |            |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |K17       |            |         |VCCINT                       |         |           |              |          |         |           |         |1.2      |          |           |                |
 |K18       |            |IOBS     |IO_L32N_A16_M1A9_1           |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|K19       |iPARITY_SW  |IOB      |IO_L28N_VREF_1               |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|K19       |iBAUD_SW<2> |IOB      |IO_L28N_VREF_1               |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |K20       |            |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |K21       |            |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |K22       |            |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
@@ -641,7 +641,7 @@ Pinout by Pin Number:
 |V21       |            |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |V22       |            |IOBM     |IO_L71P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |V23       |            |IOBM     |IO_L42P_GCLK7_M1UDM_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|V24       |            |IOBM     |IO_L45P_A1_M1LDQS_1          |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|V24       |iPARITY_SW  |IOB      |IO_L45P_A1_M1LDQS_1          |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |V25       |            |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |V26       |            |IOBS     |IO_L45N_A0_M1LDQSN_1         |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |W1        |            |IOBS     |IO_L38N_M3DQ3_3              |UNUSED   |           |3             |          |         |           |         |         |          |           |                |

@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity uart_verification_return is
 	 Generic (
-		BAUD_RATE_SEL : integer := 2;
+		BAUD_RATE_SEL : integer := 3;
 		DATA_WIDTH    : integer := 8
 	 );
     Port ( iCLK  		 : in  std_logic;
@@ -64,7 +64,7 @@ architecture Behavioral of uart_verification_return is
 		
 	component uart is
 		 Generic (
-			BAUD_RATE_SEL : integer := 2;
+			BAUD_RATE_SEL : integer := 3;
 			DATA_WIDTH    : integer := 8
 		 );
 		 Port ( iCLK        		 : in   std_logic;
