@@ -32,15 +32,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity uart_verification_return is
 	 Generic (
 		BAUD_RATE_SEL : integer := 3;
+		DATA_BIT_SEL  : integer := 2;
 		DATA_WIDTH    : integer := 8
 	 );
-    Port ( iCLK  		 : in  std_logic;
-           inRST 		 : in  std_logic;
-			  iPARITY_SW : in  std_logic;
-			  iRX 		 : in  std_logic;
-			  iBAUD_SW	 : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
-			  oTX			 : out std_logic;
-           oLED_DATA  : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		   : in  std_logic;
+           inRST 		   : in  std_logic;
+			  iPARITY_SW   : in  std_logic;
+			  iDATA_BIT_SW : in  std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iRX 		   : in  std_logic;
+			  iBAUD_SW	   : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
+			  oTX			   : out std_logic;
+           oLED_DATA    : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart_verification_return;
 
 architecture Behavioral of uart_verification_return is
@@ -63,22 +65,24 @@ architecture Behavioral of uart_verification_return is
 
 		
 	component uart is
-		 Generic (
-			BAUD_RATE_SEL : integer := 3;
-			DATA_WIDTH    : integer := 8
-		 );
-		 Port ( iCLK        		 : in   std_logic;
-				  inRST       		 : in   std_logic;
-				  iPARITY			 : in   std_logic;
-				  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
-				  iRX         		 : in   std_logic;
-				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
-				  iUART_WR 			 : in	  std_logic;
-				  iUART_RD    		 : in   std_logic;
-				  oTX         		 : out  std_logic;
-				  oUART_FULL       : out  std_logic;
-				  oUART_EMPTY      : out  std_logic;
-				  oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
+	 Generic (
+		BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
+		DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
+		DATA_WIDTH    : integer := 8	 -- Data widht 
+	 );
+    Port ( iCLK        		 : in   std_logic;
+           inRST       		 : in   std_logic;
+			  iPARITY			 : in   std_logic;
+			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
+			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+           iRX         		 : in   std_logic;
+			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
+			  iUART_WR 			 : in	  std_logic;
+           iUART_RD    		 : in   std_logic;
+			  oTX         		 : out  std_logic;
+			  oUART_FULL       : out  std_logic;
+           oUART_EMPTY      : out  std_logic;
+           oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
 	end component uart;	
 	
 begin
@@ -89,6 +93,7 @@ begin
 			iCLK        		 => iCLK,
 			inRST       		 => inRST,
 			iPARITY				 => iPARITY_SW,
+			iDATA_SEL			 => iDATA_BIT_SW,
 			iBAUD_SEL			 => iBAUD_SW,
 			iRX         		 => iRX,
 			iUART_DATA		 	 => sOUART_DATA,

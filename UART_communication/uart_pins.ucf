@@ -1,25 +1,26 @@
-NET "iCLK"  			LOC = M21;
-NET "inRST"				LOC = AE24;
+NET "iCLK"  				LOC = M21;
+NET "inRST"					LOC = AE24;
 
-NET "iRX"				LOC = A21;
-NET "oTX"				LOC = A20;
+NET "iRX"					LOC = A21;
+NET "oTX"					LOC = A20;
 
-NET "iBAUD_SW(0)" 	LOC = W19;
-NET "iBAUD_SW(1)" 	LOC = Y24;
-NET "iBAUD_SW(2)" 	LOC = K19;
+NET "iBAUD_SW(0)" 		LOC = W19;
+NET "iBAUD_SW(1)" 		LOC = Y24;
+NET "iBAUD_SW(2)" 		LOC = K19;
 
-NET "iPARITY_SW" 		LOC = V24;
+NET "iPARITY_SW" 			LOC = V24;
 
-#NET "iSW_DATA(4)" 	LOC = U20;
-#NET "iSW_DATA(5)" 	LOC = U23;
+NET "iDATA_BIT_SW(0)" 	LOC = U20;
+NET "iDATA_BIT_SW(1)" 	LOC = U23;
+
 #NET "iSW_DATA(6)" 	LOC = U24;
 #NET "iSW_DATA(7)" 	LOC = U19;
 
-NET "oLED_DATA(0)" 	LOC = N24;
-NET "oLED_DATA(1)" 	LOC = N23;
-NET "oLED_DATA(2)" 	LOC = M24;
-NET "oLED_DATA(3)" 	LOC = L24;
-NET "oLED_DATA(4)" 	LOC = L23;
-NET "oLED_DATA(5)" 	LOC = K24;
-NET "oLED_DATA(6)" 	LOC = H24;
-NET "oLED_DATA(7)" 	LOC = D24;
+NET "oLED_DATA(0)" 		LOC = N24;
+NET "oLED_DATA(1)" 		LOC = N23;
+NET "oLED_DATA(2)" 		LOC = M24;
+NET "oLED_DATA(3)" 		LOC = L24;
+NET "oLED_DATA(4)" 		LOC = L23;
+NET "oLED_DATA(5)" 		LOC = K24;
+NET "oLED_DATA(6)" 		LOC = H24;
+NET "oLED_DATA(7)" 		LOC = D24;

@@ -35,13 +35,15 @@ entity transmitter is
 		DATA_WIDTH 		 : integer := 8;  -- Data bit number
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
 		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	 : integer := 4   -- Width of terminal count counter
+		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
+		DATA_BIT_SEL	 : integer := 2
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
 			  iPARITY	 : in   std_logic;
+			  iDATA_SEL  : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
            iTC    	 : in   std_logic;
-           iDATA  	 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
+           iDATA  	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
            iSTART 	 : in   std_logic;
 			  oTX_READY  : out  std_logic;
            oTX    	 : out  std_logic);
@@ -49,6 +51,11 @@ end transmitter;
 
 architecture Behavioral of transmitter is
 
+	-- Data counter count limit
+	constant cDATA_5_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "100";
+	constant cDATA_6_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "101";
+	constant cDATA_7_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "110";
+	constant cDATA_8_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "111";
 	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							-- Reciver FSM state type
 
 	signal sCURRENT_STATE 	 : tSTATES; 										  		-- Reciver FSM current state 
@@ -56,6 +63,8 @@ architecture Behavioral of transmitter is
 	
 	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   		-- Recived data bits counter 
 	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  		-- Terminal count counter
+	signal sDATA_BIT_REG		 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number register
+	signal sDATA_BIT			 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number 	
 	
 	
    signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register
@@ -63,6 +72,8 @@ architecture Behavioral of transmitter is
 	signal sDATA_CNT_EN 		 : std_logic;										  		-- Data counter enable
 	signal sTC_CNT_EN 		 : std_logic;										  		-- Terminal count counter enable
 	signal sSHW_EN				 : std_logic;										  		-- Shifter enable
+	signal sDATA_BIT_EN		 : std_logic;											   -- Enable signal for data bit register
+
 
 	signal sTC_CNT_DONE 		 : std_logic;										  		-- Terminal count counter count done	
 	
@@ -84,7 +95,7 @@ begin
 	end process fsm_reg;
 	
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSTART, sTC_CNT_DONE, sDATA_CNT) begin
+	fsm_next : process (sCURRENT_STATE, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
 		case (sCURRENT_STATE) is 
 			when IDLE   =>
 				-- Wait for FIFO 
@@ -102,7 +113,7 @@ begin
 				end if;
 			when DATA   =>
 				-- Check if all data bits sent
-				if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then
+				if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= PARITY; -- Get for stop bit  
 				else 
 					sNEXT_STATE <= DATA;
@@ -130,6 +141,7 @@ begin
 			when IDLE  =>
 				sTC_CNT_EN	 		<= '0';
 				sDATA_CNT_EN 		<= '0';
+				sDATA_BIT_EN		<= '1';
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
@@ -137,6 +149,7 @@ begin
 			when START =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
+				sDATA_BIT_EN		<= '0';
 				sSHW_EN		 		<= '0';
 				if (sTC_CNT_DONE = '1') then -- Load form data from FIFO 
 					sDATA_LOAD	 <= '1';
@@ -149,6 +162,7 @@ begin
 			when DATA  =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '1';
+				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '1';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';	
@@ -156,6 +170,7 @@ begin
 			when PARITY  =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
+				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
@@ -163,6 +178,7 @@ begin
 			when STOP  =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
+				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
@@ -192,7 +208,7 @@ begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sDATA_CNT = DATA_WIDTH - 1 and sTC_CNT_DONE = '1') then -- Reset counter if all bits was sent
+			if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then -- Reset counter if all bits was sent
 				sDATA_CNT <= (others => '0');
 			elsif (sDATA_CNT_EN = '1' and sTC_CNT_DONE = '1') then -- Check for enable signal and for terminal count counter
 				sDATA_CNT <= sDATA_CNT + 1; -- Count data bits			
@@ -213,6 +229,32 @@ begin
 		end if;
 	end process shift_reg;
 	
+	-- Data bit number register
+	data_bit_reg : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sDATA_BIT_REG <= cDATA_8_BIT;  -- Set to default bit number
+		elsif (iCLK'event and iCLK = '1') then	
+			if (sDATA_BIT_EN = '1') then
+				sDATA_BIT_REG <= sDATA_BIT; -- Set data bit number
+			end if;
+		end if;
+	end process data_bit_reg;
+	
+	-- Baud data bit signal generator
+	data_bit : process (iDATA_SEL) begin
+		-- Generate data bits depend on input configurarion
+		case (iDATA_SEL) is
+			when "00"   =>
+				sDATA_BIT <= cDATA_5_BIT;
+			when "01"   =>
+				sDATA_BIT <= cDATA_6_BIT;
+			when "10"   =>
+				sDATA_BIT <= cDATA_7_BIT;
+			when others =>
+				sDATA_BIT <= cDATA_8_BIT;
+		end case;
+	end process data_bit;	
+	
 	
 	-- Parity bit generator contains register for data and parity generator
 	
@@ -227,9 +269,41 @@ begin
 		end if;	
 	end process parity_reg;
 	
-	-- Parity bit generator
-	sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7)) when iPARITY = '1' else -- Odd parity
-						  sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7);								 -- Even parity
-		
+	-- Parity check signal generator
+	parity_gen : process (sSHW_REG, iPARITY, sDATA_BIT_REG, sPARITY_REG) begin
+		-- Generate parity bit depend on data bit number
+		case (sDATA_BIT_REG) is
+			when cDATA_5_BIT =>
+				-- Check parity input
+				if (iPARITY = '1') then
+					sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) ); -- Odd parity 
+				else
+					sPARITY <=	     sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) ; -- Even parity
+				end if;		
+			when cDATA_6_BIT =>	
+				-- Check parity input
+				if (iPARITY = '1') then
+					sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) ); -- Odd parity 
+				else
+					sPARITY <=	     sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) ; -- Even parity
+				end if;									
+			when cDATA_7_BIT =>		
+				-- Check parity input
+				if (iPARITY = '1') then
+					sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) ); -- Odd parity 
+				else
+					sPARITY <=	     sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) ; -- Even parity
+				end if;				
+			when others 	  =>
+				-- Check parity input
+				if (iPARITY = '1') then
+					sPARITY <=	not (sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7)); -- Odd parity 
+				else
+					sPARITY <=	     sPARITY_REG(0) xor sPARITY_REG(1) xor sPARITY_REG(2) xor sPARITY_REG(3) xor sPARITY_REG(4) xor sPARITY_REG(5) xor sPARITY_REG(6) xor sPARITY_REG(7); -- Even parity
+				end if;								
+		end case;
+	end process parity_gen;
+
+	
 end Behavioral;
 

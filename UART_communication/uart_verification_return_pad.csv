@@ -1,7 +1,7 @@
 #Release 14.6 - par P.68d (nt)
 #Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-#Wed Apr 25 09:55:57 2018
+#Wed Apr 25 17:27:58 2018
 
 #
 ## NOTE: This file is designed to be imported into a spreadsheet program
@@ -610,10 +610,10 @@ U16,,,VCCINT,,,,,,,,1.2,,,,
 U17,,IOBM,IO_L62P_1,UNUSED,,1,,,,,,,,,
 U18,,,VCCO_1,,,1,,,,,2.50,,,,
 U19,,IOBM,IO_L70P_1,UNUSED,,1,,,,,,,,,
-U20,,IOBS,IO_L64N_1,UNUSED,,1,,,,,,,,,
+U20,iDATA_BIT_SW<0>,IOB,IO_L64N_1,INPUT,LVCMOS25*,1,,,,NONE,,LOCATED,NO,NONE,
 U21,,IOBM,IO_L61P_1,UNUSED,,1,,,,,,,,,
 U22,,IOBS,IO_L61N_1,UNUSED,,1,,,,,,,,,
-U23,,IOBS,IO_L59N_1,UNUSED,,1,,,,,,,,,
+U23,iDATA_BIT_SW<1>,IOB,IO_L59N_1,INPUT,LVCMOS25*,1,,,,NONE,,LOCATED,NO,NONE,
 U24,,IOBS,IO_L53N_VREF_1,UNUSED,,1,,,,,,,,,
 U25,,IOBM,IO_L43P_GCLK5_M1DQ4_1,UNUSED,,1,,,,,,,,,
 U26,,IOBS,IO_L43N_GCLK4_M1DQ5_1,UNUSED,,1,,,,,,,,,

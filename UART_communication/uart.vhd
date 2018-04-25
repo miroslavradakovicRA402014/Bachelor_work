@@ -32,12 +32,14 @@ use work.uart_components.ALL;
 
 entity uart is
 	 Generic (
-		BAUD_RATE_SEL : integer := 2;
-		DATA_WIDTH    : integer := 8
+		BAUD_RATE_SEL : integer := 2;  -- Width of baud rate select
+		DATA_BIT_SEL  : integer := 3;  -- Width of data bit number select
+		DATA_WIDTH    : integer := 8	 -- Data widht 
 	 );
     Port ( iCLK        		 : in   std_logic;
            inRST       		 : in   std_logic;
 			  iPARITY			 : in   std_logic;
+			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
            iRX         		 : in   std_logic;
 			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
@@ -81,15 +83,16 @@ begin
 	-- UART reciver
 	eUART_RECIVER : reciver	
 		Port map(
-         iCLK 		=> iCLK,
-         inRST 	=> inRST,
-			iPARITY  => iPARITY,
-         iRX   	=> iRX,
-         iTC   	=> sTC,
-         iFULL 	=> sRECV_FULL,
-			oBAUD_EN => sBAUD_EN,
-         oDATA 	=> sRECV_DATA,
-         oRX_DONE => sRX_DONE
+         iCLK 		 => iCLK,
+         inRST 	 => inRST,
+			iPARITY   => iPARITY,
+			iDATA_SEL => iDATA_SEL,
+         iRX   	 => iRX,
+         iTC   	 => sTC,
+         iFULL 	 => sRECV_FULL,
+			oBAUD_EN  => sBAUD_EN,
+         oDATA 	 => sRECV_DATA,
+         oRX_DONE  => sRX_DONE
 		);
 		
 	-- Recive FIFO	
@@ -111,6 +114,7 @@ begin
 			iCLK 	 	  => iCLK,
 			inRST  	  => inRST,
 			iPARITY    => iPARITY,
+			iDATA_SEL  => iDATA_SEL,
 			iTC    	  => sTC,
 		   iDATA  	  => sSEND_DATA, 
 			iSTART 	  => snSEND_EMPTY,

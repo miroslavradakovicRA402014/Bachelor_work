@@ -46,6 +46,7 @@ ARCHITECTURE behavior OF reciver_tb IS
          iRX : IN  std_logic;
          iTC : IN  std_logic;
 			iPARITY : IN  std_logic;
+			iDATA_SEL : IN std_logic_vector(1 downto 0);
          iFULL : IN  std_logic;
 			oBAUD_EN : OUT std_logic;
          oDATA : OUT  std_logic_vector(7 downto 0);
@@ -61,6 +62,7 @@ ARCHITECTURE behavior OF reciver_tb IS
    signal iTC : std_logic := '0';
    signal iFULL : std_logic := '0';
 	signal iPARITY : std_logic := '0';
+	signal iDATA_SEL : std_logic_vector(1 downto 0) := "11";
 
  	--Outputs
    signal oDATA : std_logic_vector(7 downto 0);
@@ -80,6 +82,7 @@ BEGIN
           iTC => iTC,
           iFULL => iFULL,
 			 iPARITY => iPARITY,
+			 iDATA_SEL => iDATA_SEL,
 			 oBAUD_EN => oBAUD_EN,
           oDATA => oDATA,
           oRX_DONE => oRX_DONE
@@ -105,11 +108,12 @@ BEGIN
       wait for iCLK_period*10;
 
       -- insert stimulus here 
-		inRST   <= '1';
+		inRST     <= '1';
 		
-		iPARITY <= '1';
-		iTC     <= '1';
-		iFULL   <= '0';
+		iPARITY   <= '1';
+		iTC       <= '1';
+		iFULL     <= '0';
+		iDATA_SEL <= "00";
 		
 		wait for iCLK_period*10;
 		
@@ -120,6 +124,8 @@ BEGIN
 		wait for iCLK_period*17;
 		
 	   -- Data bits
+		--"100010101"
+		
 		
 		-- 0
 		iRX  <= '1';
@@ -141,21 +147,21 @@ BEGIN
 		iRX  <= '1';
 		
 		wait for iCLK_period*16;	
-		-- 5
-		iRX  <= '0';
-		
-		wait for iCLK_period*16;		
-		-- 6
-		iRX  <= '0';
-		
-		wait for iCLK_period*16;	
-		-- 7
-		iRX  <= '0';
-		
-		wait for iCLK_period*17;
+--		-- 5
+--		iRX  <= '0';
+--		
+--		wait for iCLK_period*16;		
+--		-- 6
+--		iRX  <= '0';
+--		
+--		wait for iCLK_period*16;	
+--		-- 7
+--		iRX  <= '0';
+--		
+--		wait for iCLK_period*17;
 
 		-- parity
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*17;		
 		
