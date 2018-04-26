@@ -36,16 +36,19 @@ entity transmitter is
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
 		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
 		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
-		DATA_BIT_SEL	 : integer := 2
+		DATA_BIT_SEL	 : integer := 2	-- Width of data bit number select
 	 );
     Port ( iCLK 		 : in   std_logic;
            inRST  	 : in   std_logic;
+			  iPARITY_EN : in   std_logic;
 			  iPARITY	 : in   std_logic;
 			  iDATA_SEL  : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iCTS		 : in   std_logic;
            iTC    	 : in   std_logic;
            iDATA  	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
            iSTART 	 : in   std_logic;
 			  oTX_READY  : out  std_logic;
+			  oRTS		 : out  std_logic;
            oTX    	 : out  std_logic);
 end transmitter;
 
@@ -56,7 +59,8 @@ architecture Behavioral of transmitter is
 	constant cDATA_6_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "101";
 	constant cDATA_7_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "110";
 	constant cDATA_8_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "111";
-	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							-- Reciver FSM state type
+	
+	type tSTATES is (IDLE, HANDSHAKE, START, DATA, PARITY, STOP); 				-- Reciver FSM state type
 
 	signal sCURRENT_STATE 	 : tSTATES; 										  		-- Reciver FSM current state 
 	signal sNEXT_STATE    	 : tSTATES;	   						      	  		-- Reciver FSM next state
@@ -95,37 +99,48 @@ begin
 	end process fsm_reg;
 	
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
+	fsm_next : process (sCURRENT_STATE, iCTS, iPARITY_EN, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
 		case (sCURRENT_STATE) is 
-			when IDLE   =>
+			when IDLE      =>	
 				-- Wait for FIFO 
 				if (iSTART = '1') then 
-					sNEXT_STATE <= START; -- Get for start bit
+					sNEXT_STATE <= HANDSHAKE; -- Start handshaking
 				else 
 					sNEXT_STATE <= IDLE;
 				end if;
-			when START  =>
+			when HANDSHAKE =>	
+				-- Wait for CTS signal 
+				if (iCTS = '1') then 
+					sNEXT_STATE <= START; -- Get for start bit
+				else 
+					sNEXT_STATE <= HANDSHAKE;
+				end if;			
+			when START     =>
 				-- Check if start sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
 			   else
 					sNEXT_STATE <= START;
 				end if;
-			when DATA   =>
+			when DATA     =>
 				-- Check if all data bits sent
 				if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= PARITY; -- Get for stop bit  
+					if (iPARITY_EN = '1') then
+						sNEXT_STATE <= PARITY; -- Get for stop bit
+					else
+						sNEXT_STATE <= STOP; -- Skip parity bit
+					end if;
 				else 
 					sNEXT_STATE <= DATA;
 				end if;
-			when PARITY =>
+			when PARITY   =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= STOP; -- Recive stop bit
 			   else
 					sNEXT_STATE <= PARITY;
 				end if;				
-			when STOP   =>
+			when STOP     =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Recive next data 
@@ -138,15 +153,25 @@ begin
 	-- Reciver FSM output logic
 	fsm_out : process (sCURRENT_STATE, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
 		case (sCURRENT_STATE) is
-			when IDLE  =>
+			when IDLE  	   =>
 				sTC_CNT_EN	 		<= '0';
 				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '1';
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
+				oRTS					<= '0';
 				oTX 			 		<= '1';
-			when START =>	
+			when HANDSHAKE =>
+				sTC_CNT_EN	 		<= '0';
+				sDATA_CNT_EN 		<= '0';
+				sDATA_BIT_EN		<= '1';
+				sSHW_EN		 		<= '0';
+				sDATA_LOAD	 		<= '0';
+				oTX_READY 	 		<= '0';
+				oRTS					<= '1';
+				oTX 			 		<= '1';				
+			when START 	   =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '0';
@@ -158,30 +183,34 @@ begin
 					sDATA_LOAD	 <= '0';
 					oTX_READY 	 <= '0';					
 				end if;
+				oRTS					<= '1';
 				oTX 			 		<= '0';				
-			when DATA  =>	
+			when DATA  	   =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '1';
 				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '1';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';	
+				oRTS					<= '1';
 				oTX 			 		<= sSHW_REG(0);
-			when PARITY  =>	
+			when PARITY  	=>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
+			   oRTS					<= '1';
 				oTX			 		<= sPARITY;				
-			when STOP  =>	
+			when STOP  	   =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '0';				
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
+				oRTS					<= '1';
 				oTX			 		<= '1';
 		end case;		
 	end process fsm_out;	

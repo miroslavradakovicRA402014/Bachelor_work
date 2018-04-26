@@ -1,7 +1,7 @@
 Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Wed Apr 25 17:27:59 2018
+Thu Apr 26 17:15:43 2018
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -38,7 +38,7 @@ Pinout by Pin Number:
 |A16       |               |IOBS     |IO_L38N_VREF_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |A17       |               |IOBS     |IO_L50N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |A18       |               |IOBS     |IO_L62N_VREF_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|A19       |               |IOBS     |IO_L63N_SCP6_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
+|A19       |iCTS           |IOB      |IO_L63N_SCP6_0               |INPUT    |LVCMOS25*  |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |A20       |oTX            |IOB      |IO_L64N_SCP4_0               |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |A21       |iRX            |IOB      |IO_L65N_SCP2_0               |INPUT    |LVCMOS25*  |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |A22       |               |IOBS     |IO_L66N_SCP0_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
@@ -95,7 +95,7 @@ Pinout by Pin Number:
 |AB21      |               |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |AB22      |               |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |AB23      |               |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
-|AB24      |               |IOBM     |IO_L49P_M1DQ10_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|AB24      |inRST          |IOB      |IO_L49P_M1DQ10_1             |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |AB25      |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |AB26      |               |IOBS     |IO_L49N_M1DQ11_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |AC1       |               |IOBS     |IO_L34N_M3UDQSN_3            |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
@@ -173,7 +173,7 @@ Pinout by Pin Number:
 |AE21      |               |IOBM     |IO_L2P_CMPCLK_2              |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |AE22      |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |AE23      |               |IOBM     |IO_L74P_AWAKE_1              |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|AE24      |inRST          |IOB      |IO_L67P_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|AE24      |               |IOBM     |IO_L67P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |AE25      |               |IOBM     |IO_L52P_M1DQ14_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |AE26      |               |IOBS     |IO_L52N_M1DQ15_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |AF1       |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
@@ -221,7 +221,7 @@ Pinout by Pin Number:
 |B17       |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |B18       |               |IOBM     |IO_L62P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |B19       |               |         |VCCO_0                       |         |           |0             |          |         |           |         |2.50     |          |           |                |
-|B20       |               |IOBM     |IO_L64P_SCP5_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
+|B20       |oRTS           |IOB      |IO_L64P_SCP5_0               |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |B21       |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |B22       |               |IOBM     |IO_L66P_SCP1_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |B23       |               |IOBM     |IO_L1P_A25_1                 |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -611,11 +611,11 @@ Pinout by Pin Number:
 |U17       |               |IOBM     |IO_L62P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |U18       |               |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |U19       |               |IOBM     |IO_L70P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|U20       |iDATA_BIT_SW<0>|IOB      |IO_L64N_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|U20       |iPARITY_SW     |IOB      |IO_L64N_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |U21       |               |IOBM     |IO_L61P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |U22       |               |IOBS     |IO_L61N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|U23       |iDATA_BIT_SW<1>|IOB      |IO_L59N_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
-|U24       |               |IOBS     |IO_L53N_VREF_1               |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|U23       |iDATA_BIT_SW<0>|IOB      |IO_L59N_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|U24       |iDATA_BIT_SW<1>|IOB      |IO_L53N_VREF_1               |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |U25       |               |IOBM     |IO_L43P_GCLK5_M1DQ4_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |U26       |               |IOBS     |IO_L43N_GCLK4_M1DQ5_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |V1        |               |IOBS     |IO_L39N_M3LDQSN_3            |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
@@ -641,7 +641,7 @@ Pinout by Pin Number:
 |V21       |               |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |V22       |               |IOBM     |IO_L71P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |V23       |               |IOBM     |IO_L42P_GCLK7_M1UDM_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|V24       |iPARITY_SW     |IOB      |IO_L45P_A1_M1LDQS_1          |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|V24       |iPARITY_EN_SW  |IOB      |IO_L45P_A1_M1LDQS_1          |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |V25       |               |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |V26       |               |IOBS     |IO_L45N_A0_M1LDQSN_1         |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |W1        |               |IOBS     |IO_L38N_M3DQ3_3              |UNUSED   |           |3             |          |         |           |         |         |          |           |                |

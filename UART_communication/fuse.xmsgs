@@ -5,14 +5,5 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="957" delta="unknown" >"D:/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" Line 279: Case choice must be a locally static expression
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="957" delta="unknown" >"D:/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" Line 286: Case choice must be a locally static expression
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="957" delta="unknown" >"D:/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" Line 293: Case choice must be a locally static expression
-</msg>
-
 </messages>
 

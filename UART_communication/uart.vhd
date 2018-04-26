@@ -32,20 +32,23 @@ use work.uart_components.ALL;
 
 entity uart is
 	 Generic (
-		BAUD_RATE_SEL : integer := 2;  -- Width of baud rate select
-		DATA_BIT_SEL  : integer := 3;  -- Width of data bit number select
+		BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
+		DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
 		DATA_WIDTH    : integer := 8	 -- Data widht 
 	 );
     Port ( iCLK        		 : in   std_logic;
            inRST       		 : in   std_logic;
+			  iPARITY_EN		 : in   std_logic;
 			  iPARITY			 : in   std_logic;
 			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			  iCTS				 : in   std_logic;
            iRX         		 : in   std_logic;
 			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
 			  iUART_WR 			 : in	  std_logic;
            iUART_RD    		 : in   std_logic;
 			  oTX         		 : out  std_logic;
+			  oRTS				 : out  std_logic;
 			  oUART_FULL       : out  std_logic;
            oUART_EMPTY      : out  std_logic;
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
@@ -83,29 +86,30 @@ begin
 	-- UART reciver
 	eUART_RECIVER : reciver	
 		Port map(
-         iCLK 		 => iCLK,
-         inRST 	 => inRST,
-			iPARITY   => iPARITY,
-			iDATA_SEL => iDATA_SEL,
-         iRX   	 => iRX,
-         iTC   	 => sTC,
-         iFULL 	 => sRECV_FULL,
-			oBAUD_EN  => sBAUD_EN,
-         oDATA 	 => sRECV_DATA,
-         oRX_DONE  => sRX_DONE
+         iCLK 		  => iCLK,
+         inRST 	  => inRST,
+			iPARITY_EN => iPARITY_EN,
+			iPARITY    => iPARITY,
+			iDATA_SEL  => iDATA_SEL,
+         iRX   	  => iRX,
+         iTC   	  => sTC,
+         iFULL 	  => sRECV_FULL,
+			oBAUD_EN   => sBAUD_EN,
+         oDATA 	  => sRECV_DATA,
+         oRX_DONE   => sRX_DONE
 		);
 		
 	-- Recive FIFO	
 	eRECV_FIFO : fifo 	
 		Port map(
-			iCLK   		=> iCLK,
-         inRST  		=> inRST,
-         iDATA  		=> sRECV_DATA,
-         iWR    		=> sRX_DONE,
-         iRD    		=> iUART_RD,
-         oFULL  		=> sRECV_FULL,
-         oEMPTY 		=> oUART_EMPTY,
-         oDATA  		=> oUART_DATA
+			iCLK   	=> iCLK,
+         inRST  	=> inRST,
+         iDATA  	=> sRECV_DATA,
+         iWR    	=> sRX_DONE,
+         iRD    	=> iUART_RD,
+         oFULL  	=> sRECV_FULL,
+         oEMPTY 	=> oUART_EMPTY,
+         oDATA  	=> oUART_DATA
 		);
 	
 	-- UART transmitter 
@@ -113,12 +117,15 @@ begin
 		Port map(
 			iCLK 	 	  => iCLK,
 			inRST  	  => inRST,
+			iPARITY_EN => iPARITY_EN,
 			iPARITY    => iPARITY,
 			iDATA_SEL  => iDATA_SEL,
+			iCTS		  => iCTS,
 			iTC    	  => sTC,
 		   iDATA  	  => sSEND_DATA, 
 			iSTART 	  => snSEND_EMPTY,
 			oTX_READY  => sTX_DONE,
+			oRTS       => oRTS,
 			oTX    	  => oTX		
 		);
 	

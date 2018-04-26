@@ -38,16 +38,17 @@ entity reciver is
 		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 		DATA_BIT_SEL	 : integer := 2   -- Width of data bit number select
 	 );
-    Port ( iCLK      : in   std_logic;
-           inRST     : in   std_logic;
-			  iPARITY   : in   std_logic;
-			  iDATA_SEL : in   std_logic_vector(DATA_BIT_SEL - 1  downto 0);
-           iRX       : in   std_logic;
-           iTC       : in   std_logic;
-           iFULL 	   : in   std_logic;
-			  oBAUD_EN  : out  std_logic;
-           oDATA 	   : out  std_logic_vector(DATA_WIDTH   - 1 downto 0);
-           oRX_DONE  : out  std_logic);
+    Port ( iCLK        : in   std_logic;
+           inRST       : in   std_logic;
+			  iPARITY_EN  : in   std_logic;
+			  iPARITY     : in   std_logic;
+			  iDATA_SEL   : in   std_logic_vector(DATA_BIT_SEL - 1  downto 0);
+           iRX         : in   std_logic;
+           iTC         : in   std_logic;
+           iFULL 	     : in   std_logic;
+			  oBAUD_EN    : out  std_logic;
+           oDATA 	     : out  std_logic_vector(DATA_WIDTH   - 1 downto 0);
+           oRX_DONE    : out  std_logic);
 end reciver;
 
 architecture Behavioral of reciver is
@@ -96,7 +97,7 @@ begin
 	end process fsm_reg;
 
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iRX, sSTART_TC_CNT_DONE, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
+	fsm_next : process (sCURRENT_STATE, iRX, iPARITY_EN, sSTART_TC_CNT_DONE, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
 		case (sCURRENT_STATE) is 
 			when IDLE   =>
 				-- Wait for RX 
@@ -115,7 +116,11 @@ begin
 			when DATA   =>
 				-- Check if all data bits recived
 				if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= PARITY; -- Get for parity bit  
+					if (iPARITY_EN = '1') then
+						sNEXT_STATE <= PARITY; -- Get for parity bit
+					else
+						sNEXT_STATE <= STOP; -- Skip parity bit
+					end if;	
 				else 
 					sNEXT_STATE <= DATA;
 				end if;
@@ -179,7 +184,7 @@ begin
 				sTC_CNT_EN	 <= '1';
 				sTC_CNT_RST	 <= '0';
 				sDATA_BIT_EN <= '0';
-				sDATA_CNT_EN <= '0';
+				sDATA_CNT_EN <= '0';	
 				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '0';
 				if (iFULL = '0' and sTC_CNT_DONE = '1') then -- FIFO is not full, store to it
@@ -230,7 +235,7 @@ begin
 			sSHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sSHW_EN = '1' and sTC_CNT_DONE = '1') then -- Check for shift enable
-				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH downto 1); -- Shift data bits
+				sSHW_REG <= iRX & sSHW_REG(DATA_WIDTH downto 1); -- Shift data bits		
 			end if;
 		end if;
 	end process shift_reg;
@@ -299,10 +304,14 @@ begin
 	
 	
 	-- Reciver data output
-	oDATA <=		     sSHW_REG(DATA_WIDTH - 1 downto 0) when sPARITY_OK = '1' and sDATA_BIT_REG = cDATA_8_BIT else
-				'0'   & sSHW_REG(DATA_WIDTH - 1 downto 1) when sPARITY_OK = '1' and sDATA_BIT_REG = cDATA_7_BIT else
-				"00"  & sSHW_REG(DATA_WIDTH - 1 downto 2) when sPARITY_OK = '1' and sDATA_BIT_REG = cDATA_6_BIT else
-				"000" & sSHW_REG(DATA_WIDTH - 1 downto 3) when sPARITY_OK = '1' and sDATA_BIT_REG = cDATA_5_BIT else
+	oDATA <=		     sSHW_REG(DATA_WIDTH - 1 downto 0) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_8_BIT and iPARITY_EN = '1' else
+						  sSHW_REG(DATA_WIDTH     downto 1) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_8_BIT and iPARITY_EN = '0' else
+				'0'   & sSHW_REG(DATA_WIDTH - 1 downto 1) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_7_BIT and iPARITY_EN = '1' else
+				'0'   & sSHW_REG(DATA_WIDTH     downto 2) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_7_BIT and iPARITY_EN = '0' else
+				"00"  & sSHW_REG(DATA_WIDTH - 1 downto 2) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_6_BIT and iPARITY_EN = '1' else
+				"00"  & sSHW_REG(DATA_WIDTH     downto 3) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_6_BIT and iPARITY_EN = '0' else
+				"000" & sSHW_REG(DATA_WIDTH - 1 downto 3) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_5_BIT and iPARITY_EN = '1' else
+				"000" & sSHW_REG(DATA_WIDTH     downto 4) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_5_BIT and iPARITY_EN = '0' else
 				cWRONG_DATA;
 	
 end Behavioral;

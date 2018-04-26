@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-04-25T15:55:16</DateModified>
+  <DateModified>2018-04-26T15:31:21</DateModified>
   <ModuleName>uart_verification_return</ModuleName>
-  <SummaryTimeStamp>2018-04-25T09:56:15</SummaryTimeStamp>
+  <SummaryTimeStamp>2018-04-26T13:04:18</SummaryTimeStamp>
   <SavedFilePath>D:/BSc_workspace/Bachelor_work/UART_communication/iseconfig/uart_verification_return.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/UART_communication</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/UART_communication\</ImplementationReportsDirectory>
   <DateInitialized>2018-04-23T08:34:53</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

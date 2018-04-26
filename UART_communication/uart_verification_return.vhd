@@ -35,14 +35,17 @@ entity uart_verification_return is
 		DATA_BIT_SEL  : integer := 2;
 		DATA_WIDTH    : integer := 8
 	 );
-    Port ( iCLK  		   : in  std_logic;
-           inRST 		   : in  std_logic;
-			  iPARITY_SW   : in  std_logic;
-			  iDATA_BIT_SW : in  std_logic_vector(DATA_BIT_SEL - 1 downto 0);
-			  iRX 		   : in  std_logic;
-			  iBAUD_SW	   : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0); 
-			  oTX			   : out std_logic;
-           oLED_DATA    : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		    : in  std_logic;
+           inRST 		    : in  std_logic;
+			  iPARITY_EN_SW : in  std_logic;
+			  iPARITY_SW    : in  std_logic;
+			  iDATA_BIT_SW  : in  std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iCTS			 : in  std_logic;
+			  iRX 		    : in  std_logic;
+			  iBAUD_SW	    : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			  oTX			    : out std_logic;
+			  oRTS			 : out std_logic;
+           oLED_DATA     : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart_verification_return;
 
 architecture Behavioral of uart_verification_return is
@@ -72,14 +75,17 @@ architecture Behavioral of uart_verification_return is
 	 );
     Port ( iCLK        		 : in   std_logic;
            inRST       		 : in   std_logic;
+			  iPARITY_EN		 : in   std_logic;
 			  iPARITY			 : in   std_logic;
 			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			  iCTS				 : in   std_logic;
            iRX         		 : in   std_logic;
 			  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0);
 			  iUART_WR 			 : in	  std_logic;
            iUART_RD    		 : in   std_logic;
 			  oTX         		 : out  std_logic;
+			  oRTS				 : out  std_logic;
 			  oUART_FULL       : out  std_logic;
            oUART_EMPTY      : out  std_logic;
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
@@ -92,14 +98,17 @@ begin
 		Port map (
 			iCLK        		 => iCLK,
 			inRST       		 => inRST,
+			iPARITY_EN			 => iPARITY_EN_SW,
 			iPARITY				 => iPARITY_SW,
 			iDATA_SEL			 => iDATA_BIT_SW,
 			iBAUD_SEL			 => iBAUD_SW,
+			iCTS					 => iCTS,
 			iRX         		 => iRX,
 			iUART_DATA		 	 => sOUART_DATA,
 			iUART_WR 			 => sUART_WRITE,
 			iUART_RD    		 => sUART_READ,
 			oTX         		 => oTX,
+			oRTS					 => oRTS,
 			oUART_FULL         => sUART_FULL,
 			oUART_EMPTY      	 => sUART_EMPTY,
 			oUART_DATA       	 => sIUART_DATA

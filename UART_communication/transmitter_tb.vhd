@@ -43,12 +43,15 @@ ARCHITECTURE behavior OF transmitter_tb IS
     PORT(
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
+			iCTS	: IN std_logic;
          iTC : IN  std_logic;
+			iPARITY_EN : IN  std_logic;
 			iPARITY : IN  std_logic;
 			iDATA_SEL : IN std_logic_vector(1 downto 0);			
          iDATA : IN  std_logic_vector(7 downto 0);
          iSTART : IN  std_logic;
          oTX_READY : OUT  std_logic;
+			oRTS		: OUT std_logic;
          oTX : OUT  std_logic
         );
     END COMPONENT;
@@ -62,10 +65,13 @@ ARCHITECTURE behavior OF transmitter_tb IS
    signal iSTART : std_logic := '0';
 	signal iPARITY : std_logic := '0';
 	signal iDATA_SEL : std_logic_vector(1 downto 0) := "11";	
+	signal iCTS		: std_logic := '0';
+	signal iPARITY_EN : std_logic := '0';
 
  	--Outputs
    signal oTX_READY : std_logic;
    signal oTX : std_logic;
+	signal oRTS : std_logic;
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -76,11 +82,14 @@ BEGIN
    uut: transmitter PORT MAP (
           iCLK => iCLK,
           inRST => inRST,
+			 iCTS => iCTS,
           iTC => iTC,
           iDATA => iDATA,
           iSTART => iSTART,
+			 iPARITY_EN => iPARITY_EN,
 			 iPARITY => iPARITY,
-			 iDATA_SEL => iDATA_SEL,			 
+			 iDATA_SEL => iDATA_SEL,
+			 oRTS => oRTS,
           oTX_READY => oTX_READY,
           oTX => oTX
         );
@@ -104,21 +113,26 @@ BEGIN
       wait for iCLK_period*10;
 
       -- insert stimulus here 
-		inRST <= '1';
+		inRST 		 <= '1';
 		
-		iPARITY   <= '1';
-		iDATA_SEL <= "00";
-		iDATA     <= "01100111";
-		iSTART    <= '0';
+		iPARITY      <= '1';
+		iPARITY_EN   <= '0';
+		iDATA_SEL    <= "11";
+		iDATA        <= "01100111";
+		iSTART       <= '0';
+		iCTS 		    <= '0';
 		
-		iTC    <= '1';
+		iTC    	 	 <= '1';
 		
 		
       wait for iCLK_period*10;
 		
 		iSTART <= '1';
 		
-      wait for iCLK_period*100;
+      wait for iCLK_period*10;
+		
+		iCTS		 <= '1';	
+		
 
 
       wait;
