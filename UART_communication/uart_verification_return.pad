@@ -1,7 +1,7 @@
 Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Fri Apr 27 09:48:23 2018
+Fri Apr 27 10:31:26 2018
 
 
 # NOTE: This file is designed to be imported into a spreadsheet program
@@ -609,7 +609,7 @@ U15||IOBM|IO_L42P_2|UNUSED||2|||||||||
 U16|||VCCINT||||||||1.2||||
 U17||IOBM|IO_L62P_1|UNUSED||1|||||||||
 U18|||VCCO_1|||1|||||2.50||||
-U19||IOBM|IO_L70P_1|UNUSED||1|||||||||
+U19|iHANDSHAKE_EN_SW|IOB|IO_L70P_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
 U20|iPARITY_SW|IOB|IO_L64N_1|INPUT|LVCMOS25*|1||||NONE||LOCATED|NO|NONE|
 U21||IOBM|IO_L61P_1|UNUSED||1|||||||||
 U22||IOBS|IO_L61N_1|UNUSED||1|||||||||

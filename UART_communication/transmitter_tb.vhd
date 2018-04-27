@@ -47,6 +47,7 @@ ARCHITECTURE behavior OF transmitter_tb IS
          iTC : IN  std_logic;
 			iPARITY_EN : IN  std_logic;
 			iPARITY : IN  std_logic;
+			iHANDSHAKE_EN : IN  std_logic;
 			iDATA_SEL : IN std_logic_vector(1 downto 0);			
          iDATA : IN  std_logic_vector(7 downto 0);
          iSTART : IN  std_logic;
@@ -67,6 +68,7 @@ ARCHITECTURE behavior OF transmitter_tb IS
 	signal iDATA_SEL : std_logic_vector(1 downto 0) := "11";	
 	signal iCTS		: std_logic := '0';
 	signal iPARITY_EN : std_logic := '0';
+	signal iHANDSHAKE_EN : std_logic := '0';
 
  	--Outputs
    signal oTX_READY : std_logic;
@@ -87,6 +89,7 @@ BEGIN
           iDATA => iDATA,
           iSTART => iSTART,
 			 iPARITY_EN => iPARITY_EN,
+			 iHANDSHAKE_EN => iHANDSHAKE_EN,
 			 iPARITY => iPARITY,
 			 iDATA_SEL => iDATA_SEL,
 			 oRTS => oRTS,
@@ -113,16 +116,17 @@ BEGIN
       wait for iCLK_period*10;
 
       -- insert stimulus here 
-		inRST 		 <= '1';
+		inRST 		  <= '1';
 		
-		iPARITY      <= '1';
-		iPARITY_EN   <= '0';
-		iDATA_SEL    <= "11";
-		iDATA        <= "01100111";
-		iSTART       <= '0';
-		iCTS 		    <= '0';
+		iPARITY       <= '1';
+		iPARITY_EN    <= '0';
+		iHANDSHAKE_EN <= '0';
+		iDATA_SEL     <= "11";
+		iDATA         <= "01100111";
+		iSTART        <= '0';
+		iCTS 		     <= '0';
 		
-		iTC    	 	 <= '1';
+		iTC    	 	  <= '1';
 		
 		
       wait for iCLK_period*10;

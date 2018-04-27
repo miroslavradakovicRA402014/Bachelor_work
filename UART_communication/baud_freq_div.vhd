@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    09:58:49 04/16/2018 
 -- Design Name: 
@@ -21,9 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -90,7 +87,7 @@ begin
 	
 	-- Baud rate period signal generator 
 	baud_gen : process (iBAUD_SEL) begin
-		-- Generate baud rate depend on input configurarion
+		-- Generate baud rate period depends on input configurarion
 		case (iBAUD_SEL) is
 			when "000" 	=> 
 				sBAUD_RATE <= cBAUD_2400_PERIOD;  

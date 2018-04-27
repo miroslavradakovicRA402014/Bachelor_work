@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    08:13:51 04/20/2018 
 -- Design Name: 
@@ -20,10 +20,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
 --library UNISIM;
@@ -35,17 +31,18 @@ entity uart_verification_return is
 		DATA_BIT_SEL  : integer := 2;
 		DATA_WIDTH    : integer := 8
 	 );
-    Port ( iCLK  		    : in  std_logic;
-           inRST 		    : in  std_logic;
-			  iPARITY_EN_SW : in  std_logic;
-			  iPARITY_SW    : in  std_logic;
-			  iDATA_BIT_SW  : in  std_logic_vector(DATA_BIT_SEL - 1 downto 0);
-			  iCTS			 : in  std_logic;
-			  iRX 		    : in  std_logic;
-			  iBAUD_SW	    : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
-			  oTX			    : out std_logic;
-			  oRTS			 : out std_logic;
-           oLED_DATA     : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		    	  : in  std_logic;
+           inRST 		    	  : in  std_logic;
+			  iPARITY_EN_SW 	  : in  std_logic;
+			  iPARITY_SW    	  : in  std_logic;
+			  iHANDSHAKE_EN_SW  : in  std_logic;
+			  iDATA_BIT_SW  	  : in  std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iCTS			 	  : in  std_logic;
+			  iRX 		    	  : in  std_logic;
+			  iBAUD_SW	    	  : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			  oTX			    	  : out std_logic;
+			  oRTS			 	  : out std_logic;
+           oLED_DATA     	  : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end uart_verification_return;
 
 architecture Behavioral of uart_verification_return is
@@ -60,8 +57,8 @@ architecture Behavioral of uart_verification_return is
 	signal sIUART_DATA	 : std_logic_vector(DATA_WIDTH - 1 downto 0); -- Recived UART data	 
 	signal sOUART_DATA	 : std_logic_vector(DATA_WIDTH - 1 downto 0); -- Recived UART data
 	
-	signal sUART_READ 	 : std_logic;
-	signal sUART_WRITE  	 : std_logic;
+	signal sUART_READ 	 : std_logic; -- Read UART
+	signal sUART_WRITE  	 : std_logic; -- Write to UART
 	
 	signal sUART_FULL		 : std_logic;
 	signal sUART_EMPTY	 : std_logic;
@@ -77,6 +74,7 @@ architecture Behavioral of uart_verification_return is
            inRST       		 : in   std_logic;
 			  iPARITY_EN		 : in   std_logic;
 			  iPARITY			 : in   std_logic;
+			  iHANDSHAKE_EN 	 : in   std_logic;
 			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
 			  iCTS				 : in   std_logic;
@@ -100,6 +98,7 @@ begin
 			inRST       		 => inRST,
 			iPARITY_EN			 => iPARITY_EN_SW,
 			iPARITY				 => iPARITY_SW,
+			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
 			iDATA_SEL			 => iDATA_BIT_SW,
 			iBAUD_SEL			 => iBAUD_SW,
 			iCTS					 => iCTS,
@@ -174,10 +173,6 @@ begin
 	-- LED output
 	oLED_DATA   <= sRECV_DATA_REG;
 	
-	
-	
---	oLED_DATA <= "11110000" when sUART_EMPTY = '0' else 
---			       "00001111";
 
 end Behavioral;
 

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    09:03:15 04/17/2018 
 -- Design Name: 
@@ -21,10 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
 --library UNISIM;
@@ -38,18 +34,19 @@ entity transmitter is
 		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 		DATA_BIT_SEL	 : integer := 2	-- Width of data bit number select
 	 );
-    Port ( iCLK 		 : in   std_logic;
-           inRST  	 : in   std_logic;
-			  iPARITY_EN : in   std_logic;
-			  iPARITY	 : in   std_logic;
-			  iDATA_SEL  : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
-			  iCTS		 : in   std_logic;
-           iTC    	 : in   std_logic;
-           iDATA  	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
-           iSTART 	 : in   std_logic;
-			  oTX_READY  : out  std_logic;
-			  oRTS		 : out  std_logic;
-           oTX    	 : out  std_logic);
+    Port ( iCLK 		 	 : in   std_logic;
+           inRST  	 	 : in   std_logic;
+			  iPARITY_EN 	 : in   std_logic;
+			  iPARITY	 	 : in   std_logic;
+			  iHANDSHAKE_EN : in   std_logic;
+			  iDATA_SEL  	 : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iCTS		 	 : in   std_logic;
+           iTC    	 	 : in   std_logic;
+           iDATA  	 	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
+           iSTART 	 	 : in   std_logic;
+			  oTX_READY  	 : out  std_logic;
+			  oRTS		 	 : out  std_logic;
+           oTX    	 	 : out  std_logic);
 end transmitter;
 
 architecture Behavioral of transmitter is
@@ -99,12 +96,16 @@ begin
 	end process fsm_reg;
 	
 	-- Reciver FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iCTS, iPARITY_EN, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
+	fsm_next : process (sCURRENT_STATE, iHANDSHAKE_EN, iCTS, iPARITY_EN, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
 		case (sCURRENT_STATE) is 
 			when IDLE      =>	
 				-- Wait for FIFO 
 				if (iSTART = '1') then 
-					sNEXT_STATE <= HANDSHAKE; -- Start handshaking
+					if (iHANDSHAKE_EN = '1') then -- Check does handshaking enabled
+						sNEXT_STATE <= HANDSHAKE; -- Start handshaking
+					else
+						sNEXT_STATE <= START; -- Get for start bit
+					end if;
 				else 
 					sNEXT_STATE <= IDLE;
 				end if;
@@ -136,14 +137,14 @@ begin
 			when PARITY   =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= STOP; -- Recive stop bit
+					sNEXT_STATE <= STOP; -- Send stop bit
 			   else
 					sNEXT_STATE <= PARITY;
 				end if;				
 			when STOP     =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
-					sNEXT_STATE <= IDLE; -- Recive next data 
+					sNEXT_STATE <= IDLE; -- Send next data 
 			   else
 					sNEXT_STATE <= STOP;
 				end if;			
@@ -151,17 +152,17 @@ begin
 	end process fsm_next;	
 	
 	-- Reciver FSM output logic
-	fsm_out : process (sCURRENT_STATE, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
+	fsm_out : process (sCURRENT_STATE, iHANDSHAKE_EN, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
 		case (sCURRENT_STATE) is
 			when IDLE  	   =>
 				sTC_CNT_EN	 		<= '0';
 				sDATA_CNT_EN 		<= '0';
-				sDATA_BIT_EN		<= '1';
+				sDATA_BIT_EN		<= '1'; -- Enable data bit number register
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
 				oRTS					<= '0';
-				oTX 			 		<= '1';
+				oTX 			 		<= '1'; 
 			when HANDSHAKE =>
 				sTC_CNT_EN	 		<= '0';
 				sDATA_CNT_EN 		<= '0';
@@ -169,10 +170,10 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
-				oRTS					<= '1';
+				oRTS					<= '1'; -- Start handshaking 
 				oTX 			 		<= '1';				
 			when START 	   =>	
-				sTC_CNT_EN	 		<= '1';
+				sTC_CNT_EN	 		<= '1'; -- Start countig 
 				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '0';
 				sSHW_EN		 		<= '0';
@@ -183,17 +184,27 @@ begin
 					sDATA_LOAD	 <= '0';
 					oTX_READY 	 <= '0';					
 				end if;
-				oRTS					<= '1';
+		      -- If handshaking enabled assert RTS signal
+				if (iHANDSHAKE_EN = '1') then
+					oRTS	<= '1';
+				else 
+					oRTS 	<= '0';
+				end if;
 				oTX 			 		<= '0';				
 			when DATA  	   =>	
-				sTC_CNT_EN	 		<= '1';
-				sDATA_CNT_EN 		<= '1';
+				sTC_CNT_EN	 		<= '1';  
+				sDATA_CNT_EN 		<= '1'; -- Count data bits 
 				sDATA_BIT_EN		<= '0';				
-				sSHW_EN		 		<= '1';
+				sSHW_EN		 		<= '1'; -- Shift data bits  
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';	
-				oRTS					<= '1';
-				oTX 			 		<= sSHW_REG(0);
+				-- If handshaking enabled assert RTS signal
+				if (iHANDSHAKE_EN = '1') then
+					oRTS	<= '1';
+				else 
+					oRTS 	<= '0';
+				end if;
+				oTX 			 		<= sSHW_REG(0); -- LSB of shift register is current data bit to transmitt
 			when PARITY  	=>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
@@ -201,8 +212,13 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
-			   oRTS					<= '1';
-				oTX			 		<= sPARITY;				
+				-- If handshaking enabled assert RTS signal
+				if (iHANDSHAKE_EN = '1') then
+					oRTS	<= '1';
+				else 
+					oRTS 	<= '0';
+				end if;
+				oTX			 		<= sPARITY;	-- Transmitt parity bit			
 			when STOP  	   =>	
 				sTC_CNT_EN	 		<= '1';
 				sDATA_CNT_EN 		<= '0';
@@ -210,8 +226,13 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
-				oRTS					<= '1';
-				oTX			 		<= '1';
+				-- If handshaking enabled assert RTS signal
+				if (iHANDSHAKE_EN = '1') then
+					oRTS	<= '1';
+				else 
+					oRTS 	<= '0';
+				end if;
+				oTX			 		<= '1';	
 		end case;		
 	end process fsm_out;	
 	

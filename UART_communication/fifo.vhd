@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    12:56:14 04/16/2018 
 -- Design Name: 
@@ -21,11 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.NUMERIC_STD.ALL;
-
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -91,7 +86,7 @@ begin
 		if (inRST = '0') then
 			sWR_PTR <= 0; -- Reset pointer
 		elsif (iCLK'event and iCLK = '1') then
-			if (iWR = '1' and sFULL = '0') then
+			if (iWR = '1' and sFULL = '0') then -- If FIFO is not full and write enable write to it
 				sWR_PTR <= sWR_PTR + 1;  	  -- Increment write pointer 
 			elsif (iRD = '1' and sEMPTY = '0') then
 				sWR_PTR <= sWR_PTR - 1;      -- Decrement wirte pointer

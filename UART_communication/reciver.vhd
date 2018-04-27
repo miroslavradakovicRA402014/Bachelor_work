@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    14:55:05 04/13/2018 
 -- Design Name: 
@@ -20,9 +20,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -147,15 +144,15 @@ begin
 			when IDLE   =>
 				sTC_CNT_EN	 <= '0';
 				sTC_CNT_RST  <= '0';
-				sDATA_BIT_EN <= '1';
+				sDATA_BIT_EN <= '1'; -- Enable data bit register
 				sDATA_CNT_EN <= '0';
 				sSHW_EN		 <= '0';
-				oBAUD_EN 	 <= '1';
+				oBAUD_EN 	 <= '1'; -- Enable baud rate in freq divider
 				oRX_DONE 	 <= '0';
 			when START  =>	
-				sTC_CNT_EN	 <= '1';
+				sTC_CNT_EN	 <= '1'; -- Start counter
 				if (sSTART_TC_CNT_DONE = '1') then
-					sTC_CNT_RST  <= '1'; -- Reset counter
+					sTC_CNT_RST  <= '1'; -- Reset counter if start period of 8 cycles done 
 			   else
 					sTC_CNT_RST  <= '0';
 				end if;			
@@ -165,19 +162,19 @@ begin
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when DATA   =>	
-				sTC_CNT_EN	 <= '1';
+				sTC_CNT_EN	 <= '1';	 
 				sTC_CNT_RST	 <= '0';
-				sDATA_BIT_EN <= '0';
-				sDATA_CNT_EN <= '1';
-				sSHW_EN		 <= '1';
+				sDATA_BIT_EN <= '0'; 
+				sDATA_CNT_EN <= '1'; -- Enable data counter
+				sSHW_EN		 <= '1'; -- Enable shifter for data bits 
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';
 			when PARITY =>
-				sTC_CNT_EN	 <= '1';
+				sTC_CNT_EN	 <= '1';	
 				sTC_CNT_RST	 <= '0';
 				sDATA_BIT_EN <= '0';
 				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '1';
+				sSHW_EN		 <= '1'; -- Enable shifter for parity bit
 				oBAUD_EN 	 <= '0';
 				oRX_DONE 	 <= '0';			
 			when STOP   =>	
@@ -188,7 +185,7 @@ begin
 				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '0';
 				if (iFULL = '0' and sTC_CNT_DONE = '1') then -- FIFO is not full, store to it
-					oRX_DONE  <= '1';
+					oRX_DONE  <= '1'; -- Tell FIFO that data is recived
 				else 
 					oRX_DONE  <= '0';
 				end if;	
@@ -253,7 +250,7 @@ begin
 	
 	-- Baud data bit signal generator
 	data_bit : process (iDATA_SEL) begin
-		-- Generate data bits depend on input configurarion
+		-- Generate data bits signal depends on input configurarion
 		case (iDATA_SEL) is
 			when "00"   =>
 				sDATA_BIT <= cDATA_5_BIT;
@@ -266,10 +263,9 @@ begin
 		end case;
 	end process data_bit;
 	
-
 	-- Parity check signal generator
 	parity_gen : process (sSHW_REG, iPARITY, sDATA_BIT_REG) begin
-		-- Generate parity bit depend on data bit number
+		-- Generate parity bit depends on data bit number
 		case (sDATA_BIT_REG) is
 			when cDATA_5_BIT =>
 				-- Check parity input
@@ -302,8 +298,9 @@ begin
 		end case;
 	end process parity_gen;
 	
-	
 	-- Reciver data output
+	-- Depends on data bits number get different parts of shift register because shift register is widther than width of some data 
+	-- NOTE: If parity is not enabled data MSB will be at MSB bit of shift register
 	oDATA <=		     sSHW_REG(DATA_WIDTH - 1 downto 0) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_8_BIT and iPARITY_EN = '1' else
 						  sSHW_REG(DATA_WIDTH     downto 1) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_8_BIT and iPARITY_EN = '0' else
 				'0'   & sSHW_REG(DATA_WIDTH - 1 downto 1) when (not (iPARITY_EN = '1') or sPARITY_OK = '1') and sDATA_BIT_REG = cDATA_7_BIT and iPARITY_EN = '1' else

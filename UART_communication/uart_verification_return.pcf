@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.68d on Fri Apr 27 09:48:13 2018
+// Written by: Map P.68d on Fri Apr 27 10:31:17 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -11,6 +11,7 @@ COMP "oRTS" LOCATE = SITE "B20" LEVEL 1;
 COMP "iPARITY_EN_SW" LOCATE = SITE "V24" LEVEL 1;
 COMP "iPARITY_SW" LOCATE = SITE "U20" LEVEL 1;
 COMP "inRST" LOCATE = SITE "AB24" LEVEL 1;
+COMP "iHANDSHAKE_EN_SW" LOCATE = SITE "U19" LEVEL 1;
 COMP "iDATA_BIT_SW<0>" LOCATE = SITE "U23" LEVEL 1;
 COMP "iDATA_BIT_SW<1>" LOCATE = SITE "U24" LEVEL 1;
 COMP "oLED_DATA<0>" LOCATE = SITE "N24" LEVEL 1;

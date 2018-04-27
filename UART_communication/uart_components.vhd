@@ -56,18 +56,19 @@ package uart_components is
 			TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 			DATA_BIT_SEL	 : integer := 2	-- Width of data bit number select
 		 );
-		Port ( iCLK 		 : in   std_logic;
-			   inRST  	 : in   std_logic;
-			   iPARITY_EN : in  std_logic;
-				  iPARITY	 : in   std_logic;
-				  iDATA_SEL  : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
-				  iCTS		 : in   std_logic;
-			   iTC    	 : in   std_logic;
-			   iDATA  	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
-			   iSTART 	 : in   std_logic;
-				  oTX_READY  : out  std_logic;
-				  oRTS		 : out  std_logic;
-			   oTX    	 : out  std_logic);
+		Port ( iCLK 		 	 : in   std_logic;
+			   inRST  	 	 : in   std_logic;
+				  iPARITY_EN 	 : in   std_logic;
+				  iPARITY	 	 : in   std_logic;
+				  iHANDSHAKE_EN : in   std_logic;
+				  iDATA_SEL  	 : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+				  iCTS		 	 : in   std_logic;
+			   iTC    	 	 : in   std_logic;
+			   iDATA  	 	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
+			   iSTART 	 	 : in   std_logic;
+				  oTX_READY  	 : out  std_logic;
+				  oRTS		 	 : out  std_logic;
+			   oTX    	 	 : out  std_logic);
 	end component transmitter;
 
 	component fifo is

@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 PhD Miroslav Radakovic
 -- 
 -- Create Date:    14:47:40 04/13/2018 
--- Design Name: 
+-- Design Name: 		
 -- Module Name:    uart - Behavioral 
 -- Project Name: 
 -- Target Devices: 
@@ -21,10 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use work.uart_components.ALL;                     
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
 --library UNISIM;
@@ -40,6 +36,7 @@ entity uart is
            inRST       		 : in   std_logic;
 			  iPARITY_EN		 : in   std_logic;
 			  iPARITY			 : in   std_logic;
+			  iHANDSHAKE_EN    : in   std_logic;
 			  iDATA_SEL			 : in   std_logic_vector(DATA_BIT_SEL  - 1 downto 0);
 			  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
 			  iCTS				 : in   std_logic;
@@ -115,18 +112,19 @@ begin
 	-- UART transmitter 
 	eUART_TRANSMITTER : transmitter 
 		Port map(
-			iCLK 	 	  => iCLK,
-			inRST  	  => inRST,
-			iPARITY_EN => iPARITY_EN,
-			iPARITY    => iPARITY,
-			iDATA_SEL  => iDATA_SEL,
-			iCTS		  => iCTS,
-			iTC    	  => sTC,
-		   iDATA  	  => sSEND_DATA, 
-			iSTART 	  => snSEND_EMPTY,
-			oTX_READY  => sTX_DONE,
-			oRTS       => oRTS,
-			oTX    	  => oTX		
+			iCLK 	 	     => iCLK,
+			inRST  	     => inRST,
+			iPARITY_EN 	  => iPARITY_EN,
+			iPARITY    	  => iPARITY,
+			iHANDSHAKE_EN => iHANDSHAKE_EN,
+			iDATA_SEL     => iDATA_SEL,
+			iCTS		  	  => iCTS,
+			iTC    	  	  => sTC,
+		   iDATA  	     => sSEND_DATA, 
+			iSTART 	     => snSEND_EMPTY,
+			oTX_READY     => sTX_DONE,
+			oRTS          => oRTS,
+			oTX    	     => oTX		
 		);
 	
 	-- Send FIFO	
