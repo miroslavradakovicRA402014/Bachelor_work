@@ -11,7 +11,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Thu Apr 26 17:15:25 2018
+Mapped Date    : Fri Apr 27 09:48:04 2018
 
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to
@@ -35,7 +35,7 @@ Updating timing models...
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 3 secs 
+Total REAL time at the beginning of Placer: 4 secs 
 Total CPU  time at the beginning of Placer: 3 secs 
 
 Phase 1.1  Initial Placement Analysis
@@ -50,38 +50,38 @@ Phase 3.31  Local Placement Optimization (Checksum:a57e91a6) REAL time: 4 secs
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:3563b8a4) REAL time: 7 secs 
+(Checksum:3563b8a4) REAL time: 8 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:3563b8a4) REAL time: 7 secs 
+Phase 5.36  Local Placement Optimization (Checksum:3563b8a4) REAL time: 8 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:3563b8a4) REAL time: 7 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:3563b8a4) REAL time: 8 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:3563b8a4) REAL time: 7 secs 
+Phase 7.3  Local Placement Optimization (Checksum:3563b8a4) REAL time: 8 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:3563b8a4) REAL time: 7 secs 
+Phase 8.5  Local Placement Optimization (Checksum:3563b8a4) REAL time: 8 secs 
 
 Phase 9.8  Global Placement
-.............
 ............
-Phase 9.8  Global Placement (Checksum:c34ed221) REAL time: 8 secs 
+..............
+Phase 9.8  Global Placement (Checksum:3c8db1df) REAL time: 8 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:c34ed221) REAL time: 8 secs 
+Phase 10.5  Local Placement Optimization (Checksum:3c8db1df) REAL time: 8 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:e3005a15) REAL time: 8 secs 
+Phase 11.18  Placement Optimization (Checksum:f4ec35e3) REAL time: 8 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:e3005a15) REAL time: 8 secs 
+Phase 12.5  Local Placement Optimization (Checksum:f4ec35e3) REAL time: 8 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:e3005a15) REAL time: 8 secs 
+Phase 13.34  Placement Validation (Checksum:e8e4cf93) REAL time: 8 secs 
 
-Total REAL time to Placer completion: 8 secs 
+Total REAL time to Placer completion: 9 secs 
 Total CPU  time to Placer completion: 8 secs 
 Running post-placement packing...
 Writing output files...
@@ -107,7 +107,7 @@ Slice Logic Utilization:
     Number used as Memory:                       0 out of   6,408    0%
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   131 out of   6,822    1%
+  Number of occupied Slices:                   132 out of   6,822    1%
   Number of MUXCYs used:                        12 out of  13,644    1%
   Number of LUT Flip Flop pairs used:          434
     Number with an unused Flip Flop:            98 out of     434   22%

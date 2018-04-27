@@ -11,7 +11,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Thu Apr 26 17:15:25 2018
+Mapped Date    : Fri Apr 27 09:48:04 2018
 
 Design Summary
 --------------
@@ -32,7 +32,7 @@ Slice Logic Utilization:
     Number used as Memory:                       0 out of   6,408    0%
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   131 out of   6,822    1%
+  Number of occupied Slices:                   132 out of   6,822    1%
   Number of MUXCYs used:                        12 out of  13,644    1%
   Number of LUT Flip Flop pairs used:          434
     Number with an unused Flip Flop:            98 out of     434   22%

@@ -50,8 +50,9 @@ architecture Behavioral of baud_freq_div is
 	constant cBAUD_14400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(110, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 14400
 	constant cBAUD_19200_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(80 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 19200
 	constant cBAUD_38400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(40 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 38400
+	constant cBAUD_57600_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(28 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 57600
 	constant cBAUD_115200_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(14 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 115200
-	constant cBAUD_128000_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(12 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 128000
+	
 
 	signal 	sCLK_CNT 			  : unsigned(CLK_CNT_WIDTH - 1 downto 0); 			-- Clock counter signal
 	signal   sBAUD_RATE			  : unsigned(CLK_CNT_WIDTH - 1 downto 0);				-- Baud rate period of clock signal 
@@ -104,9 +105,9 @@ begin
 			when "101" 	=>	
 				sBAUD_RATE <= cBAUD_38400_PERIOD;		
 			when "110"	=>
-				sBAUD_RATE <= cBAUD_115200_PERIOD;
+				sBAUD_RATE <= cBAUD_57600_PERIOD;
 			when others =>	
-				sBAUD_RATE <= cBAUD_128000_PERIOD;
+				sBAUD_RATE <= cBAUD_115200_PERIOD;
 		end case;
 	end process baud_gen;
 	
