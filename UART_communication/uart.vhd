@@ -21,10 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use work.uart_components.ALL;                     
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity uart is
 	 Generic (

@@ -22,11 +22,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity baud_freq_div is
 	 Generic (
 		BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
