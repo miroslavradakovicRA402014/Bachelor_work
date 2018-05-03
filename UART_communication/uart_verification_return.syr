@@ -1,18 +1,21 @@
-Release 14.6 - xst P.68d (nt)
+Release 14.6 - xst P.68d (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
---> Parameter TMPDIR set to xst/projnav.tmp
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
---> Parameter xsthdpdir set to xst
+--> 
+Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
---> Reading design: uart_verification_return.prj
+--> 
+Reading design: uart_verification_return.prj
 
 TABLE OF CONTENTS
   1) Synthesis Options Summary
@@ -105,24 +108,24 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart_components.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_components.vhd" into library work
 Parsing package <uart_components>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" into library work
 Parsing entity <transmitter>.
 Parsing architecture <Behavioral> of entity <transmitter>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd" into library work
 Parsing entity <reciver>.
 Parsing architecture <Behavioral> of entity <reciver>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/fifo.vhd" into library work
 Parsing entity <fifo>.
 Parsing architecture <Behavioral> of entity <fifo>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" into library work
 Parsing entity <baud_freq_div>.
 Parsing architecture <Behavioral> of entity <baud_freq_div>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart.vhd" into library work
 Parsing entity <uart>.
 Parsing architecture <Behavioral> of entity <uart>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" into library work
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.vhd" into library work
 Parsing entity <uart_verification_return>.
 Parsing architecture <Behavioral> of entity <uart_verification_return>.
 
@@ -147,11 +150,11 @@ Elaborating entity <transmitter> (architecture <Behavioral>) with generics from 
 =========================================================================
 
 Synthesizing Unit <uart_verification_return>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.vhd".
         BAUD_RATE_SEL = 3
         DATA_BIT_SEL = 2
         DATA_WIDTH = 8
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" line 99: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.vhd" line 91: Output port <oUART_FULL> of the instance <eUART> is unconnected or connected to loadless signal.
     Found 8-bit register for signal <sOUART_DATA>.
     Found 2-bit register for signal <sCURRENT_STATE>.
     Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
@@ -174,7 +177,7 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\UART_communication\uart_verifica
 Unit <uart_verification_return> synthesized.
 
 Synthesizing Unit <uart>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart.vhd".
         BAUD_RATE_SEL = 3
         DATA_BIT_SEL = 2
         DATA_WIDTH = 8
@@ -183,7 +186,7 @@ Synthesizing Unit <uart>.
 Unit <uart> synthesized.
 
 Synthesizing Unit <baud_freq_div>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd".
         BAUD_RATE_SEL = 3
         CLK_CNT_WIDTH = 10
     Found 10-bit register for signal <sCLK_CNT>.
@@ -191,7 +194,7 @@ Synthesizing Unit <baud_freq_div>.
     Found 10-bit adder for signal <sCLK_CNT[9]_GND_7_o_add_2_OUT> created at line 1241.
     Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_6_OUT<9:0>> created at line 1308.
     Found 8x10-bit Read Only RAM for signal <sBAUD_RATE>
-    Found 10-bit comparator equal for signal <oTC> created at line 77
+    Found 10-bit comparator equal for signal <oTC> created at line 69
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -201,7 +204,7 @@ Synthesizing Unit <baud_freq_div>.
 Unit <baud_freq_div> synthesized.
 
 Synthesizing Unit <reciver>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd".
         DATA_WIDTH = 8
         START_TC_PERIOD = 8
         TC_PERIOD = 16
@@ -230,7 +233,7 @@ Synthesizing Unit <reciver>.
     Found 4-bit adder for signal <sTC_CNT[3]_GND_9_o_add_15_OUT> created at line 1241.
     Found 3-bit adder for signal <sDATA_CNT[2]_GND_9_o_add_22_OUT> created at line 1241.
     Found 4x3-bit Read Only RAM for signal <sDATA_BIT>
-    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_22_o> created at line 224
+    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_22_o> created at line 217
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -241,7 +244,7 @@ Synthesizing Unit <reciver>.
 Unit <reciver> synthesized.
 
 Synthesizing Unit <fifo>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/fifo.vhd".
         DATA_WIDTH = 8
         NUM_OF_WORDS = 16
     Found 8-bit register for signal <sFIFO<14>>.
@@ -261,16 +264,16 @@ Synthesizing Unit <fifo>.
     Found 8-bit register for signal <sFIFO<0>>.
     Found 8-bit register for signal <sFIFO<15>>.
     Found 4-bit register for signal <sWR_PTR>.
-    Found 4-bit adder for signal <sWR_PTR[3]_GND_12_o_add_65_OUT> created at line 95.
-    Found 4-bit subtractor for signal <GND_12_o_GND_12_o_sub_67_OUT<3:0>> created at line 97.
-    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 107
-    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 107
+    Found 4-bit adder for signal <sWR_PTR[3]_GND_12_o_add_65_OUT> created at line 86.
+    Found 4-bit subtractor for signal <GND_12_o_GND_12_o_sub_67_OUT<3:0>> created at line 88.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 98
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 98
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred 132 D-type flip-flop(s).
@@ -279,7 +282,7 @@ Synthesizing Unit <fifo>.
 Unit <fifo> synthesized.
 
 Synthesizing Unit <transmitter>.
-    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd".
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd".
         DATA_WIDTH = 8
         TC_PERIOD = 16
         DATA_CNT_WIDTH = 3
@@ -308,7 +311,7 @@ Synthesizing Unit <transmitter>.
     Found 4-bit adder for signal <sTC_CNT[3]_GND_21_o_add_20_OUT> created at line 1241.
     Found 3-bit adder for signal <sDATA_CNT[2]_GND_21_o_add_26_OUT> created at line 1241.
     Found 4x3-bit Read Only RAM for signal <sDATA_BIT>
-    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_26_o> created at line 262
+    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_26_o> created at line 257
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -730,12 +733,13 @@ iCLK           |    6.828|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 5.64 secs
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 5.52 secs
  
 --> 
 
-Total memory usage is 282940 kilobytes
+
+Total memory usage is 392872 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    3 (   0 filtered)

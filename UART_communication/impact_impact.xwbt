@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/impact.xsl
+OUTFILE=/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/impact.xsl
+FAMILY=None
+PART=None
+WORKINGDIR=/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication
+LICENSE=iMPACT
+USER_INFO=iMPACT

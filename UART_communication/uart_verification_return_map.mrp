@@ -1,4 +1,4 @@
-Release 14.6 Map P.68d (nt)
+Release 14.6 Map P.68d (lin64)
 Xilinx Mapping Report File for Design 'uart_verification_return'
 
 Design Information
@@ -11,7 +11,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Fri Apr 27 10:31:05 2018
+Mapped Date    : Mon Apr 30 15:29:04 2018
 
 Design Summary
 --------------
@@ -79,8 +79,8 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                5.17
 
-Peak Memory Usage:  426 MB
-Total REAL time to MAP completion:  12 secs 
+Peak Memory Usage:  789 MB
+Total REAL time to MAP completion:  13 secs 
 Total CPU time to MAP completion:   11 secs 
 
 Table of Contents
@@ -113,9 +113,9 @@ Xilinx software updates or new releases.
 
 Section 3 - Informational
 -------------------------
-INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to
-'2100@licserver'.
-INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+INFO:Security:51 - The XILINXD_LICENSE_FILE environment variable is not set.
+INFO:Security:52 - The LM_LICENSE_FILE environment variable is set to
+'2100@licserver:/usr/local/flexlm'.
 INFO:Security:54 - 'xc6slx45' is a WebPack part.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
