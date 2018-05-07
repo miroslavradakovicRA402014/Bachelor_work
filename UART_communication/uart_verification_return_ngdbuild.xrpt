@@ -5,22 +5,38 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="NgdBuild" timeStamp="Mon Apr 30 15:29:02 2018">
+  <application stringID="NgdBuild" timeStamp="Mon May  7 15:21:05 2018">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
         <column stringID="value"/>
         <row stringID="row" value="0">
-          <item stringID="variable" value="PATH"/>
-          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE//bin/lin64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"/>
+          <item stringID="variable" value="XILINX_DSP"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE"/>
         </row>
         <row stringID="row" value="1">
-          <item stringID="variable" value="XILINX"/>
-          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE/"/>
+          <item stringID="variable" value="LD_LIBRARY_PATH"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE//lib/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/lib/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/smartmodel/lin64/installed_lin64/lib:/opt/Xilinx/14.6/ISE_DS/ISE/sysgen/lib:/opt/Xilinx/14.6/ISE_DS/EDK/lib/lin64:/opt/Xilinx/14.6/ISE_DS/common/lib/lin64"/>
         </row>
         <row stringID="row" value="2">
-          <item stringID="variable" value="LD_LIBRARY_PATH"/>
-          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE//lib/lin64"/>
+          <item stringID="variable" value="XILINX_EDK"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/EDK"/>
+        </row>
+        <row stringID="row" value="3">
+          <item stringID="variable" value="PATH"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE//bin/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/sysgen/util:/opt/Xilinx/14.6/ISE_DS/ISE/sysgen/bin:/opt/Xilinx/14.6/ISE_DS/ISE/../../../DocNav:/opt/Xilinx/14.6/ISE_DS/PlanAhead/bin:/opt/Xilinx/14.6/ISE_DS/EDK/bin/lin64:/opt/Xilinx/14.6/ISE_DS/EDK/gnu/microblaze/lin/bin:/opt/Xilinx/14.6/ISE_DS/EDK/gnu/powerpc-eabi/lin/bin:/opt/Xilinx/14.6/ISE_DS/EDK/gnu/arm/lin/bin:/opt/Xilinx/14.6/ISE_DS/EDK/gnu/microblaze/linux_toolchain/lin64_be/bin:/opt/Xilinx/14.6/ISE_DS/EDK/gnu/microblaze/linux_toolchain/lin64_le/bin:/opt/Xilinx/14.6/ISE_DS/common/bin/lin64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"/>
+        </row>
+        <row stringID="row" value="4">
+          <item stringID="variable" value="LMC_HOME"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE/smartmodel/lin64/installed_lin64"/>
+        </row>
+        <row stringID="row" value="5">
+          <item stringID="variable" value="XILINX_PLANAHEAD"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/PlanAhead"/>
+        </row>
+        <row stringID="row" value="6">
+          <item stringID="variable" value="XILINX"/>
+          <item stringID="value" value="/opt/Xilinx/14.6/ISE_DS/ISE/"/>
         </row>
       </table>
       <item stringID="User_EnvOs" value="OS Information">
@@ -33,7 +49,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz"/>
-          <item stringID="speed" value="3816.937 MHz"/>
+          <item stringID="speed" value="3973.481 MHz"/>
         </row>
       </table>
     </section>
@@ -88,6 +104,7 @@
         <item dataType="int" stringID="NGDBUILD_NUM_MUXCY" value="9"/>
         <item dataType="int" stringID="NGDBUILD_NUM_MUXF7" value="2"/>
         <item dataType="int" stringID="NGDBUILD_NUM_OBUF" value="10"/>
+        <item dataType="int" stringID="NGDBUILD_NUM_TS_TIMESPEC" value="1"/>
         <item dataType="int" stringID="NGDBUILD_NUM_XORCY" value="10"/>
       </section>
       <section stringID="NGDBUILD_CORE_GENERATION_SUMMARY">

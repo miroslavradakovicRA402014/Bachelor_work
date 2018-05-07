@@ -27,3 +27,7 @@ NET "oLED_DATA(4)" 			LOC = L23;
 NET "oLED_DATA(5)" 			LOC = K24;
 NET "oLED_DATA(6)" 			LOC = H24;
 NET "oLED_DATA(7)" 			LOC = D24;
+
+NET "iCLK" TNM_NET = "iCLK";
+TIMESPEC "TS_ClkIn" = PERIOD "iCLK" 5 ns HIGH 50%;
+

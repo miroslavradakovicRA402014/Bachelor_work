@@ -1,1 +1,2 @@
+vhdl work "reg.vhd"
 vhdl work "i2c_slave.vhd"

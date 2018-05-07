@@ -5,14 +5,14 @@ Parameter TMPDIR set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Parameter xsthdpdir set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Reading design: i2c_slave.prj
@@ -42,21 +42,23 @@ TABLE OF CONTENTS
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/reg.vhd" into library work
+Parsing entity <reg>.
+Parsing architecture <Behavioral> of entity <reg>.
 Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" into library work
 Parsing entity <i2c_slave>.
 Parsing architecture <Behavioral> of entity <i2c_slave>.
-ERROR:HDLCompiler:806 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 38: Syntax error near "REGISTER_ACK".
-ERROR:HDLCompiler:806 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 56: Syntax error near ")".
-ERROR:HDLCompiler:69 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 50: <reg> is not declared.
-ERROR:HDLCompiler:69 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 62: <idle> is not declared.
-ERROR:HDLCompiler:854 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 35: Unit <behavioral> ignored due to previous errors.
-VHDL file /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd ignored due to errors
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 1.99 secs
+ 
 --> 
 
 
-Total memory usage is 302164 kilobytes
+Total memory usage is 303592 kilobytes
 
-Number of errors   :    5 (   0 filtered)
+Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

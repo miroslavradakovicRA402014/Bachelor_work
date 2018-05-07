@@ -43,6 +43,7 @@ ARCHITECTURE behavior OF i2c_slave_tb IS
     PORT(
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
+			iTC	: IN std_logic;
          iSCL : IN  std_logic;
          ioSDA : INOUT  std_logic
         );
@@ -53,6 +54,7 @@ ARCHITECTURE behavior OF i2c_slave_tb IS
    signal iCLK : std_logic := '0';
    signal inRST : std_logic := '0';
    signal iSCL : std_logic := '1';
+	signal iTC : std_logic := '1';
 
 	--BiDirs
    signal ioSDA : std_logic := '1';
@@ -66,6 +68,7 @@ BEGIN
    uut: i2c_slave PORT MAP (
           iCLK => iCLK,
           inRST => inRST,
+			 iTC  => iTC,
           iSCL => iSCL,
           ioSDA => ioSDA
         );
@@ -92,6 +95,7 @@ BEGIN
 		inRST <= '1';
 		ioSDA <= '1';
 		iSCL  <= '1';
+		iTC   <= '1';
 		
 		wait for iCLK_period*10;
 		
@@ -99,8 +103,130 @@ BEGIN
 		ioSDA <= '0';
 		
 		wait for iCLK_period*10;
-
+		
+		-- Generate SCL
+		-- SCL 0		
 		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '1'; -- Data 0
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;			
+
+		-- SCL 1		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 1
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;		
+
+		-- SCL 2		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '1'; -- Data 2
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 3		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 3
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 4		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 4
+
+		wait for iCLK_period*4;	
+			
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 5		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 5
+
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 6		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 6
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 7		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 7
+
+		wait for iCLK_period*4;
+		
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+		
+		-- SCL 8
+		iSCL <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 8
+		
+		wait for iCLK_period*1.5;
+
+		ioSDA <= 'Z';
+
+		wait for iCLK_period*3;
+		
+		iSCL <= '1';
+		
+		wait for iCLK_period*8;
+		
+		iSCL <= '0';
 
       wait;
    end process;

@@ -1,0 +1,2 @@
+vhdl isim_temp "rising_edge_det.vhd"
+vhdl isim_temp "rising_edge_det_tb.vhd"
