@@ -40,6 +40,9 @@ ARCHITECTURE behavior OF i2c_slave_tb IS
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT i2c_slave
+	 GENERIC (
+		SLAVE_ADDRESS  : std_logic_vector(6 downto 0) := "1010101"
+	 );
     PORT(
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
@@ -65,7 +68,11 @@ ARCHITECTURE behavior OF i2c_slave_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: i2c_slave PORT MAP (
+   uut: i2c_slave
+			GENERIC MAP (
+				SLAVE_ADDRESS => "1010101"
+			)
+			PORT MAP (
           iCLK => iCLK,
           inRST => inRST,
 			 iTC  => iTC,
@@ -227,6 +234,265 @@ BEGIN
 		wait for iCLK_period*8;
 		
 		iSCL <= '0';
+
+		wait for iCLK_period*4;
+		
+		-- Register address
+
+		iSCL <= '0';
+		ioSDA <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 0
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;			
+
+		-- SCL 1		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 1
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;		
+
+		-- SCL 2		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 2
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 3		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 3
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 4		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 4
+
+		wait for iCLK_period*4;	
+			
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 5		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 5
+
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 6		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 6
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 7		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 7
+
+		wait for iCLK_period*4;
+		
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+		
+		-- SCL 8
+		iSCL <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 8
+		
+		-- Register ack/nack
+
+		wait for iCLK_period*2;
+
+		ioSDA <= 'Z';
+
+		wait for iCLK_period*3;
+		
+		iSCL <= '1';
+		
+		wait for iCLK_period*8;
+		
+		iSCL <= '0';
+
+		wait for iCLK_period*4;		
+		
+		-- Data byte 10000001
+		iSCL <= '0';
+		ioSDA <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '1'; -- Data 0
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;			
+
+		-- SCL 1		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 1
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;		
+
+		-- SCL 2		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0'; -- Data 2
+		
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 3		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 3
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 4		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 4
+
+		wait for iCLK_period*4;	
+			
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 5		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 5
+
+		wait for iCLK_period*4;		
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 6		
+		iSCL  <= '0';
+		
+	   wait for iCLK_period*4;
+
+		ioSDA <= '0'; -- Data 6
+
+		wait for iCLK_period*4;	
+
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+
+		-- SCL 7		
+		iSCL  <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 7
+
+		wait for iCLK_period*4;
+		
+		iSCL  <= '1';
+		
+		wait for iCLK_period*8;	
+		
+		-- SCL 8
+		iSCL <= '0';
+		
+		wait for iCLK_period*4;
+
+		ioSDA <= '1'; -- Data 8		
+		
+		-- Data read ack/nack
+
+		wait for iCLK_period*2;
+
+		ioSDA <= 'Z';
+
+		wait for iCLK_period*3;
+		
+		iSCL <= '1';
+		
+		wait for iCLK_period*8;
+		
+		iSCL <= '0';
+
+		wait for iCLK_period*4;			
 
       wait;
    end process;
