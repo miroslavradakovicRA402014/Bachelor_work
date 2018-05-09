@@ -1,0 +1,10 @@
+Command line:
+   rising_edge_det_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  1
+     -socket  58815
+
+Wed May  9 09:33:25 2018
+
+
+ Elaboration Time: 0.02 sec

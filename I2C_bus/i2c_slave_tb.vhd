@@ -208,7 +208,7 @@ BEGIN
 		
 		wait for iCLK_period*4;
 
-		ioSDA <= '0'; -- Data 7
+		ioSDA <= '1'; -- Data 7 -- Mode R/W
 
 		wait for iCLK_period*4;
 		

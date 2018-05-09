@@ -716,7 +716,7 @@ LAB104:    xsi_set_current_line(211, ng0);
     t6 = *((char **)t4);
     t7 = (t6 + 56U);
     t8 = *((char **)t7);
-    *((unsigned char *)t8) = (unsigned char)2;
+    *((unsigned char *)t8) = (unsigned char)3;
     xsi_driver_first_trans_fast(t2);
     xsi_set_current_line(213, ng0);
     t2 = (t0 + 1968U);

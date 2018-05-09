@@ -96,6 +96,9 @@ architecture Behavioral of i2c_slave is
 	signal sADDR_REG					: std_logic_vector(3 downto 0);															-- Register address register
 	signal sADDR_REG_EN				: std_logic;																					-- Register address register enable
 	
+	signal sMODE_FF					: std_logic;																					-- R/W mode flip-flop
+	signal sMODE_FF_EN				: std_logic;																					-- R/W mode flip-flop enable
+	
 begin
 
 	-- Generate slave registers
@@ -111,7 +114,7 @@ begin
 	end generate reg_gen;
 	
 	-- Register address register
-	eRED_ADDR_REG : entity work.reg
+	eREG_ADDR_REG : entity work.reg
 		Generic map (
 			DATA_WIDTH => 4
 		)
@@ -121,8 +124,8 @@ begin
 			iWE   => sADDR_REG_EN,
 			iD    => sISHW_REG(3 downto 0),
 			oQ		=> sADDR_REG
-		);	
-	
+		);
+
 	-- Rising edge detector
 	eEDGE_DET : entity work.rising_edge_det
 			Port map(
@@ -131,6 +134,17 @@ begin
 				iSIG  => iSCL,
 				oEDGE => sSCL_RISING_EDGE
 			);
+	
+	-- Mode R/W flip-flop 
+	mode_ff : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sMODE_FF <= '0'; -- Reset flip-flop
+		elsif (iCLK'event and iCLK = '1') then
+			if (sMODE_FF_EN = '1') then
+				sMODE_FF <= sISHW_REG(0); -- Get mode
+			end if;
+		end if;
+	end process mode_ff;
 
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
@@ -142,7 +156,7 @@ begin
 	end process fsm_reg;
 	
 	-- Slave FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sTC_PERIOD_CNT, sTC_TR_PERIOD_CNT) begin
+	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sTC_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for start condition
@@ -188,7 +202,11 @@ begin
 				end if;	
 			when REGISTER_ADDRESS_ACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= READ_DATA;	-- If transmission for ack period done	get data byte
+					if (sMODE_FF = '0') then
+						sNEXT_STATE <= READ_DATA;	-- If transmission for ack period done	get data byte form master
+					else 
+						sNEXT_STATE <= WRITE_DATA; -- If transmission for ack period done	write register data to master
+					end if;	
 				else
 					sNEXT_STATE <= REGISTER_ADDRESS_ACK;
 				end if;			
@@ -198,7 +216,7 @@ begin
 				else
 					sNEXT_STATE <= REGISTER_ADDRESS_NACK;
 				end if;	
-			when READ_DATA				 =>
+			when READ_DATA	=>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= READ_ACK;
@@ -226,13 +244,14 @@ begin
 	-- Reciver FSM output logic
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT) begin
 		case (sCURRENT_STATE) is
-			when IDLE   				   =>
+			when IDLE =>
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';
 				sDATA_CNT_EN   	<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '0';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -241,13 +260,14 @@ begin
 				sREG_DEC_EN			<= '0';
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';
-			when START  				   => 
+			when START => 
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';
 				sDATA_CNT_EN 		<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '0';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -256,15 +276,17 @@ begin
 				sREG_DEC_EN			<= '0';	
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';				
-			when SLAVE_ADDRESS_MODE    =>		
+			when SLAVE_ADDRESS_MODE =>		
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';	
 				sDATA_CNT_EN 		<= '1';
 				sADDR_REG_EN		<= '0';
 				if (sDATA_CNT = DATA_WIDTH) then
+					sMODE_FF_EN		<= '1';
 					sPERIOD_CNT_EN <= '1';
 					sISHW_EN			<= '0';
 				else
+					sMODE_FF_EN		<= '0';
 					sPERIOD_CNT_EN <= '0';
 					sISHW_EN			<= '1';
 				end if;
@@ -276,13 +298,14 @@ begin
 				sREG_DEC_EN			<= '0';
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';
-			when SLAVE_ADDRESS_ACK 	   =>	
+			when SLAVE_ADDRESS_ACK =>	
 				sIN_BUFF_EN	 		<= '0';
 				sOUT_BUFF_EN 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '1';
-				sADDR_REG_EN		<= '0';				
+				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';				
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -291,10 +314,11 @@ begin
 				sREG_DEC_EN			<= '0';	
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';	
-			when REGISTER_ADDRESS  	   =>		
+			when REGISTER_ADDRESS =>		
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';	
 				sDATA_CNT_EN 		<= '1';
+				sMODE_FF_EN			<= '0';
 				if (sDATA_CNT = DATA_WIDTH) then
 					sPERIOD_CNT_EN <= '1';
 					sADDR_REG_EN	<= '1';
@@ -312,13 +336,14 @@ begin
 				sREG_DEC_EN			<= '0';
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';	
-			when REGISTER_ADDRESS_ACK  =>	
+			when REGISTER_ADDRESS_ACK =>	
 				sIN_BUFF_EN	 		<= '0';
 				sOUT_BUFF_EN 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '1';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -334,6 +359,7 @@ begin
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '1';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -342,11 +368,12 @@ begin
 				sREG_DEC_EN			<= '0';	
 				sACK_SEL				<= '1';
 				sSDA_SEL				<= '0';		
-			when READ_DATA   	  		   =>		
+			when READ_DATA =>		
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';	
 				sDATA_CNT_EN 		<= '1';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				if (sDATA_CNT = DATA_WIDTH) then
 					sPERIOD_CNT_EN <= '1';
 					sISHW_EN			<= '0';
@@ -364,13 +391,14 @@ begin
 				sREG_MUX_SEL		<= "0000";
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';		
-			when READ_ACK				   =>	
+			when READ_ACK =>	
 				sIN_BUFF_EN	 		<= '0';
 				sOUT_BUFF_EN 		<= '1';
 				sDATA_CNT_EN 		<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '1';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -379,13 +407,14 @@ begin
 				sREG_DEC_EN			<= '0';	
 				sACK_SEL				<= '0';
 				sSDA_SEL				<= '0';				
-			when STOP 				  	   =>
+			when STOP =>
 				sIN_BUFF_EN	 		<= '1';
 				sOUT_BUFF_EN 		<= '0';
 				sDATA_CNT_EN  		<= '0';
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '0';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';	
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
@@ -401,6 +430,7 @@ begin
 				sPERIOD_CNT_EN 	<= '0';
 				sTR_PERIOD_CNT_EN <= '0';
 				sADDR_REG_EN		<= '0';
+				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				sOSHW_EN				<= '0';
 				sOSHW_LOAD			<= '0';
