@@ -459,14 +459,15 @@ begin
 				sOUT_BUFF_EN 		<= '1';	
 				sDATA_CNT_EN 		<= '1';
 				sDATA_CNT_RST 		<= '0';
-				sPERIOD_CNT_EN 	<= '0';
 				sADDR_REG_EN		<= '0';
 				sMODE_FF_EN			<= '0';
 				sISHW_EN				<= '0';
 				if (sDATA_CNT = DATA_WIDTH) then
+					sPERIOD_CNT_EN 	<= '1';
 					sTR_PERIOD_CNT_EN <= '0';
 					sOSHW_EN				<= '0';
 				else
+					sPERIOD_CNT_EN 	<= '0';
 					sTR_PERIOD_CNT_EN <= '1';
 					sOSHW_EN				<= '1';
 				end if;
@@ -578,7 +579,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then	
 			if (sOSHW_LOAD = '1') then
 				sOSHW_REG <= sREG_MUX; -- Load data to register
-			elsif (sOSHW_EN = '1' and sTC_TR_PERIOD_CNT = '1') then
+			elsif (sOSHW_EN = '1' and sTC_TR_PERIOD_CNT = '1') then -- When data bit transsmited shift for next data bit
 				sOSHW_REG <= sOSHW_REG(DATA_WIDTH - 2 downto 0) & '0'; -- Shift data bits
 			end if;	
 		end if;
