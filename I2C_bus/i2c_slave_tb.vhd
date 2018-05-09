@@ -1097,7 +1097,11 @@ BEGIN
 		
 		iSCL <= '0';
 		
-		wait for iCLK_period*8;
+		wait for iCLK_period*6;
+		
+		ioSDA <= '1'; -- 
+		
+		wait for iCLK_period*4;
 		
 		iSCL <= '1';
 		
@@ -1105,11 +1109,22 @@ BEGIN
 
 		iSCL <= '0';
 		
-		wait for iCLK_period*8;
+		wait for iCLK_period*4;
+		
+		ioSDA <= '0';
+		
+		wait for iCLK_period*4;
 		
 		iSCL <= '1';
 		
 		wait for iCLK_period*8;		
+		
+		iSCL <= '0';
+		
+		wait for iCLK_period*8;
+		
+		iSCL <= '1';
+		
 
 
       wait;

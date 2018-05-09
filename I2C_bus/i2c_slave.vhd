@@ -259,7 +259,7 @@ begin
 						sNEXT_STATE <= STOP;	-- Get stop condition
 					end if;	
 				else
-					sNEXT_STATE <= READ_ACK;
+					sNEXT_STATE <= WRITE_ACK;
 				end if;				
 			when STOP =>
 				-- Wait for stop condition

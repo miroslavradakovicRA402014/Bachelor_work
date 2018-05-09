@@ -453,7 +453,7 @@ LAB68:    xsi_set_current_line(262, ng0);
     t5 = *((char **)t2);
     t6 = (t5 + 56U);
     t9 = *((char **)t6);
-    *((unsigned char *)t9) = (unsigned char)8;
+    *((unsigned char *)t9) = (unsigned char)10;
     xsi_driver_first_trans_fast(t1);
 
 LAB67:    goto LAB2;
