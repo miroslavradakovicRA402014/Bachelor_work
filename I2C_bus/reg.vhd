@@ -24,16 +24,17 @@ entity reg is
 	 Generic (
 		DATA_WIDTH : integer := 8 -- Register data width
 	 );
-    Port ( iCLK  : in   std_logic;
-           inRST : in   std_logic;
-           iWE   : in   std_logic;
-           iD    : in   std_logic_vector(DATA_WIDTH - 1 downto 0);
-           oQ    : out  std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		: in   std_logic;
+           inRST 		: in   std_logic;
+           iWE  		: in   std_logic;
+			  iBYTE_SEL : in   std_logic;		
+           iD    		: in   std_logic_vector(DATA_WIDTH - 1 downto 0);
+           oQ    		: out  std_logic_vector(2 * DATA_WIDTH - 1 downto 0));
 end reg;
 
 architecture Behavioral of reg is
 
-	signal sREG : std_logic_vector(DATA_WIDTH - 1 downto 0); -- Register signal
+	signal sREG : std_logic_vector(2 * DATA_WIDTH - 1 downto 0); -- Register signal
 
 begin
 
@@ -43,7 +44,11 @@ begin
 			sREG <= (others => '0'); -- Reset register
 		elsif (iCLK'event and iCLK = '1') then
 			if (iWE = '1') then
-				sREG <= iD; -- Write to register
+				if (iBYTE_SEL = '0') then
+					sREG(DATA_WIDTH - 1 downto 0) <= iD; -- Write to register lower part 
+				else
+					sREG(2 * DATA_WIDTH - 1 downto DATA_WIDTH) <= iD; -- Write to register upper part
+				end if;	
 			end if;
 		end if;
 	end process;

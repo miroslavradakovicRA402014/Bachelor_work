@@ -44,8 +44,9 @@ ARCHITECTURE behavior OF reg_tb IS
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
          iWE : IN  std_logic;
+			iBYTE_SEL : IN std_logic;
          iD : IN  std_logic_vector(7 downto 0);
-         oQ : OUT  std_logic_vector(7 downto 0)
+         oQ : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
@@ -54,10 +55,11 @@ ARCHITECTURE behavior OF reg_tb IS
    signal iCLK : std_logic := '0';
    signal inRST : std_logic := '0';
    signal iWE : std_logic := '0';
+	signal iBYTE_SEL : std_logic := '0';
    signal iD : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
-   signal oQ : std_logic_vector(7 downto 0);
+   signal oQ : std_logic_vector(15 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -69,6 +71,7 @@ BEGIN
           iCLK => iCLK,
           inRST => inRST,
           iWE => iWE,
+			 iBYTE_SEL => iBYTE_SEL,
           iD => iD,
           oQ => oQ
         );
@@ -95,11 +98,15 @@ BEGIN
 		inRST <= '1';
 		iWE   <= '0';
 		iD    <= x"AA";
+		iBYTE_SEL <= '0';
 		
       wait for iCLK_period*10;		
 
 		iWE   <= '1';
-		
+			
+		wait for iCLK_period*10; 
+
+		iBYTE_SEL <= '1';
 
       wait;
    end process;
