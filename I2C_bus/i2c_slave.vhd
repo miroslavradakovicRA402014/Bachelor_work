@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 PhD Miroslav Radakovic
 -- 
 -- Create Date:    12:59:01 05/04/2018 
 -- Design Name: 
