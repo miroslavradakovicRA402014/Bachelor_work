@@ -107,7 +107,7 @@ begin
 
 	-- Generate slave registers
 	reg_gen : for i in 0 to REGISTER_NUM - 1 generate
-		eSLAVE_REG : entity work.reg 
+		eSLAVE_REG : entity work.slave_reg 
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
@@ -117,19 +117,6 @@ begin
 			);
 	end generate reg_gen;
 	
-	-- Register address register
-	eREG_ADDR_REG : entity work.reg
-		Generic map (
-			DATA_WIDTH => 4
-		)
-		Port map(
-			iCLK  => iCLK,
-			inRST => inRST,
-			iWE   => sADDR_REG_EN,
-			iD    => sISHW_REG(3 downto 0),
-			oQ		=> sADDR_REG
-		);
-
 	-- SCL rising edge detector
 	eSCL_EDGE_DET : entity work.rising_edge_det
 			Port map(
@@ -158,7 +145,18 @@ begin
 			end if;
 		end if;
 	end process mode_ff;
-
+	
+	-- Register address register
+	addr_reg : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sADDR_REG <= (others => '0'); -- Reset register
+		elsif (iCLK'event and iCLK = '1') then
+			if (sADDR_REG_EN = '1') then
+				sADDR_REG <= sISHW_REG(3 downto 0); -- Write register address
+			end if;
+		end if;
+	end process addr_reg;
+	
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
 		if (inRST = '0') then 

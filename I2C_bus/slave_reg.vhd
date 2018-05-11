@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    11:51:36 05/04/2018 
 -- Design Name: 
--- Module Name:    reg - Behavioral 
+-- Module Name:    slave_reg - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -20,7 +20,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity reg is
+entity slave_reg is
 	 Generic (
 		DATA_WIDTH : integer := 8 -- Register data width
 	 );
@@ -32,7 +32,7 @@ entity reg is
            oQ    		: out  std_logic_vector(2 * DATA_WIDTH - 1 downto 0));
 end reg;
 
-architecture Behavioral of reg is
+architecture Behavioral of slave_reg is
 
 	signal sREG : std_logic_vector(2 * DATA_WIDTH - 1 downto 0); -- Register signal
 
