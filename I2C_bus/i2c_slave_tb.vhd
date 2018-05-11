@@ -503,120 +503,120 @@ BEGIN
 
 		iSCL <= '0';
 		ioSDA <= '0';
-		
+--		
 		wait for iCLK_period*4;
 		
-		ioSDA <= '0'; -- Data 0
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;			
-
-		-- SCL 1		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-		
-		ioSDA <= '0'; -- Data 1
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;		
-
-		-- SCL 2		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-		
-		ioSDA <= '0'; -- Data 2
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 3		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-
-		ioSDA <= '0'; -- Data 3
-
-		wait for iCLK_period*4;	
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 4		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '0'; -- Data 4
-
-		wait for iCLK_period*4;	
-			
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 5		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '0'; -- Data 5
-
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 6		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '1'; -- Data 6
-
-		wait for iCLK_period*4;	
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 7		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-
-		ioSDA <= '1'; -- Data 7
-
-		wait for iCLK_period*4;
-		
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-		
-		-- SCL 8
-		iSCL <= '0';
-		
-		wait for iCLK_period*4;
-
-		ioSDA <= '1'; -- Data 8
-		
-		-- Register ack/nack
+--		ioSDA <= '0'; -- Data 0
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;			
+--
+--		-- SCL 1		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--		
+--		ioSDA <= '0'; -- Data 1
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;		
+--
+--		-- SCL 2		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--		
+--		ioSDA <= '0'; -- Data 2
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 3		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--
+--		ioSDA <= '0'; -- Data 3
+--
+--		wait for iCLK_period*4;	
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 4		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '0'; -- Data 4
+--
+--		wait for iCLK_period*4;	
+--			
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 5		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '0'; -- Data 5
+--
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 6		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '1'; -- Data 6
+--
+--		wait for iCLK_period*4;	
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 7		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--
+--		ioSDA <= '1'; -- Data 7
+--
+--		wait for iCLK_period*4;
+--		
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--		
+--		-- SCL 8
+--		iSCL <= '0';
+--		
+--		wait for iCLK_period*4;
+--
+--		ioSDA <= '1'; -- Data 8
+--		
+--		-- Register ack/nack
 
 		wait for iCLK_period*2;
 
-		ioSDA <= 'Z';
+		ioSDA <= '1';
 
 		wait for iCLK_period*3;
 		
@@ -723,9 +723,9 @@ BEGIN
 		-- SCL 7		
 		iSCL  <= '0';
 		
-		wait for iCLK_period*4;
+		wait for iCLK_period*6;
 
-		ioSDA <= '1'; -- Data 7
+		ioSDA <= 'Z'; -- Data 7
 
 		wait for iCLK_period*4;
 		
@@ -736,9 +736,9 @@ BEGIN
 		-- SCL 8
 		iSCL <= '0';
 		
-		wait for iCLK_period*4;
+		wait for iCLK_period*1;
 
-		ioSDA <= '1'; -- Data 8		
+		ioSDA <= 'Z'; -- Data 8		
 		
 		-- Data read ack/nack
 
@@ -1111,7 +1111,7 @@ BEGIN
 		
 		wait for iCLK_period*4;
 		
-		ioSDA <= '0';
+		ioSDA <= 'Z';
 		
 		wait for iCLK_period*4;
 		
@@ -1120,112 +1120,112 @@ BEGIN
 		wait for iCLK_period*8;		
 		
 		iSCL <= '0';
-			
-		wait for iCLK_period*4;
-		
-		-- Register address 
-		
-		ioSDA <= '0'; -- Data 0
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;			
-
-		-- SCL 1		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-		
-		ioSDA <= '0'; -- Data 1
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;		
-
-		-- SCL 2		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-		
-		ioSDA <= '0'; -- Data 2
-		
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 3		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*4;
-
-		ioSDA <= '0'; -- Data 3
-
-		wait for iCLK_period*4;	
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 4		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '0'; -- Data 4
-
-		wait for iCLK_period*4;	
-			
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 5		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '1'; -- Data 5
-
-		wait for iCLK_period*4;		
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 6		
-		iSCL  <= '0';
-		
-	   wait for iCLK_period*4;
-
-		ioSDA <= '1'; -- Data 6
-
-		wait for iCLK_period*4;	
-
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-
-		-- SCL 7		
-		iSCL  <= '0';
-		
-		wait for iCLK_period*6;
-
-		ioSDA <= 'Z'; -- Data 7
-
-		wait for iCLK_period*4;
-		
-		iSCL  <= '1';
-		
-		wait for iCLK_period*8;	
-		
-		-- SCL 8
-		iSCL <= '0';
+----------------			
+--		wait for iCLK_period*4;
+--		
+--		-- Register address 
+--		
+--		ioSDA <= '0'; -- Data 0
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;			
+--
+--		-- SCL 1		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--		
+--		ioSDA <= '0'; -- Data 1
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;		
+--
+--		-- SCL 2		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--		
+--		ioSDA <= '0'; -- Data 2
+--		
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 3		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*4;
+--
+--		ioSDA <= '0'; -- Data 3
+--
+--		wait for iCLK_period*4;	
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 4		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '0'; -- Data 4
+--
+--		wait for iCLK_period*4;	
+--			
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 5		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '1'; -- Data 5
+--
+--		wait for iCLK_period*4;		
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 6		
+--		iSCL  <= '0';
+--		
+--	   wait for iCLK_period*4;
+--
+--		ioSDA <= '1'; -- Data 6
+--
+--		wait for iCLK_period*4;	
+--
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--
+--		-- SCL 7		
+--		iSCL  <= '0';
+--		
+--		wait for iCLK_period*6;
+--
+--		ioSDA <= 'Z'; -- Data 7
+--
+--		wait for iCLK_period*4;
+--		
+--		iSCL  <= '1';
+--		
+--		wait for iCLK_period*8;	
+--		
+--		-- SCL 8
+--		iSCL <= '0';
 	
 		-- Read period ----------------------------------------------------------------
 	
@@ -1322,15 +1322,15 @@ BEGIN
 		iSCL <= '1';
 		
 		wait for iCLK_period*8;	
---
---		wait for iCLK_period*8;
---		
---		iSCL <= '0';
---
---		wait for iCLK_period*4;	
---	
---		ioSDA <= '1';
---		
+
+		wait for iCLK_period*8;
+		
+		iSCL <= '0';
+
+		wait for iCLK_period*4;	
+	
+		ioSDA <= '1';
+		
 --		wait for iCLK_period*4;	
 	
 		-- Stop condition

@@ -30,7 +30,7 @@ entity slave_reg is
 			  iBYTE_SEL : in   std_logic;		
            iD    		: in   std_logic_vector(DATA_WIDTH - 1 downto 0);
            oQ    		: out  std_logic_vector(2 * DATA_WIDTH - 1 downto 0));
-end reg;
+end slave_reg;
 
 architecture Behavioral of slave_reg is
 
