@@ -25,13 +25,14 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2c_slave is
 	 Generic(
-		REGISTER_NUM		: integer := 16;  										-- Number of slave registers
-		TC_PERIOD			: integer := 12;  										-- Terminal count period for ack start
-		TR_PERIOD			: integer := 16;  										-- Slave transmission peirod
-		DATA_WIDTH 			: integer := 8; 											-- Data width
-		DATA_CNT_WIDTH 	: integer := 4;											-- Data counter width
-		PERIOD_CNT_WIDTH  : integer := 4;											-- Data counter width
-		SLAVE_ADDRESS  	: std_logic_vector(6 downto 0) := "1010101"     -- Slave address (7 bit address)
+		REGISTER_NUM		 : integer := 16;  										 -- Number of slave registers
+		TC_PERIOD			 : integer := 12;  										 -- Terminal count period for ack start
+		TR_PERIOD			 : integer := 16;  										 -- Slave transmission peirod
+		DATA_WIDTH 			 : integer := 8; 											 -- Data width
+		DATA_CNT_WIDTH 	 : integer := 4;											 -- Data counter width
+		PERIOD_CNT_WIDTH   : integer := 4;											 -- Data counter width
+		REGISTER_SEL_WIDTH :	integer := 4; 											 -- Decoder selection width
+		SLAVE_ADDRESS  	 : std_logic_vector(6 downto 0) := "1010101"     -- Slave address (7 bit address)
 	 );
     Port ( iCLK 	: in  	std_logic;
            inRST 	: in  	std_logic;
@@ -99,17 +100,17 @@ architecture Behavioral of i2c_slave is
 	signal sREG_BYTE_MUX				: std_logic_vector(DATA_WIDTH		 - 1 downto 0);									-- Registers multiplexer
 	signal sREG_MUX_SEL				: std_logic_vector(3 downto 0);															-- Registers multiplexer select
 		
-	signal sREG_DEC					: std_logic_vector(2 * DATA_WIDTH - 1 downto 0);									-- Register decoder
-	signal sREG_DEC_SEL				: std_logic_vector(3 downto 0);															-- Register decoder input
+	signal sREG_DEC					: std_logic_vector(2 * DATA_WIDTH     - 1 downto 0);								-- Register decoder
+	signal sREG_DEC_SEL				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register decoder input
 	signal sREG_DEC_EN				: std_logic;																					-- Register decoder enable	
 	
-	signal sADDR_REG					: std_logic_vector(3 downto 0);															-- Register address register
+	signal sADDR_REG					: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register address register
 	signal sADDR_REG_EN				: std_logic;																					-- Register address register enable
 	
 	signal sMODE_FF					: std_logic;																					-- R/W mode flip-flop
 	signal sMODE_FF_EN				: std_logic;																					-- R/W mode flip-flop enable
 	
-	signal sBYTE_SEL					: std_logic;
+	signal sBYTE_SEL					: std_logic;																					-- Upper, lower byte selection signal
 	
 begin
 
@@ -290,9 +291,9 @@ begin
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
 				sDATA_CNT_EN   	 <= '0';
-				sDATA_CNT_RST 		 <= '1';
+				sDATA_CNT_RST 		 <= '1'; -- Reset data counters
 				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '1';				
+				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
@@ -329,19 +330,19 @@ begin
 			when SLAVE_ADDRESS_MODE =>		
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';	
-				sDATA_CNT_EN 		 <= '1';
+				sDATA_CNT_EN 		 <= '1'; -- Count slave address and mode bits
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';									
 				sADDR_REG_EN		 <= '0';
-				if (sDATA_CNT = DATA_WIDTH) then
-					sMODE_FF_EN		 <= '1';
-					sPERIOD_CNT_EN  <= '1';
+				if (sDATA_CNT = DATA_WIDTH) then -- If all address bit and mode recived  get mode and start sync period
+					sMODE_FF_EN		 <= '1'; -- Get R/W mode, write to register 
+					sPERIOD_CNT_EN  <= '1'; -- Start sync period
 					sISHW_EN			 <= '0';
 				else
 					sMODE_FF_EN		 <= '0';
 					sPERIOD_CNT_EN  <= '0';
-					sISHW_EN			 <= '1';
+					sISHW_EN			 <= '1'; -- Get data bit and shift register
 				end if;
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
@@ -354,13 +355,13 @@ begin
 				sSDA_SEL				 <= '0';
 			when SLAVE_ADDRESS_ACK =>	
 				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
+				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line 
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
+				sPERIOD_CNT_EN 	 <= '0'; 
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';				
@@ -375,19 +376,19 @@ begin
 			when REGISTER_ADDRESS =>		
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';	
-				sDATA_CNT_EN 		 <= '1';
+				sDATA_CNT_EN 		 <= '1'; -- Count register address bits
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sMODE_FF_EN			 <= '0';
-				if (sDATA_CNT = DATA_WIDTH) then
-					sPERIOD_CNT_EN  <= '1';
-					sADDR_REG_EN	 <= '1';
+				if (sDATA_CNT = DATA_WIDTH) then -- If all register address bits recived start sync period
+					sPERIOD_CNT_EN  <= '1';	-- Start sync period
+					sADDR_REG_EN	 <= '1';	-- Write register address to register
 					sISHW_EN			 <= '0';
 				else
 					sPERIOD_CNT_EN  <= '0';
 					sADDR_REG_EN	 <= '0';
-					sISHW_EN			 <= '1';
+					sISHW_EN			 <= '1'; -- Get register address bit 
 				end if;
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
@@ -400,21 +401,21 @@ begin
 				sSDA_SEL				 <= '0';	
 			when REGISTER_ADDRESS_ACK =>	
 				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
+				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';
 				sISHW_EN				 <= '0';
 				sOSHW_EN				 <= '0';
-				if (sMODE_FF = '1') then
-					sOSHW_LOAD		 <= '1';
-					sREG_MUX_SEL	 <= sADDR_REG;
+				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
+					sOSHW_LOAD		 <= '1'; -- Load data to shift register
+					sREG_MUX_SEL	 <= sADDR_REG; -- 
 				else 
 					sOSHW_LOAD		 <= '0';
 					sREG_MUX_SEL	 <= "0000";	
@@ -425,13 +426,13 @@ begin
 				sSDA_SEL				 <= '0';		
 			when REGISTER_ADDRESS_NACK =>	
 				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
+				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';
@@ -446,20 +447,20 @@ begin
 			when READ_DATA =>		
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';	
-				sDATA_CNT_EN 		 <= '1';
+				sDATA_CNT_EN 		 <= '1'; -- Count data bits
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';
-				if (sDATA_CNT = DATA_WIDTH) then
-					sPERIOD_CNT_EN  <= '1';
+				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits recived write data form shift register to register
+					sPERIOD_CNT_EN  <= '1'; -- Start snyc period
 					sISHW_EN			 <= '0';
-					sREG_DEC_SEL	 <= sADDR_REG;
-					sREG_DEC_EN		 <= '1';
+					sREG_DEC_SEL	 <= sADDR_REG; -- Select register
+					sREG_DEC_EN		 <= '1'; -- Enable decoder
 				else
 					sPERIOD_CNT_EN  <= '0';
-					sISHW_EN			 <= '1';
+					sISHW_EN			 <= '1'; -- Get data bits
 					sREG_DEC_SEL	 <= "0000";
 					sREG_DEC_EN		 <= '0';
 				end if;
@@ -472,13 +473,13 @@ begin
 				sSDA_SEL				 <= '0';		
 			when READ_ACK =>	
 				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
+				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '1';
+				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN	  	 <= '0';
 				sMODE_FF_EN			 <= '0';
@@ -492,22 +493,22 @@ begin
 				sSDA_SEL				 <= '0';					
 			when WRITE_DATA =>		
 				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';	
-				sDATA_CNT_EN 		 <= '1';
+				sOUT_BUFF_EN 		 <= '1';	-- Get SDA line
+				sDATA_CNT_EN 		 <= '1'; -- Count sent data
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';
 				sISHW_EN				 <= '0';
-				if (sDATA_CNT = DATA_WIDTH) then
-					sPERIOD_CNT_EN 	 <= '1';
+				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits sent to master 
+					sPERIOD_CNT_EN 	 <= '1'; -- Start sync period
 					sTR_PERIOD_CNT_EN  <= '0';
-					sTR_PERIOD_CNT_RST <= '1';
+					sTR_PERIOD_CNT_RST <= '1'; -- Reset transsmison period counter 
 					sOSHW_EN				 <= '0';
 				else
 					sPERIOD_CNT_EN 	 <= '0';
-					sTR_PERIOD_CNT_EN  <= '1';
+					sTR_PERIOD_CNT_EN  <= '1'; -- For each data bit start transsmison period 
 					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN				 <= '1';
 				end if;
@@ -516,23 +517,23 @@ begin
 				sREG_DEC_SEL		 <= "0000";
 				sREG_DEC_EN			 <= '0';
 				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '1';				
+				sSDA_SEL				 <= '1';	  -- Select data bit from output shift register 		
 			when WRITE_ACK =>	
-				sIN_BUFF_EN	 		 <= '1';
+				sIN_BUFF_EN	 		 <= '1'; 
 				sOUT_BUFF_EN 		 <= '0';
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '1';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
 				sMODE_FF_EN			 <= '0';
 				sISHW_EN				 <= '0';
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '1';
-				sREG_MUX_SEL		 <= sADDR_REG;
+				sOSHW_LOAD			 <= '1'; -- Load data form registers
+				sREG_MUX_SEL		 <= sADDR_REG; -- Select register
 				sREG_DEC_SEL		 <= "0000";
 				sREG_DEC_EN			 <= '0';	
 				sACK_SEL				 <= '0';
