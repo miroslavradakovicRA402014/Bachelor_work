@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: 		 RT-RK computer based systems
--- Engineer: 		 PhD Miroslav Radakovic
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    12:59:01 05/04/2018 
 -- Design Name: 
@@ -44,7 +44,7 @@ end i2c_slave;
 architecture Behavioral of i2c_slave is
 
 	-- ACK and NACK constant 
-	constant cACK  : std_logic := '0';
+	constant cACK  : std_logic := '0';  
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, START, SLAVE_ADDRESS_MODE, SLAVE_ADDRESS_ACK, REGISTER_ADDRESS, REGISTER_ADDRESS_ACK, 
@@ -283,7 +283,7 @@ begin
 		end case;
 	end process fsm_next;
 	
-	-- Reciver FSM output logic
+	-- Slave FSM output logic
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sMODE_FF, sADDR_REG) begin
 		case (sCURRENT_STATE) is
 			-- Slave control signals

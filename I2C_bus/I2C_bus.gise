@@ -56,6 +56,11 @@
     <transform xil_pn:end_ts="1526280526" xil_pn:in_ck="1807728248661932573" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526280526">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
       <outfile xil_pn:name="i2c_slave_tb.vhd"/>
       <outfile xil_pn:name="reg_tb.vhd"/>
@@ -79,6 +84,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>

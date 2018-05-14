@@ -20,6 +20,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+
 entity slave_reg is
 	 Generic (
 		DATA_WIDTH : integer := 8 -- Register data width
