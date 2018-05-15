@@ -1,0 +1,5 @@
+vhdl isim_temp "scl_gen.vhd"
+vhdl isim_temp "rising_edge_det.vhd"
+vhdl isim_temp "reg.vhd"
+vhdl isim_temp "uart_i2c_master.vhd"
+vhdl isim_temp "uart_i2c_master_tb.vhd"

@@ -23,13 +23,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity reg is
 	 Generic (
-		DATA_WIDHT : integer := 8 -- Register data widht
+		DATA_WIDTH : integer := 8 -- Register data widht
 	 );
-    Port ( iCLK  : in std_logic;
-           inRST : in std_logic;
-			  iWE   : in std_logic;
-			  iD 	  : in std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  oQ    : in std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  : in  std_logic;
+           inRST : in  std_logic;
+			  iWE   : in  std_logic;
+			  iD 	  : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
+			  oQ    : out std_logic_vector(DATA_WIDTH - 1 downto 0));
 end reg;
 
 architecture Behavioral of reg is
