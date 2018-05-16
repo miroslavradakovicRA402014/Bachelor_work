@@ -533,7 +533,7 @@ begin
 				sISHW_EN				 <= '0';
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1'; -- Load data form registers
-				sREG_MUX_SEL		 <= sADDR_REG; -- Select register
+				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address
 				sREG_DEC_SEL		 <= "0000";
 				sREG_DEC_EN			 <= '0';	
 				sACK_SEL				 <= '0';

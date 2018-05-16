@@ -5,14 +5,14 @@ Parameter TMPDIR set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Parameter xsthdpdir set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Reading design: i2c_slave.prj
@@ -42,21 +42,24 @@ TABLE OF CONTENTS
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/reg.vhd" into library work
-Parsing entity <reg>.
-Parsing architecture <Behavioral> of entity <reg>.
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/slave_reg.vhd" into library work
+Parsing entity <slave_reg>.
+Parsing architecture <Behavioral> of entity <slave_reg>.
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det.vhd" into library work
+Parsing entity <rising_edge_det>.
+Parsing architecture <Behavioral> of entity <rising_edge_det>.
 Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" into library work
 Parsing entity <i2c_slave>.
 Parsing architecture <Behavioral> of entity <i2c_slave>.
 
 
 Total REAL time to Xst completion: 2.00 secs
-Total CPU time to Xst completion: 1.99 secs
+Total CPU time to Xst completion: 1.98 secs
  
 --> 
 
 
-Total memory usage is 303592 kilobytes
+Total memory usage is 304828 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)
