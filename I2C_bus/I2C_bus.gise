@@ -23,6 +23,7 @@
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_slave.prj"/>
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="i2c_slave.stx"/>
     <file xil_pn:fileType="FILE_XST" xil_pn:name="i2c_slave.xst"/>
@@ -45,6 +46,7 @@
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="uart_i2c_master.prj"/>
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="uart_i2c_master.stx"/>
     <file xil_pn:fileType="FILE_XST" xil_pn:name="uart_i2c_master.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="uart_i2c_master_tb_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="uart_i2c_master_tb_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="uart_i2c_master_tb_isim_beh.wdb"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="uart_i2c_master_tb_stx_beh.prj"/>
@@ -57,7 +59,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526463190" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526463190">
+    <transform xil_pn:end_ts="1526478509" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526478509">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
@@ -84,7 +86,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526463172" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1526463172">
+    <transform xil_pn:end_ts="1526463193" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1526463193">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
@@ -103,18 +105,26 @@
       <outfile xil_pn:name="uart_i2c_master.vhd"/>
       <outfile xil_pn:name="uart_i2c_master_tb.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1526463173" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-7806203988027188546" xil_pn:start_ts="1526463172">
-      <status xil_pn:value="FailedRun"/>
+    <transform xil_pn:end_ts="1526463195" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-7806203988027188546" xil_pn:start_ts="1526463193">
+      <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="fuse.log"/>
+      <outfile xil_pn:name="isim"/>
+      <outfile xil_pn:name="uart_i2c_master_tb_beh.prj"/>
+      <outfile xil_pn:name="uart_i2c_master_tb_isim_beh.exe"/>
+      <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1526400200" xil_pn:in_ck="-6253331390316638779" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-5564142040887682709" xil_pn:start_ts="1526400200">
-      <status xil_pn:value="AbortedRun"/>
+    <transform xil_pn:end_ts="1526463195" xil_pn:in_ck="-6253331390316638779" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-5564142040887682709" xil_pn:start_ts="1526463195">
+      <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForced"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="uart_i2c_master_tb_isim_beh.wdb"/>
     </transform>

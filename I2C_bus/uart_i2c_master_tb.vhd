@@ -126,7 +126,7 @@ BEGIN
 		wait for iCLK_period;
 		
 		-- Slave address/mode
-		iUART_DATA  <= x"FA";
+		iUART_DATA  <= x"FB";
 		
 		wait for iCLK_period;
 		
