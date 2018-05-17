@@ -11,13 +11,13 @@
          <ClosedNode>/uart_verification - Behavioral D:|BSc_workspace|Bachelor_work|UART_communication|uart_verification_return.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>uart_verification_return - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.vhd)</SelectedItem>
+         <SelectedItem>eUART_RECIVER - reciver - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000222000000020000000000000000000000000200000064ffffffff000000810000000300000002000002220000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>uart_verification_return - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.vhd)</CurrentItem>
+      <CurrentItem>eUART_RECIVER - reciver - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -37,12 +37,14 @@
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
-      <SelectedItems/>
+      <SelectedItems>
+         <SelectedItem>uart_components.vhd</SelectedItem>
+      </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000039f000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a600000001000000000000002400000001000000000000006600000001000000000000026f0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>fifo.vhd</CurrentItem>
+      <CurrentItem>uart_components.vhd</CurrentItem>
    </ItemView>
    <ItemView guiview="Library" >
       <ClosedNodes>
@@ -72,7 +74,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001b5000000010000000100000000000000000000000064ffffffff000000810000000000000001000001b50000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001c4000000010000000100000000000000000000000064ffffffff000000810000000000000001000001c40000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>

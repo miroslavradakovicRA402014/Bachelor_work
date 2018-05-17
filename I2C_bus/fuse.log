@@ -11,7 +11,7 @@ Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart
 Starting static elaboration
 Completed static elaboration
 Fuse Memory Usage: 98420 KB
-Fuse CPU Usage: 820 ms
+Fuse CPU Usage: 930 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package std_logic_arith
@@ -26,6 +26,6 @@ Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 14 VHDL Units
 Built simulation executable /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb_isim_beh.exe
-Fuse Memory Usage: 1199220 KB
-Fuse CPU Usage: 920 ms
-GCC CPU Usage: 210 ms
+Fuse Memory Usage: 1199396 KB
+Fuse CPU Usage: 1020 ms
+GCC CPU Usage: 90 ms

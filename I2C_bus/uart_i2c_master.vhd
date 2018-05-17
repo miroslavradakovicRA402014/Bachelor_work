@@ -51,10 +51,10 @@ architecture Behavioral of uart_i2c_master is
 	constant cACK  : std_logic := '0';
 	constant cNACK : std_logic := '1';
 
-	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REG_ADDRESS, UART_BYTE_LOW, UART_BYTE_HIGH, UART_STOP,
+	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
 							 I2C_START, I2C_SLAVE_ADDRESS_MODE, I2C_SLAVE_ADDRESS_ACK, I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK,
 							 I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP,
-							 SEND_UART_START, SEND_UART_SLAVE_ADDRESS, SEND_UART_REG_ADDRESS, SEND_UART_BYTE_LOW, SEND_UART_BYTE_HIGH, SEND_UART_STOP); 	   		-- Slave FSM states type
+							 SEND_UART_START, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER, SEND_UART_STOP); 	   		-- Slave FSM states type
 
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Master FSM current state
@@ -93,10 +93,8 @@ architecture Behavioral of uart_i2c_master is
 	signal sSCL_EN						: std_logic;																					-- SCL generator enable signal
 	
 	signal sSCL_RISING_EDGE    	: std_logic;																					-- SCL rising edge indication
-	--signal sSDA_RISING_EDGE    	: std_logic;																					-- SDA rising edge indication
 	
-	signal sIUART_REG					: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART input register
-	signal sOUART_REG					: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART output register
+	signal sIUART_REG					: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART input register signal
 	signal sIUART_REG_EN				: std_logic;																					-- UART input register	enable
 	signal sOUART_REG_EN				: std_logic;																					-- UART output register enable
 
@@ -116,7 +114,7 @@ architecture Behavioral of uart_i2c_master is
 
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
-	signal sLOW_BYTE_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower data byte
+	signal sLOWER_BYTE_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower data byte
 	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper data byte
 
 	signal sREG_DEC 					: std_logic_vector(REGISTER_NUM - 1 downto 0);
@@ -174,7 +172,7 @@ begin
 				inRST => inRST,
 				iWE   => sREG_DEC(2),
 				iD 	=> sUBYTE_REG_MUX,
-				oQ		=> sLOW_BYTE_REG
+				oQ		=> sLOWER_BYTE_REG
 			);
 			
 	-- Upper data byte register
@@ -232,27 +230,31 @@ begin
 				end if;
 			when UART_SLAVE_ADDRESS =>
 				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_REG_ADDRESS; -- Get register address from UART 
+					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get register address from UART 
 				else 
 					sNEXT_STATE <= UART_SLAVE_ADDRESS;
 				end if;	
-			when UART_REG_ADDRESS =>
+			when UART_REGISTER_ADDRESS =>
 				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_BYTE_LOW; -- Get lower data byte from UART 
+					if (sSLAVE_ADDR_REG(0) = '0') then
+						sNEXT_STATE <= UART_BYTE_LOWER; -- Get lower data byte from UART
+					else
+						sNEXT_STATE <= UART_STOP; 
+					end if;
 				else 
-					sNEXT_STATE <= UART_REG_ADDRESS;
+					sNEXT_STATE <= UART_REGISTER_ADDRESS;
 				end if;	
-			when UART_BYTE_LOW =>
+			when UART_BYTE_LOWER =>
 				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_BYTE_HIGH; -- Get upper data byte from UART 
+					sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART 
 				else 
-					sNEXT_STATE <= UART_BYTE_LOW;
+					sNEXT_STATE <= UART_BYTE_LOWER;
 				end if;	
-			when UART_BYTE_HIGH =>
+			when UART_BYTE_UPPER =>
 				if (iUART_EMPTY = '0') then
 					sNEXT_STATE <= UART_STOP; -- Get stop byte from UART 
 				else 
-					sNEXT_STATE <= UART_BYTE_HIGH;
+					sNEXT_STATE <= UART_BYTE_UPPER;
 				end if;				
 			when UART_STOP =>
 				if (iUART_EMPTY = '0' and iUART_DATA = "10000000") then
@@ -344,27 +346,33 @@ begin
 				end if;
 			when SEND_UART_START =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS; -- Send slave address to UART 
+					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS; -- Send UART start byte 
 				else 
 					sNEXT_STATE <= SEND_UART_START;
 				end if;	
 			when SEND_UART_SLAVE_ADDRESS =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_REG_ADDRESS; -- Send slave register address to UART 
+					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send slave address to UART 
 				else 
 					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
 				end if;
-			when SEND_UART_BYTE_LOW =>
+			when SEND_UART_REGISTER_ADDRESS =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_HIGH; -- Send slave lower byte to UART 
+					sNEXT_STATE <= SEND_UART_BYTE_LOWER; -- Send slave register address to UART 
 				else 
-					sNEXT_STATE <= SEND_UART_BYTE_LOW;
+					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS;
+				end if;				
+			when SEND_UART_BYTE_LOWER =>
+				if (iUART_FULL = '0') then
+					sNEXT_STATE <= SEND_UART_BYTE_UPPER; -- Send slave lower byte to UART 
+				else 
+					sNEXT_STATE <= SEND_UART_BYTE_LOWER;
 				end if;
-			when SEND_UART_BYTE_HIGH =>
+			when SEND_UART_BYTE_UPPER =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_STOP; -- Send slave upper byte to UART 
 				else 
-					sNEXT_STATE <= SEND_UART_BYTE_HIGH;
+					sNEXT_STATE <= SEND_UART_BYTE_UPPER;
 				end if;		
 			when SEND_UART_STOP =>
 				sNEXT_STATE <= IDLE; 
@@ -399,6 +407,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
+				sOUART_REG_SEL		 <= "000";	
 			when UART_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -421,7 +430,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
+				sOSHW_LOAD			 <= '0';
+				sOUART_REG_SEL		 <= "000";				
 			when UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -444,8 +454,9 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';	
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
-			when UART_REG_ADDRESS =>
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";	
+			when UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
@@ -467,8 +478,9 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
-			when UART_BYTE_LOW =>
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";		
+			when UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
@@ -490,8 +502,9 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
-			when UART_BYTE_HIGH =>
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";	
+			when UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
@@ -513,7 +526,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";
 			when UART_STOP =>	
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -536,7 +550,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -560,6 +575,7 @@ begin
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_SLAVE_ADDRESS_MODE => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -589,6 +605,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_SLAVE_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -612,6 +629,7 @@ begin
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_REGISTER_ADDRESS => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -641,6 +659,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_REGISTER_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -664,6 +683,7 @@ begin
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_WRITE_DATA =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -693,6 +713,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_READ_DATA =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -723,7 +744,8 @@ begin
 				end if;
 				sOSHW_EN			 	 <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
-				sOSHW_LOAD			 <= '0';					
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_WRITE_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -747,6 +769,7 @@ begin
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_READ_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -769,7 +792,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";				
 			when I2C_STOP =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -792,7 +816,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';				
+				sOSHW_LOAD			 <= '0';
+				sOUART_REG_SEL		 <= "000";				
 			when SEND_UART_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -804,7 +829,7 @@ begin
 				sUBYTE_REG_SEL 	 <= '0';	
 				sREG_MUX_SEL		 <= "00";		
 				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '1';
+				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
@@ -816,6 +841,127 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";
+			when SEND_UART_SLAVE_ADDRESS =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '1';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "001";	
+			when SEND_UART_REGISTER_ADDRESS =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '1';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "010";					
+			when SEND_UART_BYTE_LOWER =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '1';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "011";		
+			when SEND_UART_BYTE_UPPER =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '1';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "100";	
+			when SEND_UART_STOP =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '1';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "101";				
 			when others => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -838,7 +984,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '1';				
+				sOSHW_LOAD			 <= '1';			
+				sOUART_REG_SEL		 <= "101";	
 		end case;
 	end process fsm_out;
 		
@@ -888,6 +1035,7 @@ begin
 	-- Transmission period counter terminal count 
 	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD - 1 else
 								'0'; 	
+								
 	-- Input shift register process		
 	ishift_reg : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -913,7 +1061,7 @@ begin
 	end process oshift_reg;	
 
 	-- Registers multiplexer process
-	reg_mux : process (sREG_MUX_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOW_BYTE_REG, sUPPER_BYTE_REG) begin
+	reg_mux : process (sREG_MUX_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG, sUPPER_BYTE_REG) begin
 		-- Select register
 		case (sREG_MUX_SEL) is
 			when "00" =>
@@ -921,14 +1069,14 @@ begin
 			when "01" =>
 				sREG_MUX <= sREG_ADDR_REG;
 			when "10" =>
-				sREG_MUX <= sLOW_BYTE_REG;
+				sREG_MUX <= sLOWER_BYTE_REG;
 			when others =>
 				sREG_MUX <= sUPPER_BYTE_REG;		
 		end case;
 	end process reg_mux;
 	
 	-- UART output multiplexer
-	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOW_BYTE_REG) begin
+	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG) begin
 		-- Select UART output register data
 		case (sOUART_REG_SEL) is
 			when "000" =>
@@ -938,7 +1086,7 @@ begin
 			when "010" =>
 				sOUART_REG_MUX <= sREG_ADDR_REG;
 			when "011" =>
-				sOUART_REG_MUX <= sLOW_BYTE_REG;
+				sOUART_REG_MUX <= sLOWER_BYTE_REG;
 			when "100" =>
 				sOUART_REG_MUX <= sUPPER_BYTE_REG;
 			when "101" =>
@@ -949,11 +1097,11 @@ begin
 	end process ouart_reg_mux;
 		
 	-- Register decoder
-	sREG_DEC <= "0000" when sREG_DEC_EN =  '0'  else 
-					"0001" when sREG_DEC_SEL = "00" else
-					"0010" when sREG_DEC_SEL = "01" else
-					"0100" when sREG_DEC_SEL = "10" else
-					"1000";
+	ssREG_DEC <= "0000" when sREG_DEC_EN =  '0'  else 
+					 "0001" when sREG_DEC_SEL = "00" else
+					 "0010" when sREG_DEC_SEL = "01" else
+					 "0100" when sREG_DEC_SEL = "10" else
+					 "1000";
 	
 	-- Lower byte register multiplexer
 	sLBYTE_REG_MUX <=	sIUART_REG when sLBYTE_REG_SEL = '0' else 
