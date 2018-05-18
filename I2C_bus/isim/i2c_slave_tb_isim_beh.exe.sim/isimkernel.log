@@ -2,9 +2,9 @@ Command line:
    i2c_slave_tb_isim_beh.exe
      -simmode  gui
      -simrunnum  1
-     -socket  38949
+     -socket  51173
 
-Thu May 17 14:32:27 2018
+Fri May 18 16:45:15 2018
 
 
  Elaboration Time: 0.01 sec
@@ -20,9 +20,9 @@ Thu May 17 14:32:27 2018
  Total Traceable Variables  : 58
  Total Scalar Nets and Variables : 1182
 
- Total Simulation Time: 0.31 sec
+ Total Simulation Time: 0.72 sec
 
  Current Memory Usage: 320.438 Meg
 
-Thu May 17 14:36:14 2018
+Fri May 18 17:15:07 2018
 

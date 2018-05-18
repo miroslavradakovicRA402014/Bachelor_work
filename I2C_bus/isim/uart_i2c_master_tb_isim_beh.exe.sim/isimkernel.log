@@ -2,9 +2,9 @@ Command line:
    uart_i2c_master_tb_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  55319
+     -socket  33325
 
-Fri May 18 10:59:29 2018
+Fri May 18 14:48:34 2018
 
 
- Elaboration Time: 0.01 sec
+ Elaboration Time: 0.02 sec

@@ -25,6 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity uart_i2c_master is
 	 Generic (
 		REGISTER_NUM		: integer := 4;	 -- Number of register
+		DATA_BYTE_NUM		: integer := 2;
 		TC_PERIOD			: integer := 12;   -- Terminal count period 
 		TR_PERIOD			: integer := 16;   -- Master transmission peirod
 		DATA_WIDTH 			: integer := 8;	 -- UART word widht 
@@ -54,7 +55,7 @@ architecture Behavioral of uart_i2c_master is
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
 							 I2C_START, I2C_SLAVE_ADDRESS_MODE, I2C_SLAVE_ADDRESS_ACK, I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK,
 							 I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP, SEND_I2C_UART_TELEGRAM,
-							 SEND_UART_START, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER, SEND_UART_STOP); 	   		-- Slave FSM states type
+							 SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER); 	   		-- Slave FSM states type
 
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Master FSM current state
@@ -72,6 +73,12 @@ architecture Behavioral of uart_i2c_master is
 	signal sDATA_CNT_EN 	 	   	: std_logic;																					-- Data counter enable		
 	signal sDATA_CNT_RST				: std_logic;																					-- Data counter reset signal
 
+	signal sBYTE_CNT 		 	   	: unsigned(1 downto 0);																		-- Data byte counter
+	signal sBYTE_CNT_EN 	 	   	: std_logic;																					-- Data byte counter enable		
+	signal sBYTE_CNT_RST				: std_logic;																					-- Data byte counter reset signal
+
+	signal sBYTE_SEL					: std_logic;																					-- Upper, lower byte selection signal
+	
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
 	signal sTC_PERIOD_CNT 			: std_logic;																					-- Period counter terminal count
@@ -110,7 +117,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sUBYTE_REG_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper byte register multiplexer
 
 	signal sOUART_REG_MUX 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART output registers multiplexer
-	signal sOUART_REG_SEL			: std_logic_vector(2 downto 0);															-- UART output registers multiplexer select signal	
+	signal sOUART_REG_SEL			: std_logic_vector(1 downto 0);															-- UART output registers multiplexer select signal	
 
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
@@ -214,7 +221,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_SEL) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
@@ -322,14 +329,22 @@ begin
 			when I2C_WRITE_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_STOP;	
+					if (sBYTE_CNT(0) = '0') then
+						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
+					else
+						sNEXT_STATE <= I2C_WRITE_DATA; -- Write another byte
+					end if;
 				else
 					sNEXT_STATE <= I2C_WRITE_DATA_ACK;
 				end if;	
 			when I2C_READ_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_STOP;	
+					if (sBYTE_CNT(0) = '0') then
+						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
+					else
+						sNEXT_STATE <= I2C_READ_DATA; -- Read another byte from slave
+					end if;	
 				else
 					sNEXT_STATE <= I2C_READ_DATA_ACK;
 				end if;					
@@ -346,13 +361,7 @@ begin
 				end if;
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
-				sNEXT_STATE <= SEND_UART_START;
-			when SEND_UART_START =>
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS; -- Send UART start byte 
-				else 
-					sNEXT_STATE <= SEND_UART_START;
-				end if;	
+				sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
 			when SEND_UART_SLAVE_ADDRESS =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send slave address to UART 
@@ -373,17 +382,15 @@ begin
 				end if;
 			when SEND_UART_BYTE_UPPER =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_STOP; -- Send slave upper byte to UART 
+					sNEXT_STATE <= IDLE; -- Send slave upper byte to UART 
 				else 
 					sNEXT_STATE <= SEND_UART_BYTE_UPPER;
 				end if;		
-			when SEND_UART_STOP =>
-				sNEXT_STATE <= IDLE; 
 		end case;
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, sDATA_CNT) begin
+	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sBYTE_CNT, sBYTE_SEL) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 <= '0';
@@ -401,14 +408,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '1';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';	
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "000";	
+				sOUART_REG_SEL		 <= "00";	
 			when UART_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -425,14 +434,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';		
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -449,14 +460,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';		
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';	
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";	
+				sOUART_REG_SEL		 <= "00";	
 			when UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -473,14 +486,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";		
+				sOUART_REG_SEL		 <= "00";		
 			when UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -497,14 +512,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';		
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";	
+				sOUART_REG_SEL		 <= "00";	
 			when UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -521,14 +538,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";
+				sOUART_REG_SEL		 <= "00";
 			when UART_STOP =>	
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -545,14 +564,16 @@ begin
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -570,13 +591,15 @@ begin
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';			
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';	
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_SLAVE_ADDRESS_MODE => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -593,7 +616,9 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
@@ -606,7 +631,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_SLAVE_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -623,14 +648,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_REGISTER_ADDRESS => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -647,7 +674,9 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1';
 					sTR_PERIOD_CNT_RST <= '1';					
@@ -660,7 +689,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_REGISTER_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -670,21 +699,23 @@ begin
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '0';		
 				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= "10";				
+				sREG_MUX_SEL		 <= '1' & sBYTE_SEL;				
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_WRITE_DATA =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -701,7 +732,9 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
@@ -714,7 +747,7 @@ begin
 				sISHW_EN			    <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_READ_DATA =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -729,9 +762,11 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';		
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sREG_DEC_SEL		 <= "10";
+					sREG_DEC_SEL		 <= '1' & sBYTE_SEL;
 					sREG_DEC_EN			 <= '1';
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
@@ -746,7 +781,7 @@ begin
 				sOSHW_EN			 	 <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_WRITE_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';
@@ -763,14 +798,22 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';		
+				sBYTE_CNT_EN   	 <= '1';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '1';	
-				sOUART_REG_SEL		 <= "000";				
+				if (sBYTE_CNT = "") then
+					sREG_MUX_SEL		 <= '1' & sBYTE_SEL;
+					sOSHW_LOAD			 <= '1';
+				else
+					sREG_MUX_SEL		 <= "00";
+					sOSHW_LOAD			 <= '0';
+				end if;	
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_READ_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -780,21 +823,30 @@ begin
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '0';		
 				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= "00";				
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
+				sREG_MUX_SEL		 <= "00";					
+				if (sBYTE_CNT(0) = '1') then
+					sACK_SEL		 		 <= '1';
+					sREG_DEC_SEL		 <= '1' & sBYTE_SEL;
+					sREG_DEC_EN			 <= '1';	
+				else
+					sACK_SEL		 		 <= '0';
+					sREG_DEC_SEL		 <= "00";
+					sREG_DEC_EN			 <= '0';
+				end if;					
 				sSCL_EN				 <= '1';	
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";				
 			when I2C_STOP =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -811,14 +863,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "000";	
+				sOUART_REG_SEL		 <= "00";	
 			when SEND_I2C_UART_TELEGRAM =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -835,38 +889,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";	
-			when SEND_UART_START =>
-				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '1';
-				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "001";
+				sOUART_REG_SEL		 <= "00";	
 			when SEND_UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -883,14 +915,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "010";	
+				sOUART_REG_SEL		 <= "01";	
 			when SEND_UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -907,14 +941,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "011";					
+				sOUART_REG_SEL		 <= "10";					
 			when SEND_UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -931,39 +967,17 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "100";		
+				sOUART_REG_SEL		 <= "11";		
 			when SEND_UART_BYTE_UPPER =>
-				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '1';
-				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "101";		
-			when SEND_UART_STOP =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '0';
@@ -979,14 +993,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "00";						
 			when others => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -1003,14 +1019,16 @@ begin
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';			
+				sDATA_CNT_RST 		 <= '0';
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';			
-				sOUART_REG_SEL		 <= "101";	
+				sOUART_REG_SEL		 <= "00";	
 		end case;
 	end process fsm_out;
 		
@@ -1027,6 +1045,22 @@ begin
 		end if;
 	end process data_cnt;	
 	
+	-- Byte counter process						
+	byte_cnt : process (iCLK, inRST) begin				
+		if (inRST = '0') then
+			sBYTE_CNT <= (others => '0'); -- Reset counter		
+		elsif (iCLK'event and iCLK = '1') then	
+			if (sBYTE_CNT_RST = '1') then 
+				sBYTE_CNT <= (others => '0'); -- Reset counter when all data recived and period elapsed
+			elsif (sSCL_RISING_EDGE = '1' and sBYTE_CNT_EN = '1') then
+				sBYTE_CNT <= sBYTE_CNT + 1; -- Count data bits
+			end if;	
+		end if;
+	end process byte_cnt;	
+	
+	-- Select register byte
+	sBYTE_SEL <= sBYTE_CNT(0);
+		
 	-- Period counter process
 	per_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -1104,20 +1138,14 @@ begin
 	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG) begin
 		-- Select UART output register data
 		case (sOUART_REG_SEL) is
-			when "000" =>
-				sOUART_REG_MUX <= "00000001";
-			when "001" =>
+			when "00" =>
 				sOUART_REG_MUX <= sSLAVE_ADDR_REG;
-			when "010" =>
+			when "01" =>
 				sOUART_REG_MUX <= sREG_ADDR_REG;
-			when "011" =>
+			when "10" =>
 				sOUART_REG_MUX <= sLOWER_BYTE_REG;
-			when "100" =>
-				sOUART_REG_MUX <= sUPPER_BYTE_REG;
-			when "101" =>
-				sOUART_REG_MUX <= "10000000";
 			when others =>
-				sOUART_REG_MUX <= "00000000";
+				sOUART_REG_MUX <= sUPPER_BYTE_REG;
 		end case;
 	end process ouart_reg_mux;
 		

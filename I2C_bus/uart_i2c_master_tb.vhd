@@ -126,7 +126,7 @@ BEGIN
 --		wait for iCLK_period;
 		
 		-- Slave address/mode
-		iUART_DATA  <= x"FA";
+		iUART_DATA  <= x"FB";
 		
 		wait for iCLK_period;
 		
@@ -135,14 +135,14 @@ BEGIN
 
 		wait for iCLK_period;
 	
-		-- Lower data byte
-		iUART_DATA  <= x"11";
-		
-		wait for iCLK_period;
+--		-- Lower data byte
+--		iUART_DATA  <= x"11";
 --		
---		-- Upper data byte
-		iUART_DATA  <= x"21";		
-		
+--		wait for iCLK_period;
+--		
+----		-- Upper data byte
+--		iUART_DATA  <= x"21";		
+--		
 --		wait for iCLK_period;	
 --
 --		iUART_DATA  <= x"80";
