@@ -118,37 +118,41 @@ BEGIN
 		iUART_FULL  <= '0';
 		iUART_EMPTY <= '0';
 			
-		wait for iCLK_period;
+--		wait for iCLK_period;
 	
 		-- Start 
-		iUART_DATA  <= x"01";
-		
-		wait for iCLK_period;
+--		iUART_DATA  <= x"01";
+--		
+--		wait for iCLK_period;
 		
 		-- Slave address/mode
-		iUART_DATA  <= x"FB";
+		iUART_DATA  <= x"FA";
 		
 		wait for iCLK_period;
 		
 		-- Register address
 		iUART_DATA  <= x"AA";
 
---		wait for iCLK_period;
---		
---		-- Lower data byte
---		iUART_DATA  <= x"11";
---		
---		wait for iCLK_period;
+		wait for iCLK_period;
+	
+		-- Lower data byte
+		iUART_DATA  <= x"11";
+		
+		wait for iCLK_period;
 --		
 --		-- Upper data byte
---		iUART_DATA  <= x"21";		
+		iUART_DATA  <= x"21";		
 		
-		wait for iCLK_period;	
-
-		iUART_DATA  <= x"80";
+--		wait for iCLK_period;	
+--
+--		iUART_DATA  <= x"80";
 		
 		
 		--ioSDA <= '1';
+		
+		wait for iCLK_period*10;
+		
+		iUART_EMPTY <= '1';
 
       wait;
    end process;

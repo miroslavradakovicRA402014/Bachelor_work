@@ -53,7 +53,7 @@ architecture Behavioral of uart_i2c_master is
 
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
 							 I2C_START, I2C_SLAVE_ADDRESS_MODE, I2C_SLAVE_ADDRESS_ACK, I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK,
-							 I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP,
+							 I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP, SEND_I2C_UART_TELEGRAM,
 							 SEND_UART_START, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER, SEND_UART_STOP); 	   		-- Slave FSM states type
 
 
@@ -117,9 +117,9 @@ architecture Behavioral of uart_i2c_master is
 	signal sLOWER_BYTE_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower data byte
 	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper data byte
 
-	signal sREG_DEC 					: std_logic_vector(REGISTER_NUM - 1 downto 0);
-	signal sREG_DEC_SEL 				: std_logic_vector(1 downto 0);
-	signal sREG_DEC_EN				: std_logic;
+	signal sREG_DEC 					: std_logic_vector(REGISTER_NUM - 1 downto 0);										-- Registers decoder
+	signal sREG_DEC_SEL 				: std_logic_vector(1 downto 0);															-- Register decoder selection signal
+	signal sREG_DEC_EN				: std_logic;																					-- Register decoder enable
 
 begin
 
@@ -217,8 +217,8 @@ begin
 	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
-				if (iUART_EMPTY = '0' and iUART_DATA = "00000001") then -- Check is there messages
-					sNEXT_STATE <= UART_START; -- Get start byte from UART
+				if (iUART_EMPTY = '0') then -- Check is there messages
+					sNEXT_STATE <= UART_START; -- Get I2C telegram from UART
 				else 
 					sNEXT_STATE <= IDLE;
 				end if;
@@ -252,27 +252,27 @@ begin
 				end if;	
 			when UART_BYTE_UPPER =>
 				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_STOP; -- Get stop byte from UART 
+					sNEXT_STATE <= UART_STOP; -- End of I2C telegram
 				else 
 					sNEXT_STATE <= UART_BYTE_UPPER;
 				end if;				
 			when UART_STOP =>
-				if (iUART_EMPTY = '0' and iUART_DATA = "10000000") then
-					sNEXT_STATE <= I2C_START; -- Get stop byte from UART 
+				if (iUART_EMPTY = '0') then
+					sNEXT_STATE <= I2C_START; -- Start send I2C telegram
 				else 
 					sNEXT_STATE <= UART_STOP;
 				end if;
 			when I2C_START =>
 				-- Check if period elapsed
 				if (sTC_TR_PERIOD_CNT = '1') then
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_MODE; 
+					sNEXT_STATE <= I2C_SLAVE_ADDRESS_MODE; -- Send I2C address to slave
 				else 
 					sNEXT_STATE <= I2C_START;
 				end if;
 			when I2C_SLAVE_ADDRESS_MODE =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK;
+					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK; -- Send I2C register address to slave
 				else
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_MODE;
 				end if;
@@ -337,13 +337,16 @@ begin
 				-- Check if period elapsed
 				if (sTC_TR_PERIOD_CNT = '1') then
 					if (sSLAVE_ADDR_REG(0) = '1') then -- If read form slave return back to UART 
-						sNEXT_STATE <= SEND_UART_START;
+						sNEXT_STATE <= SEND_I2C_UART_TELEGRAM;
 					else
 						sNEXT_STATE <= IDLE;
 					end if;
 				else 
 					sNEXT_STATE <= I2C_STOP;
 				end if;
+			when SEND_I2C_UART_TELEGRAM =>
+				-- Start to send I2C telegram to UART
+				sNEXT_STATE <= SEND_UART_START;
 			when SEND_UART_START =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS; -- Send UART start byte 
@@ -376,8 +379,6 @@ begin
 				end if;		
 			when SEND_UART_STOP =>
 				sNEXT_STATE <= IDLE; 
-			when others =>
-					sNEXT_STATE <= IDLE;
 		end case;
 	end process fsm_next;	
 
@@ -817,7 +818,31 @@ begin
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "000";				
+				sOUART_REG_SEL		 <= "000";	
+			when SEND_I2C_UART_TELEGRAM =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '1';
+				sACK_SEL		 		 <= '1';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";		
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '0';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '0';
+				sISHW_EN			    <= '0'; 
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "000";	
 			when SEND_UART_START =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -841,7 +866,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "000";
+				sOUART_REG_SEL		 <= "001";
 			when SEND_UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -865,7 +890,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "001";	
+				sOUART_REG_SEL		 <= "010";	
 			when SEND_UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -889,7 +914,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "010";					
+				sOUART_REG_SEL		 <= "011";					
 			when SEND_UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -913,7 +938,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "011";		
+				sOUART_REG_SEL		 <= "100";		
 			when SEND_UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -937,12 +962,12 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "100";	
+				sOUART_REG_SEL		 <= "101";		
 			when SEND_UART_STOP =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '1';
+				sOUART_REG_EN		 <= '0';
 				sACK_SEL		 		 <= '1';
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '0';		
@@ -961,7 +986,7 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "101";				
+				sOUART_REG_SEL		 <= "000";				
 			when others => 
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
@@ -1002,7 +1027,7 @@ begin
 		end if;
 	end process data_cnt;	
 	
-	-- Period counter
+	-- Period counter process
 	per_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sPERIOD_CNT <= (others => '0'); -- Reset counter 
@@ -1097,7 +1122,7 @@ begin
 	end process ouart_reg_mux;
 		
 	-- Register decoder
-	ssREG_DEC <= "0000" when sREG_DEC_EN =  '0'  else 
+	sREG_DEC <=  "0000" when sREG_DEC_EN =  '0'  else 
 					 "0001" when sREG_DEC_SEL = "00" else
 					 "0010" when sREG_DEC_SEL = "01" else
 					 "0100" when sREG_DEC_SEL = "10" else

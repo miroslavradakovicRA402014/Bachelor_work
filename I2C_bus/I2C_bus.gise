@@ -60,7 +60,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526564145" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526564145">
+    <transform xil_pn:end_ts="1526627584" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526627584">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
@@ -90,6 +90,10 @@
     <transform xil_pn:end_ts="1526564145" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1526564145">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
       <outfile xil_pn:name="i2c_slave_tb.vhd"/>
       <outfile xil_pn:name="reg.vhd"/>
@@ -105,7 +109,10 @@
     <transform xil_pn:end_ts="1526564146" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-7806203988027188546" xil_pn:start_ts="1526564145">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
@@ -117,6 +124,9 @@
     <transform xil_pn:end_ts="1526564175" xil_pn:in_ck="-6253331390316638779" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-5564142040887682709" xil_pn:start_ts="1526564175">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="uart_i2c_master_tb_isim_beh.wdb"/>
