@@ -132,17 +132,17 @@ BEGIN
 		
 		-- Register address
 		iUART_DATA  <= x"AA";
-
-		wait for iCLK_period;
-	
+--
+--		wait for iCLK_period;
+--	
 --		-- Lower data byte
 --		iUART_DATA  <= x"11";
 --		
 --		wait for iCLK_period;
 --		
-----		-- Upper data byte
+--		-- Upper data byte
 --		iUART_DATA  <= x"21";		
---		
+		
 --		wait for iCLK_period;	
 --
 --		iUART_DATA  <= x"80";

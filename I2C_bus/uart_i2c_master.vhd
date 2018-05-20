@@ -24,13 +24,14 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity uart_i2c_master is
 	 Generic (
-		REGISTER_NUM		: integer := 4;	 -- Number of register
-		DATA_BYTE_NUM		: integer := 2;
-		TC_PERIOD			: integer := 12;   -- Terminal count period 
-		TR_PERIOD			: integer := 16;   -- Master transmission peirod
-		DATA_WIDTH 			: integer := 8;	 -- UART word widht 
-		DATA_CNT_WIDTH 	: integer := 4;    -- Data counter width
-		PERIOD_CNT_WIDTH  : integer := 4		 -- Period counter width
+		REGISTER_NUM		 : integer := 4;	 -- Number of register
+		DATA_BYTE_NUM		 : integer := 2;	 -- Nmber of data bytes
+		TC_PERIOD			 : integer := 12;  -- Terminal count period 
+		TR_PERIOD			 : integer := 16;  -- Master transmission peirod
+		REGISTER_SEL_WIDTH : integer := 2;	 -- Register mux and decoder select widht
+		DATA_WIDTH 			 : integer := 8;	 -- UART word widht 
+		DATA_CNT_WIDTH 	 : integer := 4;   -- Data counter width
+		PERIOD_CNT_WIDTH   : integer := 4	 -- Period counter width
 	 );
     Port ( iCLK  		  : in 	 std_logic;
            inRST 		  : in 	 std_logic;
@@ -75,9 +76,7 @@ architecture Behavioral of uart_i2c_master is
 
 	signal sBYTE_CNT 		 	   	: unsigned(1 downto 0);																		-- Data byte counter
 	signal sBYTE_CNT_EN 	 	   	: std_logic;																					-- Data byte counter enable		
-	signal sBYTE_CNT_RST				: std_logic;																					-- Data byte counter reset signal
-
-	signal sBYTE_SEL					: std_logic;																					-- Upper, lower byte selection signal
+	signal sBYTE_CNT_RST				: std_logic;																					-- Data byte counter reset signal-- Upper, lower byte selection signal
 	
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
@@ -95,7 +94,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sOSHW_LOAD					: std_logic;																					-- Shift load signal
 
 	signal sREG_MUX					: std_logic_vector(DATA_WIDTH	- 1 downto 0);											-- Input registers multiplexer
-	signal sREG_MUX_SEL				: std_logic_vector(1 downto 0);															-- Registers multiplexer select
+	signal sREG_MUX_SEL				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Registers multiplexer select
 	
 	signal sSCL_EN						: std_logic;																					-- SCL generator enable signal
 	
@@ -117,7 +116,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sUBYTE_REG_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper byte register multiplexer
 
 	signal sOUART_REG_MUX 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART output registers multiplexer
-	signal sOUART_REG_SEL			: std_logic_vector(1 downto 0);															-- UART output registers multiplexer select signal	
+	signal sOUART_REG_SEL			: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- UART output registers multiplexer select signal	
 
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
@@ -125,7 +124,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper data byte
 
 	signal sREG_DEC 					: std_logic_vector(REGISTER_NUM - 1 downto 0);										-- Registers decoder
-	signal sREG_DEC_SEL 				: std_logic_vector(1 downto 0);															-- Register decoder selection signal
+	signal sREG_DEC_SEL 				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register decoder selection signal
 	signal sREG_DEC_EN				: std_logic;																					-- Register decoder enable
 
 begin
@@ -221,7 +220,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_SEL) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_CNT) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
@@ -329,7 +328,7 @@ begin
 			when I2C_WRITE_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					if (sBYTE_CNT(0) = '0') then
+					if (sBYTE_CNT = DATA_BYTE_NUM) then
 						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
 					else
 						sNEXT_STATE <= I2C_WRITE_DATA; -- Write another byte
@@ -340,7 +339,7 @@ begin
 			when I2C_READ_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					if (sBYTE_CNT(0) = '0') then
+					if (sBYTE_CNT = DATA_BYTE_NUM) then
 						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
 					else
 						sNEXT_STATE <= I2C_READ_DATA; -- Read another byte from slave
@@ -390,7 +389,7 @@ begin
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sBYTE_CNT, sBYTE_SEL) begin
+	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sBYTE_CNT) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 <= '0';
@@ -699,9 +698,15 @@ begin
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '0';		
 				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= '1' & sBYTE_SEL;				
+				if (sSLAVE_ADDR_REG(0) = '1') then
+					sREG_MUX_SEL		 <= "00";
+					sOSHW_LOAD			 <= '0';	
+				else
+					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(1);				
+					sOSHW_LOAD			 <= '1';	
+				end if;			
 				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
+				sREG_DEC_EN			 <= '0';	
 				sSCL_EN				 <= '1';	
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
@@ -714,7 +719,6 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '1';
 				sOUART_REG_SEL		 <= "00";				
 			when I2C_WRITE_DATA =>
 				sIN_BUFF_EN	 		 <= '0';
@@ -733,7 +737,7 @@ begin
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
 				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_EN   	 <= '1';
 				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
@@ -756,17 +760,17 @@ begin
 				sACK_SEL		 		 <= '0';
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '1';		
-				sUBYTE_REG_SEL 	 <= '0';	
+				sUBYTE_REG_SEL 	 <= '1';	
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
 				sDATA_CNT_RST 		 <= '0';		
-				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_EN   	 <= '1';
 				sBYTE_CNT_RST 		 <= '0';					
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sREG_DEC_SEL		 <= '1' & sBYTE_SEL;
+					sREG_DEC_SEL		 <= '1' & sBYTE_CNT(1);
 					sREG_DEC_EN			 <= '1';
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
@@ -799,19 +803,19 @@ begin
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';		
-				sBYTE_CNT_EN   	 <= '1';
+				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
-				if (sBYTE_CNT = "") then
-					sREG_MUX_SEL		 <= '1' & sBYTE_SEL;
-					sOSHW_LOAD			 <= '1';
-				else
+				if (sBYTE_CNT = DATA_BYTE_NUM) then
 					sREG_MUX_SEL		 <= "00";
 					sOSHW_LOAD			 <= '0';
+				else
+					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(0);
+					sOSHW_LOAD			 <= '1';
 				end if;	
 				sOUART_REG_SEL		 <= "00";				
 			when I2C_READ_DATA_ACK =>
@@ -823,15 +827,13 @@ begin
 				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '0';		
 				sUBYTE_REG_SEL 	 <= '0';	
-				sREG_MUX_SEL		 <= "00";					
-				if (sBYTE_CNT(0) = '1') then
+				sREG_MUX_SEL		 <= "00";	
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';				
+				if (sBYTE_CNT = DATA_BYTE_NUM) then
 					sACK_SEL		 		 <= '1';
-					sREG_DEC_SEL		 <= '1' & sBYTE_SEL;
-					sREG_DEC_EN			 <= '1';	
 				else
 					sACK_SEL		 		 <= '0';
-					sREG_DEC_SEL		 <= "00";
-					sREG_DEC_EN			 <= '0';
 				end if;					
 				sSCL_EN				 <= '1';	
 				oUART_READ  		 <= '0';
@@ -1052,15 +1054,12 @@ begin
 		elsif (iCLK'event and iCLK = '1') then	
 			if (sBYTE_CNT_RST = '1') then 
 				sBYTE_CNT <= (others => '0'); -- Reset counter when all data recived and period elapsed
-			elsif (sSCL_RISING_EDGE = '1' and sBYTE_CNT_EN = '1') then
+			elsif (sSCL_RISING_EDGE = '1' and sBYTE_CNT_EN = '1' and sDATA_CNT = 0) then
 				sBYTE_CNT <= sBYTE_CNT + 1; -- Count data bits
 			end if;	
 		end if;
 	end process byte_cnt;	
-	
-	-- Select register byte
-	sBYTE_SEL <= sBYTE_CNT(0);
-		
+			
 	-- Period counter process
 	per_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then

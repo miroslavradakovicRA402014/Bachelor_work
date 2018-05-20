@@ -1,18 +1,18 @@
-Release 14.6 - xst P.68d (lin64)
+Release 14.7 - xst P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
-Parameter TMPDIR set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst/projnav.tmp
+Parameter TMPDIR set to /home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
-Parameter xsthdpdir set to /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst
+Parameter xsthdpdir set to /home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Reading design: uart_i2c_master.prj
@@ -42,28 +42,29 @@ TABLE OF CONTENTS
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/scl_gen.vhd" into library work
+Parsing VHDL file "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/scl_gen.vhd" into library work
 Parsing entity <scl_gen>.
 Parsing architecture <Behavioral> of entity <scl_gen>.
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det.vhd" into library work
+Parsing VHDL file "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/rising_edge_det.vhd" into library work
 Parsing entity <rising_edge_det>.
 Parsing architecture <Behavioral> of entity <rising_edge_det>.
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/reg.vhd" into library work
+Parsing VHDL file "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/reg.vhd" into library work
 Parsing entity <reg>.
 Parsing architecture <Behavioral> of entity <reg>.
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" into library work
+Parsing VHDL file "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" into library work
 Parsing entity <uart_i2c_master>.
 Parsing architecture <Behavioral> of entity <uart_i2c_master>.
-ERROR:HDLCompiler:69 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" Line 770: <sbyte_sel> is not declared.
-ERROR:HDLCompiler:69 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" Line 1098: <sbyte_sel> is not declared.
-ERROR:HDLCompiler:854 - "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" Line 48: Unit <behavioral> ignored due to previous errors.
-VHDL file /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd ignored due to errors
+
+
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 2.90 secs
+ 
 --> 
 
 
-Total memory usage is 304792 kilobytes
+Total memory usage is 304904 kilobytes
 
-Number of errors   :    3 (   0 filtered)
+Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

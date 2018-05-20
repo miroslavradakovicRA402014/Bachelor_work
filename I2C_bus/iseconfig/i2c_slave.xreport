@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-05-18T15:42:21</DateModified>
+  <DateModified>2018-05-20T17:30:34</DateModified>
   <ModuleName>i2c_slave</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/iseconfig/i2c_slave.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/iseconfig/i2c_slave.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/</ImplementationReportsDirectory>
   <DateInitialized>2018-05-07T08:10:31</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

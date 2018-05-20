@@ -1,5 +1,5 @@
-set -tmpdir "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst/projnav.tmp"
-set -xsthdpdir "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/xst"
+set -tmpdir "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/xst/projnav.tmp"
+set -xsthdpdir "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/xst"
 run -compileonly yes
 -p xc6slx45-2-fgg676
 -top uart_i2c_master

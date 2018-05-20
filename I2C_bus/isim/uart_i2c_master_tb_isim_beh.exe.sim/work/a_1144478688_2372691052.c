@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd";
+static const char *ng0 = "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd";
 
 
 
@@ -157,7 +157,7 @@ LAB4:    xsi_set_current_line(113, ng0);
     *((unsigned char *)t8) = (unsigned char)2;
     xsi_driver_first_trans_fast(t2);
     xsi_set_current_line(129, ng0);
-    t2 = (t0 + 7904);
+    t2 = (t0 + 7968);
     t6 = (t0 + 4856);
     t7 = (t6 + 56U);
     t8 = *((char **)t7);
@@ -180,7 +180,7 @@ LAB5:    goto LAB4;
 LAB7:    goto LAB5;
 
 LAB8:    xsi_set_current_line(134, ng0);
-    t2 = (t0 + 7912);
+    t2 = (t0 + 7976);
     t6 = (t0 + 4856);
     t7 = (t6 + 56U);
     t8 = *((char **)t7);
@@ -188,12 +188,13 @@ LAB8:    xsi_set_current_line(134, ng0);
     t10 = *((char **)t9);
     memcpy(t10, t2, 8U);
     xsi_driver_first_trans_fast(t6);
-    xsi_set_current_line(136, ng0);
+    xsi_set_current_line(153, ng0);
     t2 = (t0 + 2928U);
     t3 = *((char **)t2);
     t4 = *((int64 *)t3);
+    t5 = (t4 * 10);
     t2 = (t0 + 3960);
-    xsi_process_wait(t2, t4);
+    xsi_process_wait(t2, t5);
 
 LAB14:    *((char **)t1) = &&LAB15;
     goto LAB1;
@@ -202,22 +203,7 @@ LAB9:    goto LAB8;
 
 LAB11:    goto LAB9;
 
-LAB12:    xsi_set_current_line(153, ng0);
-    t2 = (t0 + 2928U);
-    t3 = *((char **)t2);
-    t4 = *((int64 *)t3);
-    t5 = (t4 * 10);
-    t2 = (t0 + 3960);
-    xsi_process_wait(t2, t5);
-
-LAB18:    *((char **)t1) = &&LAB19;
-    goto LAB1;
-
-LAB13:    goto LAB12;
-
-LAB15:    goto LAB13;
-
-LAB16:    xsi_set_current_line(155, ng0);
+LAB12:    xsi_set_current_line(155, ng0);
     t2 = (t0 + 4792);
     t3 = (t2 + 56U);
     t6 = *((char **)t3);
@@ -227,18 +213,18 @@ LAB16:    xsi_set_current_line(155, ng0);
     xsi_driver_first_trans_fast(t2);
     xsi_set_current_line(157, ng0);
 
-LAB22:    *((char **)t1) = &&LAB23;
+LAB18:    *((char **)t1) = &&LAB19;
     goto LAB1;
+
+LAB13:    goto LAB12;
+
+LAB15:    goto LAB13;
+
+LAB16:    goto LAB2;
 
 LAB17:    goto LAB16;
 
 LAB19:    goto LAB17;
-
-LAB20:    goto LAB2;
-
-LAB21:    goto LAB20;
-
-LAB23:    goto LAB21;
 
 }
 
