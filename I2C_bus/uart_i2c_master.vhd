@@ -19,8 +19,8 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
+
 
 entity uart_i2c_master is
 	 Generic (
@@ -31,19 +31,21 @@ entity uart_i2c_master is
 		REGISTER_SEL_WIDTH : integer := 2;	 -- Register mux and decoder select widht
 		DATA_WIDTH 			 : integer := 8;	 -- UART word widht 
 		DATA_CNT_WIDTH 	 : integer := 4;   -- Data counter width
+		BYTE_CNT_WIDTH 	 : integer := 2;   -- Byte counter width
 		PERIOD_CNT_WIDTH   : integer := 4	 -- Period counter width
 	 );
-    Port ( iCLK  		  : in 	 std_logic;
-           inRST 		  : in 	 std_logic;
-			  iTC 		  : in 	 std_logic;
-			  iUART_FULL  : in 	 std_logic; 
-			  iUART_EMPTY : in  	 std_logic;
-			  iUART_DATA  : in 	 std_logic_vector(DATA_WIDTH - 1  downto 0);
-			  oUART_READ  : out 	 std_logic;
-			  oUART_WRITE : out 	 std_logic;
-			  oUART_DATA  : out 	 std_logic_vector(DATA_WIDTH - 1  downto 0);
-			  oSCL		  : out 	 std_logic;
-			  ioSDA		  : inout std_logic
+    Port ( iCLK  		   : in 	  std_logic;
+           inRST 		   : in 	  std_logic;
+			  iTC 		   : in 	  std_logic;
+			  iUART_FULL   : in 	  std_logic; 
+			  iUART_EMPTY  : in    std_logic;
+			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);
+			  oFREQ_EN 		: out   std_logic;		
+			  oUART_READ   : out   std_logic;
+			  oUART_WRITE  : out   std_logic;
+			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);
+			  oSCL		   : out   std_logic;
+			  ioSDA		   : inout std_logic
 			  );
 end uart_i2c_master;
 
@@ -74,7 +76,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sDATA_CNT_EN 	 	   	: std_logic;																					-- Data counter enable		
 	signal sDATA_CNT_RST				: std_logic;																					-- Data counter reset signal
 
-	signal sBYTE_CNT 		 	   	: unsigned(1 downto 0);																		-- Data byte counter
+	signal sBYTE_CNT 		 	   	: unsigned(BYTE_CNT_WIDTH - 1 downto 0);												-- Data byte counter
 	signal sBYTE_CNT_EN 	 	   	: std_logic;																					-- Data byte counter enable		
 	signal sBYTE_CNT_RST				: std_logic;																					-- Data byte counter reset signal-- Upper, lower byte selection signal
 	
@@ -94,7 +96,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sOSHW_LOAD					: std_logic;																					-- Shift load signal
 
 	signal sREG_MUX					: std_logic_vector(DATA_WIDTH	- 1 downto 0);											-- Input registers multiplexer
-	signal sREG_MUX_SEL				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Registers multiplexer select
+	signal sREG_MUX_SEL				: std_logic_vector(1 downto 0);															-- Registers multiplexer select
 	
 	signal sSCL_EN						: std_logic;																					-- SCL generator enable signal
 	
@@ -116,7 +118,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sUBYTE_REG_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper byte register multiplexer
 
 	signal sOUART_REG_MUX 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART output registers multiplexer
-	signal sOUART_REG_SEL			: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- UART output registers multiplexer select signal	
+	signal sOUART_REG_SEL			: std_logic_vector(1 downto 0);															-- UART output registers multiplexer select signal	
 
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
@@ -128,7 +130,6 @@ architecture Behavioral of uart_i2c_master is
 	signal sREG_DEC_EN				: std_logic;																					-- Register decoder enable
 
 begin
-
 
 
 	-- Input UART data register
@@ -404,6 +405,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -456,6 +458,7 @@ begin
 				sREG_DEC_SEL		 <= "01";
 				sREG_DEC_EN			 <= '1';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -482,6 +485,7 @@ begin
 				sREG_DEC_SEL		 <= "10";
 				sREG_DEC_EN			 <= '1';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -508,6 +512,7 @@ begin
 				sREG_DEC_SEL		 <= "11";
 				sREG_DEC_EN			 <= '1';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -534,6 +539,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -559,7 +565,8 @@ begin
 				sREG_MUX_SEL		 <= "00";	
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
+				sSCL_EN				 <= '0';
+				oFREQ_EN 			 <= '0';				
 				oUART_READ  		 <= '1';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -586,6 +593,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -612,6 +620,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
@@ -644,6 +653,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -669,7 +679,8 @@ begin
 				sREG_MUX_SEL		 <= "00";	
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '1';	
+				sSCL_EN				 <= '1';
+				oFREQ_EN 			 <= '1';				
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
@@ -708,6 +719,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';	
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -733,6 +745,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
@@ -763,6 +776,7 @@ begin
 				sUBYTE_REG_SEL 	 <= '1';	
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '1';
@@ -799,6 +813,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -836,6 +851,7 @@ begin
 					sACK_SEL		 		 <= '0';
 				end if;					
 				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -862,6 +878,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '1';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -887,7 +904,9 @@ begin
 				sREG_MUX_SEL		 <= "00";		
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
+				sSCL_EN				 <= '0';
+				oFREQ_EN 			 <= '0';
+				oFREQ_EN 			 <= '0';				
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';
 				sDATA_CNT_EN 		 <= '0';
@@ -914,6 +933,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
@@ -940,6 +960,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
@@ -966,6 +987,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
@@ -992,6 +1014,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
 				sDATA_CNT_EN 		 <= '0';
@@ -1018,6 +1041,7 @@ begin
 				sREG_DEC_SEL		 <= "00";
 				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '0';
 				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '0';		
 				sDATA_CNT_EN 		 <= '0';
@@ -1181,6 +1205,7 @@ begin
 
 	-- Output SCL 
 	oSCL <= sSCL;
+	
 					
 end Behavioral;
 

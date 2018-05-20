@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "secureip" -o "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb_isim_beh.exe" -prj "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb_beh.prj" "work.uart_i2c_master_tb" 
+-intstyle "ise" -incremental -lib "secureip" -o "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/i2c_slave_tb_isim_beh.exe" -prj "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/i2c_slave_tb_beh.prj" "work.i2c_slave_tb" 

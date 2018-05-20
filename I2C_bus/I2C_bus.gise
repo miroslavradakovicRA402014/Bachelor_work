@@ -24,10 +24,19 @@
   <files xmlns="http://www.xilinx.com/XMLSchema">
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
     <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_bus_tb_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_bus_tb_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_clk_freq_div.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="i2c_clk_freq_div.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="i2c_clk_freq_div.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_clk_freq_div_tb_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_clk_freq_div_tb_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_slave.prj"/>
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="i2c_slave.stx"/>
     <file xil_pn:fileType="FILE_XST" xil_pn:name="i2c_slave.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_slave_tb_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="i2c_slave_tb_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="i2c_slave_tb_isim_beh.wdb"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i2c_slave_tb_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
@@ -60,13 +69,14 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526830289" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526830289">
+    <transform xil_pn:end_ts="1526848515" xil_pn:in_ck="1715345881674704307" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1526848515">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="i2c_bus.vhd"/>
+      <outfile xil_pn:name="i2c_bus_components.vhd"/>
+      <outfile xil_pn:name="i2c_bus_tb.vhd"/>
+      <outfile xil_pn:name="i2c_clk_freq_div.vhd"/>
+      <outfile xil_pn:name="i2c_clk_freq_div_tb.vhd"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
       <outfile xil_pn:name="i2c_slave_tb.vhd"/>
       <outfile xil_pn:name="reg.vhd"/>
@@ -79,26 +89,26 @@
       <outfile xil_pn:name="uart_i2c_master.vhd"/>
       <outfile xil_pn:name="uart_i2c_master_tb.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1526730876" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-4857587839051348977" xil_pn:start_ts="1526730876">
+    <transform xil_pn:end_ts="1526848515" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-526337317207783645" xil_pn:start_ts="1526848515">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526730876" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="7488839522275284621" xil_pn:start_ts="1526730876">
+    <transform xil_pn:end_ts="1526848515" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="-2062138156508937823" xil_pn:start_ts="1526848515">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1525435513" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-5453610920926706742" xil_pn:start_ts="1525435513">
+    <transform xil_pn:end_ts="1526843005" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="3982600973648892729" xil_pn:start_ts="1526843005">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526830292" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1526830292">
+    <transform xil_pn:end_ts="1526848515" xil_pn:in_ck="1715345881674704307" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1526848515">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="i2c_bus.vhd"/>
+      <outfile xil_pn:name="i2c_bus_components.vhd"/>
+      <outfile xil_pn:name="i2c_bus_tb.vhd"/>
+      <outfile xil_pn:name="i2c_clk_freq_div.vhd"/>
+      <outfile xil_pn:name="i2c_clk_freq_div_tb.vhd"/>
       <outfile xil_pn:name="i2c_slave.vhd"/>
       <outfile xil_pn:name="i2c_slave_tb.vhd"/>
       <outfile xil_pn:name="reg.vhd"/>
@@ -111,30 +121,24 @@
       <outfile xil_pn:name="uart_i2c_master.vhd"/>
       <outfile xil_pn:name="uart_i2c_master_tb.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1526830297" xil_pn:in_ck="-605531314604526957" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-7806203988027188546" xil_pn:start_ts="1526830292">
+    <transform xil_pn:end_ts="1526848517" xil_pn:in_ck="1715345881674704307" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-5324404273086851290" xil_pn:start_ts="1526848515">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
+      <outfile xil_pn:name="i2c_slave_tb_beh.prj"/>
+      <outfile xil_pn:name="i2c_slave_tb_isim_beh.exe"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="uart_i2c_master_tb_beh.prj"/>
-      <outfile xil_pn:name="uart_i2c_master_tb_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1526830297" xil_pn:in_ck="-6253331390316638779" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-5564142040887682709" xil_pn:start_ts="1526830297">
+    <transform xil_pn:end_ts="1526848517" xil_pn:in_ck="5461585677634766546" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-8653162299462880749" xil_pn:start_ts="1526848517">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="i2c_slave_tb_isim_beh.wdb"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="uart_i2c_master_tb_isim_beh.wdb"/>
     </transform>
   </transforms>
 

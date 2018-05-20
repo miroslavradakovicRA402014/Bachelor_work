@@ -47,6 +47,7 @@ ARCHITECTURE behavior OF uart_i2c_master_tb IS
          iUART_FULL : IN  std_logic;
          iUART_EMPTY : IN  std_logic;
          iUART_DATA : IN  std_logic_vector(7 downto 0);
+			oFREQ_EN : OUT  std_logic;
          oUART_READ : OUT  std_logic;
          oUART_WRITE : OUT  std_logic;
          oUART_DATA : OUT  std_logic_vector(7 downto 0);
@@ -68,6 +69,7 @@ ARCHITECTURE behavior OF uart_i2c_master_tb IS
    signal ioSDA : std_logic;
 
  	--Outputs
+	signal oFREQ_EN : std_logic;
    signal oUART_READ : std_logic;
    signal oUART_WRITE : std_logic;
    signal oUART_DATA : std_logic_vector(7 downto 0);
@@ -86,6 +88,7 @@ BEGIN
           iUART_FULL => iUART_FULL,
           iUART_EMPTY => iUART_EMPTY,
           iUART_DATA => iUART_DATA,
+			 oFREQ_EN => oFREQ_EN,
           oUART_READ => oUART_READ,
           oUART_WRITE => oUART_WRITE,
           oUART_DATA => oUART_DATA,

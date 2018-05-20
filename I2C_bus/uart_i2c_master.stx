@@ -5,7 +5,7 @@ Parameter TMPDIR set to /home/mika/Projects/projects_workspace/Bachelor_work/I2C
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.05 secs
+Total CPU time to Xst completion: 0.04 secs
  
 --> 
 Parameter xsthdpdir set to /home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/xst
@@ -56,8 +56,8 @@ Parsing entity <uart_i2c_master>.
 Parsing architecture <Behavioral> of entity <uart_i2c_master>.
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 2.90 secs
+Total REAL time to Xst completion: 3.00 secs
+Total CPU time to Xst completion: 2.92 secs
  
 --> 
 

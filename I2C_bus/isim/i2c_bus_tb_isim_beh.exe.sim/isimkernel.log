@@ -1,0 +1,10 @@
+Command line:
+   i2c_bus_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  33217
+
+Sun May 20 22:16:26 2018
+
+
+ Elaboration Time: 0.03 sec

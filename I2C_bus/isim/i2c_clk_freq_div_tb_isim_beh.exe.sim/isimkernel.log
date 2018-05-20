@@ -1,0 +1,29 @@
+Command line:
+   i2c_clk_freq_div_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  1
+     -socket  54283
+
+Sun May 20 19:34:38 2018
+
+
+ Elaboration Time: 0.02 sec
+
+ Current Memory Usage: 246.235 Meg
+
+ Total Signals          : 9
+ Total Nets             : 8
+ Total Signal Drivers   : 5
+ Total Blocks           : 6
+ Total Primitive Blocks : 5
+ Total Processes        : 4
+ Total Traceable Variables  : 19
+ Total Scalar Nets and Variables : 516
+Total Line Count : 19
+
+ Total Simulation Time: 0.06 sec
+
+ Current Memory Usage: 321.737 Meg
+
+Sun May 20 19:34:54 2018
+

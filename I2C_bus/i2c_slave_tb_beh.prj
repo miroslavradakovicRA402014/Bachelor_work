@@ -1,0 +1,4 @@
+vhdl work "slave_reg.vhd"
+vhdl work "rising_edge_det.vhd"
+vhdl work "i2c_slave.vhd"
+vhdl work "i2c_slave_tb.vhd"

@@ -1,0 +1,2 @@
+vhdl isim_temp "i2c_freq_div.vhd"
+vhdl isim_temp "i2c_clk_freq_div_tb.vhd"

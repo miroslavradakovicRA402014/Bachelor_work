@@ -1,28 +1,10 @@
 Command line:
    i2c_slave_tb_isim_beh.exe
      -simmode  gui
-     -simrunnum  1
-     -socket  51173
+     -simrunnum  2
+     -socket  55355
 
-Fri May 18 16:45:15 2018
+Sun May 20 22:35:19 2018
 
 
- Elaboration Time: 0.01 sec
-
- Current Memory Usage: 244.937 Meg
-
- Total Signals          : 177
- Total Nets             : 632
- Total Signal Drivers   : 84
- Total Blocks           : 40
- Total Primitive Blocks : 22
- Total Processes        : 63
- Total Traceable Variables  : 58
- Total Scalar Nets and Variables : 1182
-
- Total Simulation Time: 0.72 sec
-
- Current Memory Usage: 320.438 Meg
-
-Fri May 18 17:15:07 2018
-
+ Elaboration Time: 0.03 sec
