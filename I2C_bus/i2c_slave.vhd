@@ -99,7 +99,7 @@ architecture Behavioral of i2c_slave is
 		
 	signal sREG_MUX					: std_logic_vector(2 * DATA_WIDTH - 1 downto 0);									-- Register byte multiplexer
 	signal sREG_BYTE_MUX				: std_logic_vector(DATA_WIDTH		 - 1 downto 0);									-- Registers multiplexer
-	signal sREG_MUX_SEL				: std_logic_vector(3 downto 0);								-- Registers multiplexer select
+	signal sREG_MUX_SEL				: std_logic_vector(3 downto 0);															-- Registers multiplexer select
 		
 	signal sREG_DEC					: std_logic_vector(2 * DATA_WIDTH     - 1 downto 0);								-- Register decoder
 	signal sREG_DEC_SEL				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register decoder input

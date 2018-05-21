@@ -35,7 +35,7 @@ entity reciver is
            inRST       : in   std_logic;
 			  iPARITY_EN  : in   std_logic;
 			  iPARITY     : in   std_logic;
-			  iDATA_SEL   : in   std_logic_vector(DATA_BIT_SEL - 1  downto 0);
+			  iDATA_SEL   : in   std_logic_vector(1  downto 0);
            iRX         : in   std_logic;
            iTC         : in   std_logic;
            iFULL 	     : in   std_logic;
@@ -46,7 +46,7 @@ end reciver;
 
 architecture Behavioral of reciver is
 
-	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";									-- Wrong parity character
+	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";							 -- Wrong parity character
 	
 	-- Data counter count limit
 	constant cDATA_5_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "100";		
@@ -54,15 +54,15 @@ architecture Behavioral of reciver is
 	constant cDATA_7_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "110";
 	constant cDATA_8_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "111";
 
-	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     								 		-- Reciver FSM state type
+	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     								 -- Reciver FSM state type
 
-	signal sCURRENT_STATE 	 	: tSTATES; 										  			  								 		-- Reciver FSM current state 
-	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 							 		-- Reciver FSM next state 
+	signal sCURRENT_STATE 	 	: tSTATES; 										  			  								 -- Reciver FSM current state 
+	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 							 -- Reciver FSM next state 
 	
-	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  							 		-- Recived data bits counter 
-	signal sDATA_BIT_REG			: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 		-- Data bit number register
-	signal sDATA_BIT				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 		-- Data bit number 
-	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  							 		-- Terminal count counter
+	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  							 -- Recived data bits counter 
+	signal sDATA_BIT_REG			: unsigned(2	downto 0);											 					 -- Data bit number register
+	signal sDATA_BIT				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 -- Data bit number 
+	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  						 	 -- Terminal count counter
 	
 	signal sTC_CNT_RST       	: std_logic;	  			  																 -- Terminal count counter reset
 	

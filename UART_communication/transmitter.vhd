@@ -35,7 +35,7 @@ entity transmitter is
 			  iPARITY_EN 	 : in   std_logic;
 			  iPARITY	 	 : in   std_logic;
 			  iHANDSHAKE_EN : in   std_logic;
-			  iDATA_SEL  	 : in   std_logic_vector(DATA_BIT_SEL - 1 downto 0);
+			  iDATA_SEL  	 : in   std_logic_vector(1 downto 0);
 			  iCTS		 	 : in   std_logic;
            iTC    	 	 : in   std_logic;
            iDATA  	 	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
@@ -60,7 +60,7 @@ architecture Behavioral of transmitter is
 	
 	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   		-- Recived data bits counter 
 	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  		-- Terminal count counter
-	signal sDATA_BIT_REG		 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number register
+	signal sDATA_BIT_REG		 : unsigned(2 downto 0);								-- Data bit number register
 	signal sDATA_BIT			 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number 	
 	
 	

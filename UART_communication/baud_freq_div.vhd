@@ -30,7 +30,7 @@ entity baud_freq_div is
 	 );
     Port ( iCLK   	: in  std_logic;
            inRST  	: in  std_logic;
-			  iBAUD_SEL : in  std_logic_vector(BAUD_RATE_SEL - 1 downto 0);
+			  iBAUD_SEL : in  std_logic_vector(2 downto 0);
 			  iBAUD_EN  : in  std_logic;
            oTC 		: out std_logic);
 end baud_freq_div;
