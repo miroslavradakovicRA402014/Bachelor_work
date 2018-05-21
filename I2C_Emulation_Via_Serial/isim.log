@@ -40,3 +40,21 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_S
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 Finished circuit initialization process.
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
+# run 1.00us
