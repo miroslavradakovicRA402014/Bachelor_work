@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd";
+static const char *ng0 = "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd";
 
 
 
@@ -157,7 +157,7 @@ LAB4:    xsi_set_current_line(116, ng0);
     *((unsigned char *)t8) = (unsigned char)2;
     xsi_driver_first_trans_fast(t2);
     xsi_set_current_line(132, ng0);
-    t2 = (t0 + 8232);
+    t2 = (t0 + 8120);
     t6 = (t0 + 5016);
     t7 = (t6 + 56U);
     t8 = *((char **)t7);
@@ -180,7 +180,7 @@ LAB5:    goto LAB4;
 LAB7:    goto LAB5;
 
 LAB8:    xsi_set_current_line(137, ng0);
-    t2 = (t0 + 8240);
+    t2 = (t0 + 8128);
     t6 = (t0 + 5016);
     t7 = (t6 + 56U);
     t8 = *((char **)t7);

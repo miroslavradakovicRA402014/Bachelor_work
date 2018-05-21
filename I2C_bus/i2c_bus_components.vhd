@@ -8,15 +8,18 @@ package i2c_bus_components is
 	
 	component uart_i2c_master is
 		 Generic (
-			REGISTER_NUM		 : integer := 4;	 -- Number of register
-			DATA_BYTE_NUM		 : integer := 2;	 -- Nmber of data bytes
-			TC_PERIOD			 : integer := 12;  -- Terminal count period 
-			TR_PERIOD			 : integer := 16;  -- Master transmission peirod
-			REGISTER_SEL_WIDTH : integer := 2;	 -- Register mux and decoder select widht
-			DATA_WIDTH 			 : integer := 8;	 -- UART word widht 
-			DATA_CNT_WIDTH 	 : integer := 4;   -- Data counter width
-			BYTE_CNT_WIDTH 	 : integer := 2;   -- Byte counter width
-			PERIOD_CNT_WIDTH   : integer := 4	 -- Period counter width
+			REGISTER_NUM		   : integer := 4;	-- Number of register
+			DATA_BYTE_NUM		   : integer := 2;	-- Nmber of data bytes
+			START_PERIOD		   : integer := 5;   -- Master start sync peirod
+			TC_PERIOD			   : integer := 13;  -- Terminal count period 
+			TR_PERIOD			   : integer := 17;  -- Master transmission peirod
+			REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
+			DATA_WIDTH 			   : integer := 8;	-- UART word widht 
+			DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
+			START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
+			BYTE_CNT_WIDTH 	   : integer := 2;   -- Byte counter width
+			TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmission period counter width
+			PERIOD_CNT_WIDTH     : integer := 4		-- Period counter width
 		 );
 		 Port ( iCLK  		   : in 	  std_logic;
 				  inRST 		   : in 	  std_logic;
@@ -35,15 +38,16 @@ package i2c_bus_components is
 	
 	component i2c_slave is
 		 Generic(
-			REGISTER_NUM		 : integer := 16;  										 -- Number of slave registers
-			TC_PERIOD			 : integer := 12;  										 -- Terminal count period for ack start
-			TR_PERIOD			 : integer := 16;  										 -- Slave transmission peirod
-			DATA_WIDTH 			 : integer := 8; 											 -- Data width
-			DATA_CNT_WIDTH 	 : integer := 4;											 -- Data counter width
-			PERIOD_CNT_WIDTH   : integer := 4;											 -- Data counter width
-			REGISTER_SEL_WIDTH :	integer := 4; 											 -- Decoder selection width
-			SLAVE_ADDRESS  	 : std_logic_vector(6 downto 0) := "1111101"     -- Slave address (7 bit address)
-		 );
+			REGISTER_NUM		 	: integer := 16;  										 -- Number of slave registers
+			TC_PERIOD			 	: integer := 13;  										 -- Terminal count period for ack start
+			TR_PERIOD			 	: integer := 17;  										 -- Slave transmission peirod
+			DATA_WIDTH 			 	: integer := 8; 											 -- Data width
+			DATA_CNT_WIDTH 	 	: integer := 4;											 -- Data counter width
+			TR_PERIOD_CNT_WIDTH  : integer := 5;											 -- Transmission period counter width
+			PERIOD_CNT_WIDTH   	: integer := 4;											 -- Period counter width
+			REGISTER_SEL_WIDTH 	: integer := 4; 											 -- Decoder selection width
+			SLAVE_ADDRESS  	   : std_logic_vector(6 downto 0) := "1111101"    	 -- Slave address (7 bit address)
+		 );	
 		 Port ( iCLK 	: in  	std_logic;
 				  inRST 	: in  	std_logic;
 				  iTC		: in 		std_logic;

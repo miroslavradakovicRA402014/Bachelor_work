@@ -25,8 +25,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity scl_gen is
 	 Generic (
-		PERIOD_CNT_WIDHT : integer := 3; -- Period counter width
-		SCL_CLOCK_PERIOD : integer := 8 	-- Clock period
+		PERIOD_CNT_WIDHT : integer := 4; -- Period counter width
+		SCL_CLOCK_PERIOD : integer := 9 	-- Clock period
 	 );
     Port ( iCLK  	 : in  std_logic;
            inRST 	 : in  std_logic;

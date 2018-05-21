@@ -1,10 +1,10 @@
 Command line:
    i2c_slave_tb_isim_beh.exe
      -simmode  gui
-     -simrunnum  2
-     -socket  55355
+     -simrunnum  1
+     -socket  34719
 
-Sun May 20 22:35:19 2018
+Mon May 21 08:18:01 2018
 
 
- Elaboration Time: 0.03 sec
+ Elaboration Time: 0.01 sec

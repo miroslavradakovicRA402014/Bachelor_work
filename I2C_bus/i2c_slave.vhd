@@ -25,14 +25,15 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2c_slave is
 	 Generic(
-		REGISTER_NUM		 : integer := 16;  										 -- Number of slave registers
-		TC_PERIOD			 : integer := 12;  										 -- Terminal count period for ack start
-		TR_PERIOD			 : integer := 16;  										 -- Slave transmission peirod
-		DATA_WIDTH 			 : integer := 8; 											 -- Data width
-		DATA_CNT_WIDTH 	 : integer := 4;											 -- Data counter width
-		PERIOD_CNT_WIDTH   : integer := 4;											 -- Data counter width
-		REGISTER_SEL_WIDTH :	integer := 4; 											 -- Decoder selection width
-		SLAVE_ADDRESS  	 : std_logic_vector(6 downto 0) := "1010101"     -- Slave address (7 bit address)
+		REGISTER_NUM		 	: integer := 16;  										 -- Number of slave registers
+		TC_PERIOD			 	: integer := 13;  										 -- Terminal count period for ack start
+		TR_PERIOD			 	: integer := 17;  										 -- Slave transmission peirod
+		DATA_WIDTH 			 	: integer := 8; 											 -- Data width
+		DATA_CNT_WIDTH 	 	: integer := 4;											 -- Data counter width
+		TR_PERIOD_CNT_WIDTH  : integer := 5;											 -- Transmission period counter width
+		PERIOD_CNT_WIDTH   	: integer := 4;											 -- Period counter width
+		REGISTER_SEL_WIDTH 	: integer := 4; 											 -- Decoder selection width
+		SLAVE_ADDRESS  	 	: std_logic_vector(6 downto 0) := "1010101"      -- Slave address (7 bit address)
 	 );
     Port ( iCLK 	: in  	std_logic;
            inRST 	: in  	std_logic;
@@ -74,7 +75,7 @@ architecture Behavioral of i2c_slave is
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
 	signal sTC_PERIOD_CNT 			: std_logic;
 
-	signal sTR_PERIOD_CNT 			: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Slave transmission period
+	signal sTR_PERIOD_CNT 			: unsigned(TR_PERIOD_CNT_WIDTH - 1 downto 0);										-- Slave transmission period
 	signal sTR_PERIOD_CNT_EN 		: std_logic;																					-- Slave transmission period enable
 	signal sTC_TR_PERIOD_CNT 		: std_logic;																					-- Slave transmission period terminal count
 	signal sTR_PERIOD_CNT_RST		: std_logic;																					-- Slave transmission period counter reset signal

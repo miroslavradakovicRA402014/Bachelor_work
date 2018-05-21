@@ -24,15 +24,18 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity uart_i2c_master is
 	 Generic (
-		REGISTER_NUM		 : integer := 4;	 -- Number of register
-		DATA_BYTE_NUM		 : integer := 2;	 -- Nmber of data bytes
-		TC_PERIOD			 : integer := 12;  -- Terminal count period 
-		TR_PERIOD			 : integer := 16;  -- Master transmission peirod
-		REGISTER_SEL_WIDTH : integer := 2;	 -- Register mux and decoder select widht
-		DATA_WIDTH 			 : integer := 8;	 -- UART word widht 
-		DATA_CNT_WIDTH 	 : integer := 4;   -- Data counter width
-		BYTE_CNT_WIDTH 	 : integer := 2;   -- Byte counter width
-		PERIOD_CNT_WIDTH   : integer := 4	 -- Period counter width
+		REGISTER_NUM		   : integer := 4;	-- Number of register
+		DATA_BYTE_NUM		   : integer := 2;	-- Nmber of data bytes
+		START_PERIOD		   : integer := 5;   -- Master start sync peirod
+		TC_PERIOD			   : integer := 13;  -- Terminal count period 
+		TR_PERIOD			   : integer := 17;  -- Master transmission peirod
+		REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
+		DATA_WIDTH 			   : integer := 8;	-- UART word widht 
+		DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
+		START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
+		BYTE_CNT_WIDTH 	   : integer := 2;   -- Byte counter width
+		TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmisssion period counter width
+		PERIOD_CNT_WIDTH     : integer := 4		-- Period counter width
 	 );
     Port ( iCLK  		   : in 	  std_logic;
            inRST 		   : in 	  std_logic;
@@ -56,7 +59,7 @@ architecture Behavioral of uart_i2c_master is
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
-							 I2C_START, I2C_SLAVE_ADDRESS_MODE, I2C_SLAVE_ADDRESS_ACK, I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK,
+							 I2C_START, I2C_START_PERIOD, I2C_SLAVE_ADDRESS_MODE, I2C_SLAVE_ADDRESS_ACK, I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK,
 							 I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP, SEND_I2C_UART_TELEGRAM,
 							 SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER); 	   		-- Slave FSM states type
 
@@ -80,11 +83,15 @@ architecture Behavioral of uart_i2c_master is
 	signal sBYTE_CNT_EN 	 	   	: std_logic;																					-- Data byte counter enable		
 	signal sBYTE_CNT_RST				: std_logic;																					-- Data byte counter reset signal-- Upper, lower byte selection signal
 	
+	signal sSTART_PERIOD_CNT 		: unsigned(START_CNT_WIDTH - 1 downto 0);												-- Start period counter
+	signal sSTART_PERIOD_CNT_EN 	: std_logic;																					-- Start period counter enable
+	signal sTC_START_PERIOD_CNT 	: std_logic;																					-- Start period counter terminal count
+	
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
-	signal sTC_PERIOD_CNT 			: std_logic;																					-- Period counter terminal count
+	signal sTC_PERIOD_CNT 			: std_logic;		
 	
-	signal sTR_PERIOD_CNT 			: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Master transmission period
+	signal sTR_PERIOD_CNT 			: unsigned(TR_PERIOD_CNT_WIDTH - 1 downto 0);										-- Master transmission period
 	signal sTR_PERIOD_CNT_EN 		: std_logic;																					-- Master transmission period enable
 	signal sTC_TR_PERIOD_CNT 		: std_logic;																					-- Master transmission period terminal count
 	signal sTR_PERIOD_CNT_RST		: std_logic;																					-- Master transmission period counter reset signal	
@@ -221,7 +228,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_CNT) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_START_PERIOD_CNT, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_CNT) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
@@ -264,18 +271,26 @@ begin
 					sNEXT_STATE <= UART_BYTE_UPPER;
 				end if;				
 			when UART_STOP =>
-				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= I2C_START; -- Start send I2C telegram
-				else 
-					sNEXT_STATE <= UART_STOP;
-				end if;
+--				if (iUART_EMPTY = '0') then
+--					sNEXT_STATE <= I2C_START; -- Start send I2C telegram
+--				else 
+--					sNEXT_STATE <= UART_STOP;
+--				end if;
+				sNEXT_STATE <= I2C_START; -- Start send I2C telegram
 			when I2C_START =>
 				-- Check if period elapsed
 				if (sTC_TR_PERIOD_CNT = '1') then
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_MODE; -- Send I2C address to slave
+					sNEXT_STATE <= I2C_START_PERIOD; -- Start period for SDA-SCL sync
 				else 
 					sNEXT_STATE <= I2C_START;
 				end if;
+			when I2C_START_PERIOD =>
+				-- Check if period elapsed
+				if (sTC_START_PERIOD_CNT = '1') then
+					sNEXT_STATE <= I2C_SLAVE_ADDRESS_MODE; -- Send I2C address to slave
+				else 
+					sNEXT_STATE <= I2C_START_PERIOD;
+				end if;				
 			when I2C_SLAVE_ADDRESS_MODE =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
@@ -286,7 +301,7 @@ begin
 			when I2C_SLAVE_ADDRESS_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_REGISTER_ADDRESS;	
+					sNEXT_STATE <= I2C_REGISTER_ADDRESS; -- Get slave register address 
 				else
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK;
 				end if;	
@@ -411,7 +426,8 @@ begin
 				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '0';	
 				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '1';					
+				sBYTE_CNT_RST 		 <= '1';	
+				sSTART_PERIOD_CNT_EN <= '0';	
 				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';	
@@ -439,6 +455,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -466,6 +483,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';	
 				sISHW_EN			    <= '0';				
@@ -493,6 +511,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
@@ -520,6 +539,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
@@ -547,6 +567,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
@@ -574,6 +595,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
@@ -601,8 +623,37 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';	
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
+				sISHW_EN			    <= '0';				
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';	
+				sOUART_REG_SEL		 <= "00";				
+			when I2C_START_PERIOD =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '0';
+				sOUART_REG_EN		 <= '0';
+				sACK_SEL		 		 <= '0';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';	
+				sREG_MUX_SEL		 <= "00";				
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '1';	
+				oFREQ_EN 			 <= '1';
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '0';		
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';			
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';	
+				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '1';
+				sTR_PERIOD_CNT_RST <= '1';
+				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0';				
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1';	
@@ -637,6 +688,7 @@ begin
 					sOSHW_EN			    <= '1'; 
 				end if;
 				sISHW_EN			    <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
 				sOUART_REG_SEL		 <= "00";				
@@ -661,6 +713,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -697,6 +750,7 @@ begin
 					sOSHW_EN			 	 <= '1'; 
 				end if;
 				sISHW_EN			    <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';		
 				sOUART_REG_SEL		 <= "00";				
@@ -727,6 +781,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -762,6 +817,7 @@ begin
 					sOSHW_EN			    <= '1'; 
 				end if;
 				sISHW_EN			    <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';	
 				sOUART_REG_SEL		 <= "00";				
@@ -797,6 +853,7 @@ begin
 					sISHW_EN			    <= '1'; 
 				end if;
 				sOSHW_EN			 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sOSHW_LOAD			 <= '0';	
 				sOUART_REG_SEL		 <= "00";				
@@ -821,6 +878,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -859,6 +917,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -886,6 +945,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -914,6 +974,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -941,6 +1002,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -968,6 +1030,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -995,6 +1058,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -1022,6 +1086,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sISHW_EN			    <= '0'; 
@@ -1049,6 +1114,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
 				sISHW_EN			    <= '0';				
@@ -1083,6 +1149,23 @@ begin
 			end if;	
 		end if;
 	end process byte_cnt;	
+
+	-- Start sync period counter process
+	start_per_cnt : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sSTART_PERIOD_CNT <= (others => '0'); -- Reset counter 
+		elsif (iCLK'event and iCLK = '1') then
+			if (sSTART_PERIOD_CNT = START_PERIOD - 1) then -- Check counted periods
+				sSTART_PERIOD_CNT <= (others => '0'); 
+			elsif (iTC = '1' and sSTART_PERIOD_CNT_EN = '1') then 
+				sSTART_PERIOD_CNT <= sSTART_PERIOD_CNT + 1; -- Count period
+			end if;
+		end if;
+	end process start_per_cnt;
+	
+	-- Start period counter terminal count 
+	sTC_START_PERIOD_CNT <= '1' when sSTART_PERIOD_CNT = START_PERIOD - 1 else
+									'0';
 			
 	-- Period counter process
 	per_cnt : process (iCLK, inRST) begin
