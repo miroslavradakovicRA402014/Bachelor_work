@@ -478,7 +478,7 @@ begin
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0'; 
 				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
+				sDATA_CNT_RST 		 <= '1';
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';

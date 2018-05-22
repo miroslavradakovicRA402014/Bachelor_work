@@ -48,7 +48,6 @@ architecture Behavioral of i2c_bus is
 	
 begin
 
-
 	-- I2C bus master 
 	eUART_I2C_MASTER : uart_i2c_master 
 			Port map(

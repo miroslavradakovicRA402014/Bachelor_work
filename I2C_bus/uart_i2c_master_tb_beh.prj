@@ -1,5 +1,0 @@
-vhdl work "scl_gen.vhd"
-vhdl work "rising_edge_det.vhd"
-vhdl work "reg.vhd"
-vhdl work "uart_i2c_master.vhd"
-vhdl work "uart_i2c_master_tb.vhd"
