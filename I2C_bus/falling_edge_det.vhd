@@ -29,7 +29,7 @@ entity falling_edge_det is
 end falling_edge_det;
 
 architecture Behavioral of falling_edge_det is
-	type   tSTATES is (IDLE, EDGE, ZERO); 	 -- Detector FSM states
+	type   tSTATES is (IDLE, RIS_EDGE, ONE, FALL_EDGE); 	 -- Detector FSM states
 	
 	signal sCURRENT_STATE : tSTATES;	 -- Detector FSM current state
 	signal sNEXT_STATE 	 : tSTATES;  -- Detector FSM next state
@@ -51,22 +51,24 @@ begin
 			when IDLE =>
 				-- Wait for signal edge
 				if (iSIG = '1') then
-					sNEXT_STATE <= IDLE; -- Falling edge detected
+					sNEXT_STATE <= RIS_EDGE; -- Rising edge detected
 				else
-					sNEXT_STATE <= ZERO;
+					sNEXT_STATE <= IDLE;
 				end if;
-			when EDGE =>
-				if (iSIG = '0') then
-					sNEXT_STATE <= ZERO; -- Logical zero
+			when RIS_EDGE =>
+				if (iSIG = '1') then
+					sNEXT_STATE <= ONE; -- Logical one
 				else 
-					sNEXT_STATE <= IDLE; -- Falling edge
+					sNEXT_STATE <= FALL_EDGE; -- Falling edge
 				end if;	
 			when ONE  =>
 				if (iSIG = '0') then
-					sNEXT_STATE <= IDLE; -- Falling edge 
+					sNEXT_STATE <= FALL_EDGE; -- Falling edge 
 				else 
 					sNEXT_STATE <= ONE;
 				end if;
+			when FALL_EDGE => 
+				sNEXT_STATE <= IDLE;			
 		end case;
 	end process fsm_next;
 	
@@ -75,10 +77,12 @@ begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				oEDGE <= '0';
-			when EDGE =>
-				oEDGE <= '1'; -- Rising edge
+			when RIS_EDGE =>
+				oEDGE <= '0'; -- Rising edge
 			when ONE  =>
 				oEDGE <= '0';
+			when FALL_EDGE =>
+				oEDGE <= '1'; -- Falling edge
 		end case;
 	end process fsm_out;
 

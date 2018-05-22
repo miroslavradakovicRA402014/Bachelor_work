@@ -770,7 +770,7 @@ BEGIN
 		
 		wait for iCLK_period*150;
 		
-		-- Read form slave -------------------------------------------------------------------------------------------
+		--- Read form slave -------------------------------------------------------------------------------------------
 		
 		-- Start condition
 		ioSDA <= '0';
@@ -873,7 +873,7 @@ BEGIN
 		
 		wait for iCLK_period*4;
 
-		ioSDA <= '1'; -- Data 7 -- Mode R/W
+		ioSDA <= '0'; -- Data 7 -- Mode R/W
 
 		wait for iCLK_period*4;
 		
@@ -1014,7 +1014,7 @@ BEGIN
 		wait for iCLK_period*6;
 
 		ioSDA <= 'Z'; -- Data 8	
-
+		
 		-- Read period ----------------------------------------------------------------
 	
 		wait for iCLK_period*4;		
@@ -1026,11 +1026,23 @@ BEGIN
 		-- SCL 1		
 		iSCL  <= '0';
 		
-		wait for iCLK_period*8;
-				
+		wait for iCLK_period*6;
+		
+		ioSDA <= '1';
+		
+		wait for iCLK_period*4;
+		
 		iSCL  <= '1';
 		
-		wait for iCLK_period*8;		
+		wait for iCLK_period*4;
+				
+		ioSDA <= '0';
+		
+		wait for iCLK_period*4;
+
+		iSCL  <= '1';		
+
+		wait for iCLK_period*4;
 
 		-- SCL 2		
 		iSCL  <= '0';

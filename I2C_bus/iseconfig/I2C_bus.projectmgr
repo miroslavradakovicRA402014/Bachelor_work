@@ -13,13 +13,13 @@
          <ClosedNode>/uart_i2c_master - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|uart_i2c_master.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>eI2C_SLAVE - i2c_slave - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd)</SelectedItem>
+         <SelectedItem>eUART_I2C_MASTER - uart_i2c_master - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000236000000020000000000000000000000000200000064ffffffff000000810000000300000002000002360000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>eI2C_SLAVE - i2c_slave - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd)</CurrentItem>
+      <CurrentItem>eUART_I2C_MASTER - uart_i2c_master - Behavioral (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -48,7 +48,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000001c4000000040101000100000000000000000000000064ffffffff0000008100000000000000040000004f0000000100000000000000290000000100000000000000840000000100000000000000c80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000039f000000040101000100000000000000000000000064ffffffff0000008100000000000000040000004f0000000100000000000000290000000100000000000000840000000100000000000002a30000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>i2c_bus_components.vhd</CurrentItem>
    </ItemView>
@@ -68,6 +68,7 @@
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
+         <ClosedNode>/falling_edge_det_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|falling_edge_det_tb.vhd</ClosedNode>
          <ClosedNode>/i2c_bus_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|i2c_bus_tb.vhd</ClosedNode>
          <ClosedNode>/i2c_clk_freq_div_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|i2c_clk_freq_div_tb.vhd</ClosedNode>
          <ClosedNode>/i2c_slave_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|i2c_slave_tb.vhd</ClosedNode>
@@ -78,13 +79,13 @@
          <ClosedNode>/uart_i2c_master_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|uart_i2c_master_tb.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>i2c_bus_tb - behavior (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_bus_tb.vhd)</SelectedItem>
+         <SelectedItem>uart_i2c_master_tb - behavior (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001ae000000020000000000000000000000000200000064ffffffff000000810000000300000002000001ae0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001b4000000020000000000000000000000000200000064ffffffff000000810000000300000002000001b40000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>i2c_bus_tb - behavior (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_bus_tb.vhd)</CurrentItem>
+      <CurrentItem>uart_i2c_master_tb - behavior (/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master_tb.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -92,13 +93,13 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem/>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001c4000000010000000100000000000000000000000064ffffffff000000810000000000000001000001c40000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem/>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -122,12 +123,12 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem>Behavioral Check Syntax</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001c4000000010000000100000000000000000000000064ffffffff000000810000000000000001000001c40000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>Behavioral Check Syntax</CurrentItem>
    </ItemView>
 </Project>

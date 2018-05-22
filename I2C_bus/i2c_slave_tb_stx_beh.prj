@@ -1,4 +1,5 @@
 vhdl isim_temp "slave_reg.vhd"
 vhdl isim_temp "rising_edge_det.vhd"
+vhdl isim_temp "falling_edge_det.vhd"
 vhdl isim_temp "i2c_slave.vhd"
 vhdl isim_temp "i2c_slave_tb.vhd"

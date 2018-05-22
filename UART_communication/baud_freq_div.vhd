@@ -46,7 +46,6 @@ architecture Behavioral of baud_freq_div is
 	constant cBAUD_57600_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(57600*16)  + 1, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 57600
 	constant cBAUD_115200_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(115200*16) + 1, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 115200
 	
-
 	signal 	sCLK_CNT 			  : unsigned(CLK_CNT_WIDTH - 1 downto 0); 			-- Clock counter signal
 	signal   sBAUD_RATE			  : unsigned(CLK_CNT_WIDTH - 1 downto 0);				-- Baud rate period of clock signal 
 	signal 	sBAUD_RATE_REG  	  : unsigned(CLK_CNT_WIDTH - 1 downto 0); 			-- Baud rate reigster

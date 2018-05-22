@@ -25,15 +25,17 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2c_slave is
 	 Generic(
-		REGISTER_NUM		 	: integer := 16;  										 -- Number of slave registers
-		TC_PERIOD			 	: integer := 13;  										 -- Terminal count period for ack start
-		TR_PERIOD			 	: integer := 17;  										 -- Slave transmission peirod
-		DATA_WIDTH 			 	: integer := 8; 											 -- Data width
-		DATA_CNT_WIDTH 	 	: integer := 4;											 -- Data counter width
-		TR_PERIOD_CNT_WIDTH  : integer := 5;											 -- Transmission period counter width
-		PERIOD_CNT_WIDTH   	: integer := 4;											 -- Period counter width
-		REGISTER_SEL_WIDTH 	: integer := 4; 											 -- Decoder selection width
-		SLAVE_ADDRESS  	 	: std_logic_vector(6 downto 0) := "1010101"      -- Slave address (7 bit address)
+		REGISTER_NUM		 		: integer := 16;  										 -- Number of slave registers
+		TC_PERIOD			 		: integer := 13;  										 -- Terminal count period for ack start
+		TR_PERIOD			 		: integer := 17;  										 -- Slave transmission peirod
+		REP_START_PERIOD 			: integer := 9;											 -- Repeated start period
+		DATA_WIDTH 			 		: integer := 8; 											 -- Data width
+		DATA_CNT_WIDTH 	 		: integer := 4;											 -- Data counter width
+		PERIOD_CNT_WIDTH   		: integer := 4;											 -- Period counter width
+		RSTART_PERIOD_CNT_WIDTH : integer := 4;									 		 -- Repeat start period counter width
+		TR_PERIOD_CNT_WIDTH  	: integer := 5;											 -- Transmission period counter width
+		REGISTER_SEL_WIDTH 		: integer := 4; 											 -- Decoder selection width
+		SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "1010101"      -- Slave address (7 bit address)
 	 );
     Port ( iCLK 	: in  	std_logic;
            inRST 	: in  	std_logic;
@@ -49,7 +51,7 @@ architecture Behavioral of i2c_slave is
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, START, SLAVE_ADDRESS_MODE, SLAVE_ADDRESS_ACK, REGISTER_ADDRESS, REGISTER_ADDRESS_ACK, 
-							 REGISTER_ADDRESS_NACK, READ_DATA, READ_ACK, WRITE_DATA, WRITE_ACK, STOP); 	   		-- Slave FSM states type																
+							 REGISTER_ADDRESS_NACK, REPEATED_START, READ_DATA, READ_ACK, WRITE_DATA, WRITE_ACK, STOP);  -- Slave FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Slave FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 																			 			-- Slave FSM next state
@@ -73,7 +75,11 @@ architecture Behavioral of i2c_slave is
 
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
-	signal sTC_PERIOD_CNT 			: std_logic;
+	signal sTC_PERIOD_CNT 			: std_logic;																					-- Period counter terminal count
+
+	signal sRSTART_PERIOD_CNT   	: unsigned(RSTART_PERIOD_CNT_WIDTH - 1 downto 0);									-- Repeated start period counter
+	signal sRSTART_PERIOD_CNT_EN 	: std_logic;																					-- Repeated start period counter enable
+	signal sTC_RSTART_PERIOD_CNT  : std_logic;																					-- Repeated start period counter terminal count
 
 	signal sTR_PERIOD_CNT 			: unsigned(TR_PERIOD_CNT_WIDTH - 1 downto 0);										-- Slave transmission period
 	signal sTR_PERIOD_CNT_EN 		: std_logic;																					-- Slave transmission period enable
@@ -85,6 +91,7 @@ architecture Behavioral of i2c_slave is
 	
 	signal sSCL_RISING_EDGE    	: std_logic;																					-- SCL rising edge indication
 	signal sSDA_RISING_EDGE    	: std_logic;																					-- SDA rising edge indication
+	signal sSDA_FALLING_EDGE    	: std_logic;																					-- SDA falling edge indication
 	
 	signal sACK							: std_logic;																					-- Acknowelge signal from mux
 	signal sACK_SEL					: std_logic;																					-- Acknowelge select signal 
@@ -129,7 +136,7 @@ begin
 	end generate reg_gen;
 	
 	-- SCL rising edge detector
-	eSCL_EDGE_DET : entity work.rising_edge_det
+	eSCL_REDGE_DET : entity work.rising_edge_det
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
@@ -138,13 +145,22 @@ begin
 			);
 			
 	-- SDA rising edge detector
-	eSDA_EDGE_DET : entity work.rising_edge_det
+	eSDA_REDGE_DET : entity work.rising_edge_det
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
 				iSIG  => ioSDA,
 				oEDGE => sSDA_RISING_EDGE
 			);			
+	
+	-- SDA falling edge detector
+	eSDA_FEDGE_DET : entity work.falling_edge_det
+			Port map(
+				iCLK  => iCLK,
+				inRST => inRST,
+				iSIG  => ioSDA,
+				oEDGE => sSDA_FALLING_EDGE
+			);
 	
 	-- Mode R/W flip-flop 
 	mode_ff : process (iCLK, inRST) begin
@@ -178,7 +194,7 @@ begin
 	end process fsm_reg;
 	
 	-- Slave FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSDA_RISING_EDGE, sTC_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
+	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for start condition
@@ -239,10 +255,16 @@ begin
 				else
 					sNEXT_STATE <= REGISTER_ADDRESS_NACK;
 				end if;	
+			when REPEATED_START =>
+			   if (sTC_RSTART_PERIOD_CNT = '1') then
+					sNEXT_STATE <= SLAVE_ADDRESS_MODE; -- Get slave address mode after repeated start
+				else
+					sNEXT_STATE <= REPEATED_START; 
+				end if;
 			when READ_DATA	=>
 				-- Check for repeated start condition
-				if (iSCL = '1') then
-					sNEXT_STATE <= SLAVE_ADDRESS_MODE;
+				if (iSCL = '1' and sSDA_FALLING_EDGE = '1') then
+					sNEXT_STATE <= REPEATED_START; 
 				-- Check if stop condition was generated by master 
 				elsif (iSCL = '1' and sSDA_RISING_EDGE = '1') then
 					sNEXT_STATE <= IDLE;			
@@ -299,6 +321,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
@@ -319,6 +342,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sADDR_REG_EN		 <= '0';
@@ -348,6 +372,7 @@ begin
 					sPERIOD_CNT_EN  <= '0';
 					sISHW_EN			 <= '1'; -- Get data bit and shift register
 				end if;
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sOSHW_EN				 <= '0';
@@ -394,6 +419,7 @@ begin
 					sADDR_REG_EN	 <= '0';
 					sISHW_EN			 <= '1'; -- Get register address bit 
 				end if;
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sOSHW_EN				 <= '0';
@@ -448,6 +474,27 @@ begin
 				sREG_DEC_EN			 <= '0';	
 				sACK_SEL				 <= '1';
 				sSDA_SEL				 <= '0';		
+			when REPEATED_START =>
+				sIN_BUFF_EN	 		 <= '1';
+				sOUT_BUFF_EN 		 <= '0'; 
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';				
+				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period
+				sTR_PERIOD_CNT_EN  <= '0'; 
+				sTR_PERIOD_CNT_RST <= '0';
+				sADDR_REG_EN		 <= '0';
+				sMODE_FF_EN			 <= '0';
+				sISHW_EN				 <= '0';
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';
+				sREG_MUX_SEL		 <= "0000";
+				sREG_DEC_SEL		 <= "0000";
+				sREG_DEC_EN			 <= '0';	
+				sACK_SEL				 <= '0';
+				sSDA_SEL				 <= '0';	
 			when READ_DATA =>		
 				sIN_BUFF_EN	 		 <= '1';
 				sOUT_BUFF_EN 		 <= '0';	
@@ -468,6 +515,7 @@ begin
 					sREG_DEC_SEL	 <= "0000";
 					sREG_DEC_EN		 <= '0';
 				end if;
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0';
 				sOSHW_EN				 <= '0';
@@ -483,6 +531,7 @@ begin
 				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
 				sBYTE_CNT_RST 		 <= '0';				
 				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN	  	 <= '0';
@@ -516,6 +565,7 @@ begin
 					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN				 <= '1';
 				end if;
+				sRSTART_PERIOD_CNT_EN <= '0';								
 				sOSHW_LOAD			 <= '0';
 				sREG_MUX_SEL		 <= "0000";
 				sREG_DEC_SEL		 <= "0000";
@@ -530,6 +580,7 @@ begin
 				sBYTE_CNT_EN   	 <= '1';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
 				sTR_PERIOD_CNT_RST <= '0';
 				sADDR_REG_EN		 <= '0';
@@ -550,6 +601,7 @@ begin
 				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '0';					
 				sPERIOD_CNT_EN 	 <= '0';
+				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '0';
 				sTR_PERIOD_CNT_RST <= '0'; 
 				sADDR_REG_EN		 <= '0';
@@ -610,6 +662,23 @@ begin
 	-- Period counter terminal count 
 	sTC_PERIOD_CNT <= '1' when sPERIOD_CNT = TC_PERIOD - 1 else
 							'0';
+								  
+	-- Repeated start period counter
+	rep_start_per_cnt : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sRSTART_PERIOD_CNT <= (others => '0'); -- Reset counter 
+		elsif (iCLK'event and iCLK = '1') then
+			if (sRSTART_PERIOD_CNT = REP_START_PERIOD - 1) then -- Check counted periods
+				sRSTART_PERIOD_CNT <= (others => '0'); 
+			elsif (iTC = '1' and sRSTART_PERIOD_CNT_EN = '1') then 
+				sRSTART_PERIOD_CNT <= sRSTART_PERIOD_CNT + 1; -- Count period
+			end if;
+		end if;
+	end process rep_start_per_cnt;
+	
+	-- Period counter terminal count 
+	sTC_RSTART_PERIOD_CNT <= '1' when sRSTART_PERIOD_CNT = REP_START_PERIOD - 1 else
+									 '0';							  
 								  
 	-- Transmission period counter
 	tr_per_cnt : process (iCLK, inRST) begin
