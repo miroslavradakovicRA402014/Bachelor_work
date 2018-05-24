@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "/home/mika/Projects/projects_workspace/Bachelor_work/I2C_bus/scl_gen.vhd";
+static const char *ng0 = "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/scl_gen.vhd";
 extern char *IEEE_P_2592010699;
 extern char *IEEE_P_1242562249;
 
@@ -166,7 +166,7 @@ LAB2:    xsi_set_current_line(64, ng0);
 LAB5:    xsi_set_current_line(66, ng0);
     t2 = (t0 + 1832U);
     t6 = *((char **)t2);
-    t2 = (t0 + 7528U);
+    t2 = (t0 + 7464U);
     t13 = (9 - 1);
     t14 = ieee_p_1242562249_sub_3307759752501503797_1035706684(IEEE_P_1242562249, t6, t2, t13);
     if (t14 != 0)
@@ -211,7 +211,7 @@ LAB10:    xsi_set_current_line(67, ng0);
 LAB13:    xsi_set_current_line(69, ng0);
     t1 = (t0 + 1832U);
     t6 = *((char **)t1);
-    t1 = (t0 + 7528U);
+    t1 = (t0 + 7464U);
     t7 = ieee_p_1242562249_sub_1006216973935652998_1035706684(IEEE_P_1242562249, t18, t6, t1, 1);
     t8 = (t18 + 12U);
     t19 = *((unsigned int *)t8);
@@ -262,7 +262,7 @@ static void work_a_1091000080_3212880686_p_2(char *t0)
 LAB0:    xsi_set_current_line(75, ng0);
     t1 = (t0 + 1832U);
     t2 = *((char **)t1);
-    t1 = (t0 + 7528U);
+    t1 = (t0 + 7464U);
     t3 = (9 - 1);
     t4 = ieee_p_1242562249_sub_3307759752501503797_1035706684(IEEE_P_1242562249, t2, t1, t3);
     if (t4 != 0)

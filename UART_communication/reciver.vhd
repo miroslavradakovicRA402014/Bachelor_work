@@ -27,7 +27,7 @@ entity reciver is
 		DATA_WIDTH 		 : integer := 8;  -- Data bit number
 		START_TC_PERIOD : integer := 8;  -- Start terminal count period for oversampling
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
-		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
+		DATA_CNT_WIDTH  : integer := 4;  -- Width of data bit counter
 		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 		DATA_BIT_SEL	 : integer := 2   -- Width of data bit number select
 	 );
@@ -49,10 +49,10 @@ architecture Behavioral of reciver is
 	constant cWRONG_DATA		 : std_logic_vector(DATA_WIDTH - 1 downto 0) := x"2D";							 -- Wrong parity character
 	
 	-- Data counter count limit
-	constant cDATA_5_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "100";		
-	constant cDATA_6_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "101";
-	constant cDATA_7_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "110";
-	constant cDATA_8_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "111";
+	constant cDATA_5_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "1000";		
+	constant cDATA_6_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "1010";
+	constant cDATA_7_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "1100";
+	constant cDATA_8_BIT     : unsigned(DATA_CNT_WIDTH - 1 downto 0) := "1000";
 
 	type tSTATES is (IDLE, START, DATA, PARITY, STOP); 							     								 -- Reciver FSM state type
 
@@ -60,7 +60,7 @@ architecture Behavioral of reciver is
 	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 							 -- Reciver FSM next state 
 	
 	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  							 -- Recived data bits counter 
-	signal sDATA_BIT_REG			: unsigned(2	downto 0);											 					 -- Data bit number register
+	signal sDATA_BIT_REG			: unsigned(3	downto 0);											 					 -- Data bit number register
 	signal sDATA_BIT				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 -- Data bit number 
 	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  						 	 -- Terminal count counter
 	

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="i2c_bus_components" />
+            <top_module name="i2c_via_uart_components" />
+            <top_module name="i2c_via_uart_tb" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="uart_components" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="22" />
+   <wave_markers>
+      <marker time="564205000000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk</obj_property>
+      <obj_property name="ObjectShortName">iclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/inrst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inrst</obj_property>
+      <obj_property name="ObjectShortName">inrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/iparity_en_sw" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iparity_en_sw</obj_property>
+      <obj_property name="ObjectShortName">iparity_en_sw</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/iparity_sw" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iparity_sw</obj_property>
+      <obj_property name="ObjectShortName">iparity_sw</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/ihandshake_en_sw" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ihandshake_en_sw</obj_property>
+      <obj_property name="ObjectShortName">ihandshake_en_sw</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/idata_bit_sw" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">idata_bit_sw[1:0]</obj_property>
+      <obj_property name="ObjectShortName">idata_bit_sw[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/ibaud_sw" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ibaud_sw[2:0]</obj_property>
+      <obj_property name="ObjectShortName">ibaud_sw[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/icts" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">icts</obj_property>
+      <obj_property name="ObjectShortName">icts</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/irx" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">irx</obj_property>
+      <obj_property name="ObjectShortName">irx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eUART_RECIVER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/otx" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">otx</obj_property>
+      <obj_property name="ObjectShortName">otx</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/orts" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">orts</obj_property>
+      <obj_property name="ObjectShortName">orts</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/iclk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk_period</obj_property>
+      <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/siuart_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">siuart_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">siuart_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/ouart_read" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ouart_read</obj_property>
+      <obj_property name="ObjectShortName">ouart_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/iuart_empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iuart_empty</obj_property>
+      <obj_property name="ObjectShortName">iuart_empty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/siuart_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">siuart_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">siuart_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/sreg_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sreg_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sreg_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/sslave_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sslave_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sslave_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eRECV_FIFO/sfifo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eUART_RECIVER/sshw_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sshw_reg[8:0]</obj_property>
+      <obj_property name="ObjectShortName">sshw_reg[8:0]</obj_property>
+   </wvobject>
+</wave_config>

@@ -424,7 +424,7 @@ begin
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT) begin
+	fsm_out : process (sCURRENT_STATE, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -441,7 +441,11 @@ begin
 				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '0';
+				if (iUART_EMPTY = '1') then
+					oUART_READ  		 	<= '0';
+				else
+					oUART_READ  		 	<= '1';
+				end if;
 				oUART_WRITE			 	<= '0';
 				sDATA_CNT_EN 		 	<= '0';
 				sDATA_CNT_RST 		 	<= '0';	
@@ -458,16 +462,23 @@ begin
 			when UART_START =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  		<= '1';
+				--sIUART_REG_EN  		<= '1';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
 				sLBYTE_REG_SEL		 	<= '0';		
 				sUBYTE_REG_SEL 	 	<= '0';	
 				sSLAVE_ADDR_SEL		<= '0';
-				sREG_MUX_SEL		 	<= "00";		
+				sREG_MUX_SEL		 	<= "00";
+				if (iUART_EMPTY = '1') then
+					sIUART_REG_EN  		<= '0';
+					sREG_DEC_EN			 	<= '0';			
+				else
+					sIUART_REG_EN  		<= '1';
+					sREG_DEC_EN			 	<= '1';	
+				end if;
 				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '1';
+				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oUART_READ  		 	<= '1';
 				oUART_WRITE			 	<= '0';
@@ -486,7 +497,7 @@ begin
 			when UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '1';
+				--sIUART_REG_EN  	 	<= '1';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -494,8 +505,15 @@ begin
 				sUBYTE_REG_SEL 	 	<= '0';
 				sSLAVE_ADDR_SEL		<= '0';				
 				sREG_MUX_SEL		 	<= "00";	
+				if (iUART_EMPTY = '1') then
+					sIUART_REG_EN  		<= '0';
+					sREG_DEC_EN			 	<= '0';			
+				else
+					sIUART_REG_EN  		<= '1';
+					sREG_DEC_EN			 	<= '1';	
+				end if;		
 				sREG_DEC_SEL		 	<= "01";
-				sREG_DEC_EN			 	<= '1';
+				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
 				oUART_READ  		 	<= '1';
@@ -515,7 +533,7 @@ begin
 			when UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '1';
+				--sIUART_REG_EN  	 	<= '1';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -524,7 +542,14 @@ begin
 				sSLAVE_ADDR_SEL		<= '0';				
 				sREG_MUX_SEL		 	<= "00";		
 				sREG_DEC_SEL		 	<= "10";
-				sREG_DEC_EN			 	<= '1';
+				if (iUART_EMPTY = '1') then
+					sIUART_REG_EN  		<= '0';
+					sREG_DEC_EN			 	<= '0';			
+				else
+					sIUART_REG_EN  		<= '1';
+					sREG_DEC_EN			 	<= '1';	
+				end if;				
+				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
 				oUART_READ  		 	<= '1';
@@ -544,7 +569,7 @@ begin
 			when UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '1';
+				--sIUART_REG_EN  	 	<= '1';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -553,7 +578,14 @@ begin
 				sSLAVE_ADDR_SEL		<= '0';				
 				sREG_MUX_SEL		 	<= "00";				
 				sREG_DEC_SEL		 	<= "11";
-				sREG_DEC_EN			 	<= '1';
+				if (iUART_EMPTY = '1') then
+					sIUART_REG_EN  		<= '0';
+					sREG_DEC_EN			 	<= '0';			
+				else
+					sIUART_REG_EN  		<= '1';
+					sREG_DEC_EN			 	<= '1';	
+				end if;				
+				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
 				oUART_READ  		 	<= '1';
