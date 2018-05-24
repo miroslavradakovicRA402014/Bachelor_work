@@ -51,7 +51,7 @@ architecture Behavioral of i2c_slave is
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, START, SLAVE_ADDRESS_MODE, SLAVE_ADDRESS_ACK, REGISTER_ADDRESS, REGISTER_ADDRESS_ACK, 
-							 REGISTER_ADDRESS_NACK, REPEATED_START, READ_DATA, READ_ACK, WRITE_DATA, WRITE_ACK, STOP);  -- Slave FSM states type																
+							 REGISTER_ADDRESS_NACK, REPEATED_START, READ_DATA, READ_ACK, WRITE_DATA, WRITE_ACK, STOP);  	-- Slave FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Slave FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 																			 			-- Slave FSM next state
@@ -396,8 +396,13 @@ begin
 				sMODE_FF_EN			 <= '0';				
 				sISHW_EN				 <= '0';
 				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
+				if (sMODE_FF = '0') then	
+					sOSHW_LOAD			 <= '0';
+					sREG_MUX_SEL		 <= "0000";
+				else
+					sOSHW_LOAD			 <= '1';
+					sREG_MUX_SEL		 <= sADDR_REG;
+				end if;
 				sREG_DEC_SEL		 <= "0000";
 				sREG_DEC_EN			 <= '0';	
 				sACK_SEL				 <= '0';
