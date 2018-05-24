@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-05-22T14:35:21</DateModified>
+  <DateModified>2018-05-24T11:10:01</DateModified>
   <ModuleName>i2c_via_uart</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/iseconfig/i2c_via_uart.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/</ImplementationReportsDirectory>
   <DateInitialized>2018-05-22T14:35:21</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

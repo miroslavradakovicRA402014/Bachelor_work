@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   15:49:18 05/21/2018
+-- Create Date:   11:15:11 05/24/2018
 -- Design Name:   
 -- Module Name:   /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd
 -- Project Name:  I2C_Emulation_Via_Serial
@@ -65,7 +65,7 @@ ARCHITECTURE behavior OF i2c_via_uart_tb IS
    signal iDATA_BIT_SW : std_logic_vector(1 downto 0) := (others => '0');
    signal iBAUD_SW : std_logic_vector(2 downto 0) := (others => '0');
    signal iCTS : std_logic := '0';
-   signal iRX : std_logic := '0';
+   signal iRX : std_logic := '1';
 
  	--Outputs
    signal oTX : std_logic;
@@ -104,12 +104,123 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100 ns.
+      -- insert stimulus here 
+		      -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for iCLK_period*10;
+		iBAUD_SW <= "010";
+		iPARITY_EN_SW <= '1';
+		iPARITY_SW <= '1';
+		iHANDSHAKE_EN_SW <= '0';
+		iDATA_BIT_SW <= "11";
 
-      -- insert stimulus here 
+      wait for iCLK_period*16*100;
+		
+		
+		inRST <= '1';
+
+
+		-- Slave address 11111010
+		
+	   -- Start bit	
+		iRX   <= '0';	
+  
+		wait for iCLK_period*16*170;
+		
+	   -- Data bits
+		
+		-- 0
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*170;
+		-- 1
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*160;
+		-- 2
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;		
+		-- 3
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*160;
+		-- 4
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*160;	
+		-- 5
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*160;		
+		-- 6
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*160;	
+		-- 7
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*170;
+
+		-- parity
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*170;		
+		
+		-- Stop bit
+		iRX <= '1';
+		
+		wait for iCLK_period*16*100;
+		
+		-- Register address 00000001
+		
+	   -- Start bit	
+		iRX   <= '0';	
+  
+		wait for iCLK_period*16*170;
+		
+	   -- Data bits
+		
+		-- 0
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*170;
+		-- 1
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;
+		-- 2
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;		
+		-- 3
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;
+		-- 4
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;	
+		-- 5
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;		
+		-- 6
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*160;	
+		-- 7
+		iRX  <= '0';
+		
+		wait for iCLK_period*16*170;
+
+		-- parity
+		iRX  <= '1';
+		
+		wait for iCLK_period*16*170;		
+		
+		-- Stop bit
+		iRX <= '1';		
 
       wait;
    end process;
