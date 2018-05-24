@@ -27,7 +27,7 @@ WARNING:HDLCompiler:746 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.v
 WARNING:HDLCompiler:220 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
 Completed static elaboration
 Fuse Memory Usage: 100236 KB
-Fuse CPU Usage: 850 ms
+Fuse CPU Usage: 930 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package i2c_via_uart_components
@@ -36,7 +36,7 @@ Compiling package i2c_bus_components
 Compiling package numeric_std
 Compiling package std_logic_arith
 Compiling architecture behavioral of entity baud_freq_div [\baud_freq_div(24000000,3,10)\]
-Compiling architecture behavioral of entity reciver [\reciver(8,8,16,4,4,2)\]
+Compiling architecture behavioral of entity reciver [\reciver(8,8,16,3,4,2)\]
 Compiling architecture behavioral of entity fifo [\fifo(8,16)\]
 Compiling architecture behavioral of entity transmitter [\transmitter(8,16,3,4,2)\]
 Compiling architecture behavioral of entity uart [\uart(3,2,8)\]
@@ -57,5 +57,5 @@ Waiting for 1 sub-compilation(s) to finish...
 Compiled 39 VHDL Units
 Built simulation executable /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
 Fuse Memory Usage: 1207508 KB
-Fuse CPU Usage: 970 ms
-GCC CPU Usage: 110 ms
+Fuse CPU Usage: 1040 ms
+GCC CPU Usage: 70 ms

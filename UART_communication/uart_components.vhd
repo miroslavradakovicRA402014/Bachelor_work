@@ -23,7 +23,7 @@ package uart_components is
 			DATA_WIDTH 		 : integer := 8;  -- Data bit number
 			START_TC_PERIOD : integer := 8;  -- Start terminal count period for oversampling
 			TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
-			DATA_CNT_WIDTH  : integer := 4;  -- Width of data bit counter
+			DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
 			TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 			DATA_BIT_SEL	 : integer := 2
 		 );
