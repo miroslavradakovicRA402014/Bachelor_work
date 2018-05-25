@@ -88,6 +88,7 @@ begin
          iTC   	  => sTC,
          iFULL 	  => sRECV_FULL,
 			oBAUD_EN   => sBAUD_EN,
+			oRTS		  => oRTS,
          oDATA 	  => sRECV_DATA,
          oRX_DONE   => sRX_DONE
 		);
@@ -119,7 +120,6 @@ begin
 		   iDATA  	     => sSEND_DATA, 
 			iSTART 	     => snSEND_EMPTY,
 			oTX_READY     => sTX_DONE,
-			oRTS          => oRTS,
 			oTX    	     => oTX		
 		);
 	

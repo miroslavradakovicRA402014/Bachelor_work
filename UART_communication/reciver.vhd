@@ -40,6 +40,7 @@ entity reciver is
            iTC         : in   std_logic;
            iFULL 	     : in   std_logic;
 			  oBAUD_EN    : out  std_logic;
+			  oRTS		  : out  std_logic;
            oDATA 	     : out  std_logic_vector(DATA_WIDTH   - 1 downto 0);
            oRX_DONE    : out  std_logic);
 end reciver;
@@ -293,6 +294,10 @@ begin
 				end if;								
 		end case;
 	end process parity_gen;
+	
+	-- RTS handshaking signal 
+	oRTS <= '1' when iFULL = '0' else -- Don't recive data if fifo is full
+			  '0';
 	
 	-- Reciver data output
 	-- Depends on data bits number get different parts of shift register because shift register is widther than width of some data 

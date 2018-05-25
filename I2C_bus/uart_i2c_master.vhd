@@ -268,7 +268,7 @@ begin
 					sNEXT_STATE <= UART_BYTE_LOWER;
 				end if;	
 			when UART_BYTE_UPPER =>
-				if (iUART_EMPTY = '0') then
+				if (iUART_EMPTY = '1') then
 					sNEXT_STATE <= UART_STOP; -- End of I2C telegram
 				else 
 					sNEXT_STATE <= UART_BYTE_UPPER;

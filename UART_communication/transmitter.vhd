@@ -41,7 +41,6 @@ entity transmitter is
            iDATA  	 	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);
            iSTART 	 	 : in   std_logic;
 			  oTX_READY  	 : out  std_logic;
-			  oRTS		 	 : out  std_logic;
            oTX    	 	 : out  std_logic);
 end transmitter;
 
@@ -157,7 +156,6 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
-				oRTS					<= '0';
 				oTX 			 		<= '1'; 
 			when HANDSHAKE =>
 				sTC_CNT_EN	 		<= '0';
@@ -166,7 +164,6 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';
-				oRTS					<= '1'; -- Start handshaking 
 				oTX 			 		<= '1';				
 			when START 	   =>	
 				sTC_CNT_EN	 		<= '1'; -- Start countig 
@@ -180,12 +177,6 @@ begin
 					sDATA_LOAD	 <= '0';
 					oTX_READY 	 <= '0';					
 				end if;
-		      -- If handshaking enabled assert RTS signal
-				if (iHANDSHAKE_EN = '1') then
-					oRTS	<= '1';
-				else 
-					oRTS 	<= '0';
-				end if;
 				oTX 			 		<= '0';				
 			when DATA  	   =>	
 				sTC_CNT_EN	 		<= '1';  
@@ -194,12 +185,6 @@ begin
 				sSHW_EN		 		<= '1'; -- Shift data bits  
 				sDATA_LOAD	 		<= '0';
 				oTX_READY 	 		<= '0';	
-				-- If handshaking enabled assert RTS signal
-				if (iHANDSHAKE_EN = '1') then
-					oRTS	<= '1';
-				else 
-					oRTS 	<= '0';
-				end if;
 				oTX 			 		<= sSHW_REG(0); -- LSB of shift register is current data bit to transmitt
 			when PARITY  	=>	
 				sTC_CNT_EN	 		<= '1';
@@ -208,12 +193,6 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
-				-- If handshaking enabled assert RTS signal
-				if (iHANDSHAKE_EN = '1') then
-					oRTS	<= '1';
-				else 
-					oRTS 	<= '0';
-				end if;
 				oTX			 		<= sPARITY;	-- Transmitt parity bit			
 			when STOP  	   =>	
 				sTC_CNT_EN	 		<= '1';
@@ -222,12 +201,6 @@ begin
 				sSHW_EN		 		<= '0';
 				sDATA_LOAD	 		<= '0';
 			   oTX_READY 	 		<= '0';	
-				-- If handshaking enabled assert RTS signal
-				if (iHANDSHAKE_EN = '1') then
-					oRTS	<= '1';
-				else 
-					oRTS 	<= '0';
-				end if;
 				oTX			 		<= '1';	
 		end case;		
 	end process fsm_out;	

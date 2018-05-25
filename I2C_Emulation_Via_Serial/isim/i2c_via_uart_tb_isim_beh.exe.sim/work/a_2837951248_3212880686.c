@@ -231,7 +231,7 @@ LAB8:    xsi_set_current_line(271, ng0);
     t1 = (t0 + 1672U);
     t2 = *((char **)t1);
     t3 = *((unsigned char *)t2);
-    t6 = (t3 == (unsigned char)2);
+    t6 = (t3 == (unsigned char)3);
     if (t6 != 0)
         goto LAB47;
 
