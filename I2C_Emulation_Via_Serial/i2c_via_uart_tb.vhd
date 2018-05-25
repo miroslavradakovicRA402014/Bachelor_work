@@ -335,14 +335,14 @@ BEGIN
 	   -- Start bit	
 		iRX   <= '0';	
   
-		wait for iCLK_period*8*170;
+		wait for iCLK_period*16*170;
 		
 	   -- Data bits
 		
 		-- 0
 		iRX  <= '0';
 		
-		wait for iCLK_period*16*170;
+		wait for iCLK_period*8*170;
 		-- 1
 		iRX  <= '1';
 		
@@ -373,7 +373,7 @@ BEGIN
 		wait for iCLK_period*16*170;
 
 		-- parity
-		iRX  <= '0';
+		iRX  <= '1';
 		
 		wait for iCLK_period*16*170;		
 		

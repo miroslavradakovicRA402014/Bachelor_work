@@ -262,17 +262,17 @@ begin
 					sNEXT_STATE <= UART_REGISTER_ADDRESS;
 				end if;	
 			when UART_BYTE_LOWER =>
-				if (iUART_EMPTY = '0') then
+				--if (iUART_EMPTY = '0') then
 					sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART 
-				else 
-					sNEXT_STATE <= UART_BYTE_LOWER;
-				end if;	
+				--else 
+				--	sNEXT_STATE <= UART_BYTE_LOWER;
+				--end if;	
 			when UART_BYTE_UPPER =>
-				if (iUART_EMPTY = '1') then
+				--if (iUART_EMPTY = '1') then
 					sNEXT_STATE <= UART_STOP; -- End of I2C telegram
-				else 
-					sNEXT_STATE <= UART_BYTE_UPPER;
-				end if;				
+				--else 
+				--	sNEXT_STATE <= UART_BYTE_UPPER;
+				--end if;				
 			when UART_STOP =>
 				sNEXT_STATE <= I2C_START; -- Start send I2C telegram
 			when I2C_START =>
@@ -578,17 +578,17 @@ begin
 				sSLAVE_ADDR_SEL		<= '0';				
 				sREG_MUX_SEL		 	<= "00";				
 				sREG_DEC_SEL		 	<= "11";
-				if (iUART_EMPTY = '1') then
-					sIUART_REG_EN  		<= '0';
-					sREG_DEC_EN			 	<= '0';			
-				else
+				--if (iUART_EMPTY = '1') then
+				--	sIUART_REG_EN  		<= '0';
+				--	sREG_DEC_EN			 	<= '0';			
+				--else
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
-				end if;				
+				--end if;				
 				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '1';
+				oUART_READ  		 	<= '0';
 				oUART_WRITE			 	<= '0';
 				sDATA_CNT_EN 		 	<= '0';
 				sDATA_CNT_RST 		 	<= '0';		
@@ -605,7 +605,7 @@ begin
 			when UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '1';
+				sIUART_REG_EN  	 	<= '0';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -617,7 +617,7 @@ begin
 				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '0';	
 				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '1';
+				oUART_READ  		 	<= '0';
 				oUART_WRITE			 	<= '0';
 				sDATA_CNT_EN 		 	<= '0';
 				sDATA_CNT_RST 		 	<= '0';	
@@ -634,7 +634,7 @@ begin
 			when UART_STOP =>	
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 			<= '1';
-				sIUART_REG_EN  	 	<= '1';
+				sIUART_REG_EN  	 	<= '0';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -646,7 +646,7 @@ begin
 				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '0';
 				oFREQ_EN 			 	<= '0';				
-				oUART_READ  		 	<= '1';
+				oUART_READ  		 	<= '0';
 				oUART_WRITE				<= '0';
 				sDATA_CNT_EN 		 	<= '0';
 				sDATA_CNT_RST 		 	<= '0';
