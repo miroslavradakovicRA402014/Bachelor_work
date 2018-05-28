@@ -231,7 +231,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_START_PERIOD_CNT, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_START_PERIOD_CNT, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
@@ -246,21 +246,21 @@ begin
 					sNEXT_STATE <= UART_START;
 				end if;
 			when UART_SLAVE_ADDRESS =>
-				if (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get register address from UART 
+				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
+					sNEXT_STATE <= UART_REGISTER_ADDRESS; 
+				elsif (iUART_EMPTY = '0') then
+					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get lower data byte from UART
 				else 
-					sNEXT_STATE <= UART_SLAVE_ADDRESS;
-				end if;	
+					sNEXT_STATE <= UART_SLAVE_ADDRESS;				
+				end if;				
 			when UART_REGISTER_ADDRESS =>
-				if (iUART_EMPTY = '0') then
-					if (sSLAVE_ADDR_REG(0) = '0') then
-						sNEXT_STATE <= UART_BYTE_LOWER; -- Get lower data byte from UART
-					else
-						sNEXT_STATE <= UART_STOP; 
-					end if;
+				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
+					sNEXT_STATE <= UART_STOP; 
+				elsif (iUART_EMPTY = '0') then
+					sNEXT_STATE <= UART_BYTE_LOWER; -- Get lower data byte from UART
 				else 
-					sNEXT_STATE <= UART_REGISTER_ADDRESS;
-				end if;	
+					sNEXT_STATE <= UART_REGISTER_ADDRESS;				
+				end if;					
 			when UART_BYTE_LOWER =>
 				sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART 	
 			when UART_BYTE_UPPER =>
@@ -416,7 +416,7 @@ begin
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
+	fsm_out : process (sCURRENT_STATE, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -498,7 +498,11 @@ begin
 				sREG_MUX_SEL		 	<= "00";	
 				if (iUART_EMPTY = '1') then
 					sIUART_REG_EN  		<= '0';
-					sREG_DEC_EN			 	<= '0';			
+					if (sSLAVE_ADDR_REG(0) = '1') then
+						sREG_DEC_EN			 	<= '1';
+					else
+						sREG_DEC_EN			 	<= '0';	
+					end if;
 				else
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	

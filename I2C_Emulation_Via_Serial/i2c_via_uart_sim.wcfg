@@ -16,9 +16,10 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="25" />
+   <WVObjectSize size="30" />
    <wave_markers>
-      <marker time="920000000000" label="" />
+      <marker time="4270000000000" label="" />
+      <marker time="16384182000000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -66,6 +67,10 @@
       <obj_property name="ElementShortName">otx</obj_property>
       <obj_property name="ObjectShortName">otx</obj_property>
    </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/orts" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">orts</obj_property>
       <obj_property name="ObjectShortName">orts</obj_property>
@@ -73,6 +78,14 @@
    <wvobject fp_name="/i2c_via_uart_tb/iclk_period" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">iclk_period</obj_property>
       <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/sscl" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sscl</obj_property>
+      <obj_property name="ObjectShortName">sscl</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/ssda" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ssda</obj_property>
+      <obj_property name="ObjectShortName">ssda</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>
@@ -93,6 +106,10 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/siuart_data" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">siuart_data[7:0]</obj_property>
       <obj_property name="ObjectShortName">siuart_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ouart_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ouart_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ouart_data[7:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/sreg_addr_reg" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sreg_addr_reg[7:0]</obj_property>
@@ -123,5 +140,9 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eUART_RECIVER/stc_cnt_done" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">stc_cnt_done</obj_property>
       <obj_property name="ObjectShortName">stc_cnt_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/sregs" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sregs[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sregs[15:0]</obj_property>
    </wvobject>
 </wave_config>

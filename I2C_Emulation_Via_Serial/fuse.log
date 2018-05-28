@@ -26,8 +26,8 @@ Starting static elaboration
 WARNING:HDLCompiler:746 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Range is empty (null range)
 WARNING:HDLCompiler:220 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
 Completed static elaboration
-Fuse Memory Usage: 100264 KB
-Fuse CPU Usage: 950 ms
+Fuse Memory Usage: 100280 KB
+Fuse CPU Usage: 830 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package i2c_via_uart_components
@@ -56,6 +56,6 @@ Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 39 VHDL Units
 Built simulation executable /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 1207276 KB
-Fuse CPU Usage: 1080 ms
-GCC CPU Usage: 300 ms
+Fuse Memory Usage: 1207296 KB
+Fuse CPU Usage: 950 ms
+GCC CPU Usage: 280 ms
