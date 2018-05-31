@@ -54,9 +54,7 @@ begin
 			else
 				-- Generate SCL signal
 				if (sTC_PER_CNT = '1') then
-					sSCL <=	not (sSCL); 
-				else
-					sSCL <=  sSCL; 
+					sSCL <=	not (sSCL);  
 				end if;
 			end if;
 		end if;

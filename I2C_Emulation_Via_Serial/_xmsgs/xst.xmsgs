@@ -5,37 +5,43 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="info" file="Xst" num="1767" delta="old" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">oFREQ_EN</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 </msg>
 
-<msg type="info" file="Xst" num="3217" delta="old" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sBAUD_RATE_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sBAUD_RATE</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
+<msg type="info" file="Xst" num="1767" delta="new" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
 </msg>
 
-<msg type="info" file="Xst" num="3217" delta="old" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sDATA_BIT_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sDATA_BIT</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
+<msg type="info" file="Xst" num="3217" delta="new" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sBAUD_RATE_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sBAUD_RATE</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
 </msg>
 
-<msg type="info" file="Xst" num="3217" delta="old" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sDATA_BIT_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sDATA_BIT</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
+<msg type="info" file="Xst" num="3217" delta="new" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sDATA_BIT_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sDATA_BIT</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
 </msg>
 
-<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">sDATA_BIT_REG_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">reciver</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="info" file="Xst" num="3217" delta="new" >HDL ADVISOR - Register &lt;<arg fmt="%s" index="1">sDATA_BIT_REG</arg>&gt; currently described with an asynchronous reset, could be combined with distributed RAM &lt;<arg fmt="%s" index="2">Mram_sDATA_BIT</arg>&gt; for implementation on block RAM resources if you made this reset synchronous instead.
 </msg>
 
-<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">sDATA_BIT_REG_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">transmitter</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+<msg type="warning" file="Xst" num="1710" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">sDATA_BIT_REG_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">reciver</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
 </msg>
 
-<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">i2c_slave</arg>: <arg fmt="%d" index="2">2</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
-
-<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">uart_i2c_master</arg>: <arg fmt="%d" index="2">2</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
-
-<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">fifo</arg>: <arg fmt="%d" index="2">8</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
-
-<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">eI2C_BUS/eUART_I2C_MASTER/eSCL_EDGE_DET/sCURRENT_STATE_FSM_FFd3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">i2c_via_uart</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;eI2C_BUS/eI2C_SLAVE/eSCL_REDGE_DET/sCURRENT_STATE_FSM_FFd3&gt; </arg>
+<msg type="warning" file="Xst" num="1710" delta="new" >FF/Latch &lt;<arg fmt="%s" index="1">sDATA_BIT_REG_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">transmitter</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
 </msg>
 
-<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">eI2C_BUS/eUART_I2C_MASTER/eSCL_EDGE_DET/sCURRENT_STATE_FSM_FFd2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">i2c_via_uart</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;eI2C_BUS/eI2C_SLAVE/eSCL_REDGE_DET/sCURRENT_STATE_FSM_FFd2&gt; </arg>
+<msg type="warning" file="Xst" num="2042" delta="new" >Unit <arg fmt="%s" index="1">i2c_slave</arg>: <arg fmt="%d" index="2">2</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="new" >Unit <arg fmt="%s" index="1">uart_i2c_master</arg>: <arg fmt="%d" index="2">2</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="new" >Unit <arg fmt="%s" index="1">fifo</arg>: <arg fmt="%d" index="2">8</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">eI2C_BUS/eUART_I2C_MASTER/eSCL_EDGE_DET/sCURRENT_STATE_FSM_FFd3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">i2c_via_uart</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;eI2C_BUS/eI2C_SLAVE/eSCL_REDGE_DET/sCURRENT_STATE_FSM_FFd3&gt; </arg>
 </msg>
 
-<msg type="info" file="Xst" num="1843" delta="old" >HDL ADVISOR - FlipFlop <arg fmt="%s" index="1">eUART/eUART_RECIVER/sDATA_BIT_REG_1</arg> connected to a primary input has been replicated
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">eI2C_BUS/eUART_I2C_MASTER/eSCL_EDGE_DET/sCURRENT_STATE_FSM_FFd2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">i2c_via_uart</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;eI2C_BUS/eI2C_SLAVE/eSCL_REDGE_DET/sCURRENT_STATE_FSM_FFd2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="1843" delta="new" >HDL ADVISOR - FlipFlop <arg fmt="%s" index="1">eUART/eUART_RECIVER/sDATA_BIT_REG_1</arg> connected to a primary input has been replicated
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="new" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 </msg>
 
 </messages>

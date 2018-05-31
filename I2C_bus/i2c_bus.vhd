@@ -24,7 +24,7 @@ use work.i2c_bus_components.ALL;
 
 entity i2c_bus is
 	 Generic (
-		DATA_WIDTH 			 : integer := 8	 -- UART word widht 
+		DATA_WIDTH 			: integer := 8	 -- UART word widht 
 	 );
     Port ( iCLK  		   : in 	  std_logic;
            inRST 		   : in 	  std_logic;
