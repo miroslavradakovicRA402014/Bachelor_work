@@ -406,7 +406,6 @@ begin
 
 	-- Master FSM output logic
 	fsm_out : process (sCURRENT_STATE, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
-		--oFREQ_EN 				 <= '0';
 		sSLAVE_ADDR_SEL 		 <= '0';
 		case (sCURRENT_STATE) is
 			when IDLE =>
