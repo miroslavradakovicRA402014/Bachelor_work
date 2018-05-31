@@ -40,24 +40,28 @@ architecture Behavioral of scl_gen is
 	signal sPER_CNT 	 : unsigned(PERIOD_CNT_WIDHT - 1 downto 0);			-- Period counter
 	signal sTC_PER_CNT : std_logic;													-- Period counter terminal count signal			
 		
-	signal sSCL : std_logic; 															-- SCL signal 
+	signal sSCL 		 : std_logic; 													-- SCL signal 
 	
 begin
 
 	-- SCL generator process
-	scl_gen : process (iSCL_EN, sTC_PER_CNT) begin
-		if (iSCL_EN = '0') then
-			sSCL <= '1';	-- SLC line idle
-		else
-			-- Generate SCL signal
-			if (sTC_PER_CNT = '1') then
-				sSCL <= sSCL; 
+	scl_gen : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sSCL <= '1';
+		elsif (iCLK'event and iCLK = '1') then	
+			if (iSCL_EN = '0') then
+				sSCL <= '1';	-- SLC line idle
 			else
-				sSCL <= not (sSCL); 
+				-- Generate SCL signal
+				if (sTC_PER_CNT = '1') then
+					sSCL <=	not (sSCL); 
+				else
+					sSCL <=  sSCL; 
+				end if;
 			end if;
 		end if;
 	end process scl_gen;
-	
+		
 	-- SCL peroid counter
 	per_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then

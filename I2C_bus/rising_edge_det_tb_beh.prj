@@ -1,0 +1,2 @@
+vhdl work "rising_edge_det.vhd"
+vhdl work "rising_edge_det_tb.vhd"

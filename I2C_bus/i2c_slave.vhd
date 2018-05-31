@@ -194,7 +194,7 @@ begin
 	end process fsm_reg;
 	
 	-- Slave FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
+	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for start condition
@@ -311,6 +311,7 @@ begin
 	
 	-- Slave FSM output logic
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sMODE_FF, sADDR_REG) begin
+		sRSTART_PERIOD_CNT_EN <= '0';
 		case (sCURRENT_STATE) is
 			-- Slave control signals
 			when IDLE =>
@@ -708,7 +709,7 @@ begin
 			sISHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sISHW_EN = '1' and sSCL_RISING_EDGE = '1') then
-				sISHW_REG <= sISHW_REG(DATA_WIDTH - 2 downto 0) & ioSDA; -- Shift data bits
+				sISHW_REG <= sISHW_REG(DATA_WIDTH - 2 downto 0) & sSDA_IN; -- Shift data bits
 			end if;
 		end if;
 	end process ishift_reg;

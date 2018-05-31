@@ -1,5 +1,6 @@
 ISim log file
-Running: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_bus_tb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/i2c_bus_tb_isim_beh.wdb 
+Running: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det_tb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det_tb_isim_beh.wdb 
+INFO: There is another simulation running in the same directory. Using database file name isim1.wdb.
 ISim P.68d (signature 0xfbc00daa)
 ----------------------------------------------------------------------
 INFO:Security:51 - The XILINXD_LICENSE_FILE environment variable is not set.
@@ -19,35 +20,16 @@ Time resolution is 1 ps
 # wave add /
 # run 1000 ns
 Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_bus_tb/uut/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_bus_tb/uut/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-at 0 ps, Instance /i2c_bus_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_bus_tb/uut/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 1.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 1000.00us
+# run 10000000.00us
+Stopped at time : 322233920 ns : File "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det.vhd" Line 42
+# exit 0
 # exit 0

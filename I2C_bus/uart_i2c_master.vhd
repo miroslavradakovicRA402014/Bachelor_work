@@ -183,12 +183,12 @@ begin
 			);	
 
 	-- Lower data byte register
-	eLOW_BYTE_REG : entity work.reg 
+	eLOWER_BYTE_REG : entity work.reg 
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
 				iWE   => sREG_DEC(2),
-				iD 	=> sUBYTE_REG_MUX,
+				iD 	=> sLBYTE_REG_MUX,
 				oQ		=> sLOWER_BYTE_REG
 			);
 			
@@ -231,7 +231,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_DATA, sTC_START_PERIOD_CNT, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_START_PERIOD_CNT, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
@@ -417,6 +417,8 @@ begin
 
 	-- Master FSM output logic
 	fsm_out : process (sCURRENT_STATE, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
+		oFREQ_EN 				 <= '0';
+		sSLAVE_ADDR_SEL 		 <= '0';
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -454,7 +456,6 @@ begin
 			when UART_START =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				--sIUART_REG_EN  		<= '1';
 				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
 				sSDA_SEL		 		 	<= '0';
@@ -470,7 +471,6 @@ begin
 					sREG_DEC_EN			 	<= '1';	
 				end if;
 				sREG_DEC_SEL		 	<= "00";
-				--sREG_DEC_EN			 	<= '1';
 				sSCL_EN				 	<= '0';	
 				oUART_READ  		 	<= '1';
 				oUART_WRITE			 	<= '0';
@@ -1363,7 +1363,7 @@ begin
 			sISHW_REG <= (others => '0'); -- Reset shifter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sISHW_EN = '1' and sSCL_RISING_EDGE = '1') then
-				sISHW_REG <= sISHW_REG(DATA_WIDTH - 2 downto 0) & ioSDA; -- Shift data bits
+				sISHW_REG <= sISHW_REG(DATA_WIDTH - 2 downto 0) & sSDA_IN; -- Shift data bits
 			end if;
 		end if;
 	end process ishift_reg;								
@@ -1401,7 +1401,7 @@ begin
 	end process reg_mux;
 		
 	-- UART output multiplexer
-	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG) begin
+	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG, sUPPER_BYTE_REG) begin
 		-- Select UART output register data
 		case (sOUART_REG_SEL) is
 			when "00" =>
