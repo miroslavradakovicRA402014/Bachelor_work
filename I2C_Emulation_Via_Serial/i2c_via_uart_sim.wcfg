@@ -16,10 +16,11 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="30" />
+   <WVObjectSize size="37" />
    <wave_markers>
       <marker time="4270000000000" label="" />
-      <marker time="16384182000000" label="" />
+      <marker time="4617415000000" label="" />
+      <marker time="10244899000000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -83,11 +84,39 @@
       <obj_property name="ElementShortName">sscl</obj_property>
       <obj_property name="ObjectShortName">sscl</obj_property>
    </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/stc_per_cnt" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_per_cnt</obj_property>
+      <obj_property name="ObjectShortName">stc_per_cnt</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/sper_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sper_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sper_cnt[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/itc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">itc</obj_property>
+      <obj_property name="ObjectShortName">itc</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/sfreq_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sfreq_en</obj_property>
+      <obj_property name="ObjectShortName">sfreq_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/iscl_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iscl_en</obj_property>
+      <obj_property name="ObjectShortName">iscl_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/otc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">otc</obj_property>
+      <obj_property name="ObjectShortName">otc</obj_property>
+   </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/ssda" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ssda</obj_property>
       <obj_property name="ObjectShortName">ssda</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>
       <obj_property name="ObjectShortName">scurrent_state</obj_property>
    </wvobject>

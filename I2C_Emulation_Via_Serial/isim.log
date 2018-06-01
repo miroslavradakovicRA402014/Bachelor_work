@@ -645,3 +645,4 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run 100000.00us
+# exit 0
