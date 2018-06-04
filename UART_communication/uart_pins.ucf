@@ -1,5 +1,5 @@
 NET "iCLK"  					LOC = M21;
-NET "inRST"						LOC = AB24;
+NET "inRST"					LOC = AB24;
 
 NET "iRX"						LOC = A21;
 NET "oTX"						LOC = A20;

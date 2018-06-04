@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="lcd_driver_tb" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="13" />
+   <wave_markers>
+      <marker time="40215150000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/lcd_driver_tb/iclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk</obj_property>
+      <obj_property name="ObjectShortName">iclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/inrst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inrst</obj_property>
+      <obj_property name="ObjectShortName">inrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/iod" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">iod[3:0]</obj_property>
+      <obj_property name="ObjectShortName">iod[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/oe" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">oe</obj_property>
+      <obj_property name="ObjectShortName">oe</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/ors" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ors</obj_property>
+      <obj_property name="ObjectShortName">ors</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/orw" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">orw</obj_property>
+      <obj_property name="ObjectShortName">orw</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/iclk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">iclk_period</obj_property>
+      <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/sin_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sin_data[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sin_data[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/sout_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sout_data[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sout_data[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/sout_buff_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sout_buff_en</obj_property>
+      <obj_property name="ObjectShortName">sout_buff_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/sin_buff_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sin_buff_en</obj_property>
+      <obj_property name="ObjectShortName">sin_buff_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/lcd_driver_tb/uut/sseq_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sseq_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sseq_cnt[3:0]</obj_property>
+   </wvobject>
+</wave_config>

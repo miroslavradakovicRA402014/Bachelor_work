@@ -760,3 +760,4 @@ map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -re
 par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
 trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
 bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 

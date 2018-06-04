@@ -45,6 +45,7 @@
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="netgen"/>
     <file xil_pn:branch="PostTranslateSimulation" xil_pn:fileType="FILE_NETGEN_REPORT" xil_pn:name="netgen/translate/uart_verification_return_translate.nlf"/>
     <file xil_pn:branch="PostTranslateSimulation" xil_pn:fileType="FILE_VHDL" xil_pn:name="netgen/translate/uart_verification_return_translate.vhd"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="planAhead_run_1"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="reciver_tb_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="reciver_tb_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="transmitter_tb_beh.prj"/>
@@ -232,14 +233,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1526556620" xil_pn:in_ck="3909879881584198758" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="2065304887746143816" xil_pn:start_ts="1526556613">
+    <transform xil_pn:end_ts="1528123999" xil_pn:in_ck="3909879881584198758" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="2065304887746143816" xil_pn:start_ts="1528123993">
       <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="uart_verification_return.lso"/>
       <outfile xil_pn:name="uart_verification_return.ngc"/>
@@ -260,7 +256,8 @@
     <transform xil_pn:end_ts="1526556626" xil_pn:in_ck="105814772921168744" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="-6085740436642622566" xil_pn:start_ts="1526556623">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_ngo"/>
       <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
       <outfile xil_pn:name="uart_verification_return.bld"/>
@@ -301,6 +298,8 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
       <outfile xil_pn:name="uart_verification_return.bgn"/>
       <outfile xil_pn:name="uart_verification_return.bit"/>

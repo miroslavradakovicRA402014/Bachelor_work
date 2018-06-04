@@ -1,0 +1,16 @@
+//! **************************************************************************
+// Written by: Map P.68d on Mon Jun 04 17:03:25 2018
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "inRST" LOCATE = SITE "AB24" LEVEL 1;
+COMP "ioD<0>" LOCATE = SITE "W18" LEVEL 1;
+COMP "ioD<1>" LOCATE = SITE "D21" LEVEL 1;
+COMP "iCLK" LOCATE = SITE "M21" LEVEL 1;
+COMP "ioD<2>" LOCATE = SITE "C21" LEVEL 1;
+COMP "ioD<3>" LOCATE = SITE "F24" LEVEL 1;
+COMP "oRS" LOCATE = SITE "T18" LEVEL 1;
+COMP "oRW" LOCATE = SITE "D18" LEVEL 1;
+COMP "oE" LOCATE = SITE "V18" LEVEL 1;
+SCHEMATIC END;
+

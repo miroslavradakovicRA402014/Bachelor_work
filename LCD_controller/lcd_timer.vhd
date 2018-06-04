@@ -24,8 +24,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity lcd_timer is
 	 Generic(
-		CLK_PERIOD_NUMBER : integer := 3600000; -- Clock period number for 15ms period
-		CLK_CNT_WIDHT 		: integer := 16 	  	 -- Clock counter widht
+		CLK_PERIOD_NUMBER : integer := 360000; 	 -- Clock period number for 15ms period
+		CLK_CNT_WIDHT 		: integer := 18 	  	 	 -- Clock counter widht
 	 );
     Port ( iCLK 		: in  std_logic;
            inRST 		: in  std_logic;
@@ -35,7 +35,7 @@ end lcd_timer;
 
 architecture Behavioral of lcd_timer is
 
-	signal sCLK_CNT : unsigned(CLK_CNT_WIDHT - 1 donwto 0);	-- Clock counter
+	signal sCLK_CNT : unsigned(CLK_CNT_WIDHT - 1 downto 0);	-- Clock counter
 	
 begin
 

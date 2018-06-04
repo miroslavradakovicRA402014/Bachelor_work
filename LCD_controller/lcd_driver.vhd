@@ -31,7 +31,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity lcd_driver is
 	 Generic(
-		INIT_SEQ_NUMBER : integer := 3;	-- Init commands sequence
+		INIT_SEQ_NUMBER : integer := 4;	-- Init commands sequence
 		CMD_SEQ_NUMBER  : integer := 2	-- Command sequence 
 	 );
     Port ( iCLK   : in 		std_logic;
@@ -44,19 +44,21 @@ end lcd_driver;
 
 architecture Behavioral of lcd_driver is
 
-	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_INIT_CMD, LCD_CONFIG); -- LCD controller FSM states type																
+	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
+							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
+							 CURSOR_CONFIG_BF, CURSOR_CONFIG, STOP_PRINT); 	-- LCD controller FSM states type																
 
-	signal sCURRENT_STATE 	   	: tSTATES;									-- LCD controller FSM current state
-	signal sNEXT_STATE    	   	: tSTATES; 									-- LCD controller FSM next state
+	signal sCURRENT_STATE 	   	: tSTATES;									  	-- LCD controller FSM current state
+	signal sNEXT_STATE    	   	: tSTATES; 									  	-- LCD controller FSM next state
 
-	signal sOUT_BUFF_EN	 	   	: std_logic;								-- Output tri-state buffer enable
-	signal sIN_BUFF_EN	 	   	: std_logic;	   						-- Input tri-state buffer enable
+	signal sOUT_BUFF_EN	 	   	: std_logic;								   -- Output tri-state buffer enable
+	signal sIN_BUFF_EN	 	   	: std_logic;	   						  	-- Input tri-state buffer enable
 
-	signal sOUT_DATA					: std_logic_vector(3 downto 0);		-- Output data
-	signal sIN_DATA					: std_logic_vector(3 downto 0);		-- Input data
+	signal sOUT_DATA					: std_logic_vector(3 downto 0);	     	-- Output data
+	signal sIN_DATA					: std_logic_vector(3 downto 0);			-- Input data
 
-	signal sINIT_PERIOD_EN			: std_logic;								-- Init period timer enable
-	signal sINIT_PERIOD_TC			: std_logic;								-- Init period timer treminal count
+	signal sINIT_PERIOD_EN			: std_logic;									-- Init period timer enable
+	signal sINIT_PERIOD_TC			: std_logic;									-- Init period timer treminal count
 
 	signal sSEQ_CNT 					: unsigned(3 downto 0);
 	signal sSEQ_CNT_EN 				: std_logic;
@@ -84,7 +86,7 @@ begin
 	end process fsm_reg;
 	
 	-- LCD controller FSM next state logic
-	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC) begin
+	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (sINIT_PERIOD_TC = '1') then
@@ -94,29 +96,61 @@ begin
 				end if;
 			when LCD_INIT_SEQ => 	
 				if (sSEQ_CNT = INIT_SEQ_NUMBER) then
-					sNEXT_STATE <= LCD_INIT_CMD;
+					sNEXT_STATE <= LCD_CONFIG;
 				else
 					sNEXT_STATE <= LCD_INIT_SEQ;
 				end if;
-			when LCD_INIT_CMD =>
-				if (sINIT_PERIOD_TC = '1') then
-					sNEXT_STATE <= LCD_CONFIG;
-				else
-					sNEXT_STATE <= LCD_INIT_CMD;
-				end if;
 			when LCD_CONFIG =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= LCD_INIT_CMD;
+					sNEXT_STATE <= DISPLAY_CONFIG_BF;
 				else
 					sNEXT_STATE <= LCD_CONFIG;
-				end if;							
+				end if;		
+			when DISPLAY_CONFIG_BF =>
+				if (sIN_DATA(3) = '0') then 
+					sNEXT_STATE <= DISPLAY_CONFIG; 
+				else
+					sNEXT_STATE <= DISPLAY_CONFIG_BF;	
+				end if;
+			when  DISPLAY_CONFIG =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+					sNEXT_STATE <= CLEAR_SCREEN_BF;
+				else
+					sNEXT_STATE <= DISPLAY_CONFIG;
+				end if;
+			when CLEAR_SCREEN_BF =>
+				if (sIN_DATA(3) = '0') then 
+					sNEXT_STATE <= CLEAR_SCREEN; 
+				else
+					sNEXT_STATE <= CLEAR_SCREEN_BF;	
+				end if;
+			when  CLEAR_SCREEN =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+					sNEXT_STATE <= CURSOR_CONFIG_BF;
+				else
+					sNEXT_STATE <= CLEAR_SCREEN;
+				end if;	
+			when CURSOR_CONFIG_BF =>
+				if (sIN_DATA(3) = '0') then 
+					sNEXT_STATE <= CURSOR_CONFIG; 
+				else
+					sNEXT_STATE <= CURSOR_CONFIG_BF;	
+				end if;
+			when CURSOR_CONFIG =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+					sNEXT_STATE <= STOP_PRINT;
+				else
+					sNEXT_STATE <= CURSOR_CONFIG;
+				end if;	
+			when STOP_PRINT =>
+				sNEXT_STATE <= STOP_PRINT;
 		end case;
 	end process fsm_next;	
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC) begin
-		sIN_BUFF_EN	 	 <= (others => '0');
-		sOUT_BUFF_EN	 <= (others => '1');
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT) begin
+		sIN_BUFF_EN	 	 <= '0';
+		sOUT_BUFF_EN	 <= '1';
 		sSEQ_CNT_EN 	 <= '0';
 		sSEQ_CNT_RST 	 <= '0';		
 		sINIT_PERIOD_EN <= '0';
@@ -134,20 +168,22 @@ begin
 					sSEQ_CNT_EN 	 <= '0';
 				end if;	
 				sINIT_PERIOD_EN <= '1';
-				sOUT_DATA 		 <= "0011";
-			when LCD_INIT_CMD =>
-				if (sINIT_PERIOD_TC = '1') then
-					sOUT_DATA 		 <= "0011";
-				else
-					sOUT_DATA 		 <= "0011";
-				end if;	
-				sINIT_PERIOD_EN <= '1';
+				if (sSEQ_CNT > 2) then
+					sOUT_DATA 		 <= "0010";
+					if (sSEQ_CNT = 4) then
+						sSEQ_CNT_RST 	 <= '1';
+					else
+						sSEQ_CNT_RST 	 <= '0';
+					end if;
+				else  
+					sOUT_DATA 		 <= "0011";				
+				end if;
 			when LCD_CONFIG =>
 				if (sSEQ_CNT = 1) then
 					sSEQ_CNT_EN 	 <= '1';
 					sOUT_DATA 		 <= "0010";
-				elsif (sSEQ_CNT = 2) else
-					sSEQ_CNT_EN 	 <= '0'
+				elsif (sSEQ_CNT = 2) then
+					sSEQ_CNT_EN 	 <= '0';
 					sOUT_DATA 		 <= "0100";
 				else
 					if (sINIT_PERIOD_TC = '1') then
@@ -157,17 +193,63 @@ begin
 					end if;	
 					sOUT_DATA 		 <= "0000";
 				end if;
-				sINIT_PERIOD_EN <= '1';			
+				sINIT_PERIOD_EN <= '1';	
+			when DISPLAY_CONFIG_BF =>
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';
+			when DISPLAY_CONFIG =>
+				if (sSEQ_CNT = 0) then
+					sSEQ_CNT_EN 	 <= '1';
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 1) then
+					sSEQ_CNT_EN 	 <= '0';
+					sOUT_DATA 		 <= "1000";
+				else
+					sOUT_DATA 		 <= "0000";
+				end if;
+			when CLEAR_SCREEN_BF =>
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';		
+			when CLEAR_SCREEN =>
+				if (sSEQ_CNT = 0) then
+					sSEQ_CNT_EN 	 <= '1';
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 1) then
+					sSEQ_CNT_EN 	 <= '0';
+					sOUT_DATA 		 <= "1000";
+				else
+					sOUT_DATA 		 <= "0000";
+				end if;	
+			when CURSOR_CONFIG_BF =>
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';		
+			when CURSOR_CONFIG =>
+				if (sSEQ_CNT = 0) then
+					sSEQ_CNT_EN 	 <= '1';
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 1) then
+					sSEQ_CNT_EN 	 <= '0';
+					sOUT_DATA 		 <= "1000";
+				else
+					sOUT_DATA 		 <= "0000";
+				end if;
+			when STOP_PRINT =>	
 		end case;
 	end process fsm_out;	
 	
 	-- Sequence number counter process 
 	seq_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
-			sSEQ_CNT <= (others <= '0'); 
+			sSEQ_CNT <= (others => '0'); 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sSEQ_CNT_RST = '1')
-				sSEQ_CNT <= (others <= '0');	
+			if (sSEQ_CNT_RST = '1') then
+				sSEQ_CNT <= (others => '0');	
 			elsif (sSEQ_CNT_EN = '1') then
 				sSEQ_CNT <= sSEQ_CNT + 1;
 			end if;
@@ -179,7 +261,7 @@ begin
 				   (others => 'Z');
 					
 	-- Output tri-state buffer
-	ioD      <= sOUT_DATA when sOUT_BUFF_EN = '1' else  
+	ioD       <= sOUT_DATA when sOUT_BUFF_EN = '1' else  
 				   (others  => 'Z');	
 
 

@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# PlanAhead v14.6 (64-bit)
+# Build 269223 by xbuild on Wed Jun  5 11:07:37 MDT 2013
+# Start of session at: Mon Jun  4 16:53:21 2018
+# Process ID: 4506
+# Log file: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_run_1/planAhead.log
+# Journal file: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Common 17-86] Your PlanAhead license expires in -916 day(s)
+INFO: [Device 21-36] Loading parts and site information from /opt/Xilinx/14.6/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [/opt/Xilinx/14.6/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [/opt/Xilinx/14.6/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/pa.fromNetlist.tcl
+# create_project -name UART_communication -dir "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_run_1" -part xc6slx45fgg676-2
+# set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+# set_property edif_top_file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {/home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication} }
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+INFO: [Common 17-344] 'add_files' was cancelled
+INFO: [Common 17-344] 'source' was cancelled
+exit
+ERROR: [#UNDEF] *** Exception: ui.h.b: Found deleted key in HTclEventBroker. Verify if the classes listed here call cleanup()
+HTclEvent: SIGNAL_MODIFY   Classes: ui.views.aR 
+HTclEvent: SIGNAL_BUS_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_CORE_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: DEBUG_PORT_CONFIG_CHANGE   Classes: ui.views.aR 
+ (See /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_pid4506.debug)
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Mon Jun  4 16:53:32 2018...
+INFO: [Common 17-83] Releasing license: PlanAhead

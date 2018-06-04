@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-06-01T12:36:46</DateModified>
+  <DateModified>2018-06-04T17:01:58</DateModified>
   <ModuleName>lcd_driver</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/iseconfig/lcd_driver.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller</ImplementationReportsDirectory>
-  <DateInitialized>2018-06-01T12:19:15</DateInitialized>
+  <ImplementationReportsDirectory>/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/</ImplementationReportsDirectory>
+  <DateInitialized>2018-06-04T11:08:56</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
  <body>

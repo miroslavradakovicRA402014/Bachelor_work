@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.6 (64-bit)
+# Build 269223 by xbuild on Wed Jun  5 11:07:37 MDT 2013
+# Start of session at: Mon Jun  4 16:53:21 2018
+# Process ID: 4506
+# Log file: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_run_1/planAhead.log
+# Journal file: /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source /home/rtrk/Workspace/BSc_workspace/Bachelor_work/UART_communication/pa.fromNetlist.tcl

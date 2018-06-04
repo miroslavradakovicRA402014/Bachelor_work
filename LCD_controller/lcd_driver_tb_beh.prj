@@ -1,0 +1,3 @@
+vhdl work "lcd_timer.vhd"
+vhdl work "lcd_driver.vhd"
+vhdl work "lcd_driver_tb.vhd"

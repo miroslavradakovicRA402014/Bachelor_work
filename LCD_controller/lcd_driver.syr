@@ -1,0 +1,378 @@
+Release 14.6 - xst P.68d (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> 
+Reading design: lcd_driver.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "lcd_driver.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "lcd_driver"
+Output Format                      : NGC
+Target Device                      : xc6slx45-2-fgg676
+
+---- Source Options
+Top Module Name                    : lcd_driver
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" into library work
+Parsing entity <lcd_timer>.
+Parsing architecture <Behavioral> of entity <lcd_timer>.
+Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd" into library work
+Parsing entity <lcd_driver>.
+Parsing architecture <Behavioral> of entity <lcd_driver>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <lcd_driver> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <lcd_timer> (architecture <Behavioral>) with generics from library <work>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <lcd_driver>.
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd".
+        INIT_SEQ_NUMBER = 4
+        CMD_SEQ_NUMBER = 2
+    Found 4-bit register for signal <sSEQ_CNT>.
+    Found 4-bit register for signal <sCURRENT_STATE>.
+    Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
+    -----------------------------------------------------------------------
+    | States             | 10                                             |
+    | Transitions        | 19                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 7                                              |
+    | Clock              | iCLK (rising_edge)                             |
+    | Reset              | inRST (negative)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit adder for signal <sSEQ_CNT[3]_GND_4_o_add_42_OUT> created at line 1241.
+    Found 4x4-bit Read Only RAM for signal <_n0071>
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 260
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 264
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 264
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 264
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 264
+    Found 4-bit comparator greater for signal <GND_4_o_sSEQ_CNT[3]_LessThan_17_o> created at line 171
+    Summary:
+	inferred   1 RAM(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   4 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred  35 Multiplexer(s).
+	inferred   5 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <lcd_driver> synthesized.
+
+Synthesizing Unit <lcd_timer>.
+    Related source file is "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd".
+        CLK_PERIOD_NUMBER = 360000
+        CLK_CNT_WIDHT = 18
+    Summary:
+	no macro.
+Unit <lcd_timer> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 4x4-bit single-port Read Only RAM                     : 1
+# Adders/Subtractors                                   : 1
+ 4-bit adder                                           : 1
+# Registers                                            : 1
+ 4-bit register                                        : 1
+# Comparators                                          : 1
+ 4-bit comparator greater                              : 1
+# Multiplexers                                         : 35
+ 1-bit 2-to-1 multiplexer                              : 18
+ 4-bit 2-to-1 multiplexer                              : 17
+# Tristates                                            : 5
+ 1-bit tristate buffer                                 : 5
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <lcd_driver>.
+The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0071> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 4-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <sSEQ_CNT<1:0>> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <lcd_driver> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 4x4-bit single-port distributed Read Only RAM         : 1
+# Counters                                             : 1
+ 4-bit up counter                                      : 1
+# Comparators                                          : 1
+ 4-bit comparator greater                              : 1
+# Multiplexers                                         : 34
+ 1-bit 2-to-1 multiplexer                              : 18
+ 4-bit 2-to-1 multiplexer                              : 16
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <sCURRENT_STATE[1:4]> with user encoding.
+-------------------------------
+ State             | Encoding
+-------------------------------
+ idle              | 0000
+ lcd_init_seq      | 0001
+ lcd_config        | 0010
+ display_config    | 0011
+ display_config_bf | 0100
+ clear_screen_bf   | 0101
+ clear_screen      | 0110
+ cursor_config_bf  | 0111
+ cursor_config     | 1000
+ stop_print        | 1001
+-------------------------------
+WARNING:Xst:2041 - Unit lcd_driver: 1 internal tristate is replaced by logic (pull-up yes): sIN_DATA<3>.
+
+Optimizing unit <lcd_driver> ...
+WARNING:Xst:1293 - FF/Latch <sCURRENT_STATE_FSM_FFd2> has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <sCURRENT_STATE_FSM_FFd4> has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <sCURRENT_STATE_FSM_FFd3> has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <sCURRENT_STATE_FSM_FFd1> has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sSEQ_CNT_0> (without init value) has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sSEQ_CNT_1> (without init value) has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sSEQ_CNT_2> (without init value) has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sSEQ_CNT_3> (without init value) has a constant value of 0 in block <lcd_driver>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block lcd_driver, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : lcd_driver.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 1
+#      GND                         : 1
+# IO Buffers                       : 7
+#      OBUF                        : 7
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45fgg676-2 
+
+
+Slice Logic Utilization: 
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:      0
+   Number with an unused Flip Flop:       0  out of      0         
+   Number with an unused LUT:             0  out of      0         
+   Number of fully used LUT-FF pairs:     0  out of      0         
+   Number of unique control sets:         0
+
+IO Utilization: 
+ Number of IOs:                           9
+ Number of bonded IOBs:                   7  out of    358     1%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+No clock signals found in this design
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: No path found
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: No path found
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 3.00 secs
+Total CPU time to Xst completion: 3.24 secs
+ 
+--> 
+
+
+Total memory usage is 390788 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    9 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+
