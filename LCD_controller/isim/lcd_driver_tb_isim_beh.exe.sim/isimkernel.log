@@ -1,0 +1,10 @@
+Command line:
+   lcd_driver_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  65191
+
+Wed Jun 06 12:35:05 2018
+
+
+ Elaboration Time: 0.09375 sec

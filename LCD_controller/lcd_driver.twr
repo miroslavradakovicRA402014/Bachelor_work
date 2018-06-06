@@ -37,8 +37,8 @@ Setup/Hold to clock iCLK
             |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------+------------+------------------+--------+
-inRST       |    3.494(R)|      SLOW  |   -1.053(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-ioD<3>      |    5.071(R)|      SLOW  |   -1.699(R)|      FAST  |iCLK_BUFGP        |   0.000|
+inRST       |    2.779(R)|      SLOW  |   -0.464(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+ioD<3>      |    5.270(R)|      SLOW  |   -1.294(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+------------+------------+------------+------------+------------------+--------+
 
 Clock iCLK to Pad
@@ -46,12 +46,13 @@ Clock iCLK to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-ioD<0>      |        14.164(R)|      SLOW  |         5.972(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioD<1>      |        14.301(R)|      SLOW  |         5.514(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioD<2>      |        16.514(R)|      SLOW  |         6.195(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioD<3>      |        12.698(R)|      SLOW  |         5.079(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oE          |        14.786(R)|      SLOW  |         6.264(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oRW         |        14.422(R)|      SLOW  |         6.180(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<0>      |        13.741(R)|      SLOW  |         5.499(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<1>      |        13.879(R)|      SLOW  |         5.561(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<2>      |        15.300(R)|      SLOW  |         6.458(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<3>      |        13.654(R)|      SLOW  |         5.300(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oE          |        14.983(R)|      SLOW  |         6.622(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oRS         |        14.137(R)|      SLOW  |         6.380(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oRW         |        14.929(R)|      SLOW  |         6.481(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock iCLK
@@ -59,18 +60,18 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.485|         |         |         |
+iCLK           |    5.125|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Wed Jun 06 13:31:35 2018 
+Analysis completed Wed Jun 06 16:53:47 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 241 MB
+Peak Memory Usage: 240 MB
 
 
 

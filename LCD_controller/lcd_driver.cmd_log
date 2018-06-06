@@ -18,3 +18,77 @@ map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -re
 par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
 trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
 bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.xst" -ofn "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc lcd_pins.ucf -p xc6slx45-fgg676-2 lcd_driver.ngc lcd_driver.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o lcd_driver_map.ncd lcd_driver.ngd lcd_driver.pcf 
+par -w -intstyle ise -ol high -mt off lcd_driver_map.ncd lcd_driver.ncd lcd_driver.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml lcd_driver.twx lcd_driver.ncd -o lcd_driver.twr lcd_driver.pcf -ucf lcd_pins.ucf 
+bitgen -intstyle ise -f lcd_driver.ut lcd_driver.ncd 

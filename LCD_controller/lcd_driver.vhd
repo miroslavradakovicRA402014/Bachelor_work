@@ -46,7 +46,8 @@ architecture Behavioral of lcd_driver is
 
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
 							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 CURSOR_CONFIG_BF, CURSOR_CONFIG, STOP_PRINT); 		-- LCD controller FSM states type																
+							 CURSOR_CONFIG_BF, CURSOR_CONFIG, DISPLAY_ON_BF, DISPLAY_ON,
+							 PRINT_H_BF, PRINT_H, STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  	-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  	-- LCD controller FSM next state
@@ -161,10 +162,34 @@ begin
 				end if;
 			when CURSOR_CONFIG =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= STOP_PRINT;
+					sNEXT_STATE <= DISPLAY_ON_BF;
 				else
 					sNEXT_STATE <= CURSOR_CONFIG;
 				end if;	
+			when DISPLAY_ON_BF =>
+				if (sIN_DATA(3) = '0') then 
+					sNEXT_STATE <= DISPLAY_ON; 
+				else
+					sNEXT_STATE <= DISPLAY_ON_BF;	
+				end if;	
+			when DISPLAY_ON =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+					sNEXT_STATE <= PRINT_H_BF;
+				else
+					sNEXT_STATE <= DISPLAY_ON;
+				end if;			
+			when PRINT_H_BF =>
+				if (sIN_DATA(3) = '0') then 
+					sNEXT_STATE <= PRINT_H; 
+				else
+					sNEXT_STATE <= PRINT_H_BF;	
+				end if;
+			when PRINT_H => 
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+					sNEXT_STATE <= STOP_PRINT;
+				else
+					sNEXT_STATE <= PRINT_H;
+				end if;
 			when STOP_PRINT =>
 				sNEXT_STATE <= STOP_PRINT;
 		end case;
@@ -276,6 +301,7 @@ begin
 				sINIT_PERIOD_EN <= '1';	
 						
 			when DISPLAY_CONFIG_BF =>
+			
 				sIN_BUFF_EN	 	 <= '1';
 				sOUT_BUFF_EN	 <= '0';
 				oRW   			 <= '1';
@@ -464,6 +490,134 @@ begin
 					sOUT_DATA 		  <= "0000";
 				end if;
 				
+			when DISPLAY_ON_BF =>
+
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+				else
+					sCMD_PERIOD_EN   <= '1';
+					sCMD_PER_CNT_EN  <= '1';
+				end if;	
+
+			when DISPLAY_ON =>
+			
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "1110";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
+				end if;		
+				
+			when PRINT_H_BF =>
+
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+				else
+					sCMD_PERIOD_EN   <= '1';
+					sCMD_PER_CNT_EN  <= '1';
+				end if;
+				
+			when PRINT_H =>
+
+				oRS <= '1';
+
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0100";
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "1000";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
+				end if;			
+			
 			when STOP_PRINT =>	
 		end case;
 	end process fsm_out;	
