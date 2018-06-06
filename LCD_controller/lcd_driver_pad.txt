@@ -1,7 +1,7 @@
-Release 14.6 - par P.68d (lin64)
+Release 14.6 - par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Mon Jun  4 17:03:35 2018
+Wed Jun 06 13:31:31 2018
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -248,7 +248,7 @@ Pinout by Pin Number:
 |C18       |           |IOBS     |IO_L52N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |C19       |           |IOBM     |IO_L63P_SCP7_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |C20       |           |IOBS     |IO_L56N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|C21       |ioD<2>     |IOB      |IO_L65P_SCP3_0               |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|C21       |oRW        |IOB      |IO_L65P_SCP3_0               |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |C22       |           |         |VCCO_0                       |         |           |0             |          |         |           |         |2.50     |          |           |                |
 |C23       |           |         |TMS                          |         |           |              |          |         |           |         |         |          |           |                |
 |C24       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
@@ -271,10 +271,10 @@ Pinout by Pin Number:
 |D15       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |D16       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |D17       |           |         |VCCO_0                       |         |           |0             |          |         |           |         |2.50     |          |           |                |
-|D18       |oRW        |IOB      |IO_L52P_0                    |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|D18       |ioD<2>     |IOB      |IO_L52P_0                    |TRISTATE |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |D19       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |D20       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
-|D21       |ioD<1>     |IOB      |IO_L56P_0                    |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|D21       |oE         |IOB      |IO_L56P_0                    |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |D22       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |D23       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |D24       |           |IOBM     |IO_L17P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -329,7 +329,7 @@ Pinout by Pin Number:
 |F21       |           |         |VCCAUX                       |         |           |              |          |         |           |         |2.5      |          |           |                |
 |F22       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |
 |F23       |           |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
-|F24       |ioD<3>     |IOB      |IO_L18P_1                    |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|F24       |oRS        |IOB      |IO_L18P_1                    |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |F25       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |F26       |           |IOBS     |IO_L18N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |G1        |           |IOBS     |IO_L65N_3                    |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
@@ -583,7 +583,7 @@ Pinout by Pin Number:
 |T15       |           |         |VCCINT                       |         |           |              |          |         |           |         |1.2      |          |           |                |
 |T16       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |T17       |           |         |VCCINT                       |         |           |              |          |         |           |         |1.2      |          |           |                |
-|T18       |oRS        |IOB      |IO_L60P_1                    |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|T18       |ioD<3>     |IOB      |IO_L60P_1                    |BIDIR    |LVCMOS25*  |1             |12        |SLOW     |           |NONE     |         |LOCATED   |NO         |NONE            |
 |T19       |           |IOBS     |IO_L60N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |T20       |           |IOBM     |IO_L64P_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |T21       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
@@ -635,7 +635,7 @@ Pinout by Pin Number:
 |V15       |           |IOBM     |IO_L18P_2                    |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |V16       |           |IOBM     |IO_L8P_2                     |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |V17       |           |IOBS     |IO_L62N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|V18       |oE         |IOB      |IO_L66P_1                    |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|V18       |ioD<1>     |IOB      |IO_L66P_1                    |TRISTATE |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |V19       |           |IOBS     |IO_L66N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |V20       |           |IOBS     |IO_L70N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |V21       |           |         |VCCO_1                       |         |           |1             |          |         |           |         |2.50     |          |           |                |
@@ -661,7 +661,7 @@ Pinout by Pin Number:
 |W15       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |W16       |           |IOBS     |IO_L18N_2                    |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |W17       |           |IOBS     |IO_L8N_2                     |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|W18       |ioD<0>     |IOB      |IO_L68P_1                    |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|W18       |ioD<0>     |IOB      |IO_L68P_1                    |TRISTATE |LVCMOS25*  |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |W19       |           |IOBS     |IO_L68N_1                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |W20       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |W21       |           |         |NC                           |         |           |              |          |         |           |         |         |          |           |                |

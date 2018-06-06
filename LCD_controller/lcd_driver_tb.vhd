@@ -64,7 +64,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
    signal oRW : std_logic;
 
    -- Clock period definitions
-   constant iCLK_period : time := 10 ns;
+   constant iCLK_period : time := 42 ns;
  
 BEGIN
  
@@ -92,7 +92,7 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
+      wait for 10000 ns;	
 
       wait for iCLK_period*10;
 

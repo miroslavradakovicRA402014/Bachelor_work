@@ -32,7 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity lcd_driver is
 	 Generic(
 		INIT_SEQ_NUMBER : integer := 4;	-- Init commands sequence
-		CMD_SEQ_NUMBER  : integer := 2	-- Command sequence 
+		CMD_SEQ_NUMBER  : integer := 3	-- Command of 4-bit sequence number
 	 );
     Port ( iCLK   : in 		std_logic;
            inRST  : in 		std_logic;
@@ -46,7 +46,7 @@ architecture Behavioral of lcd_driver is
 
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
 							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 CURSOR_CONFIG_BF, CURSOR_CONFIG, STOP_PRINT); 	-- LCD controller FSM states type																
+							 CURSOR_CONFIG_BF, CURSOR_CONFIG, STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  	-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  	-- LCD controller FSM next state
@@ -57,24 +57,47 @@ architecture Behavioral of lcd_driver is
 	signal sOUT_DATA					: std_logic_vector(3 downto 0);	     	-- Output data
 	signal sIN_DATA					: std_logic_vector(3 downto 0);			-- Input data
 
-	signal sINIT_PERIOD_EN			: std_logic;									-- Init period timer enable
-	signal sINIT_PERIOD_TC			: std_logic;									-- Init period timer treminal count
+	signal sINIT_PERIOD_EN			: std_logic;									-- Init period delay timer enable
+	signal sINIT_PERIOD_TC			: std_logic;									-- Init period delay timer treminal count
+	
+	signal sCMD_PERIOD_EN			: std_logic;									-- Command period timer enable
+	signal sCMD_PERIOD_TC			: std_logic;									-- Command period timer treminal count
 
-	signal sSEQ_CNT 					: unsigned(3 downto 0);
+	signal sSEQ_CNT 					: unsigned(2 downto 0);						
 	signal sSEQ_CNT_EN 				: std_logic;
 	signal sSEQ_CNT_RST				: std_logic;
 	
-
+	signal sCMD_PER_CNT 				: unsigned(1 downto 0);						-- Command part timer		
+	signal sCMD_PER_CNT_RST			: std_logic;
+	signal sCMD_PER_CNT_EN			: std_logic;
+	
 begin
 
-	-- LCD timer
-	eLCD_TIMER : entity work.lcd_timer
+	-- LCD init delay timer
+	eLCD_INIT_TIMER : entity work.lcd_timer
+			Generic map (
+				CLK_PERIOD_NUMBER => 360000,
+				CLK_CNT_WIDHT		=> 19
+			)
 			Port map(
 				iCLK  	  => iCLK,
 				inRST 	  => inRST,
 				iTIMER_EN  => sINIT_PERIOD_EN,
 				oTC 	  	  => sINIT_PERIOD_TC
 			);
+	
+	-- LCD R/W command timer
+	eLCD_CMD_TIMER : entity work.lcd_timer
+			Generic map (
+				CLK_PERIOD_NUMBER => 10,
+				CLK_CNT_WIDHT		=> 4
+			)
+			Port map(
+				iCLK  	  => iCLK,
+				inRST 	  => inRST,
+				iTIMER_EN  => sCMD_PERIOD_EN,
+				oTC 	  	  => sCMD_PERIOD_TC
+			);	
 
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
@@ -113,7 +136,7 @@ begin
 					sNEXT_STATE <= DISPLAY_CONFIG_BF;	
 				end if;
 			when  DISPLAY_CONFIG =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= CLEAR_SCREEN_BF;
 				else
 					sNEXT_STATE <= DISPLAY_CONFIG;
@@ -125,7 +148,7 @@ begin
 					sNEXT_STATE <= CLEAR_SCREEN_BF;	
 				end if;
 			when  CLEAR_SCREEN =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= CURSOR_CONFIG_BF;
 				else
 					sNEXT_STATE <= CLEAR_SCREEN;
@@ -137,7 +160,7 @@ begin
 					sNEXT_STATE <= CURSOR_CONFIG_BF;	
 				end if;
 			when CURSOR_CONFIG =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER - 1) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= STOP_PRINT;
 				else
 					sNEXT_STATE <= CURSOR_CONFIG;
@@ -148,113 +171,328 @@ begin
 	end process fsm_next;	
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT) begin
-		sIN_BUFF_EN	 	 <= '0';
-		sOUT_BUFF_EN	 <= '1';
-		sSEQ_CNT_EN 	 <= '0';
-		sSEQ_CNT_RST 	 <= '0';		
-		sINIT_PERIOD_EN <= '0';
-		sOUT_DATA		 <= (others => '0');
-		oE 	  			 <= '0'; 
-      oRS    			 <= '0';
-      oRW   			 <= '0';
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT) begin
+		sIN_BUFF_EN	 	 	<= '0';
+		sOUT_BUFF_EN	 	<= '1';
+		sSEQ_CNT_EN 	 	<= '0';
+		sSEQ_CNT_RST 	 	<= '0';
+		sCMD_PER_CNT_EN	<= '0';	
+		sCMD_PER_CNT_RST	<= '0';
+		sINIT_PERIOD_EN 	<= '0';	
+		sCMD_PERIOD_EN  	<= '0';	
+		sOUT_DATA		 	<= (others => '0');
+		oE 	  			 	<= '0'; 
+      oRS    			 	<= '0';
+      oRW   			 	<= '0';
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sINIT_PERIOD_EN	 <= '1';
 			when LCD_INIT_SEQ =>
 				if (sINIT_PERIOD_TC = '1') then
-					sSEQ_CNT_EN 	 <= '1';
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PER_CNT_RST <= '1';
 				else
-					sSEQ_CNT_EN 	 <= '0';
+					sSEQ_CNT_EN 	  <= '0';
+					sCMD_PER_CNT_RST <= '0';
 				end if;	
+				
 				sINIT_PERIOD_EN <= '1';
-				if (sSEQ_CNT > 2) then
-					sOUT_DATA 		 <= "0010";
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;				
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN  <= '0';
+					sCMD_PER_CNT_EN <= '0';
+				else
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';
+				end if;	
+				
+				if (sSEQ_CNT > 2) then					
 					if (sSEQ_CNT = 4) then
+						sCMD_PERIOD_EN  <= '0';
 						sSEQ_CNT_RST 	 <= '1';
-					else
+					else						
 						sSEQ_CNT_RST 	 <= '0';
-					end if;
+					end if;					
+					sOUT_DATA 		 <= "0010";
 				else  
 					sOUT_DATA 		 <= "0011";				
 				end if;
+							
 			when LCD_CONFIG =>
-				if (sSEQ_CNT = 1) then
-					sSEQ_CNT_EN 	 <= '1';
+			
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;		
+			
+				if (sSEQ_CNT = 1) then		
+
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';						
+					end if;
+					
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';
+					
 					sOUT_DATA 		 <= "0010";
 				elsif (sSEQ_CNT = 2) then
-					sSEQ_CNT_EN 	 <= '0';
-					sOUT_DATA 		 <= "0100";
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';				
+					
+					sOUT_DATA 		 <= "1000";
 				else
 					if (sINIT_PERIOD_TC = '1') then
 						sSEQ_CNT_EN 	 <= '1';
 					else
 						sSEQ_CNT_EN 	 <= '0';
 					end if;	
+					
+					sCMD_PERIOD_EN  <= '0';
+					sCMD_PER_CNT_EN <= '0';
+					
 					sOUT_DATA 		 <= "0000";
 				end if;
+				
 				sINIT_PERIOD_EN <= '1';	
+						
 			when DISPLAY_CONFIG_BF =>
 				sIN_BUFF_EN	 	 <= '1';
 				sOUT_BUFF_EN	 <= '0';
 				oRW   			 <= '1';
 				sSEQ_CNT_RST 	 <= '1';
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+				else
+					sCMD_PERIOD_EN   <= '1';
+					sCMD_PER_CNT_EN  <= '1';
+				end if;
+			
 			when DISPLAY_CONFIG =>
-				if (sSEQ_CNT = 0) then
-					sSEQ_CNT_EN 	 <= '1';
+			
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
 					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 1) then
-					sSEQ_CNT_EN 	 <= '0';
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
 					sOUT_DATA 		 <= "1000";
 				else
-					sOUT_DATA 		 <= "0000";
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
 				end if;
+				
+								
 			when CLEAR_SCREEN_BF =>
+
 				sIN_BUFF_EN	 	 <= '1';
 				sOUT_BUFF_EN	 <= '0';
 				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';		
-			when CLEAR_SCREEN =>
-				if (sSEQ_CNT = 0) then
-					sSEQ_CNT_EN 	 <= '1';
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 1) then
-					sSEQ_CNT_EN 	 <= '0';
-					sOUT_DATA 		 <= "1000";
+				sSEQ_CNT_RST 	 <= '1';
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
 				else
-					sOUT_DATA 		 <= "0000";
-				end if;	
-			when CURSOR_CONFIG_BF =>
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';		
-			when CURSOR_CONFIG =>
-				if (sSEQ_CNT = 0) then
-					sSEQ_CNT_EN 	 <= '1';
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 1) then
-					sSEQ_CNT_EN 	 <= '0';
-					sOUT_DATA 		 <= "1000";
-				else
-					sOUT_DATA 		 <= "0000";
+					oE <= '0';
 				end if;
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+				else
+					sCMD_PERIOD_EN   <= '1';
+					sCMD_PER_CNT_EN  <= '1';
+				end if;
+		
+			when CLEAR_SCREEN =>
+
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0001";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
+				end if;
+
+			when CURSOR_CONFIG_BF =>
+
+				sIN_BUFF_EN	 	 <= '1';
+				sOUT_BUFF_EN	 <= '0';
+				oRW   			 <= '1';
+				sSEQ_CNT_RST 	 <= '1';
+				
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sCMD_PER_CNT = 3) then
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+				else
+					sCMD_PERIOD_EN   <= '1';
+					sCMD_PER_CNT_EN  <= '1';
+				end if;
+
+			when CURSOR_CONFIG =>
+			
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0110";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
+				end if;
+				
 			when STOP_PRINT =>	
 		end case;
 	end process fsm_out;	
 	
-	-- Sequence number counter process 
+	-- Command sequence number counter process 
 	seq_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
-			sSEQ_CNT <= (others => '0'); 
+			sSEQ_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
 			if (sSEQ_CNT_RST = '1') then
-				sSEQ_CNT <= (others => '0');	
+				sSEQ_CNT <= (others => '0');	-- Reset counter
 			elsif (sSEQ_CNT_EN = '1') then
-				sSEQ_CNT <= sSEQ_CNT + 1;
+				sSEQ_CNT <= sSEQ_CNT + 1; -- Count command sequence
 			end if;
 		end if;
 	end process seq_cnt;
+	
+	-- Command period number counter process 
+	cmd_per_cnt : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sCMD_PER_CNT <= (others => '0'); -- Reset counter
+		elsif (iCLK'event and iCLK = '1') then
+			if (sCMD_PER_CNT_RST = '1') then
+				sCMD_PER_CNT <= (others => '0'); -- Reset counter  
+			elsif (sCMD_PER_CNT_EN = '1' and sCMD_PERIOD_TC = '1') then
+				sCMD_PER_CNT <= sCMD_PER_CNT + 1; -- Count period if one command period elapsed
+			end if;
+		end if;
+	end process cmd_per_cnt;	
 	
 	-- Input tri-state buffer
 	sIN_DATA  <= ioD 		 when sIN_BUFF_EN  = '1' else  

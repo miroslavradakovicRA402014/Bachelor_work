@@ -1,10 +1,10 @@
 NET "iCLK"  					LOC = M21;
-NET "inRST"					LOC = AB24;
+NET "inRST"						LOC = AB24;
 
-NET "oE"					LOC = V18;
-NET "oRS"					LOC = T18;
-NET "oRW"					LOC = D18;
+NET "oE"							LOC = D21;
+NET "oRS"						LOC = F24;
+NET "oRW"						LOC = C21;
 NET "ioD(0)"					LOC = W18;
-NET "ioD(1)"					LOC = D21;
-NET "ioD(2)"					LOC = C21;
-NET "ioD(3)"					LOC = F24;				
+NET "ioD(1)"					LOC = V18;
+NET "ioD(2)"					LOC = D18;
+NET "ioD(3)"					LOC = T18;				

@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "secureip" -o "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe" -prj "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj" "lcd_driver_tb" 
+-intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj" "work.lcd_driver_tb" 
