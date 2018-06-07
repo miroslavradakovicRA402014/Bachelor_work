@@ -124,6 +124,22 @@ BEGIN
 		
 		ioD <= (others => 'Z'); 
 		
+		wait for 40 us;
+		
+		ioD <= "0000";
+			
+		wait for iCLK_period;	
+		
+		ioD <= (others => 'Z');		
+		
+		wait for 40 us;
+		
+		ioD <= "0000";
+			
+		wait for iCLK_period;	
+		
+		ioD <= (others => 'Z');		
+		
       wait;
    end process;
 

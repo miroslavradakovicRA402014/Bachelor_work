@@ -13,7 +13,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000016c000000020000000000000000000000000200000064ffffffff0000008100000003000000020000016c0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000018c000000020000000000000000000000000200000064ffffffff0000008100000003000000020000018c0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
       <CurrentItem>lcd_driver - Behavioral (D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd)</CurrentItem>
    </ItemView>
@@ -77,6 +77,7 @@
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/lcd_driver - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|LCD_controller|lcd_driver.vhd</ClosedNode>
          <ClosedNode>/lcd_driver_tb - behavior D:|BSc_workspace|Bachelor_work|LCD_controller|lcd_driver_tb.vhd</ClosedNode>
+         <ClosedNode>/lcd_driver_tb - behavior D:|BSc_workspace|Bachelor_work|LCD_controller|lcd_driver_tb.vhd/uut - lcd_driver - Behavioral</ClosedNode>
          <ClosedNode>/lcd_driver_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|LCD_controller|lcd_driver_tb.vhd</ClosedNode>
          <ClosedNode>/testbench - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|LCD_controller|lcd_driver_tb.vhd</ClosedNode>
          <ClosedNode>/testbench - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|LCD_controller|lcd_timer_tb.vhd</ClosedNode>

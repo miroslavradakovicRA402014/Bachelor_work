@@ -39,6 +39,7 @@ entity lcd_driver is
            oE 	   : out 	std_logic;
            oRS    : out		std_logic;
            oRW   	: out 	std_logic;
+			  oLED	: out 	std_logic_vector(7 downto 0);
            ioD 	: inout  std_logic_vector (3 downto 0));
 end lcd_driver;
 
@@ -47,7 +48,7 @@ architecture Behavioral of lcd_driver is
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
 							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
 							 CURSOR_CONFIG_BF, CURSOR_CONFIG, DISPLAY_ON_BF, DISPLAY_ON,
-							 PRINT_H_BF, PRINT_H, STOP_PRINT); 		-- LCD controller FSM states type																
+							 PRINT_H_BF, PRINT_H ,STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  	-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  	-- LCD controller FSM next state
@@ -189,9 +190,9 @@ begin
 					sNEXT_STATE <= STOP_PRINT;
 				else
 					sNEXT_STATE <= PRINT_H;
-				end if;
+				end if;			
 			when STOP_PRINT =>
-				sNEXT_STATE <= STOP_PRINT;
+				sNEXT_STATE <= DISPLAY_ON_BF;
 		end case;
 	end process fsm_next;	
 	
@@ -209,6 +210,8 @@ begin
 		oE 	  			 	<= '0'; 
       oRS    			 	<= '0';
       oRW   			 	<= '0';
+		
+		oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sINIT_PERIOD_EN	 <= '1';
@@ -617,8 +620,10 @@ begin
 					sCMD_PER_CNT_RST <= '1';
 					sOUT_DATA 		  <= "0000";
 				end if;			
-			
-			when STOP_PRINT =>	
+				
+			when STOP_PRINT =>
+				oLED <= (others => '1');
+				
 		end case;
 	end process fsm_out;	
 	
