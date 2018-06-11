@@ -28,7 +28,7 @@ unsigned char ieee_p_1242562249_sub_1781507893_1035706684(char *, char *, char *
 char *ieee_p_1242562249_sub_1919365254_1035706684(char *, char *, char *, char *, int );
 
 
-static void work_a_2488688190_3212880686_p_0(char *t0)
+static void work_a_4002811230_3212880686_p_0(char *t0)
 {
     char t18[16];
     char *t1;
@@ -92,7 +92,7 @@ LAB5:    xsi_set_current_line(47, ng0);
     t2 = (t0 + 960U);
     t6 = *((char **)t2);
     t2 = (t0 + 3752U);
-    t13 = (10 - 1);
+    t13 = (12 - 1);
     t14 = ieee_p_1242562249_sub_1781507893_1035706684(IEEE_P_1242562249, t6, t2, t13);
     if (t14 != 0)
         goto LAB10;
@@ -154,7 +154,7 @@ LAB15:    xsi_size_not_matching(4U, t20, 0);
 
 }
 
-static void work_a_2488688190_3212880686_p_1(char *t0)
+static void work_a_4002811230_3212880686_p_1(char *t0)
 {
     char *t1;
     char *t2;
@@ -176,7 +176,7 @@ LAB0:    xsi_set_current_line(56, ng0);
     t1 = (t0 + 960U);
     t2 = *((char **)t1);
     t1 = (t0 + 3752U);
-    t3 = (10 - 1);
+    t3 = (12 - 1);
     t4 = ieee_p_1242562249_sub_1781507893_1035706684(IEEE_P_1242562249, t2, t1, t3);
     if (t4 != 0)
         goto LAB3;
@@ -208,9 +208,9 @@ LAB6:    goto LAB2;
 }
 
 
-extern void work_a_2488688190_3212880686_init()
+extern void work_a_4002811230_3212880686_init()
 {
-	static char *pe[] = {(void *)work_a_2488688190_3212880686_p_0,(void *)work_a_2488688190_3212880686_p_1};
-	xsi_register_didat("work_a_2488688190_3212880686", "isim/lcd_driver_tb_isim_beh.exe.sim/work/a_2488688190_3212880686.didat");
+	static char *pe[] = {(void *)work_a_4002811230_3212880686_p_0,(void *)work_a_4002811230_3212880686_p_1};
+	xsi_register_didat("work_a_4002811230_3212880686", "isim/lcd_driver_tb_isim_beh.exe.sim/work/a_4002811230_3212880686.didat");
 	xsi_register_executes(pe);
 }

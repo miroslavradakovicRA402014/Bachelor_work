@@ -1,33 +1,33 @@
-Running: /opt/Xilinx/14.6/ISE_DS/ISE/bin/lin64/unwrapped/fuse -relaunch -intstyle "ise" -incremental -lib "secureip" -o "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe" -prj "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_beh.prj" "i2c_via_uart_tb" 
-ISim P.68d (signature 0xfbc00daa)
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_beh.prj" "work.i2c_via_uart_tb" 
+ISim P.68d (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 8
 Turning on mult-threading, number of parallel sub-compilation jobs: 16 
 Determining compilation order of HDL files
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/slave_reg.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/scl_gen.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/rising_edge_det.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/reg.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/falling_edge_det.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/uart_components.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/transmitter.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/reciver.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/fifo.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/baud_freq_div.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/uart_i2c_master.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_slave.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_clk_freq_div.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_bus_components.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/uart.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_components.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_bus.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd" into library work
-Parsing VHDL file "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/slave_reg.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/scl_gen.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/rising_edge_det.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/reg.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/falling_edge_det.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/uart_components.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/transmitter.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/reciver.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/fifo.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/baud_freq_div.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/uart_i2c_master.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_slave.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_clk_freq_div.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_bus_components.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../UART_communication/uart.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_components.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_bus.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" into library work
 Starting static elaboration
-WARNING:HDLCompiler:746 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Range is empty (null range)
-WARNING:HDLCompiler:220 - "/build/xfndry10/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
+WARNING:HDLCompiler:746 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Range is empty (null range)
+WARNING:HDLCompiler:220 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
 Completed static elaboration
-Fuse Memory Usage: 100284 KB
-Fuse CPU Usage: 840 ms
+Fuse Memory Usage: 197144 KB
+Fuse CPU Usage: 374 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package i2c_via_uart_components
@@ -55,7 +55,6 @@ Compiling architecture behavior of entity i2c_via_uart_tb
 Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 39 VHDL Units
-Built simulation executable /home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 1207552 KB
-Fuse CPU Usage: 970 ms
-GCC CPU Usage: 290 ms
+Built simulation executable D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
+Fuse Memory Usage: 226328 KB
+Fuse CPU Usage: 889 ms

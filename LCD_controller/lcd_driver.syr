@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> Reading design: lcd_driver.prj
 
@@ -150,12 +150,12 @@ Synthesizing Unit <lcd_driver>.
     Found 3-bit adder for signal <sSEQ_CNT[2]_GND_4_o_add_92_OUT> created at line 1241.
     Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_4_o_add_96_OUT> created at line 1241.
     Found 4x12-bit Read Only RAM for signal <_n0138>
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 657
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 661
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 661
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 661
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 661
-    Found 3-bit comparator greater for signal <GND_4_o_sSEQ_CNT[2]_LessThan_25_o> created at line 243
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 672
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 676
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 676
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 676
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 676
+    Found 3-bit comparator greater for signal <GND_4_o_sSEQ_CNT[2]_LessThan_25_o> created at line 258
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -180,7 +180,7 @@ Unit <lcd_timer_1> synthesized.
 
 Synthesizing Unit <lcd_timer_2>.
     Related source file is "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_timer.vhd".
-        CLK_PERIOD_NUMBER = 10
+        CLK_PERIOD_NUMBER = 12
         CLK_CNT_WIDHT = 4
     Found 4-bit register for signal <sCLK_CNT>.
     Found 4-bit adder for signal <sCLK_CNT[3]_GND_6_o_add_1_OUT> created at line 1241.
@@ -288,8 +288,8 @@ Optimizing FSM <FSM_0> on signal <sCURRENT_STATE[1:4]> with user encoding.
  cursor_config     | 1000
  display_on_bf     | 1001
  display_on        | 1010
- print_h_bf        | 1011
- print_h           | 1100
+ print_char_bf     | 1011
+ print_char        | 1100
  stop_print        | 1101
 -------------------------------
 WARNING:Xst:2041 - Unit lcd_driver: 1 internal tristate is replaced by logic (pull-up yes): sIN_DATA<3>.
@@ -334,17 +334,17 @@ Top Level Output File Name         : lcd_driver.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 147
+# BELS                             : 148
 #      GND                         : 1
 #      INV                         : 3
 #      LUT1                        : 18
 #      LUT2                        : 5
-#      LUT3                        : 8
-#      LUT4                        : 13
+#      LUT3                        : 7
+#      LUT4                        : 14
 #      LUT5                        : 28
 #      LUT6                        : 31
 #      MUXCY                       : 18
-#      MUXF7                       : 2
+#      MUXF7                       : 3
 #      VCC                         : 1
 #      XORCY                       : 19
 # FlipFlops/Latches                : 36
@@ -415,9 +415,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 5.809ns (Maximum Frequency: 172.147MHz)
+   Minimum period: 5.802ns (Maximum Frequency: 172.354MHz)
    Minimum input arrival time before clock: 4.309ns
-   Maximum output required time after clock: 7.225ns
+   Maximum output required time after clock: 7.141ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -426,10 +426,10 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 5.809ns (frequency: 172.147MHz)
-  Total number of paths / destination ports: 1665 / 59
+  Clock period: 5.802ns (frequency: 172.354MHz)
+  Total number of paths / destination ports: 1661 / 59
 -------------------------------------------------------------------------
-Delay:               5.809ns (Levels of Logic = 3)
+Delay:               5.802ns (Levels of Logic = 3)
   Source:            eLCD_INIT_TIMER/sCLK_CNT_12 (FF)
   Destination:       eLCD_INIT_TIMER/sCLK_CNT_0 (FF)
   Source Clock:      iCLK rising
@@ -439,14 +439,14 @@ Delay:               5.809ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             4   0.525   1.259  eLCD_INIT_TIMER/sCLK_CNT_12 (eLCD_INIT_TIMER/sCLK_CNT_12)
-     LUT6:I0->O            2   0.254   0.954  eLCD_INIT_TIMER/oTC<18>1_1 (eLCD_INIT_TIMER/oTC<18>11)
+     FDCE:C->Q             5   0.525   1.296  eLCD_INIT_TIMER/sCLK_CNT_12 (eLCD_INIT_TIMER/sCLK_CNT_12)
+     LUT6:I0->O            1   0.254   0.910  eLCD_INIT_TIMER/oTC<18>1_2 (eLCD_INIT_TIMER/oTC<18>12)
      LUT4:I1->O            3   0.235   0.766  eLCD_INIT_TIMER/oTC<18>4 (sINIT_PERIOD_TC)
      LUT5:I4->O           19   0.254   1.260  eLCD_INIT_TIMER/_n0015_inv1 (eLCD_INIT_TIMER/_n0015_inv)
      FDCE:CE                   0.302          eLCD_INIT_TIMER/sCLK_CNT_0
     ----------------------------------------
-    Total                      5.809ns (1.570ns logic, 4.239ns route)
-                                       (27.0% logic, 73.0% route)
+    Total                      5.802ns (1.570ns logic, 4.232ns route)
+                                       (27.1% logic, 72.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
@@ -472,22 +472,22 @@ Offset:              4.309ns (Levels of Logic = 2)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
   Total number of paths / destination ports: 80 / 15
 -------------------------------------------------------------------------
-Offset:              7.225ns (Levels of Logic = 3)
-  Source:            sCURRENT_STATE_FSM_FFd1 (FF)
+Offset:              7.141ns (Levels of Logic = 3)
+  Source:            sCURRENT_STATE_FSM_FFd2 (FF)
   Destination:       ioD<0> (PAD)
   Source Clock:      iCLK rising
 
-  Data Path: sCURRENT_STATE_FSM_FFd1 to ioD<0>
+  Data Path: sCURRENT_STATE_FSM_FFd2 to ioD<0>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q             23   0.525   1.466  sCURRENT_STATE_FSM_FFd1 (sCURRENT_STATE_FSM_FFd1)
-     LUT2:I0->O            1   0.250   1.137  Mmux_sOUT_DATA1_SW0 (N10)
-     LUT6:I0->O            1   0.254   0.681  Mmux_sOUT_DATA1 (sOUT_DATA<0>)
+     FDC:C->Q             25   0.525   1.833  sCURRENT_STATE_FSM_FFd2 (sCURRENT_STATE_FSM_FFd2)
+     LUT6:I1->O            1   0.254   0.682  Mmux_sOUT_DATA11 (Mmux_sOUT_DATA1)
+     LUT2:I1->O            1   0.254   0.681  Mmux_sOUT_DATA12 (sOUT_DATA<0>)
      OBUFT:I->O                2.912          ioD_0_OBUFT (ioD<0>)
     ----------------------------------------
-    Total                      7.225ns (3.941ns logic, 3.284ns route)
-                                       (54.5% logic, 45.5% route)
+    Total                      7.141ns (3.945ns logic, 3.196ns route)
+                                       (55.2% logic, 44.8% route)
 
 =========================================================================
 
@@ -499,18 +499,18 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.809|         |         |         |
+iCLK           |    5.802|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 3.00 secs
-Total CPU time to Xst completion: 3.20 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 3.61 secs
  
 --> 
 
-Total memory usage is 280452 kilobytes
+Total memory usage is 279748 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)

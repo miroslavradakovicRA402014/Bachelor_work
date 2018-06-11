@@ -1,3 +1,5 @@
 vhdl work "lcd_timer.vhd"
+vhdl work "char_gen.vhd"
+vhdl work "../I2C_bus/reg.vhd"
 vhdl work "lcd_driver.vhd"
 vhdl work "lcd_driver_tb.vhd"

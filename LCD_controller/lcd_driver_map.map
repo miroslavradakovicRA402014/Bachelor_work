@@ -10,7 +10,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Thu Jun 07 16:52:24 2018
+Mapped Date    : Mon Jun 11 09:44:38 2018
 
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to
@@ -49,39 +49,39 @@ Phase 3.31  Local Placement Optimization (Checksum:2e08b88c) REAL time: 4 secs
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:2e08b88c) REAL time: 5 secs 
+(Checksum:2e08b88c) REAL time: 6 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:2e08b88c) REAL time: 5 secs 
+Phase 5.36  Local Placement Optimization (Checksum:2e08b88c) REAL time: 6 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:2e08b88c) REAL time: 5 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:2e08b88c) REAL time: 6 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:2e08b88c) REAL time: 5 secs 
+Phase 7.3  Local Placement Optimization (Checksum:2e08b88c) REAL time: 6 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:2e08b88c) REAL time: 5 secs 
+Phase 8.5  Local Placement Optimization (Checksum:2e08b88c) REAL time: 6 secs 
 
 Phase 9.8  Global Placement
-....
-....
-Phase 9.8  Global Placement (Checksum:5f91590d) REAL time: 5 secs 
+........
+........
+Phase 9.8  Global Placement (Checksum:25a41cae) REAL time: 6 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:5f91590d) REAL time: 5 secs 
+Phase 10.5  Local Placement Optimization (Checksum:25a41cae) REAL time: 6 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:145cfb7d) REAL time: 6 secs 
+Phase 11.18  Placement Optimization (Checksum:77807a66) REAL time: 6 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:145cfb7d) REAL time: 6 secs 
+Phase 12.5  Local Placement Optimization (Checksum:77807a66) REAL time: 6 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:145cfb7d) REAL time: 6 secs 
+Phase 13.34  Placement Validation (Checksum:77807a66) REAL time: 6 secs 
 
 Total REAL time to Placer completion: 6 secs 
-Total CPU  time to Placer completion: 5 secs 
+Total CPU  time to Placer completion: 6 secs 
 Running post-placement packing...
 Writing output files...
 
@@ -110,12 +110,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    31 out of   6,822    1%
+  Number of occupied Slices:                    33 out of   6,822    1%
   Number of MUXCYs used:                        20 out of  13,644    1%
   Number of LUT Flip Flop pairs used:           97
-    Number with an unused Flip Flop:            63 out of      97   64%
+    Number with an unused Flip Flop:            64 out of      97   65%
     Number with an unused LUT:                   0 out of      97    0%
-    Number of fully used LUT-FF pairs:          34 out of      97   35%
+    Number of fully used LUT-FF pairs:          33 out of      97   34%
     Number of unique control sets:               3
     Number of slice register sites lost
       to control set restrictions:              12 out of  54,576    1%
@@ -155,10 +155,10 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                4.25
+Average Fanout of Non-Clock Nets:                4.31
 
-Peak Memory Usage:  418 MB
-Total REAL time to MAP completion:  6 secs 
+Peak Memory Usage:  417 MB
+Total REAL time to MAP completion:  7 secs 
 Total CPU time to MAP completion:   6 secs 
 
 Mapping completed.

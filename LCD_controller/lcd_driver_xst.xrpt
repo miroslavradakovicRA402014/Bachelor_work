@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="Xst" timeStamp="Thu Jun 07 16:52:16 2018">
+  <application stringID="Xst" timeStamp="Mon Jun 11 09:44:29 2018">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -158,17 +158,17 @@
         <item stringID="XST_TOP_LEVEL_OUTPUT_FILE_NAME" value="lcd_driver.ngc"/>
       </section>
       <section stringID="XST_PRIMITIVE_AND_BLACK_BOX_USAGE">
-        <item dataType="int" stringID="XST_BELS" value="147">
+        <item dataType="int" stringID="XST_BELS" value="148">
           <item dataType="int" stringID="XST_GND" value="1"/>
           <item dataType="int" stringID="XST_INV" value="3"/>
           <item dataType="int" stringID="XST_LUT1" value="18"/>
           <item dataType="int" stringID="XST_LUT2" value="5"/>
-          <item dataType="int" stringID="XST_LUT3" value="8"/>
-          <item dataType="int" stringID="XST_LUT4" value="13"/>
+          <item dataType="int" stringID="XST_LUT3" value="7"/>
+          <item dataType="int" stringID="XST_LUT4" value="14"/>
           <item dataType="int" stringID="XST_LUT5" value="28"/>
           <item dataType="int" stringID="XST_LUT6" value="31"/>
           <item dataType="int" stringID="XST_MUXCY" value="18"/>
-          <item dataType="int" stringID="XST_MUXF7" value="2"/>
+          <item dataType="int" stringID="XST_MUXF7" value="3"/>
           <item dataType="int" stringID="XST_VCC" value="1"/>
           <item dataType="int" stringID="XST_XORCY" value="19"/>
         </item>

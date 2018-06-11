@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-06-07T15:24:31</DateModified>
+  <DateModified>2018-06-11T18:19:11</DateModified>
   <ModuleName>lcd_driver</ModuleName>
-  <SummaryTimeStamp>2018-06-07T14:45:16</SummaryTimeStamp>
+  <SummaryTimeStamp>2018-06-11T09:45:11</SummaryTimeStamp>
   <SavedFilePath>D:/BSc_workspace/Bachelor_work/LCD_controller/iseconfig/lcd_driver.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/LCD_controller\</ImplementationReportsDirectory>
   <DateInitialized>2018-06-04T11:08:56</DateInitialized>

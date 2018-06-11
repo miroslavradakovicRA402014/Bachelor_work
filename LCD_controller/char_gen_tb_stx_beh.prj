@@ -1,0 +1,2 @@
+vhdl isim_temp "char_gen.vhd"
+vhdl isim_temp "char_gen_tb.vhd"

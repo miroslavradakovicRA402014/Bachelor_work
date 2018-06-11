@@ -1,25 +1,30 @@
-Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj" "lcd_driver_tb" 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj" "work.lcd_driver_tb" 
 ISim P.68d (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 8
 Turning on mult-threading, number of parallel sub-compilation jobs: 16 
 Determining compilation order of HDL files
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/char_gen.vhd" into library work
+Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/../I2C_bus/reg.vhd" into library work
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd" into library work
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 193312 KB
-Fuse CPU Usage: 187 ms
+Fuse Memory Usage: 196248 KB
+Fuse CPU Usage: 218 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
 Compiling architecture behavioral of entity lcd_timer [\lcd_timer(42,6)\]
-Compiling architecture behavioral of entity lcd_timer [\lcd_timer(10,4)\]
-Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3)\]
+Compiling architecture behavioral of entity lcd_timer [\lcd_timer(12,4)\]
+Compiling architecture behavioral of entity reg [reg_default]
+Compiling architecture behavioral of entity reg [\reg(1)\]
+Compiling architecture behavioral of entity char_gen [char_gen_default]
+Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3,4,8,27)\]
 Compiling architecture behavior of entity lcd_driver_tb
 Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
-Compiled 10 VHDL Units
+Compiled 16 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe
-Fuse Memory Usage: 209568 KB
-Fuse CPU Usage: 359 ms
+Fuse Memory Usage: 213080 KB
+Fuse CPU Usage: 437 ms

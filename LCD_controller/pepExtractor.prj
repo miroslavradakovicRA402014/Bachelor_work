@@ -1,2 +1,1 @@
-work	"lcd_driver.vhd"
-work	"lcd_timer.vhd"
+work	"char_gen.vhd"

@@ -52,13 +52,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1527777268" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1527777268">
+    <transform xil_pn:end_ts="1528734158" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1528734158">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="../I2C_bus/falling_edge_det.vhd"/>
       <outfile xil_pn:name="../I2C_bus/i2c_bus.vhd"/>
       <outfile xil_pn:name="../I2C_bus/i2c_bus_components.vhd"/>
@@ -91,14 +87,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1527777268" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1527777268">
+    <transform xil_pn:end_ts="1528734160" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1528734160">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="../I2C_bus/falling_edge_det.vhd"/>
       <outfile xil_pn:name="../I2C_bus/i2c_bus.vhd"/>
       <outfile xil_pn:name="../I2C_bus/i2c_bus_components.vhd"/>
@@ -119,13 +110,10 @@
       <outfile xil_pn:name="i2c_via_uart_components.vhd"/>
       <outfile xil_pn:name="i2c_via_uart_tb.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1527777269" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-3824446444053875962" xil_pn:start_ts="1527777268">
+    <transform xil_pn:end_ts="1528734163" xil_pn:in_ck="1911475677917863526" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-3824446444053875962" xil_pn:start_ts="1528734160">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="i2c_via_uart_tb_beh.prj"/>
@@ -134,12 +122,9 @@
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1527777269" xil_pn:in_ck="-5235602520020615140" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-2787102694732744813" xil_pn:start_ts="1527777269">
+    <transform xil_pn:end_ts="1528734207" xil_pn:in_ck="-5235602520020615140" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-2787102694732744813" xil_pn:start_ts="1528734206">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="i2c_via_uart_tb_isim_beh.wdb"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
@@ -177,7 +162,9 @@
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="i2c_via_uart.lso"/>
       <outfile xil_pn:name="i2c_via_uart.ngc"/>

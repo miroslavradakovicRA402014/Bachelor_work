@@ -43,9 +43,16 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
     PORT(
          iCLK : IN  std_logic;
          inRST : IN  std_logic;
+			iSLAVE_ADDR : IN 	std_logic_vector(7 downto 0);
+			iREG_ADDR   : IN 	std_logic_vector(7 downto 0);
+			iLOWER_BYTE : IN  std_logic_vector(7 downto 0);
+			iUPPER_BYTE : IN 	std_logic_vector(7 downto 0);
+			iMODE 		: IN	std_logic_vector(0 downto 0);
+			iDATA_EN	  : IN 	std_logic;			
          oE : OUT  std_logic;
          oRS : OUT  std_logic;
          oRW : OUT  std_logic;
+			oLED : OUT std_logic_vector(7 downto 0);
          ioD : INOUT  std_logic_vector(3 downto 0)
         );
     END COMPONENT;
@@ -54,6 +61,13 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
    --Inputs
    signal iCLK : std_logic := '0';
    signal inRST : std_logic := '0';
+	signal iSLAVE_ADDR : std_logic_vector(7 downto 0) := (others => '0');
+	signal iREG_ADDR   : std_logic_vector(7 downto 0) := (others => '0');
+	signal iLOWER_BYTE : std_logic_vector(7 downto 0) := (others => '0');
+	signal iUPPER_BYTE : std_logic_vector(7 downto 0) := (others => '0');
+	signal iMODE 		 : std_logic_vector(0 downto 0) := (others => '0');
+	signal iDATA_EN	 : std_logic := '0';	
+	
 
 	--BiDirs
    signal ioD : std_logic_vector(3 downto 0);
@@ -62,6 +76,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
    signal oE : std_logic;
    signal oRS : std_logic;
    signal oRW : std_logic;
+	signal oLED : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 42 ns;
@@ -72,6 +87,12 @@ BEGIN
    uut: lcd_driver PORT MAP (
           iCLK => iCLK,
           inRST => inRST,
+			 iSLAVE_ADDR => iSLAVE_ADDR,
+			 iREG_ADDR   => iREG_ADDR ,
+			 iLOWER_BYTE => iLOWER_BYTE,
+			 iUPPER_BYTE => iUPPER_BYTE,
+			 iMODE 		 => iMODE,
+			 iDATA_EN	 => iDATA_EN,				 
           oE => oE,
           oRS => oRS,
           oRW => oRW,
@@ -98,47 +119,67 @@ BEGIN
 
       -- insert stimulus here 
 		inRST <= '1';
+		iSLAVE_ADDR <= "00001001";
+		iREG_ADDR <= "00000001";
+		iLOWER_BYTE <= "11110000";
+		iUPPER_BYTE <= "11111111";
+		iMODE <= "0";
+		iDATA_EN <= '1';
+		
+--		ioD <= (others => 'Z');
+		
+--		wait for 40 us;
+--		
+--		ioD <= "0000";
+--			
+--		wait for iCLK_period;	
+--		
+--		ioD <= (others => 'Z');
+--		
+--		wait for 40 us;
+--		
+--		ioD <= "0000";
+--			
+--		wait for iCLK_period;	
+--		
+--		ioD <= (others => 'Z'); 
+--		
+--		wait for 40 us;
+--		
+--		ioD <= "0000";
+--			
+--		wait for iCLK_period;	
+--		
+--		ioD <= (others => 'Z'); 
+--		
+--		wait for 40 us;
+--		
+--		ioD <= "0000";
+--			
+--		wait for iCLK_period;	
+--		
+--		ioD <= (others => 'Z');		
+--		
+--		wait for 40 us;
+--		
+--		ioD <= "0000";
+--			
+--		wait for iCLK_period;	
+--		
+--		ioD <= (others => 'Z');		
+		for i in 0 to 29 loop
+			ioD <= (others => 'Z');
+			
+			wait for 40 us;
+			
+			ioD <= "0000";	
+
+			wait for iCLK_period;	
+		end loop;
+		
+		iDATA_EN <= '0';
 		ioD <= (others => 'Z');
-		
-		wait for 40 us;
-		
-		ioD <= "0000";
-			
-		wait for iCLK_period;	
-		
-		ioD <= (others => 'Z');
-		
-		wait for 40 us;
-		
-		ioD <= "0000";
-			
-		wait for iCLK_period;	
-		
-		ioD <= (others => 'Z'); 
-		
-		wait for 40 us;
-		
-		ioD <= "0000";
-			
-		wait for iCLK_period;	
-		
-		ioD <= (others => 'Z'); 
-		
-		wait for 40 us;
-		
-		ioD <= "0000";
-			
-		wait for iCLK_period;	
-		
-		ioD <= (others => 'Z');		
-		
-		wait for 40 us;
-		
-		ioD <= "0000";
-			
-		wait for iCLK_period;	
-		
-		ioD <= (others => 'Z');		
+
 		
       wait;
    end process;

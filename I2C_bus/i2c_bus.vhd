@@ -42,7 +42,7 @@ architecture Behavioral of i2c_bus is
 	signal sSCL 	 : std_logic; -- SCL bus line
 	signal sSDA 	 : std_logic; -- SDA bus line
 
-	signal sTC  	 : std_logic; -- Clock frequency divider 
+	signal sTC  	 : std_logic; -- Clock frequency divider terminal count 
 	signal sFREQ_EN : std_logic; -- Clock frequency divider enable
 	
 	
