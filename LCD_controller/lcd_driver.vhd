@@ -36,12 +36,11 @@ entity lcd_driver is
 			  iREG_ADDR   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);
 			  iLOWER_BYTE : in  		std_logic_vector(DATA_WIDTH - 1 downto 0);
 			  iUPPER_BYTE : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  iMODE 		  : in		std_logic_vector(0 downto 0);
+			  iMODE 		  : in		std_logic;
 			  iDATA_EN	  : in 		std_logic;
            oE 	   	  : out 		std_logic;
            oRS    	  : out		std_logic;
            oRW   		  : out 		std_logic;
-			  oLED		  : out 		std_logic_vector(DATA_WIDTH 	 - 1 downto 0);
            ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end lcd_driver;
 
@@ -49,9 +48,10 @@ architecture Behavioral of lcd_driver is
 
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
 							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 CURSOR_CONFIG_BF, CURSOR_CONFIG, READ_INPUT_DATA,
-							 DISPLAY_ON_BF, DISPLAY_ON, 
+							 CURSOR_CONFIG_BF, CURSOR_CONFIG, READ_INPUT_DATA, CHECK_CURSOR,
+							 ADDRESS_SET_BF , ADDRESS_SET, 
 							 PRINT_CHAR_BF, PRINT_CHAR, 
+							 CURSOR_HOME,
 							 STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  			-- LCD controller FSM current state
@@ -85,7 +85,7 @@ architecture Behavioral of lcd_driver is
 	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Register address register
 	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Uppper byte register	
 	signal sLOWER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Lower byte register
-	signal sMODE_REG 					: std_logic_vector(0 downto 0);					-- Mode register
+	signal sMODE_FF 					: std_logic;											-- Mode register
 	
 	signal sCHAR_CODE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);
 	
@@ -100,8 +100,8 @@ begin
 	-- LCD init delay timer
 	eLCD_INIT_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 42,--360000,
-				CLK_CNT_WIDHT		=> 6--19
+				CLK_PERIOD_NUMBER => 360000,
+				CLK_CNT_WIDHT		=> 19
 			)
 			Port map(
 				iCLK  	  => iCLK,
@@ -163,19 +163,6 @@ begin
 				oQ		=> sLOWER_BYTE_REG
 			);	
 
-	-- Mode register
-	eMODE_REG : entity work.reg
-			Generic map(
-				DATA_WIDTH => 1
-			)
-			Port map(
-				iCLK  => iCLK,
-				inRST => inRST,
-				iWE   => iDATA_EN,
-				iD 	=> iMODE,
-				oQ		=> sMODE_REG
-			);				
-	
 	-- Slave address char generator		
 	eSLAVE_ADDR_CHAR_GEN : entity work.char_gen
 			Port map(
@@ -202,7 +189,19 @@ begin
 			Port map(
 				iDATA => sLOWER_BYTE_REG,
 				oCHAR => sLOWER_BYTE_CHAR
-			);			
+			);	
+	
+	-- Mode flip-flop
+	mode_ff : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sMODE_FF <= '0'; -- Reset FF
+		elsif (iCLK'event and iCLK = '1') then
+			if (iDATA_EN = '1') then
+				sMODE_FF <= iMODE; -- Write mode
+			end if;
+		end if;
+	end process mode_ff;
+			
 
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
@@ -274,23 +273,23 @@ begin
 				
 			when CURSOR_CONFIG =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= DISPLAY_ON_BF;
+					sNEXT_STATE <= ADDRESS_SET_BF;
 				else
 					sNEXT_STATE <= CURSOR_CONFIG;
 				end if;		
 				
-			when DISPLAY_ON_BF =>
+			when ADDRESS_SET_BF =>
 				if (sIN_DATA(3) = '0') then 
-					sNEXT_STATE <= DISPLAY_ON; 
+					sNEXT_STATE <= ADDRESS_SET; 
 				else
-					sNEXT_STATE <= DISPLAY_ON_BF;	
+					sNEXT_STATE <= ADDRESS_SET_BF;	
 				end if;	
 				
-			when DISPLAY_ON =>
+			when ADDRESS_SET =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= READ_INPUT_DATA;
 				else
-					sNEXT_STATE <= DISPLAY_ON;
+					sNEXT_STATE <= ADDRESS_SET;
 				end if;	
 			
 			when READ_INPUT_DATA =>
@@ -298,6 +297,13 @@ begin
 					sNEXT_STATE <= PRINT_CHAR_BF;
 				else 
 					sNEXT_STATE <= READ_INPUT_DATA;
+				end if;
+				
+			when CHECK_CURSOR => 	
+				if (sCHAR_CNT = 16) then
+					sNEXT_STATE <= CURSOR_HOME;
+				else
+					sNEXT_STATE <= PRINT_CHAR_BF;
 				end if;
 			
 			when PRINT_CHAR_BF =>
@@ -314,18 +320,25 @@ begin
 					sNEXT_STATE <= PRINT_CHAR;
 				end if;	
 				
+			when CURSOR_HOME =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+					sNEXT_STATE <= PRINT_CHAR_BF;
+				else
+					sNEXT_STATE <= CURSOR_HOME;
+				end if;					
+				
 			when STOP_PRINT =>
 				if (sCHAR_CNT = CHAR_NUMBER - 1) then
 					sNEXT_STATE <= READ_INPUT_DATA;
 				else
-					sNEXT_STATE <= PRINT_CHAR_BF;
+					sNEXT_STATE <= CHECK_CURSOR;
 				end if;
-				
+								
 		end case;
 	end process fsm_next;	
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT) begin
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
 		sOUT_BUFF_EN	 	<= '1';
 		sSEQ_CNT_EN 	 	<= '0';
@@ -341,7 +354,7 @@ begin
       oRS    			 	<= '0';
       oRW   			 	<= '0';
 		
-		oLED <= (others => '0');
+		--oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sINIT_PERIOD_EN	 <= '1';
@@ -487,7 +500,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "1000";
+					sOUT_DATA 		 <= "1110";
 				else
 					sSEQ_CNT_EN 	  <= '1';
 					sCMD_PERIOD_EN   <= '0';
@@ -601,7 +614,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0001";
+					sOUT_DATA 		 <= "0000";
 				elsif (sSEQ_CNT = 2) then
 				
 					if (sCMD_PER_CNT = 3) then
@@ -614,7 +627,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0100";
+					sOUT_DATA 		 <= "0110";
 				else
 					sSEQ_CNT_EN 	  <= '1';
 					sCMD_PERIOD_EN   <= '0';
@@ -623,7 +636,7 @@ begin
 					sOUT_DATA 		  <= "0000";
 				end if;
 				
-			when DISPLAY_ON_BF =>
+			when ADDRESS_SET_BF =>
 
 				sIN_BUFF_EN	 	 <= '1';
 				sOUT_BUFF_EN	 <= '0';
@@ -644,7 +657,7 @@ begin
 					sCMD_PER_CNT_EN  <= '1';
 				end if;	
 
-			when DISPLAY_ON =>
+			when ADDRESS_SET =>
 			
 				if (sCMD_PER_CNT = 1) then 
 					oE <= '1';
@@ -664,7 +677,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
+					sOUT_DATA 		 <= "1000";
 				elsif (sSEQ_CNT = 2) then
 				
 					if (sCMD_PER_CNT = 3) then
@@ -677,7 +690,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "1100";
+					sOUT_DATA 		 <= "0000";
 				else
 					sSEQ_CNT_EN 	  <= '1';
 					sCMD_PERIOD_EN   <= '0';
@@ -760,11 +773,60 @@ begin
 						sCHAR_CNT_EN	  <= '0';
 					end if;
 					sOUT_DATA 		  <= "0000";
-				end if;			
+				end if;	
+
+			when CURSOR_HOME =>
+
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
 				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';	
+
+					if (sCHAR_CNT = 16) then	
+						sOUT_DATA 		 <= "1000";
+					else
+						sOUT_DATA 		 <= "1100";
+					end if;
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0000";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
+				end if;		
+			when CHECK_CURSOR =>
+			
+	
 			when STOP_PRINT =>
-				oLED <= (others => '1');
-				
+				--oLED <= (others => '1');
+					
 		end case;
 	end process fsm_out;	
 	
@@ -808,7 +870,7 @@ begin
 	end process char_cnt;
 	
 	-- Char code process 
-	char_code : process (sCHAR_CNT) begin
+	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sUPPER_BYTE_CHAR, sLOWER_BYTE_CHAR) begin
 		case (sCHAR_CNT) is
 			when "00000" =>
 				sCHAR_CODE <= "01010011"; -- S
@@ -841,7 +903,7 @@ begin
 			when "01110" =>
 				sCHAR_CODE <= sREG_ADDR_CHAR(7  downto 0); -- _				
 			when "01111" =>
-				if (sMODE_REG = "0") then
+				if (sMODE_FF = '0') then
 					sCHAR_CODE <= "01010010"; -- R
 				else 
 					sCHAR_CODE <= "01010111"; -- W

@@ -35,7 +35,8 @@ entity uart_i2c_master is
 		START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
 		BYTE_CNT_WIDTH 	   : integer := 2;   -- Byte counter width
 		TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmisssion period counter width
-		PERIOD_CNT_WIDTH     : integer := 4		-- Period counter width
+		PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width
+		LCD_BUS_WIDTH 			: integer := 4		-- Width of LCD interface	
 	 );
     Port ( iCLK  		   : in 	  std_logic;
            inRST 		   : in 	  std_logic;
@@ -48,8 +49,11 @@ entity uart_i2c_master is
 			  oUART_WRITE  : out   std_logic;
 			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);
 			  oSCL		   : out   std_logic;
-			  ioSDA		   : inout std_logic
-			  );
+			  oLCD_E 	   : out   std_logic;
+           oLCD_RS    	: out   std_logic;
+           oLCD_RW      : out   std_logic;			  
+			  ioSDA		   : inout std_logic;
+			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end uart_i2c_master;
 
 architecture Behavioral of uart_i2c_master is
@@ -135,9 +139,11 @@ architecture Behavioral of uart_i2c_master is
 	signal sREG_DEC_SEL 				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register decoder selection signal
 	signal sREG_DEC_EN				: std_logic;																					-- Register decoder enable
 
+	signal sLCD_DATA_EN				: std_logic;																					-- LCD driver data enable signal
+
 begin
-
-
+   --sLCD_DATA_EN <= '1';
+ 
 	-- Input UART data register
 	eIN_UART_REG : entity work.reg 
 			Port map(
@@ -215,6 +221,23 @@ begin
 				iSCL_EN => sSCL_EN,
 				iTC     => iTC,
 				oSCL	  => sSCL
+			);
+	
+   -- LCD driver	
+	eLCD_DRIVER : entity work.lcd_driver 
+			Port map(
+			   iCLK   	  	=> iCLK,
+            inRST  	  	=> inRST,
+			   iSLAVE_ADDR => sSLAVE_ADDR_REG,
+			   iREG_ADDR   => sREG_ADDR_REG,
+			   iLOWER_BYTE => sLOWER_BYTE_REG,
+			   iUPPER_BYTE => sUPPER_BYTE_REG,
+			   iMODE 		=> sSLAVE_ADDR_REG(0),  
+			   iDATA_EN	   => sLCD_DATA_EN,
+            oE 	   	=> oLCD_E,  
+            oRS    	   => oLCD_RS,
+            oRW   		=> oLCD_RW,  
+            ioD 		  	=> ioLCD_D		
 			);
 
 	-- FSM state register process
@@ -407,6 +430,8 @@ begin
 	-- Master FSM output logic
 	fsm_out : process (sCURRENT_STATE, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
 		sSLAVE_ADDR_SEL 		 <= '0';
+		oFREQ_EN					 <= '0';
+		sLCD_DATA_EN 			 <= '0';
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -653,7 +678,12 @@ begin
 				sISHW_EN			    	<= '0';				
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '1';	
-				sOUART_REG_SEL		 	<= "00";								
+				sOUART_REG_SEL		 	<= "00";		
+				if (sSLAVE_ADDR_REG(0) = '0') then
+					sLCD_DATA_EN <= '1';
+				else
+					sLCD_DATA_EN <= '0';
+				end if;
 			when I2C_SLAVE_ADDRESS_WRITE => 
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -1070,6 +1100,7 @@ begin
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
 				sOUART_REG_SEL		 <= "00";	
+				sLCD_DATA_EN		 <= '1';				
 			when SEND_UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';

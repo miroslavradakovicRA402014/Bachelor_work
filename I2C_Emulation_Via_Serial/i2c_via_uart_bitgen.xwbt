@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.ncd
+OUTFILE=D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.bit
+FAMILY=Spartan6
+PART=xc6slx45-2fgg676
+WORKINGDIR=D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial
+LICENSE=ISE
+USER_INFO=209858334_178080923_210593072_268

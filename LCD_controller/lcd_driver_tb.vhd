@@ -47,12 +47,12 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
 			iREG_ADDR   : IN 	std_logic_vector(7 downto 0);
 			iLOWER_BYTE : IN  std_logic_vector(7 downto 0);
 			iUPPER_BYTE : IN 	std_logic_vector(7 downto 0);
-			iMODE 		: IN	std_logic_vector(0 downto 0);
+			iMODE 		: IN	std_logic;
 			iDATA_EN	  : IN 	std_logic;			
          oE : OUT  std_logic;
          oRS : OUT  std_logic;
          oRW : OUT  std_logic;
-			oLED : OUT std_logic_vector(7 downto 0);
+			--oLED : OUT std_logic_vector(7 downto 0);
          ioD : INOUT  std_logic_vector(3 downto 0)
         );
     END COMPONENT;
@@ -65,7 +65,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
 	signal iREG_ADDR   : std_logic_vector(7 downto 0) := (others => '0');
 	signal iLOWER_BYTE : std_logic_vector(7 downto 0) := (others => '0');
 	signal iUPPER_BYTE : std_logic_vector(7 downto 0) := (others => '0');
-	signal iMODE 		 : std_logic_vector(0 downto 0) := (others => '0');
+	signal iMODE 		 : std_logic := '0';
 	signal iDATA_EN	 : std_logic := '0';	
 	
 
@@ -76,7 +76,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
    signal oE : std_logic;
    signal oRS : std_logic;
    signal oRW : std_logic;
-	signal oLED : std_logic_vector(7 downto 0);
+	--signal oLED : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 42 ns;
@@ -123,7 +123,7 @@ BEGIN
 		iREG_ADDR <= "00000001";
 		iLOWER_BYTE <= "11110000";
 		iUPPER_BYTE <= "11111111";
-		iMODE <= "0";
+		iMODE <= '0';
 		iDATA_EN <= '1';
 		
 --		ioD <= (others => 'Z');

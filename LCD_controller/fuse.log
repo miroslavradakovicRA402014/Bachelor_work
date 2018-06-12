@@ -10,7 +10,7 @@ Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd"
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 196248 KB
+Fuse Memory Usage: 161320 KB
 Fuse CPU Usage: 218 ms
 Compiling package standard
 Compiling package std_logic_1164
@@ -18,13 +18,11 @@ Compiling package numeric_std
 Compiling architecture behavioral of entity lcd_timer [\lcd_timer(42,6)\]
 Compiling architecture behavioral of entity lcd_timer [\lcd_timer(12,4)\]
 Compiling architecture behavioral of entity reg [reg_default]
-Compiling architecture behavioral of entity reg [\reg(1)\]
 Compiling architecture behavioral of entity char_gen [char_gen_default]
 Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3,4,8,27)\]
 Compiling architecture behavior of entity lcd_driver_tb
 Time Resolution for simulation is 1ps.
-Waiting for 1 sub-compilation(s) to finish...
-Compiled 16 VHDL Units
+Compiled 14 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe
-Fuse Memory Usage: 213080 KB
-Fuse CPU Usage: 437 ms
+Fuse Memory Usage: 179624 KB
+Fuse CPU Usage: 374 ms

@@ -24,7 +24,8 @@ use work.i2c_bus_components.ALL;
 
 entity i2c_bus is
 	 Generic (
-		DATA_WIDTH 			: integer := 8	 -- UART word widht 
+		DATA_WIDTH 			: integer := 8;	 -- UART word widht 
+		LCD_BUS_WIDTH 		: integer := 4		 -- Width of LCD interface	
 	 );
     Port ( iCLK  		   : in 	  std_logic;
            inRST 		   : in 	  std_logic;
@@ -33,8 +34,11 @@ entity i2c_bus is
 			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);		
 			  oUART_READ   : out   std_logic;
 			  oUART_WRITE  : out   std_logic;
-			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0)
-			  );
+			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);
+			  oLCD_E 	   : out   std_logic;
+           oLCD_RS    	: out   std_logic;
+           oLCD_RW      : out   std_logic;
+			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end i2c_bus;
 
 architecture Behavioral of i2c_bus is
@@ -62,7 +66,11 @@ begin
 				oUART_WRITE  => oUART_WRITE,
 				oUART_DATA   => oUART_DATA,
 				oSCL		    => sSCL,
-				ioSDA		    => sSDA	
+			   oLCD_E 	    => oLCD_E,
+            oLCD_RS    	 => oLCD_RS,
+            oLCD_RW      => oLCD_RW,					
+				ioSDA		    => sSDA,
+				ioLCD_D		 => ioLCD_D
 			);
 	
 	--	I2C 16 bit slave	
