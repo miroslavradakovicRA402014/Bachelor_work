@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="i2c_bus_components" />
             <top_module name="i2c_via_uart_components" />
@@ -16,7 +16,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="37" />
+   <WVObjectSize size="43" />
    <wave_markers>
       <marker time="4270000000000" label="" />
       <marker time="4617415000000" label="" />
@@ -173,5 +173,29 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/sregs" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sregs[15:0]</obj_property>
       <obj_property name="ObjectShortName">sregs[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sslave_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sslave_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sslave_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sreg_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sreg_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sreg_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/slower_byte_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">slower_byte_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">slower_byte_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/supper_byte_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">supper_byte_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">supper_byte_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/idata_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">idata_en</obj_property>
+      <obj_property name="ObjectShortName">idata_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
    </wvobject>
 </wave_config>

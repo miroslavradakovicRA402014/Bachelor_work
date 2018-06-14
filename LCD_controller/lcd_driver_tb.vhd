@@ -52,7 +52,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
          oE : OUT  std_logic;
          oRS : OUT  std_logic;
          oRW : OUT  std_logic;
-			--oLED : OUT std_logic_vector(7 downto 0);
+			oLED : OUT std_logic_vector(7 downto 0);
          ioD : INOUT  std_logic_vector(3 downto 0)
         );
     END COMPONENT;
@@ -76,7 +76,7 @@ ARCHITECTURE behavior OF lcd_driver_tb IS
    signal oE : std_logic;
    signal oRS : std_logic;
    signal oRW : std_logic;
-	--signal oLED : std_logic_vector(7 downto 0);
+	signal oLED : std_logic_vector(7 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 42 ns;
@@ -96,6 +96,7 @@ BEGIN
           oE => oE,
           oRS => oRS,
           oRW => oRW,
+			 oLED => oLED,
           ioD => ioD
         );
 
@@ -126,47 +127,6 @@ BEGIN
 		iMODE <= '0';
 		iDATA_EN <= '1';
 		
---		ioD <= (others => 'Z');
-		
---		wait for 40 us;
---		
---		ioD <= "0000";
---			
---		wait for iCLK_period;	
---		
---		ioD <= (others => 'Z');
---		
---		wait for 40 us;
---		
---		ioD <= "0000";
---			
---		wait for iCLK_period;	
---		
---		ioD <= (others => 'Z'); 
---		
---		wait for 40 us;
---		
---		ioD <= "0000";
---			
---		wait for iCLK_period;	
---		
---		ioD <= (others => 'Z'); 
---		
---		wait for 40 us;
---		
---		ioD <= "0000";
---			
---		wait for iCLK_period;	
---		
---		ioD <= (others => 'Z');		
---		
---		wait for 40 us;
---		
---		ioD <= "0000";
---			
---		wait for iCLK_period;	
---		
---		ioD <= (others => 'Z');		
 		for i in 0 to 29 loop
 			ioD <= (others => 'Z');
 			

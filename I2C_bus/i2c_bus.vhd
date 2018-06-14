@@ -38,6 +38,7 @@ entity i2c_bus is
 			  oLCD_E 	   : out   std_logic;
            oLCD_RS    	: out   std_logic;
            oLCD_RW      : out   std_logic;
+			  oLED			: out   std_logic_vector(7 downto 0);  
 			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end i2c_bus;
 
@@ -70,6 +71,7 @@ begin
             oLCD_RS    	 => oLCD_RS,
             oLCD_RW      => oLCD_RW,					
 				ioSDA		    => sSDA,
+				oLED			 => oLED,
 				ioLCD_D		 => ioLCD_D
 			);
 	
@@ -91,6 +93,6 @@ begin
 				iFREQ_EN => sFREQ_EN,
 				oTC   	=>	sTC		
 			);
-	
+		
 end Behavioral;
 

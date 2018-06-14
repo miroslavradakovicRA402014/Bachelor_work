@@ -37,6 +37,7 @@ package i2c_bus_components is
 				  oLCD_RS    	: out   std_logic;
 				  oLCD_RW      : out   std_logic;			  
 				  ioSDA		   : inout std_logic;
+				  oLED			: out   std_logic_vector(7 downto 0); 	
 				  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 	end component;
 	
@@ -52,7 +53,7 @@ package i2c_bus_components is
 				RSTART_PERIOD_CNT_WIDTH : integer := 4;									 		 -- Repeat start period counter width
 				TR_PERIOD_CNT_WIDTH  	: integer := 5;											 -- Transmission period counter width
 				REGISTER_SEL_WIDTH 		: integer := 4; 											 -- Decoder selection width
-				SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "1111101"      -- Slave address (7 bit address)
+				SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "0110001"      -- Slave address (7 bit address)
 			 );	
 		 Port ( iCLK 	: in  	std_logic;
 				  inRST 	: in  	std_logic;

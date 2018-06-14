@@ -71,7 +71,7 @@
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="lcd_driver_par.xrpt"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="lcd_driver_summary.html"/>
     <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="lcd_driver_summary.xml"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="lcd_driver_tb_beh.prj"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="lcd_driver_tb_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="lcd_driver_tb_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="lcd_driver_tb_isim_beh.wdb"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="lcd_driver_tb_stx_beh.prj"/>
@@ -90,9 +90,13 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1528800296" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1528800296">
+    <transform xil_pn:end_ts="1528898935" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1528898935">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="../I2C_bus/reg.vhd"/>
       <outfile xil_pn:name="char_gen.vhd"/>
       <outfile xil_pn:name="char_gen_tb.vhd"/>
@@ -112,9 +116,14 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1528800296" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1528800296">
+    <transform xil_pn:end_ts="1528810653" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1528810653">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="../I2C_bus/reg.vhd"/>
       <outfile xil_pn:name="char_gen.vhd"/>
       <outfile xil_pn:name="char_gen_tb.vhd"/>
@@ -122,10 +131,14 @@
       <outfile xil_pn:name="lcd_driver_tb.vhd"/>
       <outfile xil_pn:name="lcd_timer.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1528800299" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="3374408079221353500" xil_pn:start_ts="1528800296">
+    <transform xil_pn:end_ts="1528810656" xil_pn:in_ck="614568769305155558" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="3374408079221353500" xil_pn:start_ts="1528810653">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="isim.log"/>
@@ -133,10 +146,12 @@
       <outfile xil_pn:name="lcd_driver_tb_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1528800299" xil_pn:in_ck="-1132478246813938467" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="7533731833040938847" xil_pn:start_ts="1528800299">
+    <transform xil_pn:end_ts="1528810656" xil_pn:in_ck="-1132478246813938467" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="7533731833040938847" xil_pn:start_ts="1528810656">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="lcd_driver_tb_isim_beh.wdb"/>
@@ -169,16 +184,14 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1528703074" xil_pn:in_ck="128804358862343153" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-5423430628802561271" xil_pn:start_ts="1528703068">
+    <transform xil_pn:end_ts="1528811714" xil_pn:in_ck="4461198097543658183" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-5423430628802561271" xil_pn:start_ts="1528811708">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
-      <status xil_pn:value="OutputRemoved"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="lcd_driver.lso"/>
       <outfile xil_pn:name="lcd_driver.ngc"/>
@@ -187,6 +200,7 @@
       <outfile xil_pn:name="lcd_driver.stx"/>
       <outfile xil_pn:name="lcd_driver.syr"/>
       <outfile xil_pn:name="lcd_driver.xst"/>
+      <outfile xil_pn:name="lcd_driver_tb_beh.prj"/>
       <outfile xil_pn:name="lcd_driver_tb_stx_beh.prj"/>
       <outfile xil_pn:name="lcd_driver_xst.xrpt"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
@@ -196,12 +210,11 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1528703078" xil_pn:in_ck="-3250131663134020932" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="7468691153072286715" xil_pn:start_ts="1528703074">
-      <status xil_pn:value="SuccessfullyRun"/>
+    <transform xil_pn:end_ts="1528811717" xil_pn:in_ck="-3250131663134020932" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="7468691153072286715" xil_pn:start_ts="1528811714">
+      <status xil_pn:value="FailedRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_ngo"/>
       <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
       <outfile xil_pn:name="lcd_driver.bld"/>
@@ -241,7 +254,7 @@
       <outfile xil_pn:name="lcd_driver_par.xrpt"/>
     </transform>
     <transform xil_pn:end_ts="1528703110" xil_pn:in_ck="8811521640337185249" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="5341574683187206424" xil_pn:start_ts="1528703100">
-      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="AbortedRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>

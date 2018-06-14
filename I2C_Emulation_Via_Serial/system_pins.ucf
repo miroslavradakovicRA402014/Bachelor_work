@@ -27,3 +27,12 @@ NET "ioLCD_D(0)"					LOC = W18;
 NET "ioLCD_D(1)"					LOC = V18;
 NET "ioLCD_D(2)"					LOC = D18;
 NET "ioLCD_D(3)"					LOC = T18;
+
+NET "oLED(0)" 						LOC = N24;
+NET "oLED(1)" 						LOC = N23;
+NET "oLED(2)" 						LOC = M24;
+NET "oLED(3)" 						LOC = L24;
+NET "oLED(4)" 						LOC = L23;
+NET "oLED(5)" 						LOC = K24;
+NET "oLED(6)" 						LOC = H24;
+NET "oLED(7)" 						LOC = D24;

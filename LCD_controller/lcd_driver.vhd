@@ -41,6 +41,7 @@ entity lcd_driver is
            oE 	   	  : out 		std_logic;
            oRS    	  : out		std_logic;
            oRW   		  : out 		std_logic;
+			  oLED		  : out   std_logic_vector(7 downto 0); 
            ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end lcd_driver;
 
@@ -87,7 +88,7 @@ architecture Behavioral of lcd_driver is
 	signal sLOWER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Lower byte register
 	signal sMODE_FF 					: std_logic;											-- Mode register
 	
-	signal sCHAR_CODE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);
+	signal sCHAR_CODE 				: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Character code at display
 	
 	signal sSLAVE_ADDR_CHAR			: std_logic_vector(15 downto 0); 				-- Slave address char	
 	signal sREG_ADDR_CHAR			: std_logic_vector(15 downto 0); 				-- Register address char
@@ -96,6 +97,8 @@ architecture Behavioral of lcd_driver is
 
 	
 begin
+
+	oLED <= sLOWER_BYTE_REG;
 
 	-- LCD init delay timer
 	eLCD_INIT_TIMER : entity work.lcd_timer
@@ -702,6 +705,7 @@ begin
 			when READ_INPUT_DATA =>
 
 				sCHAR_CNT_RST <= '1';
+				--oLED <= (others => '1');
 			
 			when PRINT_CHAR_BF =>
 
@@ -794,13 +798,8 @@ begin
 					end if;
 				
 					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';	
-
-					if (sCHAR_CNT = 16) then	
-						sOUT_DATA 		 <= "1000";
-					else
-						sOUT_DATA 		 <= "1100";
-					end if;
+					sCMD_PER_CNT_EN <= '1';
+					sOUT_DATA 		 <= "1100";
 				elsif (sSEQ_CNT = 2) then
 				
 					if (sCMD_PER_CNT = 3) then

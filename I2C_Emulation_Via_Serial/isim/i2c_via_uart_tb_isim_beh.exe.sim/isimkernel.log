@@ -1,28 +1,28 @@
 Command line:
    i2c_via_uart_tb_isim_beh.exe
      -simmode  gui
-     -simrunnum  1
-     -socket  52203
+     -simrunnum  0
+     -socket  56708
 
-Tue Jun 12 14:38:46 2018
+Thu Jun 14 08:28:44 2018
 
 
- Elaboration Time: 0.109375 sec
+ Elaboration Time: 0.140625 sec
 
- Current Memory Usage: 1477.55 Meg
+ Current Memory Usage: 1477.29 Meg
 
- Total Signals          : 559
- Total Nets             : 1529
- Total Signal Drivers   : 269
+ Total Signals          : 563
+ Total Nets             : 1550
+ Total Signal Drivers   : 270
  Total Blocks           : 73
  Total Primitive Blocks : 50
  Total Processes        : 189
  Total Traceable Variables  : 152
- Total Scalar Nets and Variables : 2271
+ Total Scalar Nets and Variables : 2292
 
- Total Simulation Time: 26.0313 sec
+ Total Simulation Time: 11.2344 sec
 
- Current Memory Usage: 374.706 Meg
+ Current Memory Usage: 1005.69 Meg
 
-Tue Jun 12 15:23:28 2018
+Thu Jun 14 08:31:11 2018
 

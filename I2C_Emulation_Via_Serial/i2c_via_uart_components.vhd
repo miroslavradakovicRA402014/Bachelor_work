@@ -22,6 +22,7 @@ package i2c_via_uart_components is
 				  oLCD_E 	   : out   std_logic;
 				  oLCD_RS    	: out   std_logic;
 				  oLCD_RW      : out   std_logic;
+				  oLED			: out   std_logic_vector(7 downto 0);
 				  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 	end component;
 	

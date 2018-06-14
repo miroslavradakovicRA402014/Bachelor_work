@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Reading design: lcd_driver.prj
 
@@ -108,6 +108,12 @@ Slice Utilization Ratio Delta      : 5
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_timer.vhd" into library work
 Parsing entity <lcd_timer>.
 Parsing architecture <Behavioral> of entity <lcd_timer>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\char_gen.vhd" into library work
+Parsing entity <char_gen>.
+Parsing architecture <Behavioral> of entity <char_gen>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\reg.vhd" into library work
+Parsing entity <reg>.
+Parsing architecture <Behavioral> of entity <reg>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" into library work
 Parsing entity <lcd_driver>.
 Parsing architecture <Behavioral> of entity <lcd_driver>.
@@ -122,6 +128,10 @@ Elaborating entity <lcd_timer> (architecture <Behavioral>) with generics from li
 
 Elaborating entity <lcd_timer> (architecture <Behavioral>) with generics from library <work>.
 
+Elaborating entity <reg> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <char_gen> (architecture <Behavioral>) with generics from library <work>.
+
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
@@ -130,15 +140,20 @@ Synthesizing Unit <lcd_driver>.
     Related source file is "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd".
         INIT_SEQ_NUMBER = 4
         CMD_SEQ_NUMBER = 3
+        LCD_BUS_WIDTH = 4
+        DATA_WIDTH = 8
+        CHAR_NUMBER = 27
+    Found 1-bit register for signal <sMODE_FF>.
+    Found 5-bit register for signal <sCURRENT_STATE>.
+    Found 5-bit register for signal <sCHAR_CNT>.
     Found 3-bit register for signal <sSEQ_CNT>.
     Found 2-bit register for signal <sCMD_PER_CNT>.
-    Found 4-bit register for signal <sCURRENT_STATE>.
     Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
     -----------------------------------------------------------------------
-    | States             | 14                                             |
-    | Transitions        | 27                                             |
-    | Inputs             | 4                                              |
-    | Outputs            | 16                                             |
+    | States             | 17                                             |
+    | Transitions        | 34                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 10                                             |
     | Clock              | iCLK (rising_edge)                             |
     | Reset              | inRST (negative)                               |
     | Reset type         | asynchronous                                   |
@@ -147,19 +162,21 @@ Synthesizing Unit <lcd_driver>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_4_o_add_92_OUT> created at line 1241.
-    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_4_o_add_96_OUT> created at line 1241.
-    Found 4x12-bit Read Only RAM for signal <_n0138>
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 672
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 676
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 676
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 676
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 676
-    Found 3-bit comparator greater for signal <GND_4_o_sSEQ_CNT[2]_LessThan_25_o> created at line 258
+    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_4_o_add_106_OUT> created at line 1241.
+    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_4_o_add_110_OUT> created at line 1241.
+    Found 5-bit adder for signal <sCHAR_CNT[4]_GND_4_o_add_114_OUT> created at line 1241.
+    Found 4x16-bit Read Only RAM for signal <_n0210>
+    Found 4-bit 4-to-1 multiplexer for signal <_n0192> created at line 737.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 930
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 934
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 934
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 934
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 934
+    Found 3-bit comparator greater for signal <GND_4_o_sSEQ_CNT[2]_LessThan_32_o> created at line 386
     Summary:
 	inferred   1 RAM(s).
-	inferred   2 Adder/Subtractor(s).
-	inferred   5 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred  11 D-type flip-flop(s).
 	inferred   1 Comparator(s).
 	inferred  83 Multiplexer(s).
 	inferred   5 Tristate(s).
@@ -190,22 +207,45 @@ Synthesizing Unit <lcd_timer_2>.
 	inferred   1 Multiplexer(s).
 Unit <lcd_timer_2> synthesized.
 
+Synthesizing Unit <reg>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\I2C_bus\reg.vhd".
+        DATA_WIDTH = 8
+    Found 8-bit register for signal <sREG>.
+    Summary:
+	inferred   8 D-type flip-flop(s).
+Unit <reg> synthesized.
+
+Synthesizing Unit <char_gen>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\LCD_controller\char_gen.vhd".
+        DATA_WIDTH = 8
+        CHAR_WIDTH = 16
+    Found 16x8-bit Read Only RAM for signal <sLOWER_CHAR>
+    Found 16x8-bit Read Only RAM for signal <sUPPER_CHAR>
+    Summary:
+	inferred   2 RAM(s).
+Unit <char_gen> synthesized.
+
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 1
- 4x12-bit single-port Read Only RAM                    : 1
-# Adders/Subtractors                                   : 4
+# RAMs                                                 : 9
+ 16x8-bit single-port Read Only RAM                    : 8
+ 4x16-bit single-port Read Only RAM                    : 1
+# Adders/Subtractors                                   : 5
  19-bit adder                                          : 1
  2-bit adder                                           : 1
  3-bit adder                                           : 1
  4-bit adder                                           : 1
-# Registers                                            : 4
+ 5-bit adder                                           : 1
+# Registers                                            : 10
+ 1-bit register                                        : 1
  19-bit register                                       : 1
  2-bit register                                        : 1
  3-bit register                                        : 1
  4-bit register                                        : 1
+ 5-bit register                                        : 1
+ 8-bit register                                        : 4
 # Comparators                                          : 1
  3-bit comparator greater                              : 1
 # Multiplexers                                         : 85
@@ -213,7 +253,9 @@ Macro Statistics
  19-bit 2-to-1 multiplexer                             : 1
  2-bit 2-to-1 multiplexer                              : 1
  3-bit 2-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 21
+ 4-bit 2-to-1 multiplexer                              : 19
+ 4-bit 4-to-1 multiplexer                              : 1
+ 5-bit 2-to-1 multiplexer                              : 1
 # Tristates                                            : 5
  1-bit tristate buffer                                 : 5
 # FSMs                                                 : 1
@@ -225,15 +267,41 @@ Macro Statistics
 =========================================================================
 
 
-Synthesizing (advanced) Unit <lcd_driver>.
-The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
-The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0138> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+Synthesizing (advanced) Unit <char_gen>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_sLOWER_CHAR> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 4-word x 12-bit                     |          |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <iDATA<3:0>>    |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <sLOWER_CHAR>   |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_sUPPER_CHAR> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <iDATA<7:4>>    |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <sUPPER_CHAR>   |          |
+    -----------------------------------------------------------------------
+Unit <char_gen> synthesized (advanced).
+
+Synthesizing (advanced) Unit <lcd_driver>.
+The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
+The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
+The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0210> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 16-bit                     |          |
     |     weA            | connected to signal <GND>           | high     |
     |     addrA          | connected to signal <sSEQ_CNT<1:0>> |          |
     |     diA            | connected to signal <GND>           |          |
@@ -253,18 +321,23 @@ Unit <lcd_timer_2> synthesized (advanced).
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 1
- 4x12-bit single-port distributed Read Only RAM        : 1
-# Counters                                             : 4
+# RAMs                                                 : 9
+ 16x8-bit single-port distributed Read Only RAM        : 8
+ 4x16-bit single-port distributed Read Only RAM        : 1
+# Counters                                             : 5
  19-bit up counter                                     : 1
  2-bit up counter                                      : 1
  3-bit up counter                                      : 1
  4-bit up counter                                      : 1
+ 5-bit up counter                                      : 1
+# Registers                                            : 33
+ Flip-Flops                                            : 33
 # Comparators                                          : 1
  3-bit comparator greater                              : 1
-# Multiplexers                                         : 81
+# Multiplexers                                         : 80
  1-bit 2-to-1 multiplexer                              : 61
- 4-bit 2-to-1 multiplexer                              : 20
+ 4-bit 2-to-1 multiplexer                              : 18
+ 4-bit 4-to-1 multiplexer                              : 1
 # FSMs                                                 : 1
 
 =========================================================================
@@ -273,36 +346,43 @@ Macro Statistics
 *                         Low Level Synthesis                           *
 =========================================================================
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <FSM_0> on signal <sCURRENT_STATE[1:4]> with user encoding.
+Optimizing FSM <FSM_0> on signal <sCURRENT_STATE[1:5]> with user encoding.
 -------------------------------
  State             | Encoding
 -------------------------------
- idle              | 0000
- lcd_init_seq      | 0001
- lcd_config        | 0010
- display_config    | 0011
- display_config_bf | 0100
- clear_screen_bf   | 0101
- clear_screen      | 0110
- cursor_config_bf  | 0111
- cursor_config     | 1000
- display_on_bf     | 1001
- display_on        | 1010
- print_char_bf     | 1011
- print_char        | 1100
- stop_print        | 1101
+ idle              | 00000
+ lcd_init_seq      | 00001
+ lcd_config        | 00010
+ display_config    | 00011
+ display_config_bf | 00100
+ clear_screen_bf   | 00101
+ clear_screen      | 00110
+ cursor_config_bf  | 00111
+ cursor_config     | 01000
+ read_input_data   | 01001
+ check_cursor      | 01010
+ address_set_bf    | 01011
+ address_set       | 01100
+ print_char_bf     | 01101
+ print_char        | 01110
+ cursor_home       | 01111
+ stop_print        | 10000
 -------------------------------
 WARNING:Xst:2041 - Unit lcd_driver: 1 internal tristate is replaced by logic (pull-up yes): sIN_DATA<3>.
 
 Optimizing unit <lcd_driver> ...
 
+Optimizing unit <reg> ...
+
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block lcd_driver, actual ratio is 0.
-FlipFlop sCURRENT_STATE_FSM_FFd1 has been replicated 1 time(s)
+Found area constraint ratio of 100 (+ 5) on block lcd_driver, actual ratio is 1.
 FlipFlop sCURRENT_STATE_FSM_FFd2 has been replicated 1 time(s)
-FlipFlop sCURRENT_STATE_FSM_FFd3 has been replicated 1 time(s)
+FlipFlop sCURRENT_STATE_FSM_FFd3 has been replicated 2 time(s)
 FlipFlop sCURRENT_STATE_FSM_FFd4 has been replicated 1 time(s)
+FlipFlop sCURRENT_STATE_FSM_FFd5 has been replicated 1 time(s)
+FlipFlop sSEQ_CNT_0 has been replicated 1 time(s)
+FlipFlop sSEQ_CNT_1 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -310,8 +390,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 36
- Flip-Flops                                            : 36
+# Registers                                            : 78
+ Flip-Flops                                            : 78
 
 =========================================================================
 
@@ -334,28 +414,28 @@ Top Level Output File Name         : lcd_driver.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 148
+# BELS                             : 264
 #      GND                         : 1
-#      INV                         : 3
+#      INV                         : 2
 #      LUT1                        : 18
-#      LUT2                        : 5
-#      LUT3                        : 7
-#      LUT4                        : 14
-#      LUT5                        : 28
-#      LUT6                        : 31
+#      LUT2                        : 4
+#      LUT3                        : 24
+#      LUT4                        : 25
+#      LUT5                        : 61
+#      LUT6                        : 85
 #      MUXCY                       : 18
-#      MUXF7                       : 3
+#      MUXF7                       : 6
 #      VCC                         : 1
 #      XORCY                       : 19
-# FlipFlops/Latches                : 36
-#      FDC                         : 13
-#      FDCE                        : 23
+# FlipFlops/Latches                : 78
+#      FDC                         : 21
+#      FDCE                        : 57
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 16
-#      IBUF                        : 1
+# IO Buffers                       : 42
+#      IBUF                        : 35
 #      IOBUF                       : 1
-#      OBUF                        : 11
+#      OBUF                        : 3
 #      OBUFT                       : 3
 
 Device utilization summary:
@@ -365,20 +445,21 @@ Selected Device : 6slx45fgg676-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              36  out of  54576     0%  
- Number of Slice LUTs:                  106  out of  27288     0%  
-    Number used as Logic:               106  out of  27288     0%  
+ Number of Slice Registers:              45  out of  54576     0%  
+ Number of Slice LUTs:                  219  out of  27288     0%  
+    Number used as Logic:               219  out of  27288     0%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    110
-   Number with an unused Flip Flop:      74  out of    110    67%  
-   Number with an unused LUT:             4  out of    110     3%  
-   Number of fully used LUT-FF pairs:    32  out of    110    29%  
-   Number of unique control sets:         3
+ Number of LUT Flip Flop pairs used:    225
+   Number with an unused Flip Flop:     180  out of    225    80%  
+   Number with an unused LUT:             6  out of    225     2%  
+   Number of fully used LUT-FF pairs:    39  out of    225    17%  
+   Number of unique control sets:         4
 
 IO Utilization: 
- Number of IOs:                          17
- Number of bonded IOBs:                  17  out of    358     4%  
+ Number of IOs:                          43
+ Number of bonded IOBs:                  43  out of    358    12%  
+    IOB Flip Flops/Latches:              33
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -404,7 +485,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-iCLK                               | BUFGP                  | 36    |
+iCLK                               | BUFGP                  | 78    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -415,9 +496,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 5.802ns (Maximum Frequency: 172.354MHz)
-   Minimum input arrival time before clock: 4.309ns
-   Maximum output required time after clock: 7.141ns
+   Minimum period: 5.725ns (Maximum Frequency: 174.672MHz)
+   Minimum input arrival time before clock: 4.950ns
+   Maximum output required time after clock: 12.121ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -426,68 +507,74 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 5.802ns (frequency: 172.354MHz)
-  Total number of paths / destination ports: 1661 / 59
+  Clock period: 5.725ns (frequency: 174.672MHz)
+  Total number of paths / destination ports: 2025 / 69
 -------------------------------------------------------------------------
-Delay:               5.802ns (Levels of Logic = 3)
-  Source:            eLCD_INIT_TIMER/sCLK_CNT_12 (FF)
+Delay:               5.725ns (Levels of Logic = 3)
+  Source:            eLCD_INIT_TIMER/sCLK_CNT_6 (FF)
   Destination:       eLCD_INIT_TIMER/sCLK_CNT_0 (FF)
   Source Clock:      iCLK rising
   Destination Clock: iCLK rising
 
-  Data Path: eLCD_INIT_TIMER/sCLK_CNT_12 to eLCD_INIT_TIMER/sCLK_CNT_0
+  Data Path: eLCD_INIT_TIMER/sCLK_CNT_6 to eLCD_INIT_TIMER/sCLK_CNT_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             5   0.525   1.296  eLCD_INIT_TIMER/sCLK_CNT_12 (eLCD_INIT_TIMER/sCLK_CNT_12)
-     LUT6:I0->O            1   0.254   0.910  eLCD_INIT_TIMER/oTC<18>1_2 (eLCD_INIT_TIMER/oTC<18>12)
-     LUT4:I1->O            3   0.235   0.766  eLCD_INIT_TIMER/oTC<18>4 (sINIT_PERIOD_TC)
-     LUT5:I4->O           19   0.254   1.260  eLCD_INIT_TIMER/_n0015_inv1 (eLCD_INIT_TIMER/_n0015_inv)
+     FDCE:C->Q             4   0.525   1.259  eLCD_INIT_TIMER/sCLK_CNT_6 (eLCD_INIT_TIMER/sCLK_CNT_6)
+     LUT6:I0->O            1   0.254   0.910  eLCD_INIT_TIMER/oTC<18>3_1 (eLCD_INIT_TIMER/oTC<18>3)
+     LUT4:I1->O            2   0.235   0.726  eLCD_INIT_TIMER/oTC<18>4 (sINIT_PERIOD_TC)
+     LUT6:I5->O           19   0.254   1.260  eLCD_INIT_TIMER/_n0015_inv1 (eLCD_INIT_TIMER/_n0015_inv)
      FDCE:CE                   0.302          eLCD_INIT_TIMER/sCLK_CNT_0
     ----------------------------------------
-    Total                      5.802ns (1.570ns logic, 4.232ns route)
-                                       (27.1% logic, 72.9% route)
+    Total                      5.725ns (1.570ns logic, 4.155ns route)
+                                       (27.4% logic, 72.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 46 / 44
+  Total number of paths / destination ports: 169 / 153
 -------------------------------------------------------------------------
-Offset:              4.309ns (Levels of Logic = 2)
-  Source:            inRST (PAD)
+Offset:              4.950ns (Levels of Logic = 4)
+  Source:            ioD<3> (PAD)
   Destination:       sCURRENT_STATE_FSM_FFd4 (FF)
   Destination Clock: iCLK rising
 
-  Data Path: inRST to sCURRENT_STATE_FSM_FFd4
+  Data Path: ioD<3> to sCURRENT_STATE_FSM_FFd4
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   1.328   0.681  inRST_IBUF (inRST_IBUF)
-     INV:I->O             36   0.255   1.586  inRST_inv1_INV_0 (inRST_inv)
-     FDCE:CLR                  0.459          eLCD_INIT_TIMER/sCLK_CNT_0
+     IOBUF:IO->O           3   1.328   1.196  ioD_3_IOBUF (N18)
+     LUT5:I0->O            4   0.254   0.804  sIN_DATA<3>LogicTrst1 (sIN_DATA<3>)
+     LUT6:I5->O            1   0.254   0.790  sCURRENT_STATE_FSM_FFd4-In4 (sCURRENT_STATE_FSM_FFd4-In4)
+     LUT4:I2->O            2   0.250   0.000  sCURRENT_STATE_FSM_FFd4-In5 (sCURRENT_STATE_FSM_FFd4-In)
+     FDC:D                     0.074          sCURRENT_STATE_FSM_FFd4
     ----------------------------------------
-    Total                      4.309ns (2.042ns logic, 2.267ns route)
-                                       (47.4% logic, 52.6% route)
+    Total                      4.950ns (2.160ns logic, 2.790ns route)
+                                       (43.6% logic, 56.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
-  Total number of paths / destination ports: 80 / 15
+  Total number of paths / destination ports: 520 / 7
 -------------------------------------------------------------------------
-Offset:              7.141ns (Levels of Logic = 3)
-  Source:            sCURRENT_STATE_FSM_FFd2 (FF)
-  Destination:       ioD<0> (PAD)
+Offset:              12.121ns (Levels of Logic = 7)
+  Source:            sCHAR_CNT_0 (FF)
+  Destination:       ioD<1> (PAD)
   Source Clock:      iCLK rising
 
-  Data Path: sCURRENT_STATE_FSM_FFd2 to ioD<0>
+  Data Path: sCHAR_CNT_0 to ioD<1>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q             25   0.525   1.833  sCURRENT_STATE_FSM_FFd2 (sCURRENT_STATE_FSM_FFd2)
-     LUT6:I1->O            1   0.254   0.682  Mmux_sOUT_DATA11 (Mmux_sOUT_DATA1)
-     LUT2:I1->O            1   0.254   0.681  Mmux_sOUT_DATA12 (sOUT_DATA<0>)
-     OBUFT:I->O                2.912          ioD_0_OBUFT (ioD<0>)
+     FDCE:C->Q            39   0.525   1.865  sCHAR_CNT_0 (sCHAR_CNT_0)
+     LUT3:I0->O            1   0.235   1.137  sCHAR_CODE<3>31 (sCHAR_CODE<3>3)
+     LUT6:I0->O            1   0.254   0.910  Mmux_sOUT_DATA42 (Mmux_sOUT_DATA41)
+     LUT6:I3->O            1   0.235   1.137  Mmux_sOUT_DATA46 (Mmux_sOUT_DATA45)
+     LUT6:I0->O            1   0.254   0.682  Mmux_sOUT_DATA414 (Mmux_sOUT_DATA413)
+     LUT6:I5->O            1   0.254   0.790  Mmux_sOUT_DATA422 (Mmux_sOUT_DATA421)
+     LUT5:I3->O            1   0.250   0.681  Mmux_sOUT_DATA424 (sOUT_DATA<1>)
+     OBUFT:I->O                2.912          ioD_1_OBUFT (ioD<1>)
     ----------------------------------------
-    Total                      7.141ns (3.945ns logic, 3.196ns route)
-                                       (55.2% logic, 44.8% route)
+    Total                     12.121ns (4.919ns logic, 7.202ns route)
+                                       (40.6% logic, 59.4% route)
 
 =========================================================================
 
@@ -499,20 +586,20 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.802|         |         |         |
+iCLK           |    5.725|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
+Total REAL time to Xst completion: 3.00 secs
 Total CPU time to Xst completion: 3.61 secs
  
 --> 
 
-Total memory usage is 279748 kilobytes
+Total memory usage is 250508 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)
-Number of infos    :    1 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
 

@@ -43,6 +43,7 @@ entity i2c_via_uart is
            oLCD_RW   		 : out   std_logic;
 			  oTX         		 : out   std_logic;
 			  oRTS				 : out   std_logic;
+			  oLED				 : out   std_logic_vector(7 downto 0);
 			  ioLCD_D 		  	 : inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end i2c_via_uart;
 
@@ -96,7 +97,8 @@ begin
 			oUART_DATA   => sOUART_DATA,
 			oLCD_E 	 	 => sLCD_E,   
          oLCD_RS    	 => sLCD_RS,
-         oLCD_RW      => sLCD_RW, 
+         oLCD_RW      => sLCD_RW,
+			oLED			 => oLED,
 			ioLCD_D 		 => sLCD_D
 		);
 		
@@ -105,7 +107,7 @@ begin
 	oLCD_RS <= sLCD_RS;
 	oLCD_RW <= sLCD_RW;
 	ioLCD_D <= sLCD_D;
-
+	
 
 end Behavioral;
 

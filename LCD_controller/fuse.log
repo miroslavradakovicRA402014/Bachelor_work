@@ -1,4 +1,4 @@
-Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj" "work.lcd_driver_tb" 
+Running: C:\Xilinx\14.6\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib secureip -o D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe -prj D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_beh.prj work.lcd_driver_tb 
 ISim P.68d (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 8
 Turning on mult-threading, number of parallel sub-compilation jobs: 16 
@@ -11,18 +11,19 @@ Parsing VHDL file "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb.v
 Starting static elaboration
 Completed static elaboration
 Fuse Memory Usage: 161320 KB
-Fuse CPU Usage: 218 ms
+Fuse CPU Usage: 250 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
-Compiling architecture behavioral of entity lcd_timer [\lcd_timer(42,6)\]
+Compiling architecture behavioral of entity lcd_timer [\lcd_timer(360000,19)\]
 Compiling architecture behavioral of entity lcd_timer [\lcd_timer(12,4)\]
 Compiling architecture behavioral of entity reg [reg_default]
 Compiling architecture behavioral of entity char_gen [char_gen_default]
 Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3,4,8,27)\]
 Compiling architecture behavior of entity lcd_driver_tb
 Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
 Compiled 14 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver_tb_isim_beh.exe
-Fuse Memory Usage: 179624 KB
-Fuse CPU Usage: 374 ms
+Fuse Memory Usage: 178764 KB
+Fuse CPU Usage: 437 ms

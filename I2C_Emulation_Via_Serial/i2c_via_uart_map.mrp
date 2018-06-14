@@ -11,40 +11,40 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Tue Jun 12 15:07:00 2018
+Mapped Date    : Thu Jun 14 08:38:37 2018
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    0
 Slice Logic Utilization:
-  Number of Slice Registers:                   843 out of  54,576    1%
-    Number used as Flip Flops:                 843
+  Number of Slice Registers:                   844 out of  54,576    1%
+    Number used as Flip Flops:                 844
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                      1,073 out of  27,288    3%
-    Number used as logic:                    1,072 out of  27,288    3%
-      Number using O6 output only:             827
+  Number of Slice LUTs:                      1,075 out of  27,288    3%
+    Number used as logic:                    1,067 out of  27,288    3%
+      Number using O6 output only:             818
       Number using O5 output only:              18
-      Number using O5 and O6:                  227
+      Number using O5 and O6:                  231
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
-    Number used exclusively as route-thrus:      1
-      Number with same-slice register load:      0
+    Number used exclusively as route-thrus:      8
+      Number with same-slice register load:      7
       Number with same-slice carry load:         1
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   399 out of   6,822    5%
+  Number of occupied Slices:                   364 out of   6,822    5%
   Number of MUXCYs used:                        32 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:        1,158
-    Number with an unused Flip Flop:           474 out of   1,158   40%
-    Number with an unused LUT:                  85 out of   1,158    7%
-    Number of fully used LUT-FF pairs:         599 out of   1,158   51%
+  Number of LUT Flip Flop pairs used:        1,143
+    Number with an unused Flip Flop:           465 out of   1,143   40%
+    Number with an unused LUT:                  68 out of   1,143    5%
+    Number of fully used LUT-FF pairs:         610 out of   1,143   53%
     Number of unique control sets:              85
     Number of slice register sites lost
-      to control set restrictions:             125 out of  54,576    1%
+      to control set restrictions:             124 out of  54,576    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -53,8 +53,8 @@ Slice Logic Distribution:
   over-mapped for a non-slice resource or if Placement fails.
 
 IO Utilization:
-  Number of bonded IOBs:                        21 out of     358    5%
-    Number of LOCed IOBs:                       21 out of      21  100%
+  Number of bonded IOBs:                        29 out of     358    8%
+    Number of LOCed IOBs:                       29 out of      29  100%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of     116    0%
@@ -83,9 +83,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                5.00
 
-Peak Memory Usage:  406 MB
-Total REAL time to MAP completion:  24 secs 
-Total CPU time to MAP completion:   22 secs 
+Peak Memory Usage:  405 MB
+Total REAL time to MAP completion:  13 secs 
+Total CPU time to MAP completion:   13 secs 
 
 Table of Contents
 -----------------
@@ -174,6 +174,14 @@ Section 6 - IOB Properties
 | oLCD_E                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
 | oLCD_RS                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
 | oLCD_RW                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<0>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<1>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<2>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<3>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<4>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<5>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<6>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| oLED<7>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
 | oRTS                               | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
 | oTX                                | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
 +---------------------------------------------------------------------------------------------------------------------------------------------------------+

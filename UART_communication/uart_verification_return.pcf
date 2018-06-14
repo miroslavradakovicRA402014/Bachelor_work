@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.68d on Thu May 17 13:30:39 2018
+// Written by: Map P.68d on Tue Jun 12 17:35:55 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -46,12 +46,12 @@ TIMEGRP iCLK = BEL "sRECV_DATA_REG_0" BEL "sRECV_DATA_REG_1" BEL
         "eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd2" BEL
         "eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3" BEL
         "eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1" BEL
-        "eUART/eUART_TRANSMITTER/sTC_CNT_3" BEL
-        "eUART/eUART_TRANSMITTER/sTC_CNT_2" BEL
-        "eUART/eUART_TRANSMITTER/sTC_CNT_1" BEL
         "eUART/eUART_TRANSMITTER/sDATA_CNT_2" BEL
         "eUART/eUART_TRANSMITTER/sDATA_CNT_1" BEL
         "eUART/eUART_TRANSMITTER/sDATA_CNT_0" BEL
+        "eUART/eUART_TRANSMITTER/sTC_CNT_3" BEL
+        "eUART/eUART_TRANSMITTER/sTC_CNT_2" BEL
+        "eUART/eUART_TRANSMITTER/sTC_CNT_1" BEL
         "eUART/eUART_TRANSMITTER/sDATA_BIT_REG_1" BEL
         "eUART/eUART_TRANSMITTER/sDATA_BIT_REG_0" BEL
         "eUART/eUART_TRANSMITTER/sPARITY_REG_7" BEL

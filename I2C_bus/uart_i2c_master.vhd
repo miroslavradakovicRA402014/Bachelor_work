@@ -53,6 +53,7 @@ entity uart_i2c_master is
            oLCD_RS    	: out   std_logic;
            oLCD_RW      : out   std_logic;			  
 			  ioSDA		   : inout std_logic;
+			  oLED			: out   std_logic_vector(7 downto 0);
 			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end uart_i2c_master;
 
@@ -64,7 +65,7 @@ architecture Behavioral of uart_i2c_master is
 
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
 							 I2C_START, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
-							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP, SEND_I2C_UART_TELEGRAM,
+							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM,
 							 SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER); 	   		-- Slave FSM states type
 
 
@@ -142,8 +143,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sLCD_DATA_EN				: std_logic;																					-- LCD driver data enable signal
 
 begin
-   --sLCD_DATA_EN <= '1';
- 
+
 	-- Input UART data register
 	eIN_UART_REG : entity work.reg 
 			Port map(
@@ -237,6 +237,7 @@ begin
             oE 	   	=> oLCD_E,  
             oRS    	   => oLCD_RS,
             oRW   		=> oLCD_RW,  
+				oLED			=> oLED,
             ioD 		  	=> ioLCD_D		
 			);
 
@@ -332,7 +333,7 @@ begin
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then
 					if (ioSDA = '1') then 
-						sNEXT_STATE <= IDLE; -- If address is not correct stop transaction
+						sNEXT_STATE <= I2C_NACK_STOP; -- If address is not correct stop transaction
 					else
 						if (sSLAVE_ADDR_REG(0) = '0') then 
 							sNEXT_STATE <= I2C_WRITE_DATA; -- Write data to slave
@@ -397,6 +398,13 @@ begin
 				else 
 					sNEXT_STATE <= I2C_STOP;
 				end if;
+			when I2C_NACK_STOP =>
+				-- Check if period elapsed
+				if (sTC_TR_PERIOD_CNT = '1') then
+					sNEXT_STATE <= IDLE;
+				else 
+					sNEXT_STATE <= I2C_NACK_STOP;
+				end if;				
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
 				sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
@@ -432,6 +440,7 @@ begin
 		sSLAVE_ADDR_SEL 		 <= '0';
 		oFREQ_EN					 <= '0';
 		sLCD_DATA_EN 			 <= '0';
+		--oLED 						 <= (others => '1');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -496,7 +505,8 @@ begin
 				sISHW_EN			    	<= '0'; 
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';
-				sOUART_REG_SEL		 	<= "00";				
+				sOUART_REG_SEL		 	<= "00";		
+				--oLED <= (others => '0');	
 			when UART_SLAVE_ADDRESS =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -534,6 +544,7 @@ begin
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
 				sOUART_REG_SEL		 	<= "00";	
+				--oLED <= "00000001";
 			when UART_REGISTER_ADDRESS =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -566,7 +577,8 @@ begin
 				sISHW_EN			    	<= '0';				
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";		
+				sOUART_REG_SEL		 	<= "00";
+				--oLED <= "00000010";				
 			when UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -595,6 +607,7 @@ begin
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
 				sOUART_REG_SEL		 	<= "00";	
+				--oLED <= "00000100";
 			when UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -623,6 +636,7 @@ begin
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
 				sOUART_REG_SEL		 	<= "00";
+				--oLED <= "00001000";
 			when UART_STOP =>	
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 			<= '1';
@@ -650,7 +664,8 @@ begin
 				sISHW_EN			    	<= '0';				
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";				
+				sOUART_REG_SEL		 	<= "00";	
+				sLCD_DATA_EN			<= '1';				
 			when I2C_START =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -684,6 +699,7 @@ begin
 				else
 					sLCD_DATA_EN <= '0';
 				end if;
+				--oLED <= (others => '0');
 			when I2C_SLAVE_ADDRESS_WRITE => 
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -1071,6 +1087,34 @@ begin
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';
 				sOUART_REG_SEL		 <= "00";	
+			when I2C_NACK_STOP =>
+				sIN_BUFF_EN	 		 <= '0';
+				sOUT_BUFF_EN 		 <= '1';
+				sIUART_REG_EN  	 <= '1';
+				sOUART_REG_EN		 <= '0';
+				sACK_SEL		 		 <= '0';
+				sSDA_SEL		 		 <= '0';
+				sLBYTE_REG_SEL		 <= '0';		
+				sUBYTE_REG_SEL 	 <= '0';		
+				sSLAVE_ADDR_SEL	 <= '0';
+				sREG_MUX_SEL		 <= "00";	
+				sREG_DEC_SEL		 <= "00";
+				sREG_DEC_EN			 <= '0';
+				sSCL_EN				 <= '0';	
+				oFREQ_EN 			 <= '1';
+				oUART_READ  		 <= '0';
+				oUART_WRITE			 <= '0';
+				sDATA_CNT_EN 		 <= '0';
+				sDATA_CNT_RST 		 <= '0';	
+				sBYTE_CNT_EN   	 <= '0';
+				sBYTE_CNT_RST 		 <= '0';					
+				sPERIOD_CNT_EN 	 <= '0';
+				sTR_PERIOD_CNT_RST <= '0';
+				sTR_PERIOD_CNT_EN  <= '1';
+				sISHW_EN			    <= '0';				
+				sOSHW_EN				 <= '0';
+				sOSHW_LOAD			 <= '0';
+				sOUART_REG_SEL		 <= "00";					
 			when SEND_I2C_UART_TELEGRAM =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
