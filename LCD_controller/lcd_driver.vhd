@@ -41,7 +41,7 @@ entity lcd_driver is
            oE 	   	  : out 		std_logic;
            oRS    	  : out		std_logic;
            oRW   		  : out 		std_logic;
-			  oLED		  : out   std_logic_vector(7 downto 0); 
+			  oLED		  : out     std_logic_vector(7 downto 0); 
            ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
 end lcd_driver;
 
@@ -49,10 +49,10 @@ architecture Behavioral of lcd_driver is
 
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
 							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 CURSOR_CONFIG_BF, CURSOR_CONFIG, READ_INPUT_DATA, CHECK_CURSOR,
+							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR,
 							 ADDRESS_SET_BF , ADDRESS_SET, 
 							 PRINT_CHAR_BF, PRINT_CHAR, 
-							 CURSOR_HOME,
+							 CURSOR_HOME, 
 							 STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  			-- LCD controller FSM current state
@@ -98,13 +98,12 @@ architecture Behavioral of lcd_driver is
 	
 begin
 
-	oLED <= sLOWER_BYTE_REG;
 
 	-- LCD init delay timer
 	eLCD_INIT_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 360000,
-				CLK_CNT_WIDHT		=> 19
+				CLK_PERIOD_NUMBER => 1080000,
+				CLK_CNT_WIDHT		=> 21
 			)
 			Port map(
 				iCLK  	  => iCLK,
@@ -116,8 +115,8 @@ begin
 	-- LCD R/W command timer
 	eLCD_CMD_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 12,
-				CLK_CNT_WIDHT		=> 4
+				CLK_PERIOD_NUMBER => 6000,
+				CLK_CNT_WIDHT		=> 13
 			)
 			Port map(
 				iCLK  	  => iCLK,
@@ -262,23 +261,23 @@ begin
 				
 			when  CLEAR_SCREEN =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= CURSOR_CONFIG_BF;
+					sNEXT_STATE <= ENTRY_MODE_BF;
 				else
 					sNEXT_STATE <= CLEAR_SCREEN;
 				end if;	
 					
-			when CURSOR_CONFIG_BF =>
+			when ENTRY_MODE_BF =>
 				if (sIN_DATA(3) = '0') then 
-					sNEXT_STATE <= CURSOR_CONFIG; 
+					sNEXT_STATE <= ENTRY_MODE; 
 				else
-					sNEXT_STATE <= CURSOR_CONFIG_BF;	
+					sNEXT_STATE <= ENTRY_MODE_BF;	
 				end if;
 				
-			when CURSOR_CONFIG =>
+			when ENTRY_MODE =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= ADDRESS_SET_BF;
 				else
-					sNEXT_STATE <= CURSOR_CONFIG;
+					sNEXT_STATE <= ENTRY_MODE;
 				end if;		
 				
 			when ADDRESS_SET_BF =>
@@ -357,7 +356,7 @@ begin
       oRS    			 	<= '0';
       oRW   			 	<= '0';
 		
-		--oLED <= (others => '0');
+		oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sINIT_PERIOD_EN	 <= '1';
@@ -576,7 +575,7 @@ begin
 					sOUT_DATA 		  <= "0000";
 				end if;
 
-			when CURSOR_CONFIG_BF =>
+			when ENTRY_MODE_BF =>
 
 				sIN_BUFF_EN	 	 <= '1';
 				sOUT_BUFF_EN	 <= '0';
@@ -597,7 +596,7 @@ begin
 					sCMD_PER_CNT_EN  <= '1';
 				end if;
 
-			when CURSOR_CONFIG =>
+			when ENTRY_MODE =>
 			
 				if (sCMD_PER_CNT = 1) then 
 					oE <= '1';
@@ -705,7 +704,7 @@ begin
 			when READ_INPUT_DATA =>
 
 				sCHAR_CNT_RST <= '1';
-				--oLED <= (others => '1');
+				oLED <= (others => '1');
 			
 			when PRINT_CHAR_BF =>
 
@@ -824,7 +823,6 @@ begin
 			
 	
 			when STOP_PRINT =>
-				--oLED <= (others => '1');
 					
 		end case;
 	end process fsm_out;	

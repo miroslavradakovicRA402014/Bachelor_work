@@ -1,6 +1,9 @@
 NET "iCLK"  					LOC = M21;
 NET "inRST"						LOC = AB24;
 
+NET "iEN"						LOC = AA24;
+NET "iSW"						LOC = W19;
+	
 NET "oE"							LOC = D21;
 NET "oRS"						LOC = F24;
 NET "oRW"						LOC = C21;

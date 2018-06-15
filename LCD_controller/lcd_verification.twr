@@ -1,0 +1,87 @@
+--------------------------------------------------------------------------------
+Release 14.6 Trace  (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.6\ISE_DS\ISE\bin\nt\unwrapped\trce.exe -intstyle ise -v 3 -s 2 -n
+3 -fastpaths -xml lcd_verification.twx lcd_verification.ncd -o
+lcd_verification.twr lcd_verification.pcf -ucf lcd_pins.ucf
+
+Design file:              lcd_verification.ncd
+Physical constraint file: lcd_verification.pcf
+Device,package,speed:     xc6slx45,fgg676,C,-2 (PRODUCTION 1.23 2013-06-08)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Setup/Hold to clock iCLK
+------------+------------+------------+------------+------------+------------------+--------+
+            |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
+Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
+------------+------------+------------+------------+------------+------------------+--------+
+iEN         |    3.255(R)|      SLOW  |   -1.119(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iSW         |    3.263(R)|      SLOW  |   -1.711(R)|      FAST  |iCLK_BUFGP        |   0.000|
+inRST       |    4.262(R)|      SLOW  |   -0.088(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+ioD<3>      |    3.914(R)|      SLOW  |   -0.888(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+------------+------------+------------+------------+------------+------------------+--------+
+
+Clock iCLK to Pad
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+ioD<0>      |        16.528(R)|      SLOW  |         5.498(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<1>      |        16.278(R)|      SLOW  |         5.257(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<2>      |        17.062(R)|      SLOW  |         6.395(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioD<3>      |        13.602(R)|      SLOW  |         4.940(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oE          |        15.591(R)|      SLOW  |         6.689(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<0>     |        11.828(R)|      SLOW  |         5.223(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<1>     |        10.650(R)|      SLOW  |         4.588(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<2>     |        13.010(R)|      SLOW  |         5.894(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<3>     |        12.079(R)|      SLOW  |         5.376(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<4>     |        12.079(R)|      SLOW  |         5.376(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<5>     |        13.377(R)|      SLOW  |         6.089(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<6>     |        13.437(R)|      SLOW  |         6.090(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<7>     |        13.864(R)|      SLOW  |         6.315(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oRS         |        12.981(R)|      SLOW  |         5.817(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oRW         |        15.527(R)|      SLOW  |         6.846(R)|      FAST  |iCLK_BUFGP        |   0.000|
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+Clock to Setup on destination clock iCLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+iCLK           |    6.523|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Analysis completed Fri Jun 15 16:30:00 2018 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 209 MB
+
+
+

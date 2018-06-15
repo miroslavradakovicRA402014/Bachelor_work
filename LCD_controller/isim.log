@@ -22,42 +22,22 @@ Simulator is doing circuit initialization process.
 at 0 ps, Instance /lcd_driver_tb/uut/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /lcd_driver_tb/uut/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# restart
 # run 1.00us
+# run 100.00us
+# restart
+# run 100.00us
 Simulator is doing circuit initialization process.
 at 0 ps, Instance /lcd_driver_tb/uut/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /lcd_driver_tb/uut/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run all
-Stopped at time : 16644873 ns : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 50
 # run 100.00us
 # run 100.00us
+# restart
 # run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /lcd_driver_tb/uut/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /lcd_driver_tb/uut/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
 # run 100.00us
 # run 100.00us
 The simulator has terminated in an unexpected manner.  Please review the ISim log (isim.log) for details.

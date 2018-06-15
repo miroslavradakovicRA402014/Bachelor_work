@@ -1,0 +1,8 @@
+Release 14.6 Drc P.68d (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Fri Jun 15 16:30:04 2018
+
+drc -z lcd_verification.ncd lcd_verification.pcf
+
+DRC detected 0 errors and 0 warnings.
