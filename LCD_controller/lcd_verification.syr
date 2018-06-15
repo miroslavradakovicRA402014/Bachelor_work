@@ -166,8 +166,8 @@ Synthesizing Unit <lcd_driver>.
     Found 2-bit register for signal <sCMD_PER_CNT>.
     Found finite state machine <FSM_0> for signal <sCURRENT_STATE>.
     -----------------------------------------------------------------------
-    | States             | 17                                             |
-    | Transitions        | 34                                             |
+    | States             | 18                                             |
+    | Transitions        | 36                                             |
     | Inputs             | 7                                              |
     | Outputs            | 18                                             |
     | Clock              | iCLK (rising_edge)                             |
@@ -178,23 +178,23 @@ Synthesizing Unit <lcd_driver>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_5_o_add_107_OUT> created at line 1241.
-    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_5_o_add_111_OUT> created at line 1241.
-    Found 5-bit adder for signal <sCHAR_CNT[4]_GND_5_o_add_115_OUT> created at line 1241.
-    Found 4x16-bit Read Only RAM for signal <_n0262>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0194> created at line 743.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 938
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 942
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 942
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 942
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 942
-    Found 3-bit comparator greater for signal <GND_5_o_sSEQ_CNT[2]_LessThan_32_o> created at line 389
+    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_5_o_add_116_OUT> created at line 1241.
+    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_5_o_add_120_OUT> created at line 1241.
+    Found 5-bit adder for signal <sCHAR_CNT[4]_GND_5_o_add_124_OUT> created at line 1241.
+    Found 4x20-bit Read Only RAM for signal <_n0240>
+    Found 4-bit 4-to-1 multiplexer for signal <_n0187> created at line 747.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 982
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 986
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 986
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 986
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 986
+    Found 3-bit comparator greater for signal <GND_5_o_sSEQ_CNT[2]_LessThan_34_o> created at line 395
     Summary:
 	inferred   1 RAM(s).
 	inferred   3 Adder/Subtractor(s).
 	inferred  11 D-type flip-flop(s).
 	inferred   1 Comparator(s).
-	inferred  83 Multiplexer(s).
+	inferred  72 Multiplexer(s).
 	inferred   5 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <lcd_driver> synthesized.
@@ -247,7 +247,7 @@ HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 9
  16x8-bit single-port Read Only RAM                    : 8
- 4x16-bit single-port Read Only RAM                    : 1
+ 4x20-bit single-port Read Only RAM                    : 1
 # Adders/Subtractors                                   : 5
  13-bit adder                                          : 1
  2-bit adder                                           : 1
@@ -264,13 +264,13 @@ Macro Statistics
  8-bit register                                        : 4
 # Comparators                                          : 1
  3-bit comparator greater                              : 1
-# Multiplexers                                         : 96
- 1-bit 2-to-1 multiplexer                              : 64
+# Multiplexers                                         : 85
+ 1-bit 2-to-1 multiplexer                              : 37
  13-bit 2-to-1 multiplexer                             : 1
  2-bit 2-to-1 multiplexer                              : 1
  21-bit 2-to-1 multiplexer                             : 1
  3-bit 2-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 18
+ 4-bit 2-to-1 multiplexer                              : 34
  4-bit 4-to-1 multiplexer                              : 1
  5-bit 2-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 8
@@ -314,12 +314,12 @@ Synthesizing (advanced) Unit <lcd_driver>.
 The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
 The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0262> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0240> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 4-word x 16-bit                     |          |
+    |     aspect ratio   | 4-word x 20-bit                     |          |
     |     weA            | connected to signal <GND>           | high     |
     |     addrA          | connected to signal <sSEQ_CNT<1:0>> |          |
     |     diA            | connected to signal <GND>           |          |
@@ -341,7 +341,7 @@ Advanced HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 9
  16x8-bit single-port distributed Read Only RAM        : 8
- 4x16-bit single-port distributed Read Only RAM        : 1
+ 4x20-bit single-port distributed Read Only RAM        : 1
 # Counters                                             : 5
  13-bit up counter                                     : 1
  2-bit up counter                                      : 1
@@ -352,9 +352,9 @@ Macro Statistics
  Flip-Flops                                            : 34
 # Comparators                                          : 1
  3-bit comparator greater                              : 1
-# Multiplexers                                         : 91
- 1-bit 2-to-1 multiplexer                              : 64
- 4-bit 2-to-1 multiplexer                              : 18
+# Multiplexers                                         : 80
+ 1-bit 2-to-1 multiplexer                              : 37
+ 4-bit 2-to-1 multiplexer                              : 34
  4-bit 4-to-1 multiplexer                              : 1
  8-bit 2-to-1 multiplexer                              : 8
 # FSMs                                                 : 1
@@ -365,37 +365,38 @@ Macro Statistics
 *                         Low Level Synthesis                           *
 =========================================================================
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <eLCD_DRIVER/FSM_0> on signal <sCURRENT_STATE[1:17]> with one-hot encoding.
-----------------------------------------
+Optimizing FSM <eLCD_DRIVER/FSM_0> on signal <sCURRENT_STATE[1:18]> with one-hot encoding.
+-----------------------------------------
  State             | Encoding
-----------------------------------------
- idle              | 00000000000000001
- lcd_init_seq      | 00000000000000010
- lcd_config        | 00000000000000100
- display_config    | 00000000000010000
- display_config_bf | 00000000000001000
- clear_screen_bf   | 00000000000100000
- clear_screen      | 00000000001000000
- entry_mode_bf     | 00000000010000000
- entry_mode        | 00000000100000000
- read_input_data   | 00000010000000000
- check_cursor      | 10000000000000000
- address_set_bf    | 00000001000000000
- address_set       | 00010000000000000
- print_char_bf     | 00000100000000000
- print_char        | 00100000000000000
- cursor_home       | 00001000000000000
- stop_print        | 01000000000000000
-----------------------------------------
+-----------------------------------------
+ idle              | 000000000000000001
+ lcd_init_seq      | 000000000000000010
+ lcd_config        | 000000000000000100
+ display_config    | 000000000000010000
+ display_config_bf | 000000000000001000
+ clear_screen_bf   | 000000000000100000
+ clear_screen      | 000000000001000000
+ entry_mode_bf     | 000000000010000000
+ entry_mode        | 000000000100000000
+ read_input_data   | 000000010000000000
+ check_cursor      | 100000000000000000
+ address_set_bf    | 000000001000000000
+ address_set       | 000010000000000000
+ print_char_bf     | 000000100000000000
+ print_char        | 000100000000000000
+ cursor_new_line   | 000001000000000000
+ cursor_back       | 010000000000000000
+ stop_print        | 001000000000000000
+-----------------------------------------
 WARNING:Xst:2041 - Unit lcd_verification: 1 internal tristate is replaced by logic (pull-up yes): eLCD_DRIVER/sIN_DATA<3>.
 
 Optimizing unit <lcd_verification> ...
 
 Optimizing unit <reg> ...
-INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 3 FFs/Latches, which will be removed : <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_5> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_1> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_0> 
-INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 3 FFs/Latches, which will be removed : <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_4> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_3> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_2> 
-INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 2 FFs/Latches, which will be removed : <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_5> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_1> 
-INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 4 FFs/Latches, which will be removed : <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_4> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_2> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_0> 
+INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 2 FFs/Latches, which will be removed : <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_5> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_1> 
+INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 4 FFs/Latches, which will be removed : <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_4> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_3> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_2> <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_0> 
+INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 3 FFs/Latches, which will be removed : <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_5> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_1> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_0> 
+INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 3 FFs/Latches, which will be removed : <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_4> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_2> 
 INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eREG_ADDR_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 6 FFs/Latches, which will be removed : <eLCD_DRIVER/eREG_ADDR_REG/sREG_6> <eLCD_DRIVER/eREG_ADDR_REG/sREG_5> <eLCD_DRIVER/eREG_ADDR_REG/sREG_4> <eLCD_DRIVER/eREG_ADDR_REG/sREG_3> <eLCD_DRIVER/eREG_ADDR_REG/sREG_2> <eLCD_DRIVER/eREG_ADDR_REG/sREG_1> 
 INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 2 FFs/Latches, which will be removed : <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_5> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_2> 
 INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_7> in Unit <lcd_verification> is equivalent to the following 4 FFs/Latches, which will be removed : <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_4> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_3> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_1> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_0> 
@@ -405,8 +406,6 @@ Building and optimizing final netlist ...
 INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_6> in Unit <lcd_verification> is equivalent to the following 3 FFs/Latches, which will be removed : <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_6> <eLCD_DRIVER/eREG_ADDR_REG/sREG_0> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_6> 
 INFO:Xst:2261 - The FF/Latch <eLCD_DRIVER/sMODE_FF> in Unit <lcd_verification> is equivalent to the following 4 FFs/Latches, which will be removed : <eLCD_DRIVER/eUPPER_BYTE_REG/sREG_7> <eLCD_DRIVER/eLOWER_BYTE_REG/sREG_7> <eLCD_DRIVER/eREG_ADDR_REG/sREG_7> <eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_7> 
 Found area constraint ratio of 100 (+ 5) on block lcd_verification, actual ratio is 1.
-FlipFlop eLCD_DRIVER/sSEQ_CNT_1 has been replicated 1 time(s)
-FlipFlop eLCD_DRIVER/sSEQ_CNT_2 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -414,8 +413,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 66
- Flip-Flops                                            : 66
+# Registers                                            : 65
+ Flip-Flops                                            : 65
 
 =========================================================================
 
@@ -438,22 +437,22 @@ Top Level Output File Name         : lcd_verification.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 251
+# BELS                             : 262
 #      GND                         : 1
-#      INV                         : 3
-#      LUT1                        : 34
-#      LUT2                        : 29
-#      LUT3                        : 14
-#      LUT4                        : 22
-#      LUT5                        : 18
-#      LUT6                        : 61
+#      INV                         : 4
+#      LUT1                        : 33
+#      LUT2                        : 31
+#      LUT3                        : 13
+#      LUT4                        : 23
+#      LUT5                        : 20
+#      LUT6                        : 65
 #      MUXCY                       : 32
-#      MUXF7                       : 2
+#      MUXF7                       : 5
 #      VCC                         : 1
 #      XORCY                       : 34
-# FlipFlops/Latches                : 66
-#      FDC                         : 19
-#      FDCE                        : 46
+# FlipFlops/Latches                : 65
+#      FDC                         : 23
+#      FDCE                        : 41
 #      FDP                         : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
@@ -470,16 +469,16 @@ Selected Device : 6slx45fgg676-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              66  out of  54576     0%  
- Number of Slice LUTs:                  181  out of  27288     0%  
-    Number used as Logic:               181  out of  27288     0%  
+ Number of Slice Registers:              65  out of  54576     0%  
+ Number of Slice LUTs:                  189  out of  27288     0%  
+    Number used as Logic:               189  out of  27288     0%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    183
-   Number with an unused Flip Flop:     117  out of    183    63%  
-   Number with an unused LUT:             2  out of    183     1%  
-   Number of fully used LUT-FF pairs:    64  out of    183    34%  
-   Number of unique control sets:         6
+ Number of LUT Flip Flop pairs used:    189
+   Number with an unused Flip Flop:     124  out of    189    65%  
+   Number with an unused LUT:             0  out of    189     0%  
+   Number of fully used LUT-FF pairs:    65  out of    189    34%  
+   Number of unique control sets:         5
 
 IO Utilization: 
  Number of IOs:                          19
@@ -509,7 +508,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-iCLK                               | BUFGP                  | 66    |
+iCLK                               | BUFGP                  | 65    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -520,9 +519,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 5.780ns (Maximum Frequency: 173.010MHz)
-   Minimum input arrival time before clock: 4.667ns
-   Maximum output required time after clock: 10.518ns
+   Minimum period: 5.864ns (Maximum Frequency: 170.532MHz)
+   Minimum input arrival time before clock: 4.659ns
+   Maximum output required time after clock: 10.393ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -531,33 +530,33 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 5.780ns (frequency: 173.010MHz)
-  Total number of paths / destination ports: 2578 / 112
+  Clock period: 5.864ns (frequency: 170.532MHz)
+  Total number of paths / destination ports: 2470 / 106
 -------------------------------------------------------------------------
-Delay:               5.780ns (Levels of Logic = 3)
-  Source:            eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_14 (FF)
-  Destination:       eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_20 (FF)
+Delay:               5.864ns (Levels of Logic = 3)
+  Source:            eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_4 (FF)
+  Destination:       eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_12 (FF)
   Source Clock:      iCLK rising
   Destination Clock: iCLK rising
 
-  Data Path: eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_14 to eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_20
+  Data Path: eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_4 to eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_12
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             2   0.525   1.181  eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_14 (eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_14)
-     LUT6:I0->O            2   0.254   0.954  eLCD_DRIVER/eLCD_INIT_TIMER/oTC<20>5_SW0 (N11)
-     LUT6:I3->O            3   0.235   0.766  eLCD_DRIVER/eLCD_INIT_TIMER/oTC<20>5_1 (eLCD_DRIVER/eLCD_INIT_TIMER/oTC<20>5)
-     LUT4:I3->O           21   0.254   1.309  eLCD_DRIVER/eLCD_INIT_TIMER/_n0015_inv1 (eLCD_DRIVER/eLCD_INIT_TIMER/_n0015_inv)
-     FDCE:CE                   0.302          eLCD_DRIVER/eLCD_INIT_TIMER/sCLK_CNT_0
+     FDCE:C->Q             2   0.525   1.181  eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_4 (eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_4)
+     LUT6:I0->O           14   0.254   1.235  eLCD_DRIVER/eLCD_CMD_TIMER/oTC<12>2 (eLCD_DRIVER/eLCD_CMD_TIMER/oTC<12>1)
+     LUT3:I1->O            3   0.250   0.766  eLCD_DRIVER/eLCD_CMD_TIMER/oTC<12>3 (eLCD_DRIVER/sCMD_PERIOD_TC)
+     LUT6:I5->O           13   0.254   1.097  eLCD_DRIVER/eLCD_CMD_TIMER/_n0015_inv3 (eLCD_DRIVER/eLCD_CMD_TIMER/_n0015_inv)
+     FDCE:CE                   0.302          eLCD_DRIVER/eLCD_CMD_TIMER/sCLK_CNT_0
     ----------------------------------------
-    Total                      5.780ns (1.570ns logic, 4.210ns route)
-                                       (27.2% logic, 72.8% route)
+    Total                      5.864ns (1.585ns logic, 4.279ns route)
+                                       (27.0% logic, 73.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 85 / 82
+  Total number of paths / destination ports: 84 / 81
 -------------------------------------------------------------------------
-Offset:              4.667ns (Levels of Logic = 2)
+Offset:              4.659ns (Levels of Logic = 2)
   Source:            inRST (PAD)
   Destination:       sCURRENT_STATE (FF)
   Destination Clock: iCLK rising
@@ -567,35 +566,36 @@ Offset:              4.667ns (Levels of Logic = 2)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   1.328   0.681  inRST_IBUF (inRST_IBUF)
-     INV:I->O             66   0.255   1.944  eLCD_DRIVER/inRST_inv1_INV_0 (eLCD_DRIVER/eLOWER_BYTE_REG/inRST_inv)
+     INV:I->O             65   0.255   1.936  eLCD_DRIVER/inRST_inv1_INV_0 (eLCD_DRIVER/eLOWER_BYTE_REG/inRST_inv)
      FDCE:CLR                  0.459          eLCD_DRIVER/eUPPER_BYTE_REG/sREG_6
     ----------------------------------------
-    Total                      4.667ns (2.042ns logic, 2.625ns route)
+    Total                      4.659ns (2.042ns logic, 2.617ns route)
                                        (43.8% logic, 56.2% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
-  Total number of paths / destination ports: 249 / 15
+  Total number of paths / destination ports: 287 / 15
 -------------------------------------------------------------------------
-Offset:              10.518ns (Levels of Logic = 6)
-  Source:            eLCD_DRIVER/sCHAR_CNT_1 (FF)
+Offset:              10.393ns (Levels of Logic = 7)
+  Source:            eLCD_DRIVER/sMODE_FF (FF)
   Destination:       ioD<0> (PAD)
   Source Clock:      iCLK rising
 
-  Data Path: eLCD_DRIVER/sCHAR_CNT_1 to ioD<0>
+  Data Path: eLCD_DRIVER/sMODE_FF to ioD<0>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q            30   0.525   1.917  eLCD_DRIVER/sCHAR_CNT_1 (eLCD_DRIVER/sCHAR_CNT_1)
-     LUT6:I1->O            1   0.254   0.682  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>4 (eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>3)
-     LUT6:I5->O            1   0.254   0.958  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>5 (eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>4)
-     LUT6:I2->O            1   0.254   0.910  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>9 (eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>8)
-     LUT6:I3->O            1   0.235   0.682  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>25_SW0 (N23)
+     FDCE:C->Q            25   0.525   1.403  eLCD_DRIVER/sMODE_FF (eLCD_DRIVER/sMODE_FF)
+     LUT2:I1->O            4   0.254   1.080  eLCD_DRIVER/eSLAVE_ADDR_CHAR_GEN/Mram_sUPPER_CHAR41 (eLCD_DRIVER/eLOWER_BYTE_CHAR_GEN/Mram_sUPPER_CHAR4)
+     LUT6:I2->O            1   0.254   0.000  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>8_SW0_F (N52)
+     MUXF7:I0->O           1   0.163   0.790  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>8_SW0 (N38)
+     LUT6:I4->O            1   0.250   0.910  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>8 (eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>7)
+     LUT6:I3->O            1   0.235   0.682  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>25_SW0 (N40)
      LUT5:I4->O            1   0.254   0.681  eLCD_DRIVER/sCURRENT_STATE_sOUT_DATA<0>25 (eLCD_DRIVER/sOUT_DATA<0>)
      OBUFT:I->O                2.912          ioD_0_OBUFT (ioD<0>)
     ----------------------------------------
-    Total                     10.518ns (4.688ns logic, 5.830ns route)
-                                       (44.6% logic, 55.4% route)
+    Total                     10.393ns (4.847ns logic, 5.546ns route)
+                                       (46.6% logic, 53.4% route)
 
 =========================================================================
 
@@ -607,14 +607,14 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.780|         |         |         |
+iCLK           |    5.864|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
 Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 3.57 secs
+Total CPU time to Xst completion: 3.83 secs
  
 --> 
 

@@ -1,8 +1,14 @@
 //! **************************************************************************
-// Written by: Map P.68d on Fri Jun 15 16:29:48 2018
+// Written by: Map P.68d on Fri Jun 15 16:58:15 2018
 //! **************************************************************************
 
 SCHEMATIC START;
+COMP "inRST" LOCATE = SITE "AB24" LEVEL 1;
+COMP "ioD<0>" LOCATE = SITE "W18" LEVEL 1;
+COMP "ioD<1>" LOCATE = SITE "V18" LEVEL 1;
+COMP "iCLK" LOCATE = SITE "M21" LEVEL 1;
+COMP "ioD<2>" LOCATE = SITE "D18" LEVEL 1;
+COMP "ioD<3>" LOCATE = SITE "T18" LEVEL 1;
 COMP "iEN" LOCATE = SITE "AA24" LEVEL 1;
 COMP "iSW" LOCATE = SITE "W19" LEVEL 1;
 COMP "oLED<0>" LOCATE = SITE "N24" LEVEL 1;
@@ -16,11 +22,5 @@ COMP "oLED<7>" LOCATE = SITE "D24" LEVEL 1;
 COMP "oRS" LOCATE = SITE "F24" LEVEL 1;
 COMP "oRW" LOCATE = SITE "C21" LEVEL 1;
 COMP "oE" LOCATE = SITE "D21" LEVEL 1;
-COMP "inRST" LOCATE = SITE "AB24" LEVEL 1;
-COMP "ioD<0>" LOCATE = SITE "W18" LEVEL 1;
-COMP "ioD<1>" LOCATE = SITE "V18" LEVEL 1;
-COMP "iCLK" LOCATE = SITE "M21" LEVEL 1;
-COMP "ioD<2>" LOCATE = SITE "D18" LEVEL 1;
-COMP "ioD<3>" LOCATE = SITE "T18" LEVEL 1;
 SCHEMATIC END;
 

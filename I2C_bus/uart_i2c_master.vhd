@@ -133,6 +133,7 @@ architecture Behavioral of uart_i2c_master is
 	
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
+	signal sSLAVE_ADDR 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address without mode bit
 	signal sLOWER_BYTE_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower data byte
 	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper data byte
 
@@ -173,6 +174,9 @@ begin
 				iD 	=> sIUART_REG,
 				oQ		=> sSLAVE_ADDR_REG
 			);
+	
+	-- Slave address
+	sSLAVE_ADDR <= '0' & sSLAVE_ADDR_REG(DATA_WIDTH - 1 downto 1); 
 	
 	-- Register address register
 	eREG_ADDR_REG : entity work.reg 
@@ -228,7 +232,7 @@ begin
 			Port map(
 			   iCLK   	  	=> iCLK,
             inRST  	  	=> inRST,
-			   iSLAVE_ADDR => sSLAVE_ADDR_REG,
+			   iSLAVE_ADDR => sSLAVE_ADDR,
 			   iREG_ADDR   => sREG_ADDR_REG,
 			   iLOWER_BYTE => sLOWER_BYTE_REG,
 			   iUPPER_BYTE => sUPPER_BYTE_REG,
@@ -440,7 +444,6 @@ begin
 		sSLAVE_ADDR_SEL 		 <= '0';
 		oFREQ_EN					 <= '0';
 		sLCD_DATA_EN 			 <= '0';
-		--oLED 						 <= (others => '1');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sIN_BUFF_EN	 		 	<= '0';
@@ -665,7 +668,12 @@ begin
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '0';	
 				sOUART_REG_SEL		 	<= "00";	
-				sLCD_DATA_EN			<= '1';				
+				--sLCD_DATA_EN			<= '1';	
+				if (sSLAVE_ADDR_REG(0) = '0') then
+					sLCD_DATA_EN <= '1';
+				else
+					sLCD_DATA_EN <= '0';
+				end if;				
 			when I2C_START =>
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
@@ -694,12 +702,6 @@ begin
 				sOSHW_EN				 	<= '0';
 				sOSHW_LOAD			 	<= '1';	
 				sOUART_REG_SEL		 	<= "00";		
-				if (sSLAVE_ADDR_REG(0) = '0') then
-					sLCD_DATA_EN <= '1';
-				else
-					sLCD_DATA_EN <= '0';
-				end if;
-				--oLED <= (others => '0');
 			when I2C_SLAVE_ADDRESS_WRITE => 
 				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';

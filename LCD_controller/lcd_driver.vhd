@@ -52,7 +52,7 @@ architecture Behavioral of lcd_driver is
 							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR,
 							 ADDRESS_SET_BF , ADDRESS_SET, 
 							 PRINT_CHAR_BF, PRINT_CHAR, 
-							 CURSOR_HOME, 
+							 CURSOR_NEW_LINE, CURSOR_BACK,
 							 STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  			-- LCD controller FSM current state
@@ -303,7 +303,7 @@ begin
 				
 			when CHECK_CURSOR => 	
 				if (sCHAR_CNT = 16) then
-					sNEXT_STATE <= CURSOR_HOME;
+					sNEXT_STATE <= CURSOR_NEW_LINE;
 				else
 					sNEXT_STATE <= PRINT_CHAR_BF;
 				end if;
@@ -322,16 +322,23 @@ begin
 					sNEXT_STATE <= PRINT_CHAR;
 				end if;	
 				
-			when CURSOR_HOME =>
+			when CURSOR_NEW_LINE =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
 					sNEXT_STATE <= PRINT_CHAR_BF;
 				else
-					sNEXT_STATE <= CURSOR_HOME;
-				end if;					
+					sNEXT_STATE <= CURSOR_NEW_LINE;
+				end if;		
+
+			when CURSOR_BACK =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+					sNEXT_STATE <= READ_INPUT_DATA;
+				else
+					sNEXT_STATE <= CURSOR_BACK;
+				end if;
 				
 			when STOP_PRINT =>
 				if (sCHAR_CNT = CHAR_NUMBER - 1) then
-					sNEXT_STATE <= READ_INPUT_DATA;
+					sNEXT_STATE <= CURSOR_BACK;
 				else
 					sNEXT_STATE <= CHECK_CURSOR;
 				end if;
@@ -502,7 +509,7 @@ begin
 				
 					sCMD_PERIOD_EN  <= '1';
 					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "1110";
+					sOUT_DATA 		 <= "1100";
 				else
 					sSEQ_CNT_EN 	  <= '1';
 					sCMD_PERIOD_EN   <= '0';
@@ -778,7 +785,7 @@ begin
 					sOUT_DATA 		  <= "0000";
 				end if;	
 
-			when CURSOR_HOME =>
+			when CURSOR_NEW_LINE =>
 
 				if (sCMD_PER_CNT = 1) then 
 					oE <= '1';
@@ -818,7 +825,50 @@ begin
 					sCMD_PER_CNT_EN  <= '0';
 					sCMD_PER_CNT_RST <= '1';
 					sOUT_DATA 		  <= "0000";
+				end if;
+
+			when CURSOR_BACK =>
+
+				if (sCMD_PER_CNT = 1) then 
+					oE <= '1';
+				else
+					oE <= '0';
+				end if;
+				
+				if (sSEQ_CNT = 1) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	 <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	 <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';
+					sOUT_DATA 		 <= "0000";
+				elsif (sSEQ_CNT = 2) then
+				
+					if (sCMD_PER_CNT = 3) then
+						sSEQ_CNT_EN 	  <= '1';
+						sCMD_PER_CNT_RST <= '1';
+					else
+						sSEQ_CNT_EN 	  <= '0';
+						sCMD_PER_CNT_RST <= '0';
+					end if;
+				
+					sCMD_PERIOD_EN  <= '1';
+					sCMD_PER_CNT_EN <= '1';			
+					sOUT_DATA 		 <= "0010";
+				else
+					sSEQ_CNT_EN 	  <= '1';
+					sCMD_PERIOD_EN   <= '0';
+					sCMD_PER_CNT_EN  <= '0';
+					sCMD_PER_CNT_RST <= '1';
+					sOUT_DATA 		  <= "0000";
 				end if;		
+				
 			when CHECK_CURSOR =>
 			
 	
@@ -878,7 +928,7 @@ begin
 			when "00011" =>
 				sCHAR_CODE <= "00110000"; -- 0
 			when "00100" =>
-				sCHAR_CODE <= "01011000"; -- X
+				sCHAR_CODE <= "01111000"; -- x
 			when "00101" =>
 				sCHAR_CODE <= sSLAVE_ADDR_CHAR(15 downto 8); -- _
 			when "00110" =>
@@ -894,13 +944,13 @@ begin
 			when "01011" =>
 				sCHAR_CODE <= "00110000"; -- 0
 			when "01100" =>
-				sCHAR_CODE <= "01011000"; -- X
+				sCHAR_CODE <= "01111000"; -- x
 			when "01101" =>
-				sCHAR_CODE <= sREG_ADDR_CHAR(15 downto 8); -- _		
+				sCHAR_CODE <= sREG_ADDR_CHAR(15 downto 8); -- _	 	
 			when "01110" =>
 				sCHAR_CODE <= sREG_ADDR_CHAR(7  downto 0); -- _				
 			when "01111" =>
-				if (sMODE_FF = '0') then
+				if (sMODE_FF = '1') then
 					sCHAR_CODE <= "01010010"; -- R
 				else 
 					sCHAR_CODE <= "01010111"; -- W
@@ -916,7 +966,7 @@ begin
 			when "10100" =>
 				sCHAR_CODE <= "00110000"; -- 0	
 			when "10101" =>
-				sCHAR_CODE <= "01011000"; -- X
+				sCHAR_CODE <= "01111000"; -- x
 			when "10110" =>
 				sCHAR_CODE <= sUPPER_BYTE_CHAR(15 downto 8); -- _
 			when "10111" =>
