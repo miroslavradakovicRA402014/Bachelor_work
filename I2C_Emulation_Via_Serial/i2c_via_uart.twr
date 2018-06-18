@@ -37,18 +37,18 @@ Setup/Hold to clock iCLK
                 |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source          | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ----------------+------------+------------+------------+------------+------------------+--------+
-iBAUD_SW<0>     |    3.119(R)|      SLOW  |   -1.228(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iBAUD_SW<1>     |    0.631(R)|      SLOW  |    0.850(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iBAUD_SW<2>     |    3.017(R)|      SLOW  |   -1.370(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iCTS            |    4.566(R)|      SLOW  |   -2.431(R)|      FAST  |iCLK_BUFGP        |   0.000|
-iDATA_BIT_SW<0> |    2.310(R)|      SLOW  |   -0.601(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iDATA_BIT_SW<1> |    2.386(R)|      SLOW  |   -0.288(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iHANDSHAKE_EN_SW|    5.262(R)|      SLOW  |   -2.515(R)|      FAST  |iCLK_BUFGP        |   0.000|
-iPARITY_EN_SW   |    3.573(R)|      SLOW  |   -0.223(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-iPARITY_SW      |    6.725(R)|      SLOW  |   -2.506(R)|      FAST  |iCLK_BUFGP        |   0.000|
-iRX             |    4.808(R)|      SLOW  |   -2.502(R)|      FAST  |iCLK_BUFGP        |   0.000|
-inRST           |    8.505(R)|      SLOW  |    0.071(R)|      SLOW  |iCLK_BUFGP        |   0.000|
-ioLCD_D<3>      |    4.898(R)|      SLOW  |   -2.077(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<0>     |    2.925(R)|      SLOW  |   -1.385(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<1>     |    1.217(R)|      SLOW  |    0.358(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iBAUD_SW<2>     |    2.989(R)|      SLOW  |   -1.485(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iCTS            |    5.171(R)|      SLOW  |   -2.458(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iDATA_BIT_SW<0> |    2.241(R)|      SLOW  |    0.350(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iDATA_BIT_SW<1> |    2.045(R)|      SLOW  |    0.339(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iHANDSHAKE_EN_SW|    4.617(R)|      SLOW  |   -2.351(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iPARITY_EN_SW   |    6.782(R)|      SLOW  |   -0.334(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+iPARITY_SW      |    5.634(R)|      SLOW  |   -1.883(R)|      FAST  |iCLK_BUFGP        |   0.000|
+iRX             |    5.981(R)|      SLOW  |   -3.313(R)|      FAST  |iCLK_BUFGP        |   0.000|
+inRST           |    8.531(R)|      SLOW  |    0.228(R)|      SLOW  |iCLK_BUFGP        |   0.000|
+ioLCD_D<3>      |    3.903(R)|      SLOW  |   -1.543(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ----------------+------------+------------+------------+------------+------------------+--------+
 
 Clock iCLK to Pad
@@ -56,22 +56,22 @@ Clock iCLK to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-ioLCD_D<0>  |        18.529(R)|      SLOW  |         5.938(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioLCD_D<1>  |        18.487(R)|      SLOW  |         5.697(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioLCD_D<2>  |        18.283(R)|      SLOW  |         6.008(R)|      FAST  |iCLK_BUFGP        |   0.000|
-ioLCD_D<3>  |        17.246(R)|      SLOW  |         5.341(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLCD_E      |        14.274(R)|      SLOW  |         6.009(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLCD_RS     |        12.435(R)|      SLOW  |         5.494(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLCD_RW     |        14.620(R)|      SLOW  |         6.458(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<0>     |        10.996(R)|      SLOW  |         4.721(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<1>     |         9.868(R)|      SLOW  |         4.106(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<2>     |        12.191(R)|      SLOW  |         5.414(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<3>     |        11.259(R)|      SLOW  |         4.895(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<4>     |        11.259(R)|      SLOW  |         4.895(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<5>     |        12.558(R)|      SLOW  |         5.609(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<6>     |        12.618(R)|      SLOW  |         5.610(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oLED<7>     |        13.045(R)|      SLOW  |         5.835(R)|      FAST  |iCLK_BUFGP        |   0.000|
-oTX         |        16.145(R)|      SLOW  |         6.204(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioLCD_D<0>  |        18.993(R)|      SLOW  |         5.343(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioLCD_D<1>  |        19.180(R)|      SLOW  |         5.123(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioLCD_D<2>  |        19.783(R)|      SLOW  |         6.324(R)|      FAST  |iCLK_BUFGP        |   0.000|
+ioLCD_D<3>  |        16.009(R)|      SLOW  |         4.811(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLCD_E      |        16.090(R)|      SLOW  |         6.541(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLCD_RS     |        13.223(R)|      SLOW  |         5.985(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLCD_RW     |        15.125(R)|      SLOW  |         6.714(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<0>     |        13.379(R)|      SLOW  |         6.122(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<1>     |        12.169(R)|      SLOW  |         5.445(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<2>     |        14.755(R)|      SLOW  |         6.901(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<3>     |        13.584(R)|      SLOW  |         6.219(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<4>     |        13.824(R)|      SLOW  |         6.358(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<5>     |        14.766(R)|      SLOW  |         6.875(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<6>     |        15.195(R)|      SLOW  |         7.110(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oLED<7>     |        15.623(R)|      SLOW  |         7.336(R)|      FAST  |iCLK_BUFGP        |   0.000|
+oTX         |        16.661(R)|      SLOW  |         6.566(R)|      FAST  |iCLK_BUFGP        |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock iCLK
@@ -79,25 +79,25 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    7.355|         |         |         |
+iCLK           |    6.645|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-iPARITY_SW     |oTX            |   15.866|
+iPARITY_SW     |oTX            |   15.650|
 ---------------+---------------+---------+
 
 
-Analysis completed Fri Jun 15 17:26:14 2018 
+Analysis completed Mon Jun 18 14:13:05 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 219 MB
+Peak Memory Usage: 221 MB
 
 
 

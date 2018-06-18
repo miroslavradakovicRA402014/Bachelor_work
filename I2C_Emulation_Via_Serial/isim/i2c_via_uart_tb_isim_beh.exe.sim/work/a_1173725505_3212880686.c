@@ -28,7 +28,7 @@ unsigned char ieee_p_1242562249_sub_1781507893_1035706684(char *, char *, char *
 char *ieee_p_1242562249_sub_1919365254_1035706684(char *, char *, char *, char *, int );
 
 
-static void work_a_2050833637_3212880686_p_0(char *t0)
+static void work_a_1173725505_3212880686_p_0(char *t0)
 {
     char t18[16];
     char *t1;
@@ -75,16 +75,16 @@ LAB3:    t1 = (t0 + 2096);
 
 LAB1:    return;
 LAB2:    xsi_set_current_line(45, ng0);
-    t1 = xsi_get_transient_memory(19U);
-    memset(t1, 0, 19U);
+    t1 = xsi_get_transient_memory(21U);
+    memset(t1, 0, 21U);
     t5 = t1;
-    memset(t5, (unsigned char)2, 19U);
+    memset(t5, (unsigned char)2, 21U);
     t6 = (t0 + 2148);
     t7 = (t6 + 32U);
     t8 = *((char **)t7);
     t9 = (t8 + 40U);
     t10 = *((char **)t9);
-    memcpy(t10, t1, 19U);
+    memcpy(t10, t1, 21U);
     xsi_driver_first_trans_fast(t6);
     goto LAB3;
 
@@ -92,7 +92,7 @@ LAB5:    xsi_set_current_line(47, ng0);
     t2 = (t0 + 960U);
     t6 = *((char **)t2);
     t2 = (t0 + 3752U);
-    t13 = (360000 - 1);
+    t13 = (1080000 - 1);
     t14 = ieee_p_1242562249_sub_1781507893_1035706684(IEEE_P_1242562249, t6, t2, t13);
     if (t14 != 0)
         goto LAB10;
@@ -115,16 +115,16 @@ LAB7:    t2 = (t0 + 592U);
     goto LAB9;
 
 LAB10:    xsi_set_current_line(48, ng0);
-    t7 = xsi_get_transient_memory(19U);
-    memset(t7, 0, 19U);
+    t7 = xsi_get_transient_memory(21U);
+    memset(t7, 0, 21U);
     t8 = t7;
-    memset(t8, (unsigned char)2, 19U);
+    memset(t8, (unsigned char)2, 21U);
     t9 = (t0 + 2148);
     t10 = (t9 + 32U);
     t15 = *((char **)t10);
     t16 = (t15 + 40U);
     t17 = *((char **)t16);
-    memcpy(t17, t7, 19U);
+    memcpy(t17, t7, 21U);
     xsi_driver_first_trans_fast(t9);
     goto LAB11;
 
@@ -136,7 +136,7 @@ LAB13:    xsi_set_current_line(50, ng0);
     t7 = (t18 + 12U);
     t19 = *((unsigned int *)t7);
     t20 = (1U * t19);
-    t11 = (19U != t20);
+    t11 = (21U != t20);
     if (t11 == 1)
         goto LAB15;
 
@@ -145,16 +145,16 @@ LAB16:    t8 = (t0 + 2148);
     t10 = *((char **)t9);
     t15 = (t10 + 40U);
     t16 = *((char **)t15);
-    memcpy(t16, t6, 19U);
+    memcpy(t16, t6, 21U);
     xsi_driver_first_trans_fast(t8);
     goto LAB11;
 
-LAB15:    xsi_size_not_matching(19U, t20, 0);
+LAB15:    xsi_size_not_matching(21U, t20, 0);
     goto LAB16;
 
 }
 
-static void work_a_2050833637_3212880686_p_1(char *t0)
+static void work_a_1173725505_3212880686_p_1(char *t0)
 {
     char *t1;
     char *t2;
@@ -176,7 +176,7 @@ LAB0:    xsi_set_current_line(56, ng0);
     t1 = (t0 + 960U);
     t2 = *((char **)t1);
     t1 = (t0 + 3752U);
-    t3 = (360000 - 1);
+    t3 = (1080000 - 1);
     t4 = ieee_p_1242562249_sub_1781507893_1035706684(IEEE_P_1242562249, t2, t1, t3);
     if (t4 != 0)
         goto LAB3;
@@ -208,9 +208,9 @@ LAB6:    goto LAB2;
 }
 
 
-extern void work_a_2050833637_3212880686_init()
+extern void work_a_1173725505_3212880686_init()
 {
-	static char *pe[] = {(void *)work_a_2050833637_3212880686_p_0,(void *)work_a_2050833637_3212880686_p_1};
-	xsi_register_didat("work_a_2050833637_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_2050833637_3212880686.didat");
+	static char *pe[] = {(void *)work_a_1173725505_3212880686_p_0,(void *)work_a_1173725505_3212880686_p_1};
+	xsi_register_didat("work_a_1173725505_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_1173725505_3212880686.didat");
 	xsi_register_executes(pe);
 }

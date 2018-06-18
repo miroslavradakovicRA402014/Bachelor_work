@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -199,7 +199,7 @@ Elaborating entity <lcd_timer> (architecture <Behavioral>) with generics from li
 Elaborating entity <lcd_timer> (architecture <Behavioral>) with generics from library <work>.
 
 Elaborating entity <char_gen> (architecture <Behavioral>) with generics from library <work>.
-INFO:HDLCompiler:679 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" Line 1262. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" Line 1256. Case statement is complete. others clause is never selected
 
 Elaborating entity <i2c_slave> (architecture <Behavioral>) with generics from library <work>.
 
@@ -419,11 +419,11 @@ Synthesizing Unit <uart_i2c_master>.
     Found 2-bit adder for signal <sBYTE_CNT[1]_GND_26_o_add_77_OUT> created at line 1241.
     Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_26_o_add_82_OUT> created at line 1241.
     Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_26_o_add_88_OUT> created at line 1241.
-    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 1384.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 1399.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 1435
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 1439
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_39_o> created at line 900
+    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 1378.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 1393.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 1429
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 1433
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_39_o> created at line 894
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
 	inferred   4 Adder/Subtractor(s).
@@ -505,7 +505,7 @@ Synthesizing Unit <lcd_driver>.
     Found 3-bit adder for signal <sSEQ_CNT[2]_GND_32_o_add_116_OUT> created at line 1241.
     Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_32_o_add_120_OUT> created at line 1241.
     Found 5-bit adder for signal <sCHAR_CNT[4]_GND_32_o_add_124_OUT> created at line 1241.
-    Found 4x20-bit Read Only RAM for signal <_n0419>
+    Found 4x20-bit Read Only RAM for signal <_n0268>
     Found 4-bit 4-to-1 multiplexer for signal <_n0186> created at line 747.
     Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 982
     Found 1-bit tristate buffer for signal <ioD<3>> created at line 986
@@ -783,7 +783,7 @@ Synthesizing (advanced) Unit <lcd_driver>.
 The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
 The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0419> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0268> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -928,8 +928,8 @@ Optimizing FSM <eI2C_BUS/eUART_I2C_MASTER/FSM_2> on signal <sCURRENT_STATE[1:26]
  uart_start                  | 00000000000000000000000010
  uart_slave_address          | 00000000000000000000000100
  uart_register_address       | 00000000000000000000001000
- uart_byte_lower             | 00000000000000000000010000
- uart_byte_upper             | 00000000000000000001000000
+ uart_byte_lower             | 00000000000000000001000000
+ uart_byte_upper             | 00000000000000000000010000
  uart_stop                   | 00000000000000000000100000
  i2c_start                   | 00000000000000000010000000
  i2c_slave_address_write     | 00000000000000000100000000
@@ -1291,8 +1291,8 @@ iCLK           |    7.048|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 10.03 secs
+Total REAL time to Xst completion: 12.00 secs
+Total CPU time to Xst completion: 11.48 secs
  
 --> 
 
