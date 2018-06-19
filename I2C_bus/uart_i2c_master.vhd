@@ -420,21 +420,21 @@ begin
 				end if;
 			when SEND_UART_REGISTER_ADDRESS =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_LOWER; -- Send slave register address to UART 
+					sNEXT_STATE <= SEND_UART_BYTE_UPPER; -- Send slave register address to UART 
 				else 
 					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS;
 				end if;				
-			when SEND_UART_BYTE_LOWER =>
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_UPPER; -- Send slave lower byte to UART 
-				else 
-					sNEXT_STATE <= SEND_UART_BYTE_LOWER;
-				end if;
 			when SEND_UART_BYTE_UPPER =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= IDLE; -- Send slave upper byte to UART 
+					sNEXT_STATE <= SEND_UART_BYTE_LOWER; -- Send slave upper byte to UART 
 				else 
 					sNEXT_STATE <= SEND_UART_BYTE_UPPER;
+				end if;
+			when SEND_UART_BYTE_LOWER =>
+				if (iUART_FULL = '0') then
+					sNEXT_STATE <= IDLE; -- Send slave lower byte to UART 
+				else 
+					sNEXT_STATE <= SEND_UART_BYTE_LOWER;
 				end if;		
 		end case;
 	end process fsm_next;	
@@ -1196,8 +1196,8 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "10";					
-			when SEND_UART_BYTE_LOWER =>
+				sOUART_REG_SEL		 <= "11";					
+			when SEND_UART_BYTE_UPPER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '0';
@@ -1224,8 +1224,8 @@ begin
 				sISHW_EN			    <= '0'; 
 				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "11";		
-			when SEND_UART_BYTE_UPPER =>
+				sOUART_REG_SEL		 <= "10";		
+			when SEND_UART_BYTE_LOWER =>
 				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '0';

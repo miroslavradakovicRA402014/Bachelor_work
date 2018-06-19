@@ -170,7 +170,10 @@ BEGIN
 			
 		end loop;		
 		
+		wait for iCLK_period;
 		
+		iWR   <= '1';
+		iRD   <= '0';		
 		
 
       wait;

@@ -35,7 +35,7 @@ entity i2c_slave is
 		RSTART_PERIOD_CNT_WIDTH : integer := 4;									 		 -- Repeat start period counter width
 		TR_PERIOD_CNT_WIDTH  	: integer := 5;											 -- Transmission period counter width
 		REGISTER_SEL_WIDTH 		: integer := 4; 											 -- Decoder selection width
-		SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "1010101"      -- Slave address (7 bit address)
+		SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "0110001"      -- Slave address (7 bit address)
 	 );
     Port ( iCLK 	: in  	std_logic;
            inRST 	: in  	std_logic;

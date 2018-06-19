@@ -46,19 +46,14 @@ architecture Behavioral of fifo is
 		others => CONV_STD_LOGIC_VECTOR(0, DATA_WIDTH)
 	); -- FIFO memory signal
 
-	signal sWR_PTR : integer range 0 to NUM_OF_WORDS - 1; -- FIFO write pointer
+	signal sWR_PTR : integer range 0 to NUM_OF_WORDS ; -- FIFO write pointer
+	signal sRD_PTR : integer range 0 to NUM_OF_WORDS ; -- FIFO write pointer
 	
 	signal sEMPTY  : std_logic; -- Empty FIFO state signal
 	signal sFULL   : std_logic; -- Full FIFO state signal
 
 begin
 
-	-- Empty FIFO statement 
-	sEMPTY <= '1' when sWR_PTR = 0 else
-				 '0';
-	-- Full FIFO statement
-	sFULL  <= '1' when sWR_PTR = NUM_OF_WORDS else
-				 '0';
 
 	-- FIFO memory process
 	fifo_mem : process (iCLK, inRST) begin
@@ -69,34 +64,74 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (iWR = '1' and sFULL = '0') then
 				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO 
-			elsif (iRD = '1' and sEMPTY = '0') then
-				for i in 0 to NUM_OF_WORDS - 2 loop 
-					sFIFO(i) <= sFIFO(i + 1); -- Read form FIFO and update memory
-				end loop;
 			end if;
 		end if;
 	end process fifo_mem;
 	
+	-- Data output
+	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' else
+				 (others => 'Z');
+	
 	-- FIFO pointer process
 	ptr_proc : process (iCLK, inRST) begin
 		if (inRST = '0') then
-			sWR_PTR <= 0; -- Reset pointer
+			sWR_PTR <= 0; -- Reset write pointer
+			sRD_PTR <= 0; -- Reset read  pointer
 		elsif (iCLK'event and iCLK = '1') then
 			if (iWR = '1' and sFULL = '0') then -- If FIFO is not full and write enable write to it
-				sWR_PTR <= sWR_PTR + 1;  	  -- Increment write pointer 
+				sWR_PTR <= sWR_PTR + 1;  	  -- Increment write pointer	
 			elsif (iRD = '1' and sEMPTY = '0') then
-				sWR_PTR <= sWR_PTR - 1;      -- Decrement wirte pointer
-			end if;		
+				sRD_PTR <= sRD_PTR + 1;      -- Increment read pointer
+			else
+				-- Return write pointer to begin
+				if (sWR_PTR = NUM_OF_WORDS) then
+					sWR_PTR <= 0;
+				end if;
+				-- Return read pointer to begin
+				if (sRD_PTR = NUM_OF_WORDS) then
+					sRD_PTR <= 0;
+				end if;			
+			end if;			
 		end if;
 	end process ptr_proc;
+	
+	-- Empty-full FIFO state process
+	fifo_state_proc : process (iCLK, inRST) begin
+		if (inRST = '0') then  -- Reset FIFO state
+			sEMPTY <= '1';
+			sFULL  <= '0';
+		elsif (iCLK'event and iCLK = '1') then	
+			if (iWR = '1') then
+				-- Check if next position write of pointer is equal to read pointer - inidicate to FIFO is full 
+				if (sWR_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
+					if (sRD_PTR = 0) then 
+						sFULL  <= '1';
+					end if;
+				else
+					if (sRD_PTR = sWR_PTR + 1) then
+						sFULL  <= '1';
+					end if;
+				end if;		
+				sEMPTY <= '0';	-- Whenever you write something FIFO won't be empty
+			elsif (iRD = '1') then
+				-- Check if next position of read pointer is equal to write pointer - inidicate to FIFO is empty
+				if (sRD_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
+					if (sWR_PTR = 0) then
+						sEMPTY <= '1';
+					end if;
+				else
+					if (sWR_PTR = sRD_PTR + 1) then
+						sEMPTY <= '1';
+					end if;	
+				end if;
+				sFULL <= '0'; -- Whenever you write something FIFO won't be empty
+			end if;
+		end if;
+	end process fifo_state_proc;
 	
 	-- Ouptut signals
 	oEMPTY <= sEMPTY;
 	oFULL  <= sFULL;
-	
-	-- Data output
-	oDATA  <= sFIFO(0) when iRD = '1' and sEMPTY = '0' else
-				 (others => 'Z');	
-
+		
 end Behavioral;
 
