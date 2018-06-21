@@ -29,557 +29,598 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
 Timing constraint: TS_ClkIn = PERIOD TIMEGRP "iCLK" 5 ns HIGH 50%;
 For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
- 16809 paths analyzed, 1169 endpoints analyzed, 8 failing endpoints
- 8 timing errors detected. (8 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   5.243ns.
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 1 timing error detected. (1 component switching limit error)
+ Minimum period is   3.200ns.
 --------------------------------------------------------------------------------
 
-Paths for end point eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (SLICE_X56Y56.CIN), 1070 paths
+Component Switching Limit Checks: TS_ClkIn = PERIOD TIMEGRP "iCLK" 5 ns HIGH 50%;
 --------------------------------------------------------------------------------
-Slack (setup path):     -0.243ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.191ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.017ns (0.285 - 0.302)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X59Y56.BMUX    Tshcko                0.518   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1
-    SLICE_X57Y56.A2      net (fanout=9)        0.792   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<1>
-    SLICE_X57Y56.A       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10111
-    SLICE_X57Y56.C2      net (fanout=3)        0.543   eUART/eBAUD_FREQ_DIV/oTC1011
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.303   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    -------------------------------------------------  ---------------------------
-    Total                                      5.191ns (2.209ns logic, 2.982ns route)
-                                                       (42.6% logic, 57.4% route)
-
+Slack: -0.600ns (period - min period limit)
+  Period: 2.400ns
+  Min period limit: 3.000ns (333.333MHz) (Tdcmper_CLKFX)
+  Physical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKFX
+  Logical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKFX
+  Location pin: DCM_X0Y6.CLKFX
+  Clock network: eDCM24_TO_50MHz/clkfx
 --------------------------------------------------------------------------------
-Slack (setup path):     -0.239ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.191ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.013ns (0.184 - 0.197)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y57.CMUX    Tshcko                0.576   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2
-    SLICE_X59Y55.B6      net (fanout=8)        0.696   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<2>
-    SLICE_X59Y55.B       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC1031_SW0
-    SLICE_X57Y56.C4      net (fanout=1)        0.581   N19
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.303   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    -------------------------------------------------  ---------------------------
-    Total                                      5.191ns (2.267ns logic, 2.924ns route)
-                                                       (43.7% logic, 56.3% route)
-
+Slack: 1.800ns (period - (min low pulse limit / (low pulse / period)))
+  Period: 5.000ns
+  Low pulse: 2.500ns
+  Low pulse limit: 1.600ns (Tdcmpw_CLKIN_200_250)
+  Physical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKIN
+  Logical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKIN
+  Location pin: DCM_X0Y6.CLKIN
+  Clock network: eDCM24_TO_50MHz/dcm_sp_inst_ML_NEW_DIVCLK
 --------------------------------------------------------------------------------
-Slack (setup path):     -0.151ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.100ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.016ns (0.285 - 0.301)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y55.DQ      Tcko                  0.525   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_7
-    SLICE_X59Y55.D6      net (fanout=2)        0.564   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-    SLICE_X59Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC711
-    SLICE_X56Y57.A6      net (fanout=3)        0.688   eUART/eBAUD_FREQ_DIV/oTC71
-    SLICE_X56Y57.A       Tilo                  0.254   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/oTC105_SW1
-    SLICE_X57Y55.C2      net (fanout=1)        0.770   N17
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.303   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
-    -------------------------------------------------  ---------------------------
-    Total                                      5.100ns (2.211ns logic, 2.889ns route)
-                                                       (43.4% logic, 56.6% route)
-
+Slack: 1.800ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 5.000ns
+  High pulse: 2.500ns
+  High pulse limit: 1.600ns (Tdcmpw_CLKIN_200_250)
+  Physical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKIN
+  Logical resource: eDCM24_TO_50MHz/dcm_sp_inst/CLKIN
+  Location pin: DCM_X0Y6.CLKIN
+  Clock network: eDCM24_TO_50MHz/dcm_sp_inst_ML_NEW_DIVCLK
 --------------------------------------------------------------------------------
 
-Paths for end point eUART/eUART_TRANSMITTER/sTC_CNT_3 (SLICE_X57Y59.CE), 124 paths
---------------------------------------------------------------------------------
-Slack (setup path):     -0.180ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 (FF)
-  Destination:          eUART/eUART_TRANSMITTER/sTC_CNT_3 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.135ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.010ns (0.292 - 0.302)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
+================================================================================
+Timing constraint: TS_eDCM24_TO_50MHz_clkfx = PERIOD TIMEGRP 
+"eDCM24_TO_50MHz_clkfx" TS_ClkIn /         2.08333333 HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 to eUART/eUART_TRANSMITTER/sTC_CNT_3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X59Y56.BMUX    Tshcko                0.518   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1
-    SLICE_X57Y56.A2      net (fanout=9)        0.792   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<1>
-    SLICE_X57Y56.A       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10111
-    SLICE_X57Y56.C2      net (fanout=3)        0.543   eUART/eBAUD_FREQ_DIV/oTC1011
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y59.C5      net (fanout=17)       0.722   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y59.C       Tilo                  0.259   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/_n0098_inv1
-    SLICE_X57Y59.CE      net (fanout=2)        0.354   eUART/eUART_TRANSMITTER/_n0098_inv
-    SLICE_X57Y59.CLK     Tceck                 0.390   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/sTC_CNT_3
-    -------------------------------------------------  ---------------------------
-    Total                                      5.135ns (1.944ns logic, 3.191ns route)
-                                                       (37.9% logic, 62.1% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     -0.176ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 (FF)
-  Destination:          eUART/eUART_TRANSMITTER/sTC_CNT_3 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.135ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.006ns (0.191 - 0.197)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 to eUART/eUART_TRANSMITTER/sTC_CNT_3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y57.CMUX    Tshcko                0.576   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2
-    SLICE_X59Y55.B6      net (fanout=8)        0.696   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<2>
-    SLICE_X59Y55.B       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC1031_SW0
-    SLICE_X57Y56.C4      net (fanout=1)        0.581   N19
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y59.C5      net (fanout=17)       0.722   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y59.C       Tilo                  0.259   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/_n0098_inv1
-    SLICE_X57Y59.CE      net (fanout=2)        0.354   eUART/eUART_TRANSMITTER/_n0098_inv
-    SLICE_X57Y59.CLK     Tceck                 0.390   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/sTC_CNT_3
-    -------------------------------------------------  ---------------------------
-    Total                                      5.135ns (2.002ns logic, 3.133ns route)
-                                                       (39.0% logic, 61.0% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     -0.088ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 (FF)
-  Destination:          eUART/eUART_TRANSMITTER/sTC_CNT_3 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.044ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.009ns (0.292 - 0.301)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 to eUART/eUART_TRANSMITTER/sTC_CNT_3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y55.DQ      Tcko                  0.525   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_7
-    SLICE_X59Y55.D6      net (fanout=2)        0.564   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-    SLICE_X59Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC711
-    SLICE_X56Y57.A6      net (fanout=3)        0.688   eUART/eBAUD_FREQ_DIV/oTC71
-    SLICE_X56Y57.A       Tilo                  0.254   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/oTC105_SW1
-    SLICE_X57Y55.C2      net (fanout=1)        0.770   N17
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y59.C5      net (fanout=17)       0.722   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y59.C       Tilo                  0.259   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/_n0098_inv1
-    SLICE_X57Y59.CE      net (fanout=2)        0.354   eUART/eUART_TRANSMITTER/_n0098_inv
-    SLICE_X57Y59.CLK     Tceck                 0.390   eUART/eUART_TRANSMITTER/sTC_CNT<3>
-                                                       eUART/eUART_TRANSMITTER/sTC_CNT_3
-    -------------------------------------------------  ---------------------------
-    Total                                      5.044ns (1.946ns logic, 3.098ns route)
-                                                       (38.6% logic, 61.4% route)
-
+ 17495 paths analyzed, 1105 endpoints analyzed, 781 failing endpoints
+ 782 timing errors detected. (781 setup errors, 0 hold errors, 1 component switching limit error)
+ Minimum period is   6.027ns.
 --------------------------------------------------------------------------------
 
-Paths for end point eUART/eBAUD_FREQ_DIV/sCLK_CNT_8 (SLICE_X56Y56.CIN), 1070 paths
+Paths for end point eUART/eUART_RECIVER/sTC_CNT_2 (SLICE_X43Y66.C6), 128 paths
 --------------------------------------------------------------------------------
-Slack (setup path):     -0.153ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_8 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.101ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.017ns (0.285 - 0.302)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X59Y56.BMUX    Tshcko                0.518   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1
-    SLICE_X57Y56.A2      net (fanout=9)        0.792   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<1>
-    SLICE_X57Y56.A       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10111
-    SLICE_X57Y56.C2      net (fanout=3)        0.543   eUART/eBAUD_FREQ_DIV/oTC1011
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.213   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    -------------------------------------------------  ---------------------------
-    Total                                      5.101ns (2.119ns logic, 2.982ns route)
-                                                       (41.5% logic, 58.5% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     -0.149ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_8 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.101ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.013ns (0.184 - 0.197)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y57.CMUX    Tshcko                0.576   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_2
-    SLICE_X59Y55.B6      net (fanout=8)        0.696   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<2>
-    SLICE_X59Y55.B       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC1031_SW0
-    SLICE_X57Y56.C4      net (fanout=1)        0.581   N19
-    SLICE_X57Y56.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC1033
-                                                       eUART/eBAUD_FREQ_DIV/oTC10131
-    SLICE_X57Y55.C3      net (fanout=1)        0.780   eUART/eBAUD_FREQ_DIV/oTC1013
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.213   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    -------------------------------------------------  ---------------------------
-    Total                                      5.101ns (2.177ns logic, 2.924ns route)
-                                                       (42.7% logic, 57.3% route)
-
---------------------------------------------------------------------------------
-Slack (setup path):     -0.061ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 (FF)
-  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_8 (FF)
-  Requirement:          5.000ns
-  Data Path Delay:      5.010ns (Levels of Logic = 7)
-  Clock Path Skew:      -0.016ns (0.285 - 0.301)
-  Source Clock:         iCLK_BUFGP rising at 0.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sCLK_CNT_7 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X56Y55.DQ      Tcko                  0.525   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_7
-    SLICE_X59Y55.D6      net (fanout=2)        0.564   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-    SLICE_X59Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC71
-                                                       eUART/eBAUD_FREQ_DIV/oTC711
-    SLICE_X56Y57.A6      net (fanout=3)        0.688   eUART/eBAUD_FREQ_DIV/oTC71
-    SLICE_X56Y57.A       Tilo                  0.254   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<9>
-                                                       eUART/eBAUD_FREQ_DIV/oTC105_SW1
-    SLICE_X57Y55.C2      net (fanout=1)        0.770   N17
-    SLICE_X57Y55.C       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC105
-    SLICE_X57Y55.D5      net (fanout=17)       0.296   eUART/eBAUD_FREQ_DIV/oTC107
-    SLICE_X57Y55.D       Tilo                  0.259   eUART/eBAUD_FREQ_DIV/oTC_inv
-                                                       eUART/eBAUD_FREQ_DIV/oTC_inv1
-    SLICE_X56Y54.AX      net (fanout=1)        0.486   eUART/eBAUD_FREQ_DIV/oTC_inv
-    SLICE_X56Y54.COUT    Taxcy                 0.259   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
-    SLICE_X56Y55.COUT    Tbyp                  0.093   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CIN     net (fanout=1)        0.082   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
-    SLICE_X56Y56.CLK     Tcinck                0.213   eUART/eBAUD_FREQ_DIV/sCLK_CNT<9>
-                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<9>
-                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_8
-    -------------------------------------------------  ---------------------------
-    Total                                      5.010ns (2.121ns logic, 2.889ns route)
-                                                       (42.3% logic, 57.7% route)
-
---------------------------------------------------------------------------------
-
-Hold Paths: TS_ClkIn = PERIOD TIMEGRP "iCLK" 5 ns HIGH 50%;
---------------------------------------------------------------------------------
-
-Paths for end point eUART/eRECV_FIFO/sFIFO_6_7 (SLICE_X42Y43.A6), 1 path
---------------------------------------------------------------------------------
-Slack (hold path):      0.414ns (requirement - (clock path skew + uncertainty - data path))
-  Source:               eUART/eRECV_FIFO/sFIFO_6_7 (FF)
-  Destination:          eUART/eRECV_FIFO/sFIFO_6_7 (FF)
-  Requirement:          0.000ns
-  Data Path Delay:      0.414ns (Levels of Logic = 1)
+Slack (setup path):     -3.627ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eUART_RECIVER/sTC_CNT_2 (FF)
+  Destination:          eUART/eUART_RECIVER/sTC_CNT_2 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.692ns (Levels of Logic = 4)
   Clock Path Skew:      0.000ns
-  Source Clock:         iCLK_BUFGP rising at 5.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eUART_RECIVER/sTC_CNT_2 to eUART/eUART_RECIVER/sTC_CNT_2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X43Y66.CQ      Tcko                  0.430   eUART/eUART_RECIVER/sTC_CNT<2>
+                                                       eUART/eUART_RECIVER/sTC_CNT_2
+    SLICE_X47Y66.B6      net (fanout=4)        0.643   eUART/eUART_RECIVER/sTC_CNT<2>
+    SLICE_X47Y66.B       Tilo                  0.259   eUART/eRECV_FIFO/sFIFO_15<7>
+                                                       eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In11
+    SLICE_X43Y65.A2      net (fanout=5)        1.054   eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In1
+    SLICE_X43Y65.AMUX    Tilo                  0.337   eUART/eRECV_FIFO/sFIFO_4<7>
+                                                       eUART/eUART_RECIVER/_n0161_inv1_SW2
+    SLICE_X38Y65.C2      net (fanout=3)        1.156   N46
+    SLICE_X38Y65.CMUX    Tilo                  0.430   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12_G
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12
+    SLICE_X43Y66.C6      net (fanout=1)        1.010   N53
+    SLICE_X43Y66.CLK     Tas                   0.373   eUART/eUART_RECIVER/sTC_CNT<2>
+                                                       eUART/eUART_RECIVER/sTC_CNT_2_rstpot
+                                                       eUART/eUART_RECIVER/sTC_CNT_2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.692ns (1.829ns logic, 3.863ns route)
+                                                       (32.1% logic, 67.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.594ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eUART_RECIVER/sTC_CNT_0 (FF)
+  Destination:          eUART/eUART_RECIVER/sTC_CNT_2 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.641ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.018ns (0.296 - 0.314)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eUART_RECIVER/sTC_CNT_0 to eUART/eUART_RECIVER/sTC_CNT_2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X49Y66.CQ      Tcko                  0.430   eUART/eUART_RECIVER/sTC_CNT<0>
+                                                       eUART/eUART_RECIVER/sTC_CNT_0
+    SLICE_X47Y66.B4      net (fanout=6)        0.592   eUART/eUART_RECIVER/sTC_CNT<0>
+    SLICE_X47Y66.B       Tilo                  0.259   eUART/eRECV_FIFO/sFIFO_15<7>
+                                                       eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In11
+    SLICE_X43Y65.A2      net (fanout=5)        1.054   eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In1
+    SLICE_X43Y65.AMUX    Tilo                  0.337   eUART/eRECV_FIFO/sFIFO_4<7>
+                                                       eUART/eUART_RECIVER/_n0161_inv1_SW2
+    SLICE_X38Y65.C2      net (fanout=3)        1.156   N46
+    SLICE_X38Y65.CMUX    Tilo                  0.430   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12_G
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12
+    SLICE_X43Y66.C6      net (fanout=1)        1.010   N53
+    SLICE_X43Y66.CLK     Tas                   0.373   eUART/eUART_RECIVER/sTC_CNT<2>
+                                                       eUART/eUART_RECIVER/sTC_CNT_2_rstpot
+                                                       eUART/eUART_RECIVER/sTC_CNT_2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.641ns (1.829ns logic, 3.812ns route)
+                                                       (32.4% logic, 67.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.528ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eUART_RECIVER/sTC_CNT_2 (FF)
+  Destination:          eUART/eUART_RECIVER/sTC_CNT_2 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.593ns (Levels of Logic = 4)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eUART_RECIVER/sTC_CNT_2 to eUART/eUART_RECIVER/sTC_CNT_2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X43Y66.CQ      Tcko                  0.430   eUART/eUART_RECIVER/sTC_CNT<2>
+                                                       eUART/eUART_RECIVER/sTC_CNT_2
+    SLICE_X47Y66.B6      net (fanout=4)        0.643   eUART/eUART_RECIVER/sTC_CNT<2>
+    SLICE_X47Y66.B       Tilo                  0.259   eUART/eRECV_FIFO/sFIFO_15<7>
+                                                       eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In11
+    SLICE_X43Y65.A2      net (fanout=5)        1.054   eUART/eUART_RECIVER/sCURRENT_STATE_FSM_FFd2-In1
+    SLICE_X43Y65.A       Tilo                  0.259   eUART/eRECV_FIFO/sFIFO_4<7>
+                                                       eUART/eUART_RECIVER/_n0161_inv1_SW1
+    SLICE_X38Y65.D5      net (fanout=4)        1.109   N45
+    SLICE_X38Y65.CMUX    Topdc                 0.456   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12_F
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW12
+    SLICE_X43Y66.C6      net (fanout=1)        1.010   N53
+    SLICE_X43Y66.CLK     Tas                   0.373   eUART/eUART_RECIVER/sTC_CNT<2>
+                                                       eUART/eUART_RECIVER/sTC_CNT_2_rstpot
+                                                       eUART/eUART_RECIVER/sTC_CNT_2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.593ns (1.777ns logic, 3.816ns route)
+                                                       (31.8% logic, 68.2% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eUART/eBAUD_FREQ_DIV/sCLK_CNT_10 (SLICE_X40Y66.CIN), 839 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.273ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_10 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.325ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.013ns (0.196 - 0.209)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X41Y64.AQ      Tcko                  0.430   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<5>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
+    SLICE_X38Y65.B1      net (fanout=3)        0.970   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<0>
+    SLICE_X38Y65.B       Tilo                  0.254   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC11111
+    SLICE_X39Y64.A2      net (fanout=3)        0.732   eUART/eBAUD_FREQ_DIV/oTC1111
+    SLICE_X39Y64.A       Tilo                  0.259   eUART/eUART_TRANSMITTER/sDATA_BIT_REG<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW0
+    SLICE_X38Y66.C1      net (fanout=6)        0.769   N19
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.319   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    -------------------------------------------------  ---------------------------
+    Total                                      5.325ns (2.080ns logic, 3.245ns route)
+                                                       (39.1% logic, 60.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.068ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_10 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.115ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.018ns (0.298 - 0.316)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X38Y66.AQ      Tcko                  0.525   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7
+    SLICE_X40Y67.C1      net (fanout=5)        0.804   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<7>
+    SLICE_X40Y67.CMUX    Tilo                  0.403   eUART/eBAUD_FREQ_DIV/oTC11
+                                                       eUART/eBAUD_FREQ_DIV/oTC111_G
+                                                       eUART/eBAUD_FREQ_DIV/oTC111
+    SLICE_X41Y66.B1      net (fanout=1)        0.729   eUART/eBAUD_FREQ_DIV/oTC11
+    SLICE_X41Y66.B       Tilo                  0.259   eUART/eSEND_FIFO/sFIFO_1<3>
+                                                       eUART/eBAUD_FREQ_DIV/oTC113
+    SLICE_X38Y66.C5      net (fanout=17)       0.484   eUART/eBAUD_FREQ_DIV/oTC113
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.319   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    -------------------------------------------------  ---------------------------
+    Total                                      5.115ns (2.324ns logic, 2.791ns route)
+                                                       (45.4% logic, 54.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.067ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_10 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.119ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.013ns (0.196 - 0.209)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X41Y64.AQ      Tcko                  0.430   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<5>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
+    SLICE_X38Y65.B1      net (fanout=3)        0.970   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<0>
+    SLICE_X38Y65.B       Tilo                  0.254   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC11111
+    SLICE_X38Y64.D6      net (fanout=3)        0.333   eUART/eBAUD_FREQ_DIV/oTC1111
+    SLICE_X38Y64.CMUX    Topdc                 0.456   eUART/eUART_TRANSMITTER/sDATA_BIT_REG<1>
+                                                       eUART/eBAUD_FREQ_DIV/oTC115_F
+                                                       eUART/eBAUD_FREQ_DIV/oTC115
+    SLICE_X38Y66.C4      net (fanout=16)       0.765   eUART/eBAUD_FREQ_DIV/oTC115
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.319   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_10
+    -------------------------------------------------  ---------------------------
+    Total                                      5.119ns (2.277ns logic, 2.842ns route)
+                                                       (44.5% logic, 55.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (SLICE_X40Y66.CIN), 839 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.261ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.313ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.013ns (0.196 - 0.209)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X41Y64.AQ      Tcko                  0.430   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<5>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
+    SLICE_X38Y65.B1      net (fanout=3)        0.970   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<0>
+    SLICE_X38Y65.B       Tilo                  0.254   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC11111
+    SLICE_X39Y64.A2      net (fanout=3)        0.732   eUART/eBAUD_FREQ_DIV/oTC1111
+    SLICE_X39Y64.A       Tilo                  0.259   eUART/eUART_TRANSMITTER/sDATA_BIT_REG<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC1112_SW0
+    SLICE_X38Y66.C1      net (fanout=6)        0.769   N19
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.307   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    -------------------------------------------------  ---------------------------
+    Total                                      5.313ns (2.068ns logic, 3.245ns route)
+                                                       (38.9% logic, 61.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.056ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.103ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.018ns (0.298 - 0.316)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X38Y66.AQ      Tcko                  0.525   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_7
+    SLICE_X40Y67.C1      net (fanout=5)        0.804   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<7>
+    SLICE_X40Y67.CMUX    Tilo                  0.403   eUART/eBAUD_FREQ_DIV/oTC11
+                                                       eUART/eBAUD_FREQ_DIV/oTC111_G
+                                                       eUART/eBAUD_FREQ_DIV/oTC111
+    SLICE_X41Y66.B1      net (fanout=1)        0.729   eUART/eBAUD_FREQ_DIV/oTC11
+    SLICE_X41Y66.B       Tilo                  0.259   eUART/eSEND_FIFO/sFIFO_1<3>
+                                                       eUART/eBAUD_FREQ_DIV/oTC113
+    SLICE_X38Y66.C5      net (fanout=17)       0.484   eUART/eBAUD_FREQ_DIV/oTC113
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.307   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    -------------------------------------------------  ---------------------------
+    Total                                      5.103ns (2.312ns logic, 2.791ns route)
+                                                       (45.3% logic, 54.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     -3.055ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 (FF)
+  Destination:          eUART/eBAUD_FREQ_DIV/sCLK_CNT_9 (FF)
+  Requirement:          2.400ns
+  Data Path Delay:      5.107ns (Levels of Logic = 6)(Component delays alone exceeds constraint)
+  Clock Path Skew:      -0.013ns (0.196 - 0.209)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0 to eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X41Y64.AQ      Tcko                  0.430   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<5>
+                                                       eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_0
+    SLICE_X38Y65.B1      net (fanout=3)        0.970   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<0>
+    SLICE_X38Y65.B       Tilo                  0.254   eUART/eSEND_FIFO/sFIFO_13<0>
+                                                       eUART/eBAUD_FREQ_DIV/oTC11111
+    SLICE_X38Y64.D6      net (fanout=3)        0.333   eUART/eBAUD_FREQ_DIV/oTC1111
+    SLICE_X38Y64.CMUX    Topdc                 0.456   eUART/eUART_TRANSMITTER/sDATA_BIT_REG<1>
+                                                       eUART/eBAUD_FREQ_DIV/oTC115_F
+                                                       eUART/eBAUD_FREQ_DIV/oTC115
+    SLICE_X38Y66.C4      net (fanout=16)       0.765   eUART/eBAUD_FREQ_DIV/oTC115
+    SLICE_X38Y66.C       Tilo                  0.255   eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG<8>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.A3      net (fanout=1)        0.768   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>
+    SLICE_X40Y64.COUT    Topcya                0.472   eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_lut<0>_rt
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<3>
+    SLICE_X40Y65.COUT    Tbyp                  0.091   eUART/eBAUD_FREQ_DIV/sCLK_CNT<7>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CIN     net (fanout=1)        0.003   eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_cy<7>
+    SLICE_X40Y66.CLK     Tcinck                0.307   eUART/eBAUD_FREQ_DIV/sCLK_CNT<10>
+                                                       eUART/eBAUD_FREQ_DIV/Mcount_sCLK_CNT_xor<10>
+                                                       eUART/eBAUD_FREQ_DIV/sCLK_CNT_9
+    -------------------------------------------------  ---------------------------
+    Total                                      5.107ns (2.265ns logic, 2.842ns route)
+                                                       (44.4% logic, 55.6% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_eDCM24_TO_50MHz_clkfx = PERIOD TIMEGRP "eDCM24_TO_50MHz_clkfx" TS_ClkIn /
+        2.08333333 HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1 (SLICE_X36Y66.A6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.444ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1 (FF)
+  Destination:          eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.444ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 2.400ns
+  Destination Clock:    sCLK rising at 2.400ns
   Clock Uncertainty:    0.000ns
 
-  Minimum Data Path at Fast Process Corner: eUART/eRECV_FIFO/sFIFO_6_7 to eUART/eRECV_FIFO/sFIFO_6_7
+  Minimum Data Path at Fast Process Corner: eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1 to eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X42Y43.AQ      Tcko                  0.200   eUART/eRECV_FIFO/sFIFO_8<7>
-                                                       eUART/eRECV_FIFO/sFIFO_6_7
-    SLICE_X42Y43.A6      net (fanout=2)        0.024   eUART/eRECV_FIFO/sFIFO_6<7>
-    SLICE_X42Y43.CLK     Tah         (-Th)    -0.190   eUART/eRECV_FIFO/sFIFO_8<7>
-                                                       eUART/eRECV_FIFO/sFIFO_6_7_dpot
-                                                       eUART/eRECV_FIFO/sFIFO_6_7
+    SLICE_X36Y66.AQ      Tcko                  0.200   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd2
+                                                       eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1
+    SLICE_X36Y66.A6      net (fanout=8)        0.054   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1
+    SLICE_X36Y66.CLK     Tah         (-Th)    -0.190   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd2
+                                                       eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1-In
+                                                       eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd1
     -------------------------------------------------  ---------------------------
-    Total                                      0.414ns (0.390ns logic, 0.024ns route)
-                                                       (94.2% logic, 5.8% route)
+    Total                                      0.444ns (0.390ns logic, 0.054ns route)
+                                                       (87.8% logic, 12.2% route)
 
 --------------------------------------------------------------------------------
 
-Paths for end point eUART/eRECV_FIFO/sFIFO_0_6 (SLICE_X46Y46.A6), 1 path
+Paths for end point eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3 (SLICE_X36Y65.CX), 1 path
 --------------------------------------------------------------------------------
-Slack (hold path):      0.418ns (requirement - (clock path skew + uncertainty - data path))
-  Source:               eUART/eRECV_FIFO/sFIFO_0_6 (FF)
-  Destination:          eUART/eRECV_FIFO/sFIFO_0_6 (FF)
-  Requirement:          0.000ns
-  Data Path Delay:      0.418ns (Levels of Logic = 1)
-  Clock Path Skew:      0.000ns
-  Source Clock:         iCLK_BUFGP rising at 5.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
-  Clock Uncertainty:    0.000ns
-
-  Minimum Data Path at Fast Process Corner: eUART/eRECV_FIFO/sFIFO_0_6 to eUART/eRECV_FIFO/sFIFO_0_6
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X46Y46.AQ      Tcko                  0.200   eUART/eRECV_FIFO/sFIFO_0<6>
-                                                       eUART/eRECV_FIFO/sFIFO_0_6
-    SLICE_X46Y46.A6      net (fanout=2)        0.028   eUART/eRECV_FIFO/sFIFO_0<6>
-    SLICE_X46Y46.CLK     Tah         (-Th)    -0.190   eUART/eRECV_FIFO/sFIFO_0<6>
-                                                       eUART/eRECV_FIFO/sFIFO_0_6_dpot
-                                                       eUART/eRECV_FIFO/sFIFO_0_6
-    -------------------------------------------------  ---------------------------
-    Total                                      0.418ns (0.390ns logic, 0.028ns route)
-                                                       (93.3% logic, 6.7% route)
-
---------------------------------------------------------------------------------
-
-Paths for end point eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3 (SLICE_X58Y60.CX), 1 path
---------------------------------------------------------------------------------
-Slack (hold path):      0.429ns (requirement - (clock path skew + uncertainty - data path))
+Slack (hold path):      0.451ns (requirement - (clock path skew + uncertainty - data path))
   Source:               eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3 (FF)
   Destination:          eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3 (FF)
   Requirement:          0.000ns
-  Data Path Delay:      0.429ns (Levels of Logic = 1)
+  Data Path Delay:      0.451ns (Levels of Logic = 1)
   Clock Path Skew:      0.000ns
-  Source Clock:         iCLK_BUFGP rising at 5.000ns
-  Destination Clock:    iCLK_BUFGP rising at 5.000ns
+  Source Clock:         sCLK rising at 2.400ns
+  Destination Clock:    sCLK rising at 2.400ns
   Clock Uncertainty:    0.000ns
 
   Minimum Data Path at Fast Process Corner: eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3 to eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X58Y60.CQ      Tcko                  0.200   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
+    SLICE_X36Y65.CQ      Tcko                  0.200   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
                                                        eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
-    SLICE_X58Y60.CX      net (fanout=27)       0.123   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
-    SLICE_X58Y60.CLK     Tckdi       (-Th)    -0.106   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
+    SLICE_X36Y65.CX      net (fanout=27)       0.145   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
+    SLICE_X36Y65.CLK     Tckdi       (-Th)    -0.106   eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
                                                        eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3-In3
                                                        eUART/eUART_TRANSMITTER/sCURRENT_STATE_FSM_FFd3
     -------------------------------------------------  ---------------------------
-    Total                                      0.429ns (0.306ns logic, 0.123ns route)
-                                                       (71.3% logic, 28.7% route)
+    Total                                      0.451ns (0.306ns logic, 0.145ns route)
+                                                       (67.8% logic, 32.2% route)
 
 --------------------------------------------------------------------------------
 
-Component Switching Limit Checks: TS_ClkIn = PERIOD TIMEGRP "iCLK" 5 ns HIGH 50%;
+Paths for end point eUART/eSEND_FIFO/sWR_PTR_4 (SLICE_X33Y65.D6), 1 path
 --------------------------------------------------------------------------------
-Slack: 2.334ns (period - min period limit)
-  Period: 5.000ns
+Slack (hold path):      0.452ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               eUART/eSEND_FIFO/sWR_PTR_4 (FF)
+  Destination:          eUART/eSEND_FIFO/sWR_PTR_4 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.452ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 2.400ns
+  Destination Clock:    sCLK rising at 2.400ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: eUART/eSEND_FIFO/sWR_PTR_4 to eUART/eSEND_FIFO/sWR_PTR_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X33Y65.DQ      Tcko                  0.198   eUART/eSEND_FIFO/sWR_PTR<4>
+                                                       eUART/eSEND_FIFO/sWR_PTR_4
+    SLICE_X33Y65.D6      net (fanout=5)        0.039   eUART/eSEND_FIFO/sWR_PTR<4>
+    SLICE_X33Y65.CLK     Tah         (-Th)    -0.215   eUART/eSEND_FIFO/sWR_PTR<4>
+                                                       eUART/eSEND_FIFO/Mmux_sWR_PTR[4]_sWR_PTR[4]_mux_58_OUT51
+                                                       eUART/eSEND_FIFO/sWR_PTR_4
+    -------------------------------------------------  ---------------------------
+    Total                                      0.452ns (0.413ns logic, 0.039ns route)
+                                                       (91.4% logic, 8.6% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_eDCM24_TO_50MHz_clkfx = PERIOD TIMEGRP "eDCM24_TO_50MHz_clkfx" TS_ClkIn /
+        2.08333333 HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: -0.266ns (period - min period limit)
+  Period: 2.400ns
   Min period limit: 2.666ns (375.094MHz) (Tbcper_I)
-  Physical resource: iCLK_BUFGP/BUFG/I0
-  Logical resource: iCLK_BUFGP/BUFG/I0
-  Location pin: BUFGMUX_X2Y2.I0
-  Clock network: iCLK_BUFGP/IBUFG
+  Physical resource: eDCM24_TO_50MHz/clkout1_buf/I0
+  Logical resource: eDCM24_TO_50MHz/clkout1_buf/I0
+  Location pin: BUFGMUX_X2Y3.I0
+  Clock network: eDCM24_TO_50MHz/clkfx
 --------------------------------------------------------------------------------
-Slack: 4.520ns (period - min period limit)
-  Period: 5.000ns
+Slack: 1.920ns (period - min period limit)
+  Period: 2.400ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>/CLK
-  Logical resource: eUART/eBAUD_FREQ_DIV/sCLK_CNT_0/CK
-  Location pin: SLICE_X56Y54.CLK
-  Clock network: iCLK_BUFGP
+  Physical resource: eUART/eSEND_FIFO/sFIFO_2<5>/CLK
+  Logical resource: eUART/eSEND_FIFO/sFIFO_2_5/CK
+  Location pin: SLICE_X30Y63.CLK
+  Clock network: sCLK
 --------------------------------------------------------------------------------
-Slack: 4.520ns (period - (min high pulse limit / (high pulse / period)))
-  Period: 5.000ns
-  High pulse: 2.500ns
+Slack: 1.920ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 2.400ns
+  High pulse: 1.200ns
   High pulse limit: 0.240ns (Trpw)
-  Physical resource: eUART/eBAUD_FREQ_DIV/sCLK_CNT<3>/SR
-  Logical resource: eUART/eBAUD_FREQ_DIV/sCLK_CNT_0/SR
-  Location pin: SLICE_X56Y54.SR
+  Physical resource: eUART/eSEND_FIFO/sFIFO_2<5>/SR
+  Logical resource: eUART/eSEND_FIFO/sFIFO_2_5/SR
+  Location pin: SLICE_X30Y63.SR
   Clock network: eUART/eBAUD_FREQ_DIV/inRST_inv
 --------------------------------------------------------------------------------
 
 
-1 constraint not met.
+Derived Constraint Report
+Derived Constraints for TS_ClkIn
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_ClkIn                       |      5.000ns|      3.200ns|     12.556ns|            1|          782|            0|        17495|
+| TS_eDCM24_TO_50MHz_clkfx      |      2.400ns|      6.027ns|          N/A|          782|            0|        17495|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+2 constraints not met.
 
 
 Data Sheet report:
@@ -591,32 +632,32 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    5.243|         |         |         |
+iCLK           |    6.027|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
 Timing summary:
 ---------------
 
-Timing errors: 8  Score: 843  (Setup/Max: 843, Hold: 0)
+Timing errors: 783  Score: 1021053  (Setup/Max: 1020187, Hold: 0, Component Switching Limit: 866)
 
-Constraints cover 16809 paths, 0 nets, and 2019 connections
+Constraints cover 17495 paths, 0 nets, and 1951 connections
 
 Design statistics:
-   Minimum period:   5.243ns{1}   (Maximum frequency: 190.730MHz)
+   Minimum period:   6.027ns{1}   (Maximum frequency: 165.920MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Tue Jun 19 16:56:01 2018 
+Analysis completed Wed Jun 20 17:04:41 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 210 MB
+Peak Memory Usage: 211 MB
 
 
 

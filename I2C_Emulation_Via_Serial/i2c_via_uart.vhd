@@ -49,6 +49,9 @@ end i2c_via_uart;
 
 architecture Behavioral of i2c_via_uart is
 
+	signal sCLK			 : std_logic;													-- Clock signal from DCM
+	signal snRST		 : std_logic;													-- Reset signal for all system
+	signal sLOCKED		 : std_logic;													-- Locked signal from DCM
 	signal sUART_EMPTY : std_logic;													-- UART fifo empty
 	signal sUART_FULL  : std_logic;													-- UART fifo full	
 	signal sUART_READ  : std_logic;													-- UART write signal
@@ -62,11 +65,20 @@ architecture Behavioral of i2c_via_uart is
 	
 begin
 
+	-- DCM 24 to 50MHz
+	eDCM24_TO_50MHz : dcm24_to_50
+		Port map( 
+			CLK_IN1   => iCLK,
+			CLK_OUT1  => sCLK,
+			RESET     => not(inRST),
+			LOCKED    => sLOCKED
+		 );
+
 	-- UART
 	eUART : uart 
 		Port map (
-			iCLK        		 => iCLK,
-			inRST       		 => inRST,
+			iCLK        		 => sCLK,
+			inRST       		 => snRST,
 			iPARITY_EN			 => iPARITY_EN_SW,
 			iPARITY				 => iPARITY_SW,
 			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
@@ -87,8 +99,8 @@ begin
 	-- I2C bus
 	eI2C_BUS : i2c_bus
 		Port map(
-			iCLK  		 => iCLK,
-         inRST 		 => inRST,
+			iCLK  		 => sCLK,
+         inRST 		 => snRST,
 			iUART_FULL   => sUART_FULL, 
 			iUART_EMPTY  => sUART_EMPTY,
 			iUART_DATA   => sIUART_DATA,
@@ -101,6 +113,10 @@ begin
 			oLED			 => oLED,
 			ioLCD_D 		 => sLCD_D
 		);
+		
+	-- If clock is not stable hold reset state of system	
+	snRST <= inRST when sLOCKED = '1' else
+				'0';
 		
 	-- LCD control output
 	oLCD_E  <= sLCD_E;

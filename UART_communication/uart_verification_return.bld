@@ -14,8 +14,20 @@ Done.
 Annotating constraints to design from ucf file "uart_pins.ucf" ...
 Resolving constraint associations...
 Checking Constraint Associations...
+INFO:ConstraintSystem:178 - TNM 'iCLK', used in period specification 'TS_ClkIn',
+   was traced into DCM_SP instance eDCM24_TO_50MHz/dcm_sp_inst. The following
+   new TNM groups and period specifications were generated at the DCM_SP
+   output(s): 
+   CLKFX: <TIMESPEC TS_eDCM24_TO_50MHz_clkfx = PERIOD "eDCM24_TO_50MHz_clkfx"
+   TS_ClkIn / 2.083333333 HIGH 50%>
+
 Done...
 
+WARNING:NgdBuild:1212 - User specified non-default attribute value (41.666) was
+   detected for the CLKIN_PERIOD attribute on DCM "eDCM24_TO_50MHz/dcm_sp_inst".
+    This does not match the PERIOD constraint value (5 ns.).  The uncertainty
+   calculation will use the non-default attribute value.  This could result in
+   incorrect uncertainty calculated for DCM output clocks.
 Checking expanded design ...
 
 Partition Implementation Status
@@ -27,9 +39,9 @@ Partition Implementation Status
 
 NGDBUILD Design Results Summary:
   Number of errors:     0
-  Number of warnings:   0
+  Number of warnings:   1
 
-Total memory usage is 156176 kilobytes
+Total memory usage is 156880 kilobytes
 
 Writing NGD file "uart_verification_return.ngd" ...
 Total REAL time to NGDBUILD completion:  2 sec

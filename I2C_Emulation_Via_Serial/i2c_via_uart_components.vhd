@@ -5,6 +5,15 @@ package i2c_via_uart_components is
 
 	-- I2C via UART components
 	
+	-- DCM 24 to 50MHz
+	component dcm24_to_50 is
+		 Port( CLK_IN1           : in     std_logic;
+				 CLK_OUT1          : out    std_logic;
+				 RESET             : in     std_logic;
+				 LOCKED            : out    std_logic
+		 );
+	end component;
+	
 	-- I2C bus
 	component i2c_bus is
 		 Generic (

@@ -64,8 +64,8 @@ package i2c_bus_components is
  
 	component i2c_clk_freq_div is
 		 Generic (
-			CLK_FREQUENCY : integer := 24000000; -- Clock frequency	
-			CLK_CNT_WIDTH : integer := 4	 		 -- Width of clock counter
+			CLK_FREQUENCY : integer := 50000000; -- Clock frequency	
+			CLK_CNT_WIDTH : integer := 5	 		 -- Width of clock counter
 		 );
 		 Port ( iCLK  		: in  std_logic;
 				  inRST 		: in  std_logic;

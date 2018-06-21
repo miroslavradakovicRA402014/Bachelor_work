@@ -102,8 +102,8 @@ begin
 	-- LCD init delay timer
 	eLCD_INIT_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 1080000,
-				CLK_CNT_WIDHT		=> 21
+				CLK_PERIOD_NUMBER => 2160000,
+				CLK_CNT_WIDHT		=> 22
 			)
 			Port map(
 				iCLK  	  => iCLK,
@@ -115,8 +115,8 @@ begin
 	-- LCD R/W command timer
 	eLCD_CMD_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 6000,
-				CLK_CNT_WIDHT		=> 13
+				CLK_PERIOD_NUMBER => 12000,
+				CLK_CNT_WIDHT		=> 14
 			)
 			Port map(
 				iCLK  	  => iCLK,
@@ -346,6 +346,8 @@ begin
 		end case;
 	end process fsm_next;	
 	
+	oLED <= sSLAVE_ADDR_REG;
+	
 	-- LCD controller FSM output logic
 	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
@@ -363,7 +365,7 @@ begin
       oRS    			 	<= '0';
       oRW   			 	<= '0';
 		
-		oLED <= (others => '0');
+		--oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				sINIT_PERIOD_EN	 <= '1';
@@ -711,7 +713,7 @@ begin
 			when READ_INPUT_DATA =>
 
 				sCHAR_CNT_RST <= '1';
-				oLED <= (others => '1');
+				--oLED <= (others => '1');
 			
 			when PRINT_CHAR_BF =>
 

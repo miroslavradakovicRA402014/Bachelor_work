@@ -46,6 +46,10 @@ architecture Behavioral of uart_verification_return is
 	type 	 tSTATES is (IDLE, RECIVE, SEND); 
 	signal sCURRENT_STATE : tSTATES;
 	signal sNEXT_STATE 	 : tSTATES;
+	
+	signal sCLK			 : std_logic;												 -- Clock signal from DCM
+	signal snRST		 : std_logic;												 -- Reset signal for all system
+	signal sLOCKED		 : std_logic;												 -- Locked signal from DCM	
 
 	signal sRECV_DATA_REG : std_logic_vector(DATA_WIDTH - 1 downto 0); -- Recive register enable
 	signal sRECV_REG_EN   : std_logic; 											 -- Recived data register enable
@@ -87,11 +91,20 @@ architecture Behavioral of uart_verification_return is
 	
 begin
 
+	-- DCM 24 to 50MHz
+	eDCM24_TO_50MHz : entity work.dcm24_to_50
+		Port map( 
+			CLK_IN1   => iCLK,
+			CLK_OUT1  => sCLK,
+			RESET     => not(inRST),
+			LOCKED    => sLOCKED
+		 );	
+
 	-- UART
 	eUART : uart 
 		Port map (
-			iCLK        		 => iCLK,
-			inRST       		 => inRST,
+			iCLK        		 => sCLK,
+			inRST       		 => snRST,
 			iPARITY_EN			 => iPARITY_EN_SW,
 			iPARITY				 => iPARITY_SW,
 			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
@@ -109,11 +122,15 @@ begin
 			oUART_DATA       	 => sIUART_DATA
 		);
 		
+	-- If clock is not stable hold reset state of system	
+	snRST <= inRST when sLOCKED = '1' else
+				'0';		
+		
 	-- FSM register
-	fsm_reg : process (iCLK, inRST) begin
-		if (inRST = '0') then
+	fsm_reg : process (sCLK, snRST) begin
+		if (snRST = '0') then
 			sCURRENT_STATE <= IDLE;
-		elsif (iCLK'event and iCLK = '1') then
+		elsif (sCLK'event and sCLK = '1') then
 			sCURRENT_STATE <= sNEXT_STATE;
 		end if;
 	end process fsm_reg;
@@ -153,10 +170,10 @@ begin
 	end process fsm_out;
 
 	-- Recived data register
-	rec_data_reg : process (iCLK, inRST) begin
-		if (inRST = '0') then
+	rec_data_reg : process (sCLK, snRST) begin
+		if (snRST = '0') then
 			sRECV_DATA_REG <= (others => '0');
-		elsif (iCLK'event and iCLK = '1') then
+		elsif (sCLK'event and sCLK = '1') then
 			if (sRECV_REG_EN = '1') then
 				sRECV_DATA_REG <= sIUART_DATA;
 			end if;

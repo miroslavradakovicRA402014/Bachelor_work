@@ -1,8 +1,11 @@
 Release 14.6 Drc P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Tue Jun 19 16:47:55 2018
+Thu Jun 21 10:04:28 2018
 
 drc -z i2c_via_uart.ncd i2c_via_uart.pcf
 
+INFO:PhysDesignRules:1861 - To achieve optimal frequency synthesis performance
+   with the CLKFX and CLKFX180 outputs of the DCM comp
+   eDCM24_TO_50MHz/dcm_sp_inst, consult the device Data Sheet.
 DRC detected 0 errors and 0 warnings.

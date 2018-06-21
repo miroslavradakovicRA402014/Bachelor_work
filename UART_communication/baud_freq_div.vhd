@@ -24,9 +24,9 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity baud_freq_div is
 	 Generic (
-		CLK_FREQUENCY 	: integer := 24000000;	 -- Clock frequency MHz
+		CLK_FREQUENCY 	: integer := 50000000;	 -- Clock frequency MHz
 		BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
-		CLK_CNT_WIDTH  : integer := 10		    -- Width of clock counter
+		CLK_CNT_WIDTH  : integer := 11		    -- Width of clock counter
 	 );
     Port ( iCLK   	: in  std_logic;
            inRST  	: in  std_logic;
@@ -39,7 +39,7 @@ architecture Behavioral of baud_freq_div is
 
 	constant cBAUD_2400_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(2400*16)   + 25, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 2400
 	constant cBAUD_4800_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(4800*16)   + 25, CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 4800
-	constant cBAUD_9600_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(9600*16) 	 + 9 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 9600
+	constant cBAUD_9600_PERIOD   : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(9600*16) 	 + 25 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 9600
 	constant cBAUD_14400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(14400*16)  + 5 , CLK_CNT_WIDTH);	-- Number of clock periods for baud rate 14400
 	constant cBAUD_19200_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(19200*16)  + 2 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 19200
 	constant cBAUD_38400_PERIOD  : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY/(38400*16)  + 1 , CLK_CNT_WIDTH);  -- Number of clock periods for baud rate 38400

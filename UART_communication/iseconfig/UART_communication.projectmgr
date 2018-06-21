@@ -60,7 +60,7 @@
       <CurrentItem>fifo_tb.vhd</CurrentItem>
    </ItemView>
    <SourceProcessView>000000ff00000000000000020000011b0000011b01000000050100000002</SourceProcessView>
-   <CurrentView>Behavioral Simulation</CurrentView>
+   <CurrentView>Implementation</CurrentView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
@@ -91,6 +91,7 @@
          <ClosedNode>/reciver_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|UART_communication|reciver_tb.vhd</ClosedNode>
          <ClosedNode>/transmitter_tb - behavior D:|BSc_workspace|Bachelor_work|UART_communication|transmitter_tb.vhd</ClosedNode>
          <ClosedNode>/transmitter_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|UART_communication|transmitter_tb.vhd</ClosedNode>
+         <ClosedNode>/uart_tb - behavior D:|BSc_workspace|Bachelor_work|UART_communication|uart_tb.vhd</ClosedNode>
          <ClosedNode>/uart_tb - behavior |home|rtrk|Workspace|BSc_workspace|Bachelor_work|UART_communication|uart_tb.vhd</ClosedNode>
          <ClosedNode>/uart_verification_return - Behavioral D:|BSc_workspace|Bachelor_work|UART_communication|uart_verification_return.vhd</ClosedNode>
          <ClosedNode>/uart_verification_return_tb - behavior D:|BSc_workspace|Bachelor_work|UART_communication|uart_verification_return_tb.vhd</ClosedNode>
@@ -103,7 +104,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001cc000000020000000000000000000000000200000064ffffffff000000810000000300000002000001cc0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001b3000000020000000000000000000000000200000064ffffffff000000810000000300000002000001b30000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
       <CurrentItem>fifo_tb - behavior (D:/BSc_workspace/Bachelor_work/UART_communication/fifo_tb.vhd)</CurrentItem>
    </ItemView>
