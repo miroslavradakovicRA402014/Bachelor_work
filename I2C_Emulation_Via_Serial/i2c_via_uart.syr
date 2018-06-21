@@ -168,7 +168,7 @@ Parsing architecture <Behavioral> of entity <i2c_bus>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" into library work
 Parsing entity <i2c_via_uart>.
 Parsing architecture <Behavioral> of entity <i2c_via_uart>.
-WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 73: Actual for formal port reset is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 78: Actual for formal port reset is neither a static name nor a globally static expression
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -525,13 +525,13 @@ Synthesizing Unit <lcd_driver>.
     Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_120_OUT> created at line 1241.
     Found 5-bit adder for signal <sCHAR_CNT[4]_GND_39_o_add_124_OUT> created at line 1241.
     Found 4x20-bit Read Only RAM for signal <_n0232>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0186> created at line 749.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 984
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 988
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 988
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 988
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 988
-    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_35_o> created at line 397
+    Found 4-bit 4-to-1 multiplexer for signal <_n0186> created at line 745.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 980
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 984
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 984
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 984
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 984
+    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_35_o> created at line 393
     Summary:
 	inferred   1 RAM(s).
 	inferred   3 Adder/Subtractor(s).
@@ -1310,7 +1310,7 @@ iCLK           |    7.029|         |         |         |
 
 
 Total REAL time to Xst completion: 11.00 secs
-Total CPU time to Xst completion: 10.85 secs
+Total CPU time to Xst completion: 11.05 secs
  
 --> 
 

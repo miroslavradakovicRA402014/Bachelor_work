@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    12:19:15 06/01/2018 
 -- Design Name: 
@@ -30,30 +30,26 @@ entity lcd_driver is
 		DATA_WIDTH		 : integer := 8;	-- Input data width
 		CHAR_NUMBER 	 : integer := 27  -- Number of characters
 	 );
-    Port ( iCLK   	  : in 		std_logic;
-           inRST  	  : in 		std_logic;
-			  iSLAVE_ADDR : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  iREG_ADDR   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  iLOWER_BYTE : in  		std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  iUPPER_BYTE : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  iMODE 		  : in		std_logic;
-			  iDATA_EN	  : in 		std_logic;
-           oE 	   	  : out 		std_logic;
-           oRS    	  : out		std_logic;
-           oRW   		  : out 		std_logic;
-			  oLED		  : out     std_logic_vector(7 downto 0); 
-           ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
+    Port ( iCLK   	  : in 		std_logic;												 -- Clock signal 50MHz
+           inRST  	  : in 		std_logic;												 -- Reset signal
+			  iSLAVE_ADDR : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);	 -- Slave address
+			  iREG_ADDR   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);    -- Slave register address
+			  iLOWER_BYTE : in  		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Lower data byte
+			  iUPPER_BYTE : in 		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Upper data byte 
+			  iMODE 		  : in		std_logic;												 -- Mode R/W signal
+			  iDATA_EN	  : in 		std_logic;												 -- Data enable signal
+           oE 	   	  : out 		std_logic;												 -- LCD display enable control signal
+           oRS    	  : out		std_logic;												 -- LCD display register select control signal
+           oRW   		  : out 		std_logic;												 -- LCD display read-write control signal
+			  oLED		  : out     std_logic_vector(7 downto 0); 					 -- LED control
+           ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data
 end lcd_driver;
 
 architecture Behavioral of lcd_driver is
 
-	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, 
-							 DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR,
-							 ADDRESS_SET_BF , ADDRESS_SET, 
-							 PRINT_CHAR_BF, PRINT_CHAR, 
-							 CURSOR_NEW_LINE, CURSOR_BACK,
-							 STOP_PRINT); 		-- LCD controller FSM states type																
+	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
+							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, 
+							 PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  			-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  			-- LCD controller FSM next state
@@ -218,14 +214,14 @@ begin
 	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT) begin
 		case (sCURRENT_STATE) is
 			when IDLE =>
-				if (sINIT_PERIOD_TC = '1') then
+				if (sINIT_PERIOD_TC = '1') then -- Wait for init period 
 					sNEXT_STATE <= LCD_INIT_SEQ;
 				else
 					sNEXT_STATE <= IDLE;
 				end if;
 				
 			when LCD_INIT_SEQ => 	
-				if (sSEQ_CNT = INIT_SEQ_NUMBER) then
+				if (sSEQ_CNT = INIT_SEQ_NUMBER) then -- Wait for all init commands
 					sNEXT_STATE <= LCD_CONFIG;
 				else
 					sNEXT_STATE <= LCD_INIT_SEQ;

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    15:48:00 05/15/2018 
 -- Design Name: 
@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+--use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 
@@ -28,11 +28,11 @@ entity scl_gen is
 		PERIOD_CNT_WIDHT : integer := 4; -- Period counter width
 		SCL_CLOCK_PERIOD : integer := 9 	-- Clock period
 	 );
-    Port ( iCLK  	 : in  std_logic;
-           inRST 	 : in  std_logic;
-           iSCL_EN : in  std_logic;
-           iTC 	 : in  std_logic;
-           oSCL 	 : out std_logic);
+    Port ( iCLK  	 : in  std_logic;		-- Clock signal 50MHz
+           inRST 	 : in  std_logic;		-- Reset signla
+           iSCL_EN : in  std_logic;    -- SCL generation enable
+           iTC 	 : in  std_logic;		-- Terminal count from clock divider
+           oSCL 	 : out std_logic);   -- SCL signal
 end scl_gen;
 
 architecture Behavioral of scl_gen is

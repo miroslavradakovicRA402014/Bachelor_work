@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    23:11:44 05/21/2018 
 -- Design Name: 
@@ -22,10 +22,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 
 entity falling_edge_det is
-    Port ( iCLK  : in  std_logic;
-           inRST : in  std_logic;
-           iSIG  : in  std_logic;
-           oEDGE : out std_logic);
+    Port ( iCLK  : in  std_logic;	-- Clock signal
+           inRST : in  std_logic;	-- Reset signal
+           iSIG  : in  std_logic;	-- Input signal
+           oEDGE : out std_logic);  -- Edge indicator
 end falling_edge_det;
 
 architecture Behavioral of falling_edge_det is

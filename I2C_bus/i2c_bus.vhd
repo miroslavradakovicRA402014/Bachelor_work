@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic  
 -- 
 -- Create Date:    20:11:17 05/20/2018 
 -- Design Name: 
@@ -27,26 +27,28 @@ entity i2c_bus is
 		DATA_WIDTH 			: integer := 8;	 -- UART word widht 
 		LCD_BUS_WIDTH 		: integer := 4		 -- Width of LCD interface	
 	 );
-    Port ( iCLK  		   : in 	  std_logic;
-           inRST 		   : in 	  std_logic;
-			  iUART_FULL   : in 	  std_logic; 
-			  iUART_EMPTY  : in    std_logic;
-			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);		
-			  oUART_READ   : out   std_logic;
-			  oUART_WRITE  : out   std_logic;
-			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);
-			  oLCD_E 	   : out   std_logic;
-           oLCD_RS    	: out   std_logic;
-           oLCD_RW      : out   std_logic;
-			  oLED			: out   std_logic_vector(7 downto 0);  
-			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
+    Port ( iCLK  		   : in 	  std_logic;												-- Clock signal 50MHz	
+           inRST 		   : in 	  std_logic;												-- Reset signal
+			  iUART_FULL   : in 	  std_logic; 												-- UART transmitter FIFO full indication
+			  iUART_EMPTY  : in    std_logic;												-- UART reciver FIFO empty indication
+			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);	-- UART data from reciver	
+			  oUART_READ   : out   std_logic;												-- Read from UART reciver signal
+			  oUART_WRITE  : out   std_logic;												-- Write to UART transmitter
+			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);   -- UART data to transmitter
+			  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
+           oLCD_RS    	: out   std_logic;												-- LCD display register select signal
+           oLCD_RW      : out   std_logic;												-- LCD read write signa
+			  oLED			: out   std_logic_vector(7 downto 0);  					-- LED control signal
+			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 end i2c_bus;
 
 architecture Behavioral of i2c_bus is
 
+	-- Master signals
 	signal sSCL 	 : std_logic; -- SCL bus line
 	signal sSDA 	 : std_logic; -- SDA bus line
 
+	-- Clock frequency divider signals
 	signal sTC  	 : std_logic; -- Clock frequency divider terminal count 
 	signal sFREQ_EN : std_logic; -- Clock frequency divider enable
 	

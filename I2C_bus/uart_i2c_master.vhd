@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    09:05:44 05/14/2018 
 -- Design Name: 
@@ -38,23 +38,23 @@ entity uart_i2c_master is
 		PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width
 		LCD_BUS_WIDTH 			: integer := 4		-- Width of LCD interface	
 	 );
-    Port ( iCLK  		   : in 	  std_logic;
-           inRST 		   : in 	  std_logic;
-			  iTC 		   : in 	  std_logic;
-			  iUART_FULL   : in 	  std_logic; 
-			  iUART_EMPTY  : in    std_logic;
-			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);
-			  oFREQ_EN 		: out   std_logic;		
-			  oUART_READ   : out   std_logic;
-			  oUART_WRITE  : out   std_logic;
-			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);
-			  oSCL		   : out   std_logic;
-			  oLCD_E 	   : out   std_logic;
-           oLCD_RS    	: out   std_logic;
-           oLCD_RW      : out   std_logic;			  
-			  ioSDA		   : inout std_logic;
-			  oLED			: out   std_logic_vector(7 downto 0);
-			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));
+    Port ( iCLK  		   : in 	  std_logic;												-- Clock signal 50MHz
+           inRST 		   : in 	  std_logic;												-- Reset signal 
+			  iTC 		   : in 	  std_logic;												-- Terminal count for period from clock divider
+			  iUART_FULL   : in 	  std_logic; 												-- UART full indication
+			  iUART_EMPTY  : in    std_logic;												-- UART empty indication
+			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);   -- Input data from UART FIFO
+			  oFREQ_EN 		: out   std_logic;												-- Frequency divider enable 
+			  oUART_READ   : out   std_logic;												-- Read from UART signal
+			  oUART_WRITE  : out   std_logic;												-- Write to UART signal
+			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);	-- Output data to UART FIFO
+			  oSCL		   : out   std_logic;												-- SCL signal
+			  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
+           oLCD_RS    	: out   std_logic;												-- LCD display register select 
+           oLCD_RW      : out   std_logic;												-- LCD display read-write signal
+			  oLED			: out   std_logic_vector(7 downto 0);						-- LED control
+			  ioSDA		   : inout std_logic;												-- SDA signal
+			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 end uart_i2c_master;
 
 architecture Behavioral of uart_i2c_master is
@@ -1305,7 +1305,7 @@ begin
 			if (sBYTE_CNT_RST = '1') then 
 				sBYTE_CNT <= (others => '0'); -- Reset counter when all data recived and period elapsed
 			elsif (sSCL_RISING_EDGE = '1' and sBYTE_CNT_EN = '1' and sDATA_CNT = 0) then
-				sBYTE_CNT <= sBYTE_CNT + 1; -- Count data bits
+				sBYTE_CNT <= sBYTE_CNT + 1; -- Count data byte
 			end if;	
 		end if;
 	end process byte_cnt;	

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    11:51:36 05/04/2018 
 -- Design Name: 
@@ -25,12 +25,12 @@ entity slave_reg is
 	 Generic (
 		DATA_WIDTH : integer := 8 -- Register data width
 	 );
-    Port ( iCLK  		: in   std_logic;
-           inRST 		: in   std_logic;
-           iWE  		: in   std_logic;
-			  iBYTE_SEL : in   std_logic;		
-           iD    		: in   std_logic_vector(DATA_WIDTH - 1 downto 0);
-           oQ    		: out  std_logic_vector(2 * DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  		: in   std_logic;														-- Clock signal 50MHz
+           inRST 		: in   std_logic;														-- Reset signal
+           iWE  		: in   std_logic;														-- Write enable
+			  iBYTE_SEL : in   std_logic;														-- Register byte selection
+           iD    		: in   std_logic_vector(DATA_WIDTH - 1 downto 0);			-- Input data
+           oQ    		: out  std_logic_vector(2 * DATA_WIDTH - 1 downto 0));	-- Output data
 end slave_reg;
 
 architecture Behavioral of slave_reg is

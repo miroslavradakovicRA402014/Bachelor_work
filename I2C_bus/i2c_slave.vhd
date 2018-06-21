@@ -37,11 +37,11 @@ entity i2c_slave is
 		REGISTER_SEL_WIDTH 		: integer := 4; 											 -- Decoder selection width
 		SLAVE_ADDRESS  	 		: std_logic_vector(6 downto 0) := "0110001"      -- Slave address (7 bit address)
 	 );
-    Port ( iCLK 	: in  	std_logic;
-           inRST 	: in  	std_logic;
-			  iTC		: in 		std_logic;
-           iSCL 	: in  	std_logic;
-           ioSDA  : inout  std_logic);
+    Port ( iCLK 	: in  	std_logic;														 -- Clock signal 50MHz
+           inRST 	: in  	std_logic;														 -- Reset signal
+			  iTC		: in 		std_logic;														 -- Terminal count signal 
+           iSCL 	: in  	std_logic;														 -- SCL signal
+           ioSDA  : inout  std_logic);														 -- SDA signal
 end i2c_slave;
 
 architecture Behavioral of i2c_slave is
@@ -86,8 +86,8 @@ architecture Behavioral of i2c_slave is
 	signal sTC_TR_PERIOD_CNT 		: std_logic;																					-- Slave transmission period terminal count
 	signal sTR_PERIOD_CNT_RST		: std_logic;																					-- Slave transmission period counter reset signal
 
-	signal sSLAVE_ADDRESS_OK   	: std_logic;																					-- Slave address 
-	signal sREGISTER_ADDRESS_OK   : std_logic;																					-- Slave address 	
+	signal sSLAVE_ADDRESS_OK   	: std_logic;																					-- Slave address correct indication
+	signal sREGISTER_ADDRESS_OK   : std_logic;																					-- Slave address correct indication	
 	
 	signal sSCL_RISING_EDGE    	: std_logic;																					-- SCL rising edge indication
 	signal sSDA_RISING_EDGE    	: std_logic;																					-- SDA rising edge indication

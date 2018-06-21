@@ -28,11 +28,11 @@ entity baud_freq_div is
 		BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
 		CLK_CNT_WIDTH  : integer := 11		    -- Width of clock counter
 	 );
-    Port ( iCLK   	: in  std_logic;
-           inRST  	: in  std_logic;
-			  iBAUD_SEL : in  std_logic_vector(2 downto 0);
-			  iBAUD_EN  : in  std_logic;
-           oTC 		: out std_logic);
+    Port ( iCLK   	: in  std_logic;							-- Clock signal 50MHz
+           inRST  	: in  std_logic;							-- Reset signal
+			  iBAUD_SEL : in  std_logic_vector(2 downto 0); -- Baud rate mode selection
+			  iBAUD_EN  : in  std_logic;							-- Baud rate mode change enable
+           oTC 		: out std_logic);							-- Terminal count for one period
 end baud_freq_div;
 
 architecture Behavioral of baud_freq_div is

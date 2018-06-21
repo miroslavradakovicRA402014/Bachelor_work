@@ -31,18 +31,18 @@ entity reciver is
 		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
 		DATA_BIT_SEL	 : integer := 2   -- Width of data bit number select
 	 );
-    Port ( iCLK        : in   std_logic;
-           inRST       : in   std_logic;
-			  iPARITY_EN  : in   std_logic;
-			  iPARITY     : in   std_logic;
-			  iDATA_SEL   : in   std_logic_vector(1  downto 0);
-           iRX         : in   std_logic;
-           iTC         : in   std_logic;
-           iFULL 	     : in   std_logic;
-			  oBAUD_EN    : out  std_logic;
-			  oRTS		  : out  std_logic;
-           oDATA 	     : out  std_logic_vector(DATA_WIDTH   - 1 downto 0);
-           oRX_DONE    : out  std_logic);
+    Port ( iCLK        : in   std_logic;												-- Clock signal 50MHz	
+           inRST       : in   std_logic;												-- Reset signal
+			  iPARITY_EN  : in   std_logic;												-- Parity enable signal
+			  iPARITY     : in   std_logic;												-- Parity mode signal
+			  iDATA_SEL   : in   std_logic_vector(1 downto 0);						-- Data bits mode
+           iRX         : in   std_logic;												-- RX signal
+           iTC         : in   std_logic;												-- Terminal count
+           iFULL 	     : in   std_logic;												-- FIFO full indication
+			  oBAUD_EN    : out  std_logic;												-- Baud register enable
+			  oRTS		  : out  std_logic;												-- Request to send signal
+           oDATA 	     : out  std_logic_vector(DATA_WIDTH  - 1 downto 0);	-- Data output 
+           oRX_DONE    : out  std_logic);												-- Data reciving done
 end reciver;
 
 architecture Behavioral of reciver is

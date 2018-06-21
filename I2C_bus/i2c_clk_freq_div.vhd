@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    18:52:59 05/20/2018 
 -- Design Name: 
@@ -19,18 +19,18 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
+
 
 entity i2c_clk_freq_div is
 	 Generic (
 		CLK_FREQUENCY : integer := 50000000; -- Clock frequency	
 		CLK_CNT_WIDTH : integer := 5	 		 -- Width of clock counter
 	 );
-    Port ( iCLK  		: in  std_logic;
-           inRST 		: in  std_logic;
-			  iFREQ_EN	: in  std_logic;
-           oTC   		: out std_logic);
+    Port ( iCLK  		: in  std_logic;		 -- Clock signal 50MHz
+           inRST 		: in  std_logic;		 -- Reset signal
+			  iFREQ_EN	: in  std_logic; 		 -- Divider enable
+           oTC   		: out std_logic);		 -- Period terminal count
 end i2c_clk_freq_div;
 
 architecture Behavioral of i2c_clk_freq_div is
