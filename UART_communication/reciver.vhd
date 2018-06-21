@@ -92,22 +92,19 @@ begin
 
 	-- Reciver FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iRX, iPARITY_EN, sSTART_TC_CNT_DONE, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is 
-			when IDLE   =>
+			when IDLE =>
 				-- Wait for RX 
 				if (iRX = '0') then 
 					sNEXT_STATE <= START; -- Get for start bit
-				else 
-					sNEXT_STATE <= IDLE;
 				end if;
 			when START  =>
 				-- Check if sampling period done
 				if (sSTART_TC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
-			   else
-					sNEXT_STATE <= START;
 				end if;
-			when DATA   =>
+			when DATA =>
 				-- Check if all data bits recived
 				if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then
 					if (iPARITY_EN = '1') then
@@ -115,76 +112,49 @@ begin
 					else
 						sNEXT_STATE <= STOP; -- Skip parity bit
 					end if;	
-				else 
-					sNEXT_STATE <= DATA;
 				end if;
 			when PARITY =>
 				-- Check if sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= STOP; -- Get for stop bit
-			   else
-					sNEXT_STATE <= PARITY;
 				end if;
-			when STOP   =>
+			when STOP =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Recive next data 
-			   else
-					sNEXT_STATE <= STOP;
 				end if;			
 		end case;
 	end process fsm_next;
 
 	-- Reciver FSM output logic
 	fsm_out : process (sCURRENT_STATE, iFULL, sSTART_TC_CNT_DONE, sTC_CNT_DONE) begin
+		sTC_CNT_EN	 <= '0';
+		sTC_CNT_RST  <= '0';
+		sDATA_BIT_EN <= '0'; 
+		sDATA_CNT_EN <= '0';
+		sSHW_EN		 <= '0';
+		oBAUD_EN 	 <= '0'; 
+		oRX_DONE 	 <= '0';
 		case (sCURRENT_STATE) is
-			when IDLE   =>
-				sTC_CNT_EN	 <= '0';
-				sTC_CNT_RST  <= '0';
+			when IDLE =>
 				sDATA_BIT_EN <= '1'; -- Enable data bit register
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
 				oBAUD_EN 	 <= '1'; -- Enable baud rate in freq divider
-				oRX_DONE 	 <= '0';
 			when START  =>	
 				sTC_CNT_EN	 <= '1'; -- Start counter
 				if (sSTART_TC_CNT_DONE = '1') then
 					sTC_CNT_RST  <= '1'; -- Reset counter if start period of 8 cycles done 
-			   else
-					sTC_CNT_RST  <= '0';
-				end if;			
-				sDATA_BIT_EN <= '0';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '0';
-				oBAUD_EN 	 <= '0';
-				oRX_DONE 	 <= '0';			
-			when DATA   =>	
+				end if;					
+			when DATA =>	
 				sTC_CNT_EN	 <= '1';	 
-				sTC_CNT_RST	 <= '0';
-				sDATA_BIT_EN <= '0'; 
 				sDATA_CNT_EN <= '1'; -- Enable data counter
 				sSHW_EN		 <= '1'; -- Enable shifter for data bits 
-				oBAUD_EN 	 <= '0';
-				oRX_DONE 	 <= '0';
 			when PARITY =>
 				sTC_CNT_EN	 <= '1';	
-				sTC_CNT_RST	 <= '0';
-				sDATA_BIT_EN <= '0';
-				sDATA_CNT_EN <= '0';
-				sSHW_EN		 <= '1'; -- Enable shifter for parity bit
-				oBAUD_EN 	 <= '0';
-				oRX_DONE 	 <= '0';			
-			when STOP   =>	
+				sSHW_EN		 <= '1'; -- Enable shifter for parity bit		
+			when STOP =>	
 				sTC_CNT_EN	 <= '1';
-				sTC_CNT_RST	 <= '0';
-				sDATA_BIT_EN <= '0';
-				sDATA_CNT_EN <= '0';	
-				sSHW_EN		 <= '0';
-				oBAUD_EN 	 <= '0';
 				if (iFULL = '0' and sTC_CNT_DONE = '1') then -- FIFO is not full, store to it
 					oRX_DONE  <= '1'; -- Tell FIFO that data is recived
-				else 
-					oRX_DONE  <= '0';
 				end if;	
 		end case;		
 	end process fsm_out;

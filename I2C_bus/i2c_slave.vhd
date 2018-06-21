@@ -195,20 +195,17 @@ begin
 	
 	-- Slave FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for start condition
 				if (iSCL = '1' and ioSDA = '0') then
 					sNEXT_STATE <= START;   
-				else
-					sNEXT_STATE <= IDLE;
 				end if;
 			when START =>
 				-- Wait for slave address
 				if (iSCL = '0') then
 					sNEXT_STATE <= SLAVE_ADDRESS_MODE; -- Get slave address and operation 
-				else 
-					sNEXT_STATE <= START;
 				end if;
 			when SLAVE_ADDRESS_MODE =>
 				-- Check if period elapsed 
@@ -217,9 +214,7 @@ begin
 						sNEXT_STATE <= SLAVE_ADDRESS_ACK; -- If it is a slave address generate ack
 					else
 						sNEXT_STATE <= STOP; -- Otherwise wait for stop condition
-					end if;
-				else
-					sNEXT_STATE <= SLAVE_ADDRESS_MODE;	
+					end if;	
 				end if;
 			when SLAVE_ADDRESS_ACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
@@ -228,8 +223,6 @@ begin
 					else
 						sNEXT_STATE <= WRITE_DATA; -- Read data if is LSB of slave address is 1  
 					end if;
-				else
-					sNEXT_STATE <= SLAVE_ADDRESS_ACK;
 				end if;
 			when REGISTER_ADDRESS =>
 				-- Check if period elapsed
@@ -239,27 +232,19 @@ begin
 					else
 						sNEXT_STATE <= REGISTER_ADDRESS_NACK; -- Otherwise generate nack
 					end if;
-				else
-					sNEXT_STATE <= REGISTER_ADDRESS;	
 				end if;	
 			when REGISTER_ADDRESS_ACK =>
 				-- Check if transmission period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then
 					sNEXT_STATE <= READ_DATA;	-- If transmission for ack period done	get data byte form master
-				else
-					sNEXT_STATE <= REGISTER_ADDRESS_ACK;
 				end if;			
 			when REGISTER_ADDRESS_NACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= STOP;	-- If transmission for nack period done	
-				else
-					sNEXT_STATE <= REGISTER_ADDRESS_NACK;
 				end if;	
 			when REPEATED_START =>
 			   if (sTC_RSTART_PERIOD_CNT = '1') then
-					sNEXT_STATE <= SLAVE_ADDRESS_MODE; -- Get slave address mode after repeated start
-				else
-					sNEXT_STATE <= REPEATED_START; 
+					sNEXT_STATE <= SLAVE_ADDRESS_MODE; -- Get slave address mode after repeated start 
 				end if;
 			when READ_DATA	=>
 				-- Check for repeated start condition
@@ -271,21 +256,15 @@ begin
 				-- Check if period elapsed if is read data form master
 				elsif (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= READ_ACK;
-				else
-					sNEXT_STATE <= READ_DATA;	
 				end if;		
 			when READ_ACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= READ_DATA;	-- If transmission for ack period done	get data byte
-				else
-					sNEXT_STATE <= READ_ACK;
 				end if;
 			when WRITE_DATA =>
 				-- Check if period elapsed if read data form master
 				if (sTC_PERIOD_CNT = '1') then
-					sNEXT_STATE <= WRITE_ACK;
-				else
-					sNEXT_STATE <= WRITE_DATA;	
+					sNEXT_STATE <= WRITE_ACK;	
 				end if;	
 			when WRITE_ACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
@@ -294,15 +273,11 @@ begin
 					else
 						sNEXT_STATE <= STOP;	-- Get stop condition
 					end if;	
-				else
-					sNEXT_STATE <= WRITE_ACK;
 				end if;				
 			when STOP =>
 				-- Wait for stop condition
 				if (iSCL = '1' and sSDA_RISING_EDGE = '1') then
 					sNEXT_STATE <= IDLE;   
-				else
-					sNEXT_STATE <= STOP;
 				end if;				
 			when others =>
 				sNEXT_STATE <= IDLE;
@@ -311,315 +286,107 @@ begin
 	
 	-- Slave FSM output logic
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sMODE_FF, sADDR_REG) begin
+		sIN_BUFF_EN	 		 	 <= '0';
+		sOUT_BUFF_EN 		 	 <= '0';
+		sDATA_CNT_EN   	 	 <= '0';
+		sDATA_CNT_RST 		 	 <= '0'; 
+		sBYTE_CNT_EN   	 	 <= '0';
+		sBYTE_CNT_RST 		 	 <= '0';			
+		sPERIOD_CNT_EN 	 	 <= '0';
 		sRSTART_PERIOD_CNT_EN <= '0';
+		sTR_PERIOD_CNT_EN  	 <= '0';
+		sTR_PERIOD_CNT_RST 	 <= '0';
+		sADDR_REG_EN		 	 <= '0';
+		sMODE_FF_EN			 	 <= '0';
+		sISHW_EN				 	 <= '0';
+		sOSHW_EN				 	 <= '0';
+		sOSHW_LOAD			 	 <= '0';
+		sREG_MUX_SEL		  	 <= "0000";
+		sREG_DEC_SEL		 	 <= "0000";
+		sREG_DEC_EN			 	 <= '0';
+		sACK_SEL				 	 <= '0';
+		sSDA_SEL				 	 <= '0';		
 		case (sCURRENT_STATE) is
 			-- Slave control signals
 			when IDLE =>
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sDATA_CNT_EN   	 <= '0';
 				sDATA_CNT_RST 		 <= '1'; -- Reset data counters
-				sBYTE_CNT_EN   	 <= '0';
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';
 			when START => 
-				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';				
+				sIN_BUFF_EN	 		 <= '1';				
 			when SLAVE_ADDRESS_MODE =>		
-				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';	
+				sIN_BUFF_EN	 		 <= '1';	
 				sDATA_CNT_EN 		 <= '1'; -- Count slave address and mode bits
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';									
-				sADDR_REG_EN		 <= '0';
 				if (sDATA_CNT = DATA_WIDTH) then -- If all address bit and mode recived  get mode and start sync period
 					sMODE_FF_EN		 <= '1'; -- Get R/W mode, write to register 
 					sPERIOD_CNT_EN  <= '1'; -- Start sync period
-					sISHW_EN			 <= '0';
 				else
-					sMODE_FF_EN		 <= '0';
-					sPERIOD_CNT_EN  <= '0';
 					sISHW_EN			 <= '1'; -- Get data bit and shift register
 				end if;
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';
 			when SLAVE_ADDRESS_ACK =>	
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line 
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0'; 
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';				
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				if (sMODE_FF = '0') then	
-					sOSHW_LOAD			 <= '0';
-					sREG_MUX_SEL		 <= "0000";
-				else
+				if (sMODE_FF = '1') then	
 					sOSHW_LOAD			 <= '1';
 					sREG_MUX_SEL		 <= sADDR_REG;
 				end if;
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';	
 			when REGISTER_ADDRESS =>		
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';	
 				sDATA_CNT_EN 		 <= '1'; -- Count register address bits
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sMODE_FF_EN			 <= '0';
 				if (sDATA_CNT = DATA_WIDTH) then -- If all register address bits recived start sync period
 					sPERIOD_CNT_EN  <= '1';	-- Start sync period
 					sADDR_REG_EN	 <= '1';	-- Write register address to register
-					sISHW_EN			 <= '0';
 				else
-					sPERIOD_CNT_EN  <= '0';
-					sADDR_REG_EN	 <= '0';
 					sISHW_EN			 <= '1'; -- Get register address bit 
 				end if;
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';	
 			when REGISTER_ADDRESS_ACK =>	
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
 				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
 					sOSHW_LOAD		 <= '1'; -- Load data to shift register
 					sREG_MUX_SEL	 <= sADDR_REG; -- 
-				else 
-					sOSHW_LOAD		 <= '0';
-					sREG_MUX_SEL	 <= "0000";	
-				end if;		
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';		
+				end if;				
 			when REGISTER_ADDRESS_NACK =>	
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '1';
-				sSDA_SEL				 <= '0';		
+				sACK_SEL				 <= '1';		
 			when REPEATED_START =>
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0'; 
-				sDATA_CNT_EN 		 <= '0';
 				sDATA_CNT_RST 		 <= '1';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period
-				sTR_PERIOD_CNT_EN  <= '0'; 
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';	
+				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period	
 			when READ_DATA =>		
-				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';	
+				sIN_BUFF_EN	 		 <= '1';	
 				sDATA_CNT_EN 		 <= '1'; -- Count data bits
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';				
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits recived write data form shift register to register
 					sPERIOD_CNT_EN  <= '1'; -- Start snyc period
-					sISHW_EN			 <= '0';
 					sREG_DEC_SEL	 <= sADDR_REG; -- Select register
 					sREG_DEC_EN		 <= '1'; -- Enable decoder
 				else
-					sPERIOD_CNT_EN  <= '0';
 					sISHW_EN			 <= '1'; -- Get data bits
-					sREG_DEC_SEL	 <= "0000";
-					sREG_DEC_EN		 <= '0';
-				end if;
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';		
+				end if;		
 			when READ_ACK =>	
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
-				sBYTE_CNT_RST 		 <= '0';				
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN	  	 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';					
+				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period					
 			when WRITE_DATA =>		
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';	-- Get SDA line
 				sDATA_CNT_EN 		 <= '1'; -- Count sent data
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits sent to master 
 					sPERIOD_CNT_EN 	 <= '1'; -- Start sync period
-					sTR_PERIOD_CNT_EN  <= '0';
 					sTR_PERIOD_CNT_RST <= '1'; -- Reset transsmison period counter 
-					sOSHW_EN				 <= '0';
 				else
-					sPERIOD_CNT_EN 	 <= '0';
 					sTR_PERIOD_CNT_EN  <= '1'; -- For each data bit start transsmison period 
-					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN				 <= '1';
 				end if;
-				sRSTART_PERIOD_CNT_EN <= '0';								
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';
-				sACK_SEL				 <= '0';
 				sSDA_SEL				 <= '1';	  -- Select data bit from output shift register 		
 			when WRITE_ACK =>	
 				sIN_BUFF_EN	 		 <= '1'; 
-				sOUT_BUFF_EN 		 <= '0';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
 				sBYTE_CNT_EN   	 <= '1';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '0';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
-				sTR_PERIOD_CNT_RST <= '0';
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';
-				sOSHW_EN				 <= '0';
 				sOSHW_LOAD			 <= '1'; -- Load data form registers
-				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';	
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';				
+				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address			
 			when STOP =>
-				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sDATA_CNT_EN  		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sRSTART_PERIOD_CNT_EN <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sTR_PERIOD_CNT_RST <= '0'; 
-				sADDR_REG_EN		 <= '0';
-				sMODE_FF_EN			 <= '0';
-				sISHW_EN				 <= '0';	
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sREG_MUX_SEL		 <= "0000";
-				sREG_DEC_SEL		 <= "0000";
-				sREG_DEC_EN			 <= '0';		
-				sACK_SEL				 <= '0';
-				sSDA_SEL				 <= '0';							
+				sIN_BUFF_EN	 		 <= '1';						
 		end case;
 	end process fsm_out;
 	

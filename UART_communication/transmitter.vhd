@@ -70,7 +70,6 @@ architecture Behavioral of transmitter is
 	signal sSHW_EN				 : std_logic;										  		-- Shifter enable
 	signal sDATA_BIT_EN		 : std_logic;											   -- Enable signal for data bit register
 
-
 	signal sTC_CNT_DONE 		 : std_logic;										  		-- Terminal count counter count done	
 	
 	signal sDATA_LOAD		    : std_logic;										 		-- Registers data load signal
@@ -92,8 +91,9 @@ begin
 	
 	-- Reciver FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iHANDSHAKE_EN, iCTS, iPARITY_EN, iSTART, sTC_CNT_DONE, sDATA_CNT, sDATA_BIT_REG) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is 
-			when IDLE      =>	
+			when IDLE =>	
 				-- Wait for FIFO 
 				if (iSTART = '1') then 
 					if (iHANDSHAKE_EN = '1') then -- Check does handshaking enabled
@@ -101,24 +101,18 @@ begin
 					else
 						sNEXT_STATE <= START; -- Get for start bit
 					end if;
-				else 
-					sNEXT_STATE <= IDLE;
 				end if;
 			when HANDSHAKE =>	
 				-- Wait for CTS signal 
 				if (iCTS = '1') then 
 					sNEXT_STATE <= START; -- Get for start bit
-				else 
-					sNEXT_STATE <= HANDSHAKE;
 				end if;			
-			when START     =>
+			when START =>
 				-- Check if start sampling period done
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= DATA; -- Get for data bits
-			   else
-					sNEXT_STATE <= START;
 				end if;
-			when DATA     =>
+			when DATA =>
 				-- Check if all data bits sent
 				if (sDATA_CNT = sDATA_BIT_REG and sTC_CNT_DONE = '1') then
 					if (iPARITY_EN = '1') then
@@ -126,81 +120,52 @@ begin
 					else
 						sNEXT_STATE <= STOP; -- Skip parity bit
 					end if;
-				else 
-					sNEXT_STATE <= DATA;
 				end if;
-			when PARITY   =>
+			when PARITY =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= STOP; -- Send stop bit
-			   else
-					sNEXT_STATE <= PARITY;
 				end if;				
-			when STOP     =>
+			when STOP =>
 				-- Check if sampling period done 
 				if (sTC_CNT_DONE = '1') then
 					sNEXT_STATE <= IDLE; -- Send next data 
-			   else
-					sNEXT_STATE <= STOP;
 				end if;			
 		end case;
 	end process fsm_next;	
 	
 	-- Reciver FSM output logic
 	fsm_out : process (sCURRENT_STATE, iHANDSHAKE_EN, sPARITY, sTC_CNT_DONE, sSHW_REG(0)) begin
+		sTC_CNT_EN	 		<= '0';
+		sDATA_CNT_EN 		<= '0';
+		sDATA_BIT_EN		<= '0'; 
+		sSHW_EN		 		<= '0';
+		sDATA_LOAD	 		<= '0';
+		oTX_READY 	 		<= '0';
+		oTX 			 		<= '0';
 		case (sCURRENT_STATE) is
-			when IDLE  	   =>
-				sTC_CNT_EN	 		<= '0';
-				sDATA_CNT_EN 		<= '0';
+			when IDLE =>
 				sDATA_BIT_EN		<= '1'; -- Enable data bit number register
-				sSHW_EN		 		<= '0';
-				sDATA_LOAD	 		<= '0';
-				oTX_READY 	 		<= '0';
 				oTX 			 		<= '1'; 
 			when HANDSHAKE =>
-				sTC_CNT_EN	 		<= '0';
-				sDATA_CNT_EN 		<= '0';
 				sDATA_BIT_EN		<= '1';
-				sSHW_EN		 		<= '0';
-				sDATA_LOAD	 		<= '0';
-				oTX_READY 	 		<= '0';
 				oTX 			 		<= '1';				
-			when START 	   =>	
+			when START =>	
 				sTC_CNT_EN	 		<= '1'; -- Start countig 
-				sDATA_CNT_EN 		<= '0';
-				sDATA_BIT_EN		<= '0';
-				sSHW_EN		 		<= '0';
 				if (sTC_CNT_DONE = '1') then -- Load form data from FIFO 
 					sDATA_LOAD	 <= '1';
-					oTX_READY 	 <= '1';
-				else			
-					sDATA_LOAD	 <= '0';
-					oTX_READY 	 <= '0';					
-				end if;
-				oTX 			 		<= '0';				
-			when DATA  	   =>	
+					oTX_READY 	 <= '1';				
+				end if;			
+			when DATA =>	
 				sTC_CNT_EN	 		<= '1';  
-				sDATA_CNT_EN 		<= '1'; -- Count data bits 
-				sDATA_BIT_EN		<= '0';				
+				sDATA_CNT_EN 		<= '1'; -- Count data bits 				
 				sSHW_EN		 		<= '1'; -- Shift data bits  
-				sDATA_LOAD	 		<= '0';
-				oTX_READY 	 		<= '0';	
 				oTX 			 		<= sSHW_REG(0); -- LSB of shift register is current data bit to transmitt
-			when PARITY  	=>	
+			when PARITY =>	
 				sTC_CNT_EN	 		<= '1';
-				sDATA_CNT_EN 		<= '0';
-				sDATA_BIT_EN		<= '0';				
-				sSHW_EN		 		<= '0';
-				sDATA_LOAD	 		<= '0';
-			   oTX_READY 	 		<= '0';	
 				oTX			 		<= sPARITY;	-- Transmitt parity bit			
-			when STOP  	   =>	
+			when STOP =>	
 				sTC_CNT_EN	 		<= '1';
-				sDATA_CNT_EN 		<= '0';
-				sDATA_BIT_EN		<= '0';				
-				sSHW_EN		 		<= '0';
-				sDATA_LOAD	 		<= '0';
-			   oTX_READY 	 		<= '0';	
 				oTX			 		<= '1';	
 		end case;		
 	end process fsm_out;	

@@ -27,10 +27,10 @@ entity lcd_timer is
 		CLK_PERIOD_NUMBER : integer := 360000; 	 -- Clock period number for 15ms period
 		CLK_CNT_WIDHT 		: integer := 18 	  	 	 -- Clock counter widht
 	 );
-    Port ( iCLK 		: in  std_logic;
-           inRST 		: in  std_logic;
-           iTIMER_EN : in  std_logic;
-           oTC 		: out std_logic);
+    Port ( iCLK 		: in  std_logic;				 -- Clock signal 50MHz
+           inRST 		: in  std_logic;				 -- Reset signal
+           iTIMER_EN : in  std_logic;				 -- Timer enable signal 
+           oTC 		: out std_logic);				 -- Terminal count
 end lcd_timer;
 
 architecture Behavioral of lcd_timer is

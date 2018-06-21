@@ -24,11 +24,14 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity lcd_driver is
 	 Generic(
-		INIT_SEQ_NUMBER : integer := 4;	-- Init commands sequence
-		CMD_SEQ_NUMBER  : integer := 3;	-- Command of 4-bit sequence number
-		LCD_BUS_WIDTH	 : integer := 4;	-- LCD controler interface width 
-		DATA_WIDTH		 : integer := 8;	-- Input data width
-		CHAR_NUMBER 	 : integer := 27  -- Number of characters
+		INIT_SEQ_NUMBER 	: integer := 4;		 -- Init commands sequence
+		CMD_SEQ_NUMBER  	: integer := 3;		 -- Command of 4-bit sequence number
+		LCD_BUS_WIDTH	 	: integer := 4;		 -- LCD controler interface width 
+		DATA_WIDTH		 	: integer := 8;		 -- Input data width
+		CHAR_WIDTH   		: integer := 8;		 -- Data character width
+		INIT_PERIOD 		: integer := 2160000; -- Clock cycles number for 25ms period
+	   CMD_SEQ_PERIOD 	: integer := 12000;	 -- Clock cycles number for 500us period		
+		CHAR_NUMBER 	 	: integer := 27  		 -- Number of characters
 	 );
     Port ( iCLK   	  : in 		std_logic;												 -- Clock signal 50MHz
            inRST  	  : in 		std_logic;												 -- Reset signal
@@ -51,54 +54,53 @@ architecture Behavioral of lcd_driver is
 							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, 
 							 PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
 
-	signal sCURRENT_STATE 	   	: tSTATES;									  			-- LCD controller FSM current state
-	signal sNEXT_STATE    	   	: tSTATES; 									  			-- LCD controller FSM next state
+	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
+	signal sNEXT_STATE    	   	: tSTATES; 									  					-- LCD controller FSM next state
 
-	signal sOUT_BUFF_EN	 	   	: std_logic;								   		-- Output tri-state buffer enable
-	signal sIN_BUFF_EN	 	   	: std_logic;	   						  			-- Input tri-state buffer enable
+	signal sOUT_BUFF_EN	 	   	: std_logic;								   				-- Output tri-state buffer enable
+	signal sIN_BUFF_EN	 	   	: std_logic;	   						  					-- Input tri-state buffer enable
 
-	signal sOUT_DATA					: std_logic_vector(3 downto 0);	     			-- Output data
-	signal sIN_DATA					: std_logic_vector(3 downto 0);					-- Input data
+	signal sOUT_DATA					: std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);	   -- Output data
+	signal sIN_DATA					: std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);		-- Input data
 
-	signal sINIT_PERIOD_EN			: std_logic;											-- Init period delay timer enable
-	signal sINIT_PERIOD_TC			: std_logic;											-- Init period delay timer treminal count
+	signal sINIT_PERIOD_EN			: std_logic;													-- Init period delay timer enable
+	signal sINIT_PERIOD_TC			: std_logic;													-- Init period delay timer treminal count
 	
-	signal sCMD_PERIOD_EN			: std_logic;											-- Command period timer enable
-	signal sCMD_PERIOD_TC			: std_logic;											-- Command period timer treminal count
+	signal sCMD_PERIOD_EN			: std_logic;													-- Command period timer enable
+	signal sCMD_PERIOD_TC			: std_logic;													-- Command period timer treminal count
 
-	signal sSEQ_CNT 					: unsigned(2 downto 0);								-- Command sequence number counter		
-	signal sSEQ_CNT_EN 				: std_logic;											-- Command sequence number counter enable
-	signal sSEQ_CNT_RST				: std_logic;											-- Command sequence number counter reset
+	signal sSEQ_CNT 					: unsigned(2 downto 0);										-- Command sequence number counter		
+	signal sSEQ_CNT_EN 				: std_logic;													-- Command sequence number counter enable
+	signal sSEQ_CNT_RST				: std_logic;													-- Command sequence number counter reset
 	
-	signal sCMD_PER_CNT 				: unsigned(1 downto 0);								-- Command period counter		 
-	signal sCMD_PER_CNT_EN			: std_logic;											-- Command period counter enable
-	signal sCMD_PER_CNT_RST			: std_logic;											-- Command period counter reset	
+	signal sCMD_PER_CNT 				: unsigned(1 downto 0);										-- Command period counter		 
+	signal sCMD_PER_CNT_EN			: std_logic;													-- Command period counter enable
+	signal sCMD_PER_CNT_RST			: std_logic;													-- Command period counter reset	
 	
-	signal sCHAR_CNT 					: unsigned(4 downto 0);								-- Character counter
-	signal sCHAR_CNT_EN 				: std_logic;											-- Character counter enable
-	signal sCHAR_CNT_RST				: std_logic;											-- Character counter reset
+	signal sCHAR_CNT 					: unsigned(4 downto 0);										-- Character counter
+	signal sCHAR_CNT_EN 				: std_logic;													-- Character counter enable
+	signal sCHAR_CNT_RST				: std_logic;													-- Character counter reset
 	
-	signal sSLAVE_ADDR_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Slave address register	
-	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Register address register
-	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Uppper byte register	
-	signal sLOWER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Lower byte register
-	signal sMODE_FF 					: std_logic;											-- Mode register
+	signal sSLAVE_ADDR_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Slave address register	
+	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Register address register
+	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);		 	-- Uppper byte register	
+	signal sLOWER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Lower byte register
+	signal sMODE_FF 					: std_logic;													-- Mode register
 	
-	signal sCHAR_CODE 				: std_logic_vector(DATA_WIDTH - 1 downto 0); -- Character code at display
+	signal sCHAR_CODE 				: std_logic_vector(CHAR_WIDTH - 1 downto 0); 		-- Character code at display
 	
-	signal sSLAVE_ADDR_CHAR			: std_logic_vector(15 downto 0); 				-- Slave address char	
-	signal sREG_ADDR_CHAR			: std_logic_vector(15 downto 0); 				-- Register address char
-	signal sUPPER_BYTE_CHAR			: std_logic_vector(15 downto 0); 				-- Uppper byte char
-	signal sLOWER_BYTE_CHAR			: std_logic_vector(15 downto 0); 				-- Lower byte char
+	signal sSLAVE_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Slave address char	
+	signal sREG_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0);	-- Register address char
+	signal sUPPER_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Uppper byte char
+	signal sLOWER_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0);	-- Lower byte char
 
 	
 begin
 
-
 	-- LCD init delay timer
 	eLCD_INIT_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 2160000,
+				CLK_PERIOD_NUMBER => INIT_PERIOD,  
 				CLK_CNT_WIDHT		=> 22
 			)
 			Port map(
@@ -111,7 +113,7 @@ begin
 	-- LCD R/W command timer
 	eLCD_CMD_TIMER : entity work.lcd_timer
 			Generic map (
-				CLK_PERIOD_NUMBER => 12000,
+				CLK_PERIOD_NUMBER => CMD_SEQ_PERIOD,
 				CLK_CNT_WIDHT		=> 14
 			)
 			Port map(
@@ -212,133 +214,84 @@ begin
 	
 	-- LCD controller FSM next state logic
 	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (sINIT_PERIOD_TC = '1') then -- Wait for init period 
 					sNEXT_STATE <= LCD_INIT_SEQ;
-				else
-					sNEXT_STATE <= IDLE;
-				end if;
-				
+				end if;				
 			when LCD_INIT_SEQ => 	
 				if (sSEQ_CNT = INIT_SEQ_NUMBER) then -- Wait for all init commands
 					sNEXT_STATE <= LCD_CONFIG;
-				else
-					sNEXT_STATE <= LCD_INIT_SEQ;
-				end if;
-				
+				end if;			
 			when LCD_CONFIG =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= DISPLAY_CONFIG_BF;
-				else
-					sNEXT_STATE <= LCD_CONFIG;
-				end if;		
-				
-			when DISPLAY_CONFIG_BF =>
-				if (sIN_DATA(3) = '0') then 
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done  
+					sNEXT_STATE <= DISPLAY_CONFIG_BF;  
+				end if;				
+			when DISPLAY_CONFIG_BF =>	 
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
 					sNEXT_STATE <= DISPLAY_CONFIG; 
-				else
-					sNEXT_STATE <= DISPLAY_CONFIG_BF;	
-				end if;
-				
+				end if;		
 			when  DISPLAY_CONFIG =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done
 					sNEXT_STATE <= CLEAR_SCREEN_BF;
-				else
-					sNEXT_STATE <= DISPLAY_CONFIG;
-				end if;
-				
+				end if;		
 			when CLEAR_SCREEN_BF =>
-				if (sIN_DATA(3) = '0') then 
-					sNEXT_STATE <= CLEAR_SCREEN; 
-				else
-					sNEXT_STATE <= CLEAR_SCREEN_BF;	
-				end if;
-				
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
+					sNEXT_STATE <= CLEAR_SCREEN; 	
+				end if;			
 			when  CLEAR_SCREEN =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
 					sNEXT_STATE <= ENTRY_MODE_BF;
-				else
-					sNEXT_STATE <= CLEAR_SCREEN;
-				end if;	
-					
+				end if;					
 			when ENTRY_MODE_BF =>
-				if (sIN_DATA(3) = '0') then 
-					sNEXT_STATE <= ENTRY_MODE; 
-				else
-					sNEXT_STATE <= ENTRY_MODE_BF;	
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
+					sNEXT_STATE <= ENTRY_MODE; 	
 				end if;
-				
 			when ENTRY_MODE =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done  
 					sNEXT_STATE <= ADDRESS_SET_BF;
-				else
-					sNEXT_STATE <= ENTRY_MODE;
-				end if;		
-				
+				end if;						
 			when ADDRESS_SET_BF =>
-				if (sIN_DATA(3) = '0') then 
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
 					sNEXT_STATE <= ADDRESS_SET; 
-				else
-					sNEXT_STATE <= ADDRESS_SET_BF;	
-				end if;	
-				
+				end if;			
 			when ADDRESS_SET =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done
 					sNEXT_STATE <= READ_INPUT_DATA;
-				else
-					sNEXT_STATE <= ADDRESS_SET;
 				end if;	
-			
 			when READ_INPUT_DATA =>
-				if (iDATA_EN = '1') then 
-					sNEXT_STATE <= PRINT_CHAR_BF;
-				else 
-					sNEXT_STATE <= READ_INPUT_DATA;
-				end if;
-				
-			when CHECK_CURSOR => 	
-				if (sCHAR_CNT = 16) then
-					sNEXT_STATE <= CURSOR_NEW_LINE;
-				else
-					sNEXT_STATE <= PRINT_CHAR_BF;
-				end if;
-			
-			when PRINT_CHAR_BF =>
-				if (sIN_DATA(3) = '0') then 
-					sNEXT_STATE <= PRINT_CHAR; 
-				else
+				if (iDATA_EN = '1') then -- Wait for input data from master
 					sNEXT_STATE <= PRINT_CHAR_BF;	
-				end if;
-				
-			when PRINT_CHAR => 
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= STOP_PRINT;
-				else
-					sNEXT_STATE <= PRINT_CHAR;
 				end if;	
-				
-			when CURSOR_NEW_LINE =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= PRINT_CHAR_BF;
-				else
+			when CHECK_CURSOR => 	
+				if (sCHAR_CNT = 16) then -- If cursor position is on end of first line move to second line
 					sNEXT_STATE <= CURSOR_NEW_LINE;
+				else
+					sNEXT_STATE <= PRINT_CHAR_BF;
 				end if;		
-
+			when PRINT_CHAR_BF =>
+				if (sIN_DATA(3) = '0') then  -- Check busy flag for next command 
+					sNEXT_STATE <= PRINT_CHAR; 
+				end if;		
+			when PRINT_CHAR => 
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done  
+					sNEXT_STATE <= STOP_PRINT;
+				end if;		
+			when CURSOR_NEW_LINE =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
+					sNEXT_STATE <= PRINT_CHAR_BF;
+				end if;		
 			when CURSOR_BACK =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then
-					sNEXT_STATE <= READ_INPUT_DATA;
-				else
-					sNEXT_STATE <= CURSOR_BACK;
-				end if;
-				
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
+					sNEXT_STATE <= READ_INPUT_DATA;	-- Return cursor to begin and wait for next data
+				end if;			
 			when STOP_PRINT =>
-				if (sCHAR_CNT = CHAR_NUMBER - 1) then
+				if (sCHAR_CNT = CHAR_NUMBER - 1) then -- Wait to print all characters
 					sNEXT_STATE <= CURSOR_BACK;
 				else
-					sNEXT_STATE <= CHECK_CURSOR;
-				end if;
-								
+					sNEXT_STATE <= CHECK_CURSOR;	-- Check cursor position
+				end if;							
 		end case;
 	end process fsm_next;	
 	
@@ -359,8 +312,7 @@ begin
 		sOUT_DATA		 	<= (others => '0');
 		oE 	  			 	<= '0'; 
       oRS    			 	<= '0';
-      oRW   			 	<= '0';
-		
+      oRW   			 	<= '0';	
 		--oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -916,6 +868,7 @@ begin
 	
 	-- Char code process 
 	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sUPPER_BYTE_CHAR, sLOWER_BYTE_CHAR) begin
+	   -- Generate char code depends on positon in display
 		case (sCHAR_CNT) is
 			when "00000" =>
 				sCHAR_CODE <= "01010011"; -- S

@@ -48,13 +48,12 @@ begin
 
 	-- Edge detector FSM next state logic
 	fsm_next : process (sCURRENT_STATE, iSIG) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for signal edge
 				if (iSIG = '1') then
 					sNEXT_STATE <= EDGE; -- Rising edge detected
-				else
-					sNEXT_STATE <= IDLE;
 				end if;
 			when EDGE =>
 				if (iSIG = '1') then
@@ -62,11 +61,9 @@ begin
 				else 
 					sNEXT_STATE <= IDLE; -- Falling edge
 				end if;	
-			when ONE  =>
+			when ONE =>
 				if (iSIG = '0') then
 					sNEXT_STATE <= IDLE; -- Falling edge 
-				else 
-					sNEXT_STATE <= ONE;
 				end if;
 		end case;
 	end process fsm_next;

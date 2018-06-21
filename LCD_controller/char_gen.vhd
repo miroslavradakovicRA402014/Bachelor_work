@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    17:02:18 06/11/2018 
 -- Design Name: 
@@ -26,11 +26,29 @@ entity char_gen is
 		 DATA_WIDTH : integer := 8; -- Data width 
 		 CHAR_WIDTH : integer := 16 -- Char width
 	 );
-    Port ( iDATA : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
-           oCHAR : out std_logic_vector(CHAR_WIDTH - 1 downto 0));
+    Port ( iDATA : in  std_logic_vector(DATA_WIDTH - 1 downto 0); 	-- Input data
+           oCHAR : out std_logic_vector(CHAR_WIDTH - 1 downto 0));	-- Generated char
 end char_gen;
 
 architecture Behavioral of char_gen is
+	
+	-- Char codes
+	constant cCHAR_0 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110000";
+	constant cCHAR_1 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110001";
+	constant cCHAR_2 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110010";
+	constant cCHAR_3 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110011";
+	constant cCHAR_4 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110100";
+	constant cCHAR_5 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110101";
+	constant cCHAR_6 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110110";
+	constant cCHAR_7 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110111";
+	constant cCHAR_8 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00111000";
+	constant cCHAR_9 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00111001";
+	constant cCHAR_A : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000001";
+	constant cCHAR_B : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000010";
+	constant cCHAR_C : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000011";
+	constant cCHAR_D : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000100";
+	constant cCHAR_E : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000101";
+	constant cCHAR_F : std_logic_vector(DATA_WIDTH - 1 downto 0) := "01000110";
 	
 	signal sUPPER_CHAR : std_logic_vector(DATA_WIDTH - 1 downto 0);  -- Upper bits char
 	signal sLOWER_CHAR : std_logic_vector(DATA_WIDTH - 1 downto 0);  -- Lower bits char
@@ -42,72 +60,72 @@ begin
 		-- Lower bits char
 		case (iDATA(3 downto 0)) is
 			when "0000" =>
-				sLOWER_CHAR <= "00110000"; -- 0
+				sLOWER_CHAR <= cCHAR_0; -- 0
 			when "0001" =>
-				sLOWER_CHAR <= "00110001"; -- 1
+				sLOWER_CHAR <= cCHAR_1; -- 1
 			when "0010" =>
-				sLOWER_CHAR <= "00110010"; -- 2
+				sLOWER_CHAR <= cCHAR_2; -- 2
 			when "0011" =>
-				sLOWER_CHAR <= "00110011"; -- 3
+				sLOWER_CHAR <= cCHAR_3; -- 3
 			when "0100" =>
-				sLOWER_CHAR <= "00110100"; -- 4
+				sLOWER_CHAR <= cCHAR_4; -- 4
 			when "0101" =>
-				sLOWER_CHAR <= "00110101"; -- 5
+				sLOWER_CHAR <= cCHAR_5; -- 5
 			when "0110" =>
-				sLOWER_CHAR <= "00110110"; -- 6
+				sLOWER_CHAR <= cCHAR_6; -- 6
 			when "0111" =>
-				sLOWER_CHAR <= "00110111"; -- 7
+				sLOWER_CHAR <= cCHAR_7; -- 7
 			when "1000" =>
-				sLOWER_CHAR <= "00111000"; -- 8
+				sLOWER_CHAR <= cCHAR_8; -- 8
 			when "1001" =>
-				sLOWER_CHAR <= "00111001"; -- 9
+				sLOWER_CHAR <= cCHAR_9; -- 9
 			when "1010" =>
-				sLOWER_CHAR <= "01000001"; -- A
+				sLOWER_CHAR <= cCHAR_A; -- A
 			when "1011" =>
-				sLOWER_CHAR <= "01000010"; -- B
+				sLOWER_CHAR <= cCHAR_B; -- B
 			when "1100" =>
-				sLOWER_CHAR <= "01000011"; -- C
+				sLOWER_CHAR <= cCHAR_C; -- C
 			when "1101" =>
-				sLOWER_CHAR <= "01000100"; -- D
+				sLOWER_CHAR <= cCHAR_D; -- D
 			when "1110" =>
-				sLOWER_CHAR <= "01000101"; -- E		
+				sLOWER_CHAR <= cCHAR_E; -- E		
 			when others =>
-				sLOWER_CHAR <= "01000110"; -- F
+				sLOWER_CHAR <= cCHAR_F; -- F
 		end case;
 		-- Upper bits char
 		case (iDATA(7 downto 4)) is
 			when "0000" =>
-				sUPPER_CHAR <= "00110000"; -- 0
+				sUPPER_CHAR <= cCHAR_0; -- 0
 			when "0001" =>
-				sUPPER_CHAR <= "00110001"; -- 1
+				sUPPER_CHAR <= cCHAR_1; -- 1
 			when "0010" =>
-				sUPPER_CHAR <= "00110010"; -- 2
+				sUPPER_CHAR <= cCHAR_2; -- 2
 			when "0011" =>
-				sUPPER_CHAR <= "00110011"; -- 3
+				sUPPER_CHAR <= cCHAR_3; -- 3
 			when "0100" =>
-				sUPPER_CHAR <= "00110100"; -- 4
+				sUPPER_CHAR <= cCHAR_4; -- 4
 			when "0101" =>
-				sUPPER_CHAR <= "00110101"; -- 5
+				sUPPER_CHAR <= cCHAR_5; -- 5
 			when "0110" =>
-				sUPPER_CHAR <= "00110110"; -- 6
+				sUPPER_CHAR <= cCHAR_6; -- 6
 			when "0111" =>
-				sUPPER_CHAR <= "00110111"; -- 7
+				sUPPER_CHAR <= cCHAR_7; -- 7
 			when "1000" =>
-				sUPPER_CHAR <= "00111000"; -- 8
+				sUPPER_CHAR <= cCHAR_8; -- 8
 			when "1001" =>
-				sUPPER_CHAR <= "00111001"; -- 9
+				sUPPER_CHAR <= cCHAR_9; -- 9
 			when "1010" =>
-				sUPPER_CHAR <= "01000001"; -- A
+				sUPPER_CHAR <= cCHAR_A; -- A
 			when "1011" =>
-				sUPPER_CHAR <= "01000010"; -- B
+				sUPPER_CHAR <= cCHAR_B; -- B
 			when "1100" =>
-				sUPPER_CHAR <= "01000011"; -- C
+				sUPPER_CHAR <= cCHAR_C; -- C
 			when "1101" =>
-				sUPPER_CHAR <= "01000100"; -- D
+				sUPPER_CHAR <= cCHAR_D; -- D
 			when "1110" =>
-				sUPPER_CHAR <= "01000101"; -- E		
+				sUPPER_CHAR <= cCHAR_E; -- E		
 			when others =>
-				sUPPER_CHAR <= "01000110"; -- F
+				sUPPER_CHAR <= cCHAR_F; -- F
 		end case;
 	end process char_gen;
 	

@@ -256,34 +256,27 @@ begin
 	
 	-- Master FSM next state logic
 	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
+		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				if (iUART_EMPTY = '0') then -- Check is there messages
 					sNEXT_STATE <= UART_START; -- Get I2C telegram from UART
-				else 
-					sNEXT_STATE <= IDLE;
 				end if;
 			when UART_START =>
 				if (iUART_EMPTY = '0') then
 					sNEXT_STATE <= UART_SLAVE_ADDRESS; -- Get slave address from UART 
-				else 
-					sNEXT_STATE <= UART_START;
 				end if;
 			when UART_SLAVE_ADDRESS =>
 				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
 					sNEXT_STATE <= UART_REGISTER_ADDRESS; 
 				elsif (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get lower data byte from UART
-				else 
-					sNEXT_STATE <= UART_SLAVE_ADDRESS;				
+					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get lower data byte from UART			
 				end if;				
 			when UART_REGISTER_ADDRESS =>
 				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
 					sNEXT_STATE <= UART_STOP; 
 				elsif (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART
-				else 
-					sNEXT_STATE <= UART_REGISTER_ADDRESS;				
+					sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART				
 				end if;					
 			when UART_BYTE_UPPER =>
 				sNEXT_STATE <= UART_BYTE_LOWER; -- Get lower data byte from UART				
@@ -295,43 +288,31 @@ begin
 				-- Check if period elapsed
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_WRITE; -- Send I2C address to slave
-				else 
-					sNEXT_STATE <= I2C_START;
 				end if;			
 			when I2C_SLAVE_ADDRESS_WRITE =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_WRITE; -- Get slave address ack
-				else
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_WRITE;
 				end if;
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= I2C_REGISTER_ADDRESS; -- Send slave register address 
-				else
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_WRITE;
 				end if;	
 			when I2C_SLAVE_ADDRESS_READ =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_READ; -- Get slave address ack
-				else
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_READ;
 				end if;
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= I2C_READ_DATA; -- Get data byte
-				else
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_READ;
 				end if;				
 			when I2C_REGISTER_ADDRESS =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_REGISTER_ADDRESS_ACK;
-				else
-					sNEXT_STATE <= I2C_REGISTER_ADDRESS;
 				end if;
 			when I2C_REGISTER_ADDRESS_ACK => 	
 				-- Check if period elapsed 
@@ -345,29 +326,21 @@ begin
 							sNEXT_STATE <= I2C_REPEATED_START; -- Generate repeated start
 						end if;
 					end if;
-				else
-					sNEXT_STATE <= I2C_REGISTER_ADDRESS_ACK;
 				end if;
 			when I2C_REPEATED_START =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_READ; -- Send slave register address 
-				else
-					sNEXT_STATE <= I2C_REPEATED_START;
 				end if;	
 			when I2C_WRITE_DATA => 
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_WRITE_DATA_ACK;
-				else
-					sNEXT_STATE <= I2C_WRITE_DATA;
 				end if;	
 			when I2C_READ_DATA =>
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_READ_DATA_ACK;
-				else
-					sNEXT_STATE <= I2C_READ_DATA;
 				end if;		
 			when I2C_WRITE_DATA_ACK =>
 				-- Check if period elapsed 
@@ -377,8 +350,6 @@ begin
 					else
 						sNEXT_STATE <= I2C_WRITE_DATA; -- Write another byte
 					end if;
-				else
-					sNEXT_STATE <= I2C_WRITE_DATA_ACK;
 				end if;	
 			when I2C_READ_DATA_ACK =>
 				-- Check if period elapsed 
@@ -388,8 +359,6 @@ begin
 					else
 						sNEXT_STATE <= I2C_READ_DATA; -- Read another byte from slave
 					end if;	
-				else
-					sNEXT_STATE <= I2C_READ_DATA_ACK;
 				end if;					
 			when I2C_STOP =>
 				-- Check if period elapsed
@@ -399,15 +368,11 @@ begin
 					else
 						sNEXT_STATE <= IDLE;
 					end if;
-				else 
-					sNEXT_STATE <= I2C_STOP;
 				end if;
 			when I2C_NACK_STOP =>
 				-- Check if period elapsed
 				if (sTC_TR_PERIOD_CNT = '1') then
 					sNEXT_STATE <= IDLE;
-				else 
-					sNEXT_STATE <= I2C_NACK_STOP;
 				end if;				
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
@@ -415,872 +380,272 @@ begin
 			when SEND_UART_SLAVE_ADDRESS =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send slave address to UART 
-				else 
-					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
 				end if;
 			when SEND_UART_REGISTER_ADDRESS =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_BYTE_UPPER; -- Send slave register address to UART 
-				else 
-					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS;
 				end if;				
 			when SEND_UART_BYTE_UPPER =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_BYTE_LOWER; -- Send slave upper byte to UART 
-				else 
-					sNEXT_STATE <= SEND_UART_BYTE_UPPER;
 				end if;
 			when SEND_UART_BYTE_LOWER =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= IDLE; -- Send slave lower byte to UART 
-				else 
-					sNEXT_STATE <= SEND_UART_BYTE_LOWER;
 				end if;		
 		end case;
 	end process fsm_next;	
 
 	-- Master FSM output logic
 	fsm_out : process (sCURRENT_STATE, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, iUART_EMPTY) begin
-		sSLAVE_ADDR_SEL 		 <= '0';
-		oFREQ_EN					 <= '0';
-		sLCD_DATA_EN 			 <= '0';
+		sIN_BUFF_EN	 		 	<= '0';
+		sOUT_BUFF_EN 		 	<= '0';
+		sIUART_REG_EN  	 	<= '0';
+		sOUART_REG_EN		 	<= '0';
+		sACK_SEL		 		 	<= '0';
+		sSDA_SEL		 		 	<= '0';
+		sLBYTE_REG_SEL		 	<= '0';		
+		sUBYTE_REG_SEL 	 	<= '0';	
+		sSLAVE_ADDR_SEL		<= '0';				
+		sREG_MUX_SEL		 	<= "00";		
+		sREG_DEC_SEL		 	<= "00";
+		sREG_DEC_EN			 	<= '0';
+		sSCL_EN				 	<= '0';	
+		oFREQ_EN 			 	<= '0';
+		oUART_READ  		 	<= '0';
+		oUART_WRITE			 	<= '0';
+		sDATA_CNT_EN 		 	<= '0';
+		sDATA_CNT_RST 		 	<= '0';	
+		sBYTE_CNT_EN   	 	<= '0';
+		sBYTE_CNT_RST 		 	<= '0';					
+		sPERIOD_CNT_EN 	 	<= '0';
+		sTR_PERIOD_CNT_RST 	<= '0';
+		sTR_PERIOD_CNT_EN  	<= '0';
+		sISHW_EN			    	<= '0';				
+		sOSHW_EN				 	<= '0';
+		sOSHW_LOAD			 	<= '0';	
+		sOUART_REG_SEL		 	<= "00";
+		sLCD_DATA_EN 			<= '0';
 		case (sCURRENT_STATE) is
 			when IDLE =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
-				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';
-				sSLAVE_ADDR_SEL		<= '0';	
-				sREG_MUX_SEL		 	<= "00";	
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
-				sSCL_EN				 	<= '0';	
-				oFREQ_EN 			 	<= '0';
-				if (iUART_EMPTY = '1') then
-					oUART_READ  		 	<= '0';
-				else
+				if (iUART_EMPTY = '0') then
 					oUART_READ  		 	<= '1';
 				end if;
-				oUART_WRITE			 	<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
 				sBYTE_CNT_RST 		 	<= '1';		
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';	
-				sISHW_EN			    	<= '0'; 
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';
-				sOUART_REG_SEL		 	<= "00";	
 			when UART_START =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sOUART_REG_EN		 	<= '0';
 				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';
-				sREG_MUX_SEL		 	<= "00";
-				if (iUART_EMPTY = '1') then
-					sIUART_REG_EN  		<= '0';
-					sREG_DEC_EN			 	<= '0';			
-				else
+				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
-				end if;
-				sREG_DEC_SEL		 	<= "00";
-				sSCL_EN				 	<= '0';	
-				oUART_READ  		 	<= '1';
-				oUART_WRITE			 	<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';		
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0'; 
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';
-				sOUART_REG_SEL		 	<= "00";		
+				end if;	
+				oUART_READ  		 	<= '1';	
 			when UART_SLAVE_ADDRESS =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL			<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";	
+				sACK_SEL		 		 	<= '1';	
 				if (iUART_EMPTY = '1') then
-					sIUART_REG_EN  		<= '0';
 					if (sSLAVE_ADDR_REG(0) = '1') then
-						sREG_DEC_EN			 	<= '1';
-					else
-						sREG_DEC_EN			 	<= '0';	
+						sREG_DEC_EN			 	<= '1';	
 					end if;
 				else
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
 				end if;		
 				sREG_DEC_SEL		 	<= "01";
-				sSCL_EN				 	<= '0';	
-				oFREQ_EN 			 	<= '0';
 				oUART_READ  		 	<= '1';
-				oUART_WRITE			 	<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';		
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';	
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";	
 			when UART_REGISTER_ADDRESS =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";		
+				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "11";
-				if (iUART_EMPTY = '1') then
-					sIUART_REG_EN  		<= '0';
-					sREG_DEC_EN			 	<= '0';			
-				else
+				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
 				end if;				
-				sSCL_EN				 	<= '0';	
-				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '1';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";		
+				oUART_READ  		 	<= '1';		
 			when UART_BYTE_UPPER =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";		
+				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "10";
-				sREG_DEC_EN			 	<= '1';
-				sSCL_EN				 	<= '0';	
-				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";				
+				sREG_DEC_EN			 	<= '1';				
 			when UART_BYTE_LOWER =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  		<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";				
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';	
-				sSCL_EN				 	<= '0';	
-				oFREQ_EN 			 	<= '0';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';		
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";	
+				sACK_SEL		 		 	<= '1';	
 			when UART_STOP =>	
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 			<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '1';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";	
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
-				sSCL_EN				 	<= '0';
-				oFREQ_EN 			 	<= '0';				
-				oUART_READ  		 	<= '0';
-				oUART_WRITE				<= '0';
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 			 <= '0';					
-				sPERIOD_CNT_EN 		 <= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';	
-				sOUART_REG_SEL		 	<= "00";		
+				sACK_SEL		 		 	<= '1';	
 				if (sSLAVE_ADDR_REG(0) = '0') then
 					sLCD_DATA_EN <= '1';
-				else
-					sLCD_DATA_EN <= '0';
 				end if;				
 			when I2C_START =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";				
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN					<= '1';	
 				oFREQ_EN 				<= '1';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';			
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';	
 				sPERIOD_CNT_EN 	 	<= '1';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '0';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '1';	
-				sOUART_REG_SEL		 	<= "00";		
+				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_WRITE => 
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
 				sSDA_SEL		 		 	<= '1';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';
-				sREG_MUX_SEL		 	<= "00";	
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 		 	<= '1';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
+				oFREQ_EN 			 	<= '1';	
+				sDATA_CNT_EN 		 	<= '1';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
-					sOSHW_EN			 	 <= '0';
 				else
-					sPERIOD_CNT_EN     <= '0';
-					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN			    <= '1'; 
 				end if;
-				sISHW_EN			    	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '1';
-				sOSHW_LOAD			 	<= '0';		
-				sOUART_REG_SEL		 	<= "00";				
+				sTR_PERIOD_CNT_EN  	<= '1';		
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
 				sIN_BUFF_EN	 		 	<= '1';
-				sOUT_BUFF_EN 		 	<= '0';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
-				sSDA_SEL		 			<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';
 				sREG_MUX_SEL		 	<= "01";				
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';	
 				oFREQ_EN 			 	<= '1';
-				oUART_READ  			<= '0';
-				oUART_WRITE				<= '0';		
-				sDATA_CNT_EN 			<= '0';
-				sDATA_CNT_RST 			<= '0';
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
 				sTR_PERIOD_CNT_EN  	<= '1';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '1';
-				sOUART_REG_SEL		 	<= "00";			
+				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_READ => 
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
 				sSDA_SEL		 		 	<= '1';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';
-				sREG_MUX_SEL		 	<= "00";	
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 		 	<= '1';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
+				oFREQ_EN 			 	<= '1';		
+				sDATA_CNT_EN 		 	<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
-					sOSHW_EN			 	 <= '0';
 				else
-					sPERIOD_CNT_EN     <= '0';
-					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN			    <= '1'; 
 				end if;
-				sISHW_EN			    	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '1';
-				sOSHW_LOAD			 	<= '0';		
-				sOUART_REG_SEL		 	<= "00";				
+				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
 				sIN_BUFF_EN	 		 	<= '1';
-				sOUT_BUFF_EN 		 	<= '0';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
-				sSDA_SEL		 			<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';
 				sREG_MUX_SEL		 	<= "01";				
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';	
 				oFREQ_EN 			 	<= '1';
-				oUART_READ  			<= '0';
-				oUART_WRITE				<= '0';		
-				sDATA_CNT_EN 			<= '0';
-				sDATA_CNT_RST 			<= '0';
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '1';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '0';
-				sOUART_REG_SEL		 	<= "00";								
+				sTR_PERIOD_CNT_EN  	<= '1';							
 			when I2C_REGISTER_ADDRESS => 
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
-				sACK_SEL		 		 	<= '0';
 				sSDA_SEL		 		 	<= '1';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
-				sSLAVE_ADDR_SEL		<= '0';				
-				sREG_MUX_SEL		 	<= "00";	
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';
-				oFREQ_EN 			 	<= '1';				
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 			<= '1';
-				sDATA_CNT_RST 		 	<= '0';	
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';					
+				oFREQ_EN 			 	<= '1';					
+				sDATA_CNT_EN 			<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1';
 					sTR_PERIOD_CNT_RST <= '1';					
-					sOSHW_EN			 	 <= '0';
 				else
-					sPERIOD_CNT_EN  	 <= '0';
-					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN			 	 <= '1'; 
 				end if;
-				sISHW_EN			    	<= '0';
-				sTR_PERIOD_CNT_EN  	<= '1';
-				sOSHW_LOAD			 	<= '0';		
-				sOUART_REG_SEL		 	<= "00";				
+				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_REGISTER_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				if (sSLAVE_ADDR_REG(0) = '1') then
-					sREG_MUX_SEL		 <= "00";
-					sOSHW_LOAD			 <= '0';	
-				else
+				if (sSLAVE_ADDR_REG(0) = '0') then
 					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(1);				
 					sOSHW_LOAD			 <= '1';	
 				end if;			
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';	
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
-				sOUART_REG_SEL		 <= "00";	
 			when I2C_REPEATED_START =>
-				sIN_BUFF_EN	 		 	<= '0';
 				sOUT_BUFF_EN 		 	<= '1';
-				sIUART_REG_EN  	 	<= '0';
-				sOUART_REG_EN		 	<= '0';
 				if (sTR_PERIOD_CNT < 8) then
-					sACK_SEL		 		 	<= '1';
-				else
-					sACK_SEL		 		 	<= '0';					
+					sACK_SEL		 		 	<= '1';					
 				end if;
-				sSDA_SEL		 		 	<= '0';
-				sLBYTE_REG_SEL		 	<= '0';		
-				sUBYTE_REG_SEL 	 	<= '0';	
 				sSLAVE_ADDR_SEL		<= '1';				
-				sREG_MUX_SEL		 	<= "00";				
-				sREG_DEC_SEL		 	<= "00";
-				sREG_DEC_EN			 	<= '0';
 				sSCL_EN				 	<= '1';	
 				oFREQ_EN 			 	<= '1';
-				oUART_READ  		 	<= '0';
-				oUART_WRITE			 	<= '0';		
-				sDATA_CNT_EN 		 	<= '0';
-				sDATA_CNT_RST 		 	<= '0';			
-				sBYTE_CNT_EN   	 	<= '0';
-				sBYTE_CNT_RST 		 	<= '0';	
-				sPERIOD_CNT_EN 	 	<= '0';
-				sTR_PERIOD_CNT_RST 	<= '0';
 				sTR_PERIOD_CNT_EN  	<= '1';
-				sISHW_EN			    	<= '0';				
-				sOSHW_EN				 	<= '0';
-				sOSHW_LOAD			 	<= '1';	
-				sOUART_REG_SEL		 	<= "00";		
+				sOSHW_LOAD			 	<= '1';		
 			when I2C_WRITE_DATA =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
 				sSDA_SEL		 		 <= '1';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";	
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
+				oFREQ_EN 			 <= '1';	
 				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '1';
-				sBYTE_CNT_RST 		 <= '0';					
+				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
-					sOSHW_EN			 	 <= '0';
 				else
-					sPERIOD_CNT_EN     <= '0';
-					sTR_PERIOD_CNT_RST <= '0';
 					sOSHW_EN			    <= '1'; 
 				end if;
-				sISHW_EN			    <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "00";				
+				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_READ_DATA =>
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
 				sLBYTE_REG_SEL		 <= '1';		
 				sUBYTE_REG_SEL 	 <= '1';	
-				sSLAVE_ADDR_SEL	 <= '0';
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
-				sDATA_CNT_EN 		 <= '1';
-				sDATA_CNT_RST 		 <= '0';		
-				sBYTE_CNT_EN   	 <= '1';
-				sBYTE_CNT_RST 		 <= '0';					
+				oFREQ_EN 			 <= '1';		
+				sDATA_CNT_EN 		 <= '1';	
+				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sREG_DEC_SEL		 <= '1' & sBYTE_CNT(1);
 					sREG_DEC_EN			 <= '1';
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
-					sISHW_EN			 	 <= '0';
 				else
-					sREG_DEC_SEL		 <= "00";
-					sREG_DEC_EN			 <= '0';
-					sPERIOD_CNT_EN     <= '0';
-					sTR_PERIOD_CNT_RST <= '0';
 					sISHW_EN			    <= '1'; 
 				end if;
-				sOSHW_EN			 	 <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "00";				
+				sTR_PERIOD_CNT_EN  <= '1';			
 			when I2C_WRITE_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
-				sOUT_BUFF_EN 		 <= '0';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";				
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';		
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
 				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
 				if (sBYTE_CNT = DATA_BYTE_NUM) then
 					sREG_MUX_SEL		 <= "00";
 					sOSHW_LOAD			 <= '0';
 				else
 					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(0);
 					sOSHW_LOAD			 <= '1';
-				end if;	
-				sOUART_REG_SEL		 <= "00";				
+				end if;				
 			when I2C_READ_DATA_ACK =>
-				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";	
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';				
+				sOUT_BUFF_EN 		 <= '1';			
 				if (sBYTE_CNT = DATA_BYTE_NUM) then
 					sACK_SEL		 		 <= '1';
-				else
-					sACK_SEL		 		 <= '0';
 				end if;					
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "00";				
+				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_STOP =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';		
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";	
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
 				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "00";	
+				sTR_PERIOD_CNT_EN  <= '1';	
 			when I2C_NACK_STOP =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '1';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '0';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';		
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";	
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
+				sIUART_REG_EN  	 <= '1';	
 				oFREQ_EN 			 <= '1';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';
-				sOUART_REG_SEL		 <= "00";					
+				sTR_PERIOD_CNT_EN  <= '1';					
 			when SEND_I2C_UART_TELEGRAM =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
 				sOUART_REG_EN		 <= '1';
-				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';
-				oFREQ_EN 			 <= '0';
-				oFREQ_EN 			 <= '0';				
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "00";	
+				sACK_SEL		 		 <= '1';	
 				sLCD_DATA_EN		 <= '1';				
 			when SEND_UART_SLAVE_ADDRESS =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oFREQ_EN 			 <= '0';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
+				oUART_WRITE			 <= '1';	
 				sOUART_REG_SEL		 <= "01";	
 			when SEND_UART_REGISTER_ADDRESS =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oFREQ_EN 			 <= '0';
-				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
 				sOUART_REG_SEL		 <= "11";					
 			when SEND_UART_BYTE_UPPER =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oFREQ_EN 			 <= '0';
-				oUART_READ  		 <= '0';
 				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
 				sOUART_REG_SEL		 <= "10";		
 			when SEND_UART_BYTE_LOWER =>
-				sIN_BUFF_EN	 		 <= '0';
 				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
 				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';	
-				sREG_MUX_SEL		 <= "00";		
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oFREQ_EN 			 <= '0';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '1';
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';	
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '0';
-				sISHW_EN			    <= '0'; 
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '0';	
-				sOUART_REG_SEL		 <= "00";						
-			when others => 
-				sIN_BUFF_EN	 		 <= '0';
-				sOUT_BUFF_EN 		 <= '1';
-				sIUART_REG_EN  	 <= '0';
-				sOUART_REG_EN		 <= '0';
-				sACK_SEL		 		 <= '1';
-				sSDA_SEL		 		 <= '0';
-				sLBYTE_REG_SEL		 <= '0';		
-				sUBYTE_REG_SEL 	 <= '0';	
-				sSLAVE_ADDR_SEL	 <= '0';
-				sREG_MUX_SEL		 <= "10";				
-				sREG_DEC_SEL		 <= "00";
-				sREG_DEC_EN			 <= '0';
-				sSCL_EN				 <= '0';	
-				oFREQ_EN 			 <= '0';
-				oUART_READ  		 <= '0';
-				oUART_WRITE			 <= '0';		
-				sDATA_CNT_EN 		 <= '0';
-				sDATA_CNT_RST 		 <= '0';
-				sBYTE_CNT_EN   	 <= '0';
-				sBYTE_CNT_RST 		 <= '0';					
-				sPERIOD_CNT_EN 	 <= '0';
-				sTR_PERIOD_CNT_RST <= '0';
-				sTR_PERIOD_CNT_EN  <= '1';
-				sISHW_EN			    <= '0';				
-				sOSHW_EN				 <= '0';
-				sOSHW_LOAD			 <= '1';			
-				sOUART_REG_SEL		 <= "00";	
+				oUART_WRITE			 <= '1';									
 		end case;
 	end process fsm_out;
 		
