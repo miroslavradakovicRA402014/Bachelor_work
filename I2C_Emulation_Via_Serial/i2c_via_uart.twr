@@ -37,18 +37,18 @@ Setup/Hold to clock iCLK
                 |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source          | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ----------------+------------+------------+------------+------------+------------------+--------+
-iBAUD_SW<0>     |    1.130(R)|      SLOW  |    1.155(R)|      SLOW  |sCLK              |   0.000|
-iBAUD_SW<1>     |   -0.392(R)|      FAST  |    3.173(R)|      SLOW  |sCLK              |   0.000|
-iBAUD_SW<2>     |    1.816(R)|      SLOW  |    0.676(R)|      SLOW  |sCLK              |   0.000|
-iCTS            |    3.608(R)|      SLOW  |   -1.566(R)|      SLOW  |sCLK              |   0.000|
-iDATA_BIT_SW<0> |    0.398(R)|      FAST  |    2.608(R)|      SLOW  |sCLK              |   0.000|
-iDATA_BIT_SW<1> |    0.107(R)|      FAST  |    2.570(R)|      SLOW  |sCLK              |   0.000|
-iHANDSHAKE_EN_SW|    2.216(R)|      SLOW  |    0.155(R)|      SLOW  |sCLK              |   0.000|
-iPARITY_EN_SW   |    3.625(R)|      SLOW  |    2.238(R)|      SLOW  |sCLK              |   0.000|
-iPARITY_SW      |    3.223(R)|      SLOW  |    0.587(R)|      SLOW  |sCLK              |   0.000|
-iRX             |    3.630(R)|      SLOW  |   -1.592(R)|      SLOW  |sCLK              |   0.000|
-inRST           |    8.135(R)|      SLOW  |   -0.227(R)|      SLOW  |sCLK              |   0.000|
-ioLCD_D<3>      |    4.608(R)|      SLOW  |   -0.186(R)|      SLOW  |sCLK              |   0.000|
+iBAUD_SW<0>     |    0.934(R)|      SLOW  |    1.082(R)|      SLOW  |sCLK              |   0.000|
+iBAUD_SW<1>     |   -0.548(R)|      FAST  |    3.083(R)|      SLOW  |sCLK              |   0.000|
+iBAUD_SW<2>     |    1.061(R)|      SLOW  |    0.866(R)|      SLOW  |sCLK              |   0.000|
+iCTS            |    2.795(R)|      SLOW  |   -0.911(R)|      SLOW  |sCLK              |   0.000|
+iDATA_BIT_SW<0> |    0.936(R)|      SLOW  |    1.511(R)|      SLOW  |sCLK              |   0.000|
+iDATA_BIT_SW<1> |    0.361(R)|      FAST  |    1.573(R)|      SLOW  |sCLK              |   0.000|
+iHANDSHAKE_EN_SW|    2.750(R)|      SLOW  |   -0.328(R)|      SLOW  |sCLK              |   0.000|
+iPARITY_EN_SW   |    2.779(R)|      SLOW  |    2.600(R)|      SLOW  |sCLK              |   0.000|
+iPARITY_SW      |    4.640(R)|      SLOW  |   -0.659(R)|      SLOW  |sCLK              |   0.000|
+iRX             |    3.366(R)|      SLOW  |   -1.423(R)|      SLOW  |sCLK              |   0.000|
+inRST           |   10.467(R)|      SLOW  |   -1.538(R)|      SLOW  |sCLK              |   0.000|
+ioLCD_D<3>      |    3.521(R)|      SLOW  |   -0.113(R)|      SLOW  |sCLK              |   0.000|
 ----------------+------------+------------+------------+------------+------------------+--------+
 
 Clock iCLK to Pad
@@ -56,22 +56,22 @@ Clock iCLK to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-ioLCD_D<0>  |        20.985(R)|      SLOW  |         7.231(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<1>  |        21.891(R)|      SLOW  |         6.908(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<2>  |        23.182(R)|      SLOW  |         6.954(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<3>  |        18.689(R)|      SLOW  |         6.427(R)|      FAST  |sCLK              |   0.000|
-oLCD_E      |        17.292(R)|      SLOW  |         7.132(R)|      FAST  |sCLK              |   0.000|
-oLCD_RS     |        15.819(R)|      SLOW  |         6.908(R)|      FAST  |sCLK              |   0.000|
-oLCD_RW     |        17.114(R)|      SLOW  |         7.414(R)|      FAST  |sCLK              |   0.000|
-oLED<0>     |        13.750(R)|      SLOW  |         6.016(R)|      FAST  |sCLK              |   0.000|
-oLED<1>     |        12.908(R)|      SLOW  |         5.508(R)|      FAST  |sCLK              |   0.000|
-oLED<2>     |        15.056(R)|      SLOW  |         6.725(R)|      FAST  |sCLK              |   0.000|
-oLED<3>     |        14.156(R)|      SLOW  |         6.210(R)|      FAST  |sCLK              |   0.000|
-oLED<4>     |        13.725(R)|      SLOW  |         5.976(R)|      FAST  |sCLK              |   0.000|
-oLED<5>     |        14.644(R)|      SLOW  |         6.478(R)|      FAST  |sCLK              |   0.000|
-oLED<6>     |        14.923(R)|      SLOW  |         6.642(R)|      FAST  |sCLK              |   0.000|
-oRTS        |        17.921(R)|      SLOW  |         8.304(R)|      FAST  |sCLK              |   0.000|
-oTX         |        19.794(R)|      SLOW  |         8.014(R)|      FAST  |sCLK              |   0.000|
+ioLCD_D<0>  |        22.306(R)|      SLOW  |         7.390(R)|      FAST  |sCLK              |   0.000|
+ioLCD_D<1>  |        21.611(R)|      SLOW  |         7.204(R)|      FAST  |sCLK              |   0.000|
+ioLCD_D<2>  |        22.042(R)|      SLOW  |         6.544(R)|      FAST  |sCLK              |   0.000|
+ioLCD_D<3>  |        19.904(R)|      SLOW  |         6.736(R)|      FAST  |sCLK              |   0.000|
+oLCD_E      |        18.639(R)|      SLOW  |         6.968(R)|      FAST  |sCLK              |   0.000|
+oLCD_RS     |        16.184(R)|      SLOW  |         6.667(R)|      FAST  |sCLK              |   0.000|
+oLCD_RW     |        16.894(R)|      SLOW  |         7.026(R)|      FAST  |sCLK              |   0.000|
+oLED<0>     |        13.701(R)|      SLOW  |         5.959(R)|      FAST  |sCLK              |   0.000|
+oLED<1>     |        12.377(R)|      SLOW  |         5.205(R)|      FAST  |sCLK              |   0.000|
+oLED<2>     |        14.959(R)|      SLOW  |         6.634(R)|      FAST  |sCLK              |   0.000|
+oLED<3>     |        14.294(R)|      SLOW  |         6.272(R)|      FAST  |sCLK              |   0.000|
+oLED<4>     |        13.211(R)|      SLOW  |         5.677(R)|      FAST  |sCLK              |   0.000|
+oLED<5>     |        14.200(R)|      SLOW  |         6.225(R)|      FAST  |sCLK              |   0.000|
+oLED<6>     |        14.624(R)|      SLOW  |         6.455(R)|      FAST  |sCLK              |   0.000|
+oRTS        |        17.574(R)|      SLOW  |         8.209(R)|      FAST  |sCLK              |   0.000|
+oTX         |        18.826(R)|      SLOW  |         7.358(R)|      FAST  |sCLK              |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock iCLK
@@ -79,18 +79,18 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    6.606|         |         |         |
+iCLK           |    6.414|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-iPARITY_SW     |oTX            |   17.008|
+iPARITY_SW     |oTX            |   16.786|
 ---------------+---------------+---------+
 
 
-Analysis completed Fri Jun 22 16:32:02 2018 
+Analysis completed Fri Jun 22 18:49:34 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:

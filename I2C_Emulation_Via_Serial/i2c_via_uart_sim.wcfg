@@ -21,11 +21,12 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="43" />
+   <WVObjectSize size="46" />
    <wave_markers>
       <marker time="4617415000000" label="" />
       <marker time="10244899000000" label="" />
       <marker time="-2499999999000" label="" />
+      <marker time="11909205000000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -34,6 +35,10 @@
    <wvobject fp_name="/i2c_via_uart_tb/inrst" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">inrst</obj_property>
       <obj_property name="ObjectShortName">inrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/sclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sclk</obj_property>
+      <obj_property name="ObjectShortName">sclk</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/iparity_en_sw" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iparity_en_sw</obj_property>
@@ -121,9 +126,17 @@
       <obj_property name="ElementShortName">scurrent_state</obj_property>
       <obj_property name="ObjectShortName">scurrent_state</obj_property>
    </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/snext_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">snext_state</obj_property>
+      <obj_property name="ObjectShortName">snext_state</obj_property>
+   </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>
       <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/sack_ff" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sack_ff</obj_property>
+      <obj_property name="ObjectShortName">sack_ff</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/siuart_reg" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">siuart_reg[7:0]</obj_property>
