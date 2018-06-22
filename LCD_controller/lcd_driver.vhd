@@ -24,14 +24,15 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity lcd_driver is
 	 Generic(
-		INIT_SEQ_NUMBER 	: integer := 4;		 -- Init commands sequence
-		CMD_SEQ_NUMBER  	: integer := 3;		 -- Command of 4-bit sequence number
-		LCD_BUS_WIDTH	 	: integer := 4;		 -- LCD controler interface width 
-		DATA_WIDTH		 	: integer := 8;		 -- Input data width
-		CHAR_WIDTH   		: integer := 8;		 -- Data character width
-		INIT_PERIOD 		: integer := 2160000; -- Clock cycles number for 25ms period
-	   CMD_SEQ_PERIOD 	: integer := 12000;	 -- Clock cycles number for 500us period		
-		CHAR_NUMBER 	 	: integer := 27  		 -- Number of characters
+		INIT_SEQ_NUMBER 	 : integer := 4;		  -- Init commands sequence
+		CMD_SEQ_NUMBER  	 : integer := 3;		  -- Command of 4-bit sequence number
+		LCD_BUS_WIDTH	 	 : integer := 4;		  -- LCD controler interface width 
+		DATA_WIDTH		 	 : integer := 8;		  -- Input data width
+		CHAR_WIDTH   		 : integer := 8;		  -- Data character width
+		SEQ_CNT_WIDTH 		 : integer := 3;		  -- Sequence command widht	
+		INIT_PERIOD 		 : integer := 2160000; -- Clock cycles number for 45ms period
+	   CMD_SEQ_PERIOD 	 : integer := 12000;	  -- Clock cycles number for 250us period		
+		CHAR_NUMBER 	 	 : integer := 27  	  -- Number of characters
 	 );
     Port ( iCLK   	  : in 		std_logic;												 -- Clock signal 50MHz
            inRST  	  : in 		std_logic;												 -- Reset signal
@@ -49,7 +50,37 @@ entity lcd_driver is
 end lcd_driver;
 
 architecture Behavioral of lcd_driver is
-
+	
+	-- LCD command constants upper and lower command sequence
+	constant cLCD_INIT_H  	    : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0010";
+	constant cLCD_INIT_L   		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0011";
+	constant cLCD_CONFIG_H 		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0010";
+	constant cLCD_CONFIG_L 		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "1000";
+	constant cDISPLAY_CONFIG_H  : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cDISPLAY_CONFIG_L  : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "1100";	
+	constant cCLEAR_SCREEN_H 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cCLEAR_SCREEN_L 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0001";
+	constant cENTRY_MODE_H 		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cENTRY_MODE_L 		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0110";	
+	constant cADDRESS_SET_H 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "1000";
+	constant cADDRESS_SET_L 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cCURSOR_NEW_LINE_H : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "1100";
+	constant cCURSOR_NEW_LINE_L : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cCURSOR_BACK_H 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0000";
+	constant cCURSOR_BACK_L 	 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0) := "0010";	
+	
+	-- Characters code constants
+	constant cCHAR_S 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010011";
+	constant cCHAR_A 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01000001";
+	constant cCHAR_DOTS			: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "00111010";
+	constant cCHAR_0 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "00110000";
+	constant cCHAR_x 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01111000";
+	constant cCHAR_VER_LINE 	: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01111100";
+	constant cCHAR_R 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010010";
+	constant cCHAR_W 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010111";
+	constant cCHAR_D 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01000100";
+	constant cCHAR_T 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010100";
+	
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
 							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, 
 							 PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
@@ -69,7 +100,7 @@ architecture Behavioral of lcd_driver is
 	signal sCMD_PERIOD_EN			: std_logic;													-- Command period timer enable
 	signal sCMD_PERIOD_TC			: std_logic;													-- Command period timer treminal count
 
-	signal sSEQ_CNT 					: unsigned(2 downto 0);										-- Command sequence number counter		
+	signal sSEQ_CNT 					: unsigned(SEQ_CNT_WIDTH - 1 downto 0);				-- Command sequence number counter		
 	signal sSEQ_CNT_EN 				: std_logic;													-- Command sequence number counter enable
 	signal sSEQ_CNT_RST				: std_logic;													-- Command sequence number counter reset
 	
@@ -300,7 +331,7 @@ begin
 	-- LCD controller FSM output logic
 	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
-		sOUT_BUFF_EN	 	<= '1';
+		sOUT_BUFF_EN	 	<= '0';
 		sSEQ_CNT_EN 	 	<= '0';
 		sSEQ_CNT_RST 	 	<= '0';
 		sCMD_PER_CNT_EN	<= '0';	
@@ -313,512 +344,297 @@ begin
 		oE 	  			 	<= '0'; 
       oRS    			 	<= '0';
       oRW   			 	<= '0';	
-		--oLED <= (others => '0');
 		case (sCURRENT_STATE) is
 			when IDLE =>
-				sINIT_PERIOD_EN	 <= '1';
+				sOUT_BUFF_EN	 	<= '1';
+				sINIT_PERIOD_EN	<= '1';	-- Start init period
 			when LCD_INIT_SEQ =>
-				if (sINIT_PERIOD_TC = '1') then
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PER_CNT_RST <= '1';
-				else
-					sSEQ_CNT_EN 	  <= '0';
-					sCMD_PER_CNT_RST <= '0';
-				end if;	
-				
-				sINIT_PERIOD_EN <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';	
+				if (sINIT_PERIOD_TC = '1') then	-- If init period elapsed move no next init sequence
+					sSEQ_CNT_EN 	  <= '1';		-- Increment command sequence 
+					sCMD_PER_CNT_RST <= '1';		-- Reset command sequence period counter
+				end if;						
+				sINIT_PERIOD_EN <= '1';	-- Enable init period			
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
+				end if;							
+				if (sCMD_PER_CNT /= 3) then -- If all command sequences are't executed
+					sCMD_PERIOD_EN  <= '1';	-- Enable command sequence counter
+					sCMD_PER_CNT_EN <= '1'; -- Count command sequence periods
 				end if;				
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN  <= '0';
-					sCMD_PER_CNT_EN <= '0';
-				else
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';
-				end if;	
-				
-				if (sSEQ_CNT > 2) then					
+				if (sSEQ_CNT > 2) then				 			
 					if (sSEQ_CNT = 4) then
-						sCMD_PERIOD_EN  <= '0';
-						sSEQ_CNT_RST 	 <= '1';
-					else						
-						sSEQ_CNT_RST 	 <= '0';
+						sCMD_PERIOD_EN  <= '0'; 
+						sSEQ_CNT_RST 	 <= '1';	-- Reset sequence counter 
 					end if;					
-					sOUT_DATA 		 <= "0010";
+					sOUT_DATA 		 <= cLCD_INIT_H; -- Upper command sequence data
 				else  
-					sOUT_DATA 		 <= "0011";				
-				end if;
-							
+					sOUT_DATA 		 <= cLCD_INIT_L; -- Lower command sequence data			
+				end if;						
 			when LCD_CONFIG =>
-			
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;		
-			
-				if (sSEQ_CNT = 1) then		
-
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command 						
+					end if;			
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				
+					sOUT_DATA 		 <= cLCD_CONFIG_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';						
-					end if;
-					
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';
-					
-					sOUT_DATA 		 <= "0010";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';				
-					
-					sOUT_DATA 		 <= "1000";
-				else
-					if (sINIT_PERIOD_TC = '1') then
-						sSEQ_CNT_EN 	 <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
 					end if;	
-					
-					sCMD_PERIOD_EN  <= '0';
-					sCMD_PER_CNT_EN <= '0';
-					
-					sOUT_DATA 		 <= "0000";
-				end if;
-				
-				sINIT_PERIOD_EN <= '1';	
-						
-			when DISPLAY_CONFIG_BF =>
-			
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cLCD_CONFIG_L;	-- Lower command sequence data
+				else
+					if (sINIT_PERIOD_TC = '1') then		-- Command wait period for init delay
+						sSEQ_CNT_EN 	 <= '1';				-- Move to first sequence
+					end if;	
+				end if;			
+				sINIT_PERIOD_EN <= '1';					
+			when DISPLAY_CONFIG_BF =>	
+				sIN_BUFF_EN	 	 <= '1';						
+				oRW   			 <= '1';						-- Write command 
+				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
+				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-				else
-					sCMD_PERIOD_EN   <= '1';
-					sCMD_PER_CNT_EN  <= '1';
+				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
+					sCMD_PERIOD_EN   <= '1';				-- Count command period
+					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;
-			
-			when DISPLAY_CONFIG =>
-			
-				if (sCMD_PER_CNT = 1) then 
+			when DISPLAY_CONFIG =>	
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cDISPLAY_CONFIG_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "1100";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  				
+					sOUT_DATA 		 <= cDISPLAY_CONFIG_L; -- Send command to controller 
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
-				end if;
-				
-								
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
+				end if;					
 			when CLEAR_SCREEN_BF =>
-
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+				sIN_BUFF_EN	 	 <= '1';						
+				oRW   			 <= '1';						-- Write command 
+				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
+				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-				else
-					sCMD_PERIOD_EN   <= '1';
-					sCMD_PER_CNT_EN  <= '1';
-				end if;
-		
+				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
+					sCMD_PERIOD_EN   <= '1';				-- Count command period
+					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
+				end if;		
 			when CLEAR_SCREEN =>
-
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cCLEAR_SCREEN_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0001";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cCLEAR_SCREEN_L; -- Send command to controller
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
-
 			when ENTRY_MODE_BF =>
-
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+				sIN_BUFF_EN	 	 <= '1';						
+				oRW   			 <= '1';						-- Write command 
+				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
+				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-				else
-					sCMD_PERIOD_EN   <= '1';
-					sCMD_PER_CNT_EN  <= '1';
+				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
+					sCMD_PERIOD_EN   <= '1';				-- Count command period
+					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;
-
 			when ENTRY_MODE =>
-			
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cENTRY_MODE_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0110";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cENTRY_MODE_L; -- Send command to controller 
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
-				
 			when ADDRESS_SET_BF =>
-
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+				sIN_BUFF_EN	 	 <= '1';						
+				oRW   			 <= '1';						-- Write command 
+				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
+				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-				else
-					sCMD_PERIOD_EN   <= '1';
-					sCMD_PER_CNT_EN  <= '1';
-				end if;	
-
+				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
+					sCMD_PERIOD_EN   <= '1';				-- Count command period
+					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
+				end if;
 			when ADDRESS_SET =>
-			
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cADDRESS_SET_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "1000";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cADDRESS_SET_L; -- Send command to controller 
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;		
 				
 			when READ_INPUT_DATA =>
-
-				sCHAR_CNT_RST <= '1';
-				--oLED <= (others => '1');
-			
+				sCHAR_CNT_RST <= '1';			-- Reset char counter
 			when PRINT_CHAR_BF =>
-
-				sIN_BUFF_EN	 	 <= '1';
-				sOUT_BUFF_EN	 <= '0';
-				oRW   			 <= '1';
-				sSEQ_CNT_RST 	 <= '1';
-				
-				if (sCMD_PER_CNT = 1) then 
+				sIN_BUFF_EN	 	 <= '1';						
+				oRW   			 <= '1';						-- Write command 
+				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
+				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sCMD_PER_CNT = 3) then
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-				else
-					sCMD_PERIOD_EN   <= '1';
-					sCMD_PER_CNT_EN  <= '1';
-				end if;
-				
+				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
+					sCMD_PERIOD_EN   <= '1';				-- Count command period
+					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
+				end if;		
 			when PRINT_CHAR =>
-
-				oRS <= '1';
-
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	 <= '1';					
+				oRS <= '1';										-- Rerister select assert to one
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period							
+					sOUT_DATA 		 <= sCHAR_CODE(DATA_WIDTH - 1 downto 4); -- Send character code
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';		
-					sCHAR_CNT_EN	 <= '0';					
-					sOUT_DATA 		 <= sCHAR_CODE(DATA_WIDTH - 1 downto 4);
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';		
-					sCHAR_CNT_EN	 <= '0';	
-					sOUT_DATA 		 <= sCHAR_CODE(3 downto 0);
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  			
+					sOUT_DATA 		 <= sCHAR_CODE(3 downto 0); -- Send character code
 				else
 					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
 					sCMD_PER_CNT_RST <= '1';
 					if (sSEQ_CNT = 3) then
 						sCHAR_CNT_EN	  <= '1';
-					else
-						sCHAR_CNT_EN	  <= '0';
 					end if;
-					sOUT_DATA 		  <= "0000";
 				end if;	
-
 			when CURSOR_NEW_LINE =>
-
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cCURSOR_NEW_LINE_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';
-					sOUT_DATA 		 <= "1100";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0000";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cCURSOR_NEW_LINE_L; -- Send command to controller 
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
-
 			when CURSOR_BACK =>
-
-				if (sCMD_PER_CNT = 1) then 
+				sOUT_BUFF_EN	 	<= '1';
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
-				else
-					oE <= '0';
 				end if;
-				
-				if (sSEQ_CNT = 1) then
-				
+				if (sSEQ_CNT = 1) then		-- First command sequence 
+					if (sCMD_PER_CNT = 3) then	 -- If is sequence executed
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter						
+					end if;	
+					sCMD_PERIOD_EN  <= '1'; -- Enable command period
+					sCMD_PER_CNT_EN <= '1'; -- Count command period				 	
+					sOUT_DATA 		 <= cCURSOR_BACK_H; -- Send command to controller 
+				elsif (sSEQ_CNT = 2) then	-- Second command sequence
 					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	 <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	 <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';
-					sOUT_DATA 		 <= "0000";
-				elsif (sSEQ_CNT = 2) then
-				
-					if (sCMD_PER_CNT = 3) then
-						sSEQ_CNT_EN 	  <= '1';
-						sCMD_PER_CNT_RST <= '1';
-					else
-						sSEQ_CNT_EN 	  <= '0';
-						sCMD_PER_CNT_RST <= '0';
-					end if;
-				
-					sCMD_PERIOD_EN  <= '1';
-					sCMD_PER_CNT_EN <= '1';			
-					sOUT_DATA 		 <= "0010";
+						sSEQ_CNT_EN 	  <= '1'; -- Move to next command sequence
+						sCMD_PER_CNT_RST <= '1'; -- Reset command period counter
+					end if;	
+					sCMD_PERIOD_EN  <= '1';					-- Enable command period
+					sCMD_PER_CNT_EN <= '1';					--	Count command period  		
+					sOUT_DATA 		 <= cCURSOR_BACK_L; -- Send command to controller 
 				else
-					sSEQ_CNT_EN 	  <= '1';
-					sCMD_PERIOD_EN   <= '0';
-					sCMD_PER_CNT_EN  <= '0';
-					sCMD_PER_CNT_RST <= '1';
-					sOUT_DATA 		  <= "0000";
-				end if;		
-				
+					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
+					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
+				end if;			
 			when CHECK_CURSOR =>
 			
 	
@@ -871,61 +687,61 @@ begin
 	   -- Generate char code depends on positon in display
 		case (sCHAR_CNT) is
 			when "00000" =>
-				sCHAR_CODE <= "01010011"; -- S
+				sCHAR_CODE <= cCHAR_S; -- S
 			when "00001" =>
-				sCHAR_CODE <= "01000001"; -- A
+				sCHAR_CODE <= cCHAR_A; -- A
 			when "00010" =>
-				sCHAR_CODE <= "00111010"; -- :
+				sCHAR_CODE <= cCHAR_DOTS; -- :
 			when "00011" =>
-				sCHAR_CODE <= "00110000"; -- 0
+				sCHAR_CODE <= cCHAR_0; -- 0
 			when "00100" =>
-				sCHAR_CODE <= "01111000"; -- x
+				sCHAR_CODE <= cCHAR_x; -- x
 			when "00101" =>
-				sCHAR_CODE <= sSLAVE_ADDR_CHAR(15 downto 8); -- _
+				sCHAR_CODE <= sSLAVE_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "00110" =>
-				sCHAR_CODE <= sSLAVE_ADDR_CHAR(7  downto 0);  -- _	
+				sCHAR_CODE <= sSLAVE_ADDR_CHAR(CHAR_WIDTH - 1  downto 0);  -- _	
 			when "00111" =>
-				sCHAR_CODE <= "01111100"; -- |
+				sCHAR_CODE <= cCHAR_VER_LINE; -- |
 			when "01000" =>
-				sCHAR_CODE <= "01010010"; -- R
+				sCHAR_CODE <= cCHAR_R; -- R
 			when "01001" =>
-				sCHAR_CODE <= "01000001"; -- A
+				sCHAR_CODE <= cCHAR_A; -- A
 			when "01010" =>
-				sCHAR_CODE <= "00111010"; -- :
+				sCHAR_CODE <= cCHAR_DOTS; -- :
 			when "01011" =>
-				sCHAR_CODE <= "00110000"; -- 0
+				sCHAR_CODE <= cCHAR_0; -- 0
 			when "01100" =>
-				sCHAR_CODE <= "01111000"; -- x
+				sCHAR_CODE <= cCHAR_x; -- x
 			when "01101" =>
-				sCHAR_CODE <= sREG_ADDR_CHAR(15 downto 8); -- _	 	
+				sCHAR_CODE <= sREG_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _	 	
 			when "01110" =>
-				sCHAR_CODE <= sREG_ADDR_CHAR(7  downto 0); -- _				
+				sCHAR_CODE <= sREG_ADDR_CHAR(CHAR_WIDTH - 1  downto 0); -- _				
 			when "01111" =>
 				if (sMODE_FF = '1') then
-					sCHAR_CODE <= "01010010"; -- R
+					sCHAR_CODE <= cCHAR_R; -- R
 				else 
-					sCHAR_CODE <= "01010111"; -- W
+					sCHAR_CODE <= cCHAR_W; -- W
 				end if;
 			when "10000" =>
-				sCHAR_CODE <= "01000100"; -- D
+				sCHAR_CODE <= cCHAR_D; -- D
 			when "10001" =>
-				sCHAR_CODE <= "01000001"; -- A
+				sCHAR_CODE <= cCHAR_A; -- A
 			when "10010" =>
-				sCHAR_CODE <= "01010100"; -- T
+				sCHAR_CODE <= cCHAR_T; -- T
 			when "10011" =>
-				sCHAR_CODE <= "00111010"; -- :
+				sCHAR_CODE <= cCHAR_DOTS; -- :
 			when "10100" =>
-				sCHAR_CODE <= "00110000"; -- 0	
+				sCHAR_CODE <= cCHAR_0; -- 0	
 			when "10101" =>
-				sCHAR_CODE <= "01111000"; -- x
+				sCHAR_CODE <= cCHAR_x; -- x
 			when "10110" =>
-				sCHAR_CODE <= sUPPER_BYTE_CHAR(15 downto 8); -- _
+				sCHAR_CODE <= sUPPER_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "10111" =>
-				sCHAR_CODE <= sUPPER_BYTE_CHAR(7  downto 0); -- _
+				sCHAR_CODE <= sUPPER_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
 			when "11000" =>
-				sCHAR_CODE <= sLOWER_BYTE_CHAR(15 downto 8); -- _
+				sCHAR_CODE <= sLOWER_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when others =>
-				sCHAR_CODE <= sLOWER_BYTE_CHAR(7  downto 0); -- _
+				sCHAR_CODE <= sLOWER_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
 		end case;	
 	end process char_code;
 	

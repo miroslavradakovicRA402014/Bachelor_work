@@ -25,14 +25,14 @@ Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/ipcor
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_components.vhd" into library work
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/../I2C_bus/i2c_bus.vhd" into library work
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd" into library work
-WARNING:HDLCompiler:946 - "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd" Line 73: Actual for formal port reset is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd" Line 78: Actual for formal port reset is neither a static name nor a globally static expression
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" into library work
 Starting static elaboration
 WARNING:HDLCompiler:746 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Range is empty (null range)
 WARNING:HDLCompiler:220 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
 Completed static elaboration
-Fuse Memory Usage: 172268 KB
-Fuse CPU Usage: 343 ms
+Fuse Memory Usage: 172076 KB
+Fuse CPU Usage: 328 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package i2c_via_uart_components
@@ -54,7 +54,7 @@ Compiling architecture dcm_sp_clock_lost_v of entity dcm_sp_clock_lost [dcm_sp_c
 Compiling architecture dcm_sp_v of entity DCM_SP [\DCM_SP(true,"*",true,false,2.0,...]
 Compiling architecture bufg_v of entity BUFG [bufg_default]
 Compiling architecture xilinx of entity dcm24_to_50 [dcm24_to_50_default]
-Compiling architecture behavioral of entity baud_freq_div [\baud_freq_div(24000000,3,10)\]
+Compiling architecture behavioral of entity baud_freq_div [\baud_freq_div(50000000,3,11)\]
 Compiling architecture behavioral of entity reciver [\reciver(8,8,16,3,4,2)\]
 Compiling architecture behavioral of entity fifo [\fifo(8,16)\]
 Compiling architecture behavioral of entity transmitter [\transmitter(8,16,3,4,2)\]
@@ -70,13 +70,13 @@ Compiling architecture behavioral of entity uart_i2c_master [\uart_i2c_master(4,
 Compiling architecture behavioral of entity slave_reg [slave_reg_default]
 Compiling architecture behavioral of entity falling_edge_det [falling_edge_det_default]
 Compiling architecture behavioral of entity i2c_slave [\i2c_slave(16,13,17,9,8,4,4,4,5,...]
-Compiling architecture behavioral of entity i2c_clk_freq_div [\i2c_clk_freq_div(24000000,4)\]
+Compiling architecture behavioral of entity i2c_clk_freq_div [\i2c_clk_freq_div(50000000,9)\]
 Compiling architecture behavioral of entity i2c_bus [\i2c_bus(8,4)\]
 Compiling architecture behavioral of entity i2c_via_uart [\i2c_via_uart(3,2,4,8)\]
 Compiling architecture behavior of entity i2c_via_uart_tb
 Time Resolution for simulation is 1ps.
-Waiting for 7 sub-compilation(s) to finish...
+Waiting for 3 sub-compilation(s) to finish...
 Compiled 68 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 216300 KB
-Fuse CPU Usage: 1452 ms
+Fuse Memory Usage: 215212 KB
+Fuse CPU Usage: 1312 ms

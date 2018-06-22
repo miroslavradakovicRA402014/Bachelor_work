@@ -116,6 +116,8 @@ architecture Behavioral of uart_i2c_master is
 
 	signal sACK							: std_logic;																					-- Acknowelge signal from mux
 	signal sACK_SEL					: std_logic;																					-- Acknowelge select signal 
+	signal sACK_FF						: std_logic;																					-- Acknowelge flip-flop  
+	signal sACK_FF_EN					: std_logic;																					-- Acknowelge flip-flop enable  	
 	
 	signal sSDA_SEL					: std_logic;																					-- SDA line data select
 
@@ -207,7 +209,7 @@ begin
 				iD 	=> sUBYTE_REG_MUX,
 				oQ		=> sUPPER_BYTE_REG
 			);	
-
+			
 	-- SCL rising edge detector
 	eSCL_EDGE_DET : entity work.rising_edge_det
 			Port map(
@@ -245,6 +247,7 @@ begin
             ioD 		  	=> ioLCD_D		
 			);
 
+	
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
 		if (inRST = '0') then 
@@ -255,7 +258,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX) begin
+	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sIUART_REG, sBYTE_CNT, sSLAVE_ADDR_MUX, sACK_FF) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -317,7 +320,7 @@ begin
 			when I2C_REGISTER_ADDRESS_ACK => 	
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then
-					if (ioSDA = '1') then 
+					if (sACK_FF = '1') then 
 						sNEXT_STATE <= I2C_NACK_STOP; -- If address is not correct stop transaction
 					else
 						if (sSLAVE_ADDR_REG(0) = '0') then 
@@ -403,6 +406,7 @@ begin
 		sIUART_REG_EN  	 	<= '0';
 		sOUART_REG_EN		 	<= '0';
 		sACK_SEL		 		 	<= '0';
+		sACK_FF_EN				<= '0';
 		sSDA_SEL		 		 	<= '0';
 		sLBYTE_REG_SEL		 	<= '0';		
 		sUBYTE_REG_SEL 	 	<= '0';	
@@ -427,6 +431,7 @@ begin
 		sOUART_REG_SEL		 	<= "00";
 		sLCD_DATA_EN 			<= '0';
 		case (sCURRENT_STATE) is
+			-- Master control signals
 			when IDLE =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
@@ -540,6 +545,7 @@ begin
 				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_REGISTER_ADDRESS_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
+				sACK_FF_EN			 <= '1';
 				if (sSLAVE_ADDR_REG(0) = '0') then
 					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(1);				
 					sOSHW_LOAD			 <= '1';	
@@ -594,10 +600,7 @@ begin
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
-				if (sBYTE_CNT = DATA_BYTE_NUM) then
-					sREG_MUX_SEL		 <= "00";
-					sOSHW_LOAD			 <= '0';
-				else
+				if (sBYTE_CNT /= DATA_BYTE_NUM) then
 					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(0);
 					sOSHW_LOAD			 <= '1';
 				end if;				
@@ -648,6 +651,19 @@ begin
 				oUART_WRITE			 <= '1';									
 		end case;
 	end process fsm_out;
+	
+	-- Acknowelge flip-flop  
+	ack_ff : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sACK_FF <= '0'; -- Reset flip-flop
+		elsif (iCLK'event and iCLK = '1') then
+			if (sACK_FF_EN = '1') then -- If ack enabled
+				if (sSCL_RISING_EDGE = '1') then 
+					sACK_FF <= ioSDA; -- Write ack or nack form bus to flip-flop
+				end if;	
+			end if;
+		end if;
+	end process ack_ff;	
 		
 	-- Data counter process						
 	data_cnt : process (iCLK, inRST) begin				

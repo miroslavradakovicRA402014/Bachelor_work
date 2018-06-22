@@ -32,7 +32,7 @@ end char_gen;
 
 architecture Behavioral of char_gen is
 	
-	-- Char codes
+	-- Char codes constants
 	constant cCHAR_0 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110000";
 	constant cCHAR_1 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110001";
 	constant cCHAR_2 : std_logic_vector(DATA_WIDTH - 1 downto 0) := "00110010";

@@ -330,7 +330,7 @@ BEGIN
 		
 		wait for iCLK_period*24*100;
 		
-		-- Slave address 11111010
+		-- Slave address 
 		
 	   -- Start bit	
 		iRX   <= '0';	
@@ -352,11 +352,11 @@ BEGIN
 		
 		wait for iCLK_period*16*160;		
 		-- 3
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*160;
 		-- 4
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*160;	
 		-- 5
@@ -368,12 +368,12 @@ BEGIN
 		
 		wait for iCLK_period*16*160;	
 		-- 7
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*170;
 
 		-- parity
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*170;		
 		
@@ -643,9 +643,7 @@ BEGIN
 		
 		-- Stop bit
 		iRX <= '1';		
-
 		
-
       wait;
    end process;
 

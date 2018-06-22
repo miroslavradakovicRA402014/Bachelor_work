@@ -25,7 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity i2c_clk_freq_div is
 	 Generic (
 		CLK_FREQUENCY : integer := 50000000; -- Clock frequency	
-		CLK_CNT_WIDTH : integer := 5	 		 -- Width of clock counter
+		CLK_CNT_WIDTH : integer := 9	 		 -- Width of clock counter
 	 );
     Port ( iCLK  		: in  std_logic;		 -- Clock signal 50MHz
            inRST 		: in  std_logic;		 -- Reset signal
@@ -35,7 +35,7 @@ end i2c_clk_freq_div;
 
 architecture Behavioral of i2c_clk_freq_div is
 
-	constant cI2C_CLK_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY / (100000 * 16), CLK_CNT_WIDTH); -- Number of clock peroids to count
+	constant cI2C_CLK_PERIOD : unsigned(CLK_CNT_WIDTH - 1 downto 0) := TO_UNSIGNED(CLK_FREQUENCY / 102400, CLK_CNT_WIDTH); -- Number of clock peroids to count 100kibit/s period
 	
 	signal sCLK_CNT : unsigned(CLK_CNT_WIDTH - 1 downto 0); 	-- Clock counter signal
 

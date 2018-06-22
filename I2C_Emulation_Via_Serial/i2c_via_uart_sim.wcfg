@@ -12,15 +12,20 @@
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
             <top_module name="std_logic_unsigned" />
+            <top_module name="textio" />
             <top_module name="uart_components" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <WVObjectSize size="43" />
    <wave_markers>
-      <marker time="4270000000000" label="" />
       <marker time="4617415000000" label="" />
       <marker time="10244899000000" label="" />
+      <marker time="-2499999999000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>

@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.10 secs
+Total CPU time to Xst completion: 0.12 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -437,10 +437,10 @@ Synthesizing Unit <uart_i2c_master>.
     Found 2-bit adder for signal <sBYTE_CNT[1]_GND_34_o_add_77_OUT> created at line 1241.
     Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_82_OUT> created at line 1241.
     Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_88_OUT> created at line 1241.
-    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 743.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 758.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 794
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 798
+    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 740.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 755.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 791
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 795
     Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_39_o> created at line 552
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
@@ -500,6 +500,10 @@ Synthesizing Unit <lcd_driver>.
         CMD_SEQ_NUMBER = 3
         LCD_BUS_WIDTH = 4
         DATA_WIDTH = 8
+        CHAR_WIDTH = 8
+        SEQ_CNT_WIDTH = 3
+        INIT_PERIOD = 2160000
+        CMD_SEQ_PERIOD = 12000
         CHAR_NUMBER = 27
     Found 1-bit register for signal <sMODE_FF>.
     Found 5-bit register for signal <sCURRENT_STATE>.
@@ -523,14 +527,14 @@ Synthesizing Unit <lcd_driver>.
     Found 3-bit adder for signal <sSEQ_CNT[2]_GND_39_o_add_116_OUT> created at line 1241.
     Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_120_OUT> created at line 1241.
     Found 5-bit adder for signal <sCHAR_CNT[4]_GND_39_o_add_124_OUT> created at line 1241.
-    Found 4x20-bit Read Only RAM for signal <_n0206>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0186> created at line 745.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 980
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 984
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 984
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 984
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 984
-    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_35_o> created at line 393
+    Found 4x20-bit Read Only RAM for signal <_n0328>
+    Found 4-bit 4-to-1 multiplexer for signal <_n0183> created at line 565.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 749
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 753
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 753
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 753
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 753
+    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_35_o> created at line 365
     Summary:
 	inferred   1 RAM(s).
 	inferred   3 Adder/Subtractor(s).
@@ -663,12 +667,12 @@ Unit <falling_edge_det> synthesized.
 Synthesizing Unit <i2c_clk_freq_div>.
     Related source file is "D:\BSc_workspace\Bachelor_work\I2C_bus\i2c_clk_freq_div.vhd".
         CLK_FREQUENCY = 50000000
-        CLK_CNT_WIDTH = 5
-    Found 5-bit register for signal <sCLK_CNT>.
-    Found 5-bit adder for signal <sCLK_CNT[4]_GND_58_o_add_1_OUT> created at line 1241.
+        CLK_CNT_WIDTH = 9
+    Found 9-bit register for signal <sCLK_CNT>.
+    Found 9-bit adder for signal <sCLK_CNT[8]_GND_58_o_add_1_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
-	inferred   5 D-type flip-flop(s).
+	inferred   9 D-type flip-flop(s).
 	inferred   1 Multiplexer(s).
 Unit <i2c_clk_freq_div> synthesized.
 
@@ -690,8 +694,9 @@ Macro Statistics
  22-bit adder                                          : 1
  3-bit adder                                           : 3
  4-bit adder                                           : 8
- 5-bit adder                                           : 4
+ 5-bit adder                                           : 3
  6-bit adder                                           : 4
+ 9-bit adder                                           : 1
 # Registers                                            : 101
  1-bit register                                        : 8
  11-bit register                                       : 2
@@ -701,9 +706,9 @@ Macro Statistics
  22-bit register                                       : 1
  3-bit register                                        : 5
  4-bit register                                        : 9
- 5-bit register                                        : 8
+ 5-bit register                                        : 7
  8-bit register                                        : 48
- 9-bit register                                        : 1
+ 9-bit register                                        : 2
 # Comparators                                          : 10
  11-bit comparator equal                               : 1
  3-bit comparator equal                                : 2
@@ -722,10 +727,11 @@ Macro Statistics
  3-bit 2-to-1 multiplexer                              : 3
  4-bit 2-to-1 multiplexer                              : 45
  4-bit 4-to-1 multiplexer                              : 1
- 5-bit 2-to-1 multiplexer                              : 8
+ 5-bit 2-to-1 multiplexer                              : 7
  8-bit 16-to-1 multiplexer                             : 2
  8-bit 2-to-1 multiplexer                              : 13
  8-bit 4-to-1 multiplexer                              : 2
+ 9-bit 2-to-1 multiplexer                              : 1
 # Tristates                                            : 25
  1-bit tristate buffer                                 : 25
 # FSMs                                                 : 9
@@ -798,7 +804,7 @@ Synthesizing (advanced) Unit <lcd_driver>.
 The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
 The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0206> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0328> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -882,7 +888,8 @@ Macro Statistics
  22-bit up counter                                     : 1
  3-bit up counter                                      : 3
  4-bit up counter                                      : 8
- 5-bit up counter                                      : 4
+ 5-bit up counter                                      : 3
+ 9-bit up counter                                      : 1
 # Registers                                            : 697
  Flip-Flops                                            : 697
 # Comparators                                          : 10
@@ -1083,8 +1090,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 871
- Flip-Flops                                            : 871
+# Registers                                            : 875
+ Flip-Flops                                            : 875
 
 =========================================================================
 
@@ -1107,23 +1114,23 @@ Top Level Output File Name         : i2c_via_uart.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1334
+# BELS                             : 1357
 #      GND                         : 1
-#      INV                         : 6
-#      LUT1                        : 34
-#      LUT2                        : 40
+#      INV                         : 5
+#      LUT1                        : 37
+#      LUT2                        : 39
 #      LUT3                        : 359
-#      LUT4                        : 96
-#      LUT5                        : 158
-#      LUT6                        : 484
-#      MUXCY                       : 44
+#      LUT4                        : 94
+#      LUT5                        : 160
+#      LUT6                        : 489
+#      MUXCY                       : 52
 #      MUXF7                       : 48
 #      MUXF8                       : 16
 #      VCC                         : 1
-#      XORCY                       : 47
-# FlipFlops/Latches                : 871
+#      XORCY                       : 56
+# FlipFlops/Latches                : 875
 #      FDC                         : 76
-#      FDCE                        : 778
+#      FDCE                        : 782
 #      FDP                         : 7
 #      FDPE                        : 10
 # Clock Buffers                    : 1
@@ -1144,15 +1151,15 @@ Selected Device : 6slx45fgg676-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             871  out of  54576     1%  
- Number of Slice LUTs:                 1177  out of  27288     4%  
-    Number used as Logic:              1177  out of  27288     4%  
+ Number of Slice Registers:             875  out of  54576     1%  
+ Number of Slice LUTs:                 1183  out of  27288     4%  
+    Number used as Logic:              1183  out of  27288     4%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1394
-   Number with an unused Flip Flop:     523  out of   1394    37%  
-   Number with an unused LUT:           217  out of   1394    15%  
-   Number of fully used LUT-FF pairs:   654  out of   1394    46%  
+ Number of LUT Flip Flop pairs used:   1400
+   Number with an unused Flip Flop:     525  out of   1400    37%  
+   Number with an unused LUT:           217  out of   1400    15%  
+   Number of fully used LUT-FF pairs:   658  out of   1400    47%  
    Number of unique control sets:        88
 
 IO Utilization: 
@@ -1183,7 +1190,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-iCLK                               | DCM_SP:CLKFX           | 871   |
+iCLK                               | DCM_SP:CLKFX           | 875   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -1195,7 +1202,7 @@ Timing Summary:
 Speed Grade: -2
 
    Minimum period: 14.644ns (Maximum Frequency: 68.289MHz)
-   Minimum input arrival time before clock: 5.327ns
+   Minimum input arrival time before clock: 5.328ns
    Maximum output required time after clock: 12.583ns
    Maximum combinational path delay: 6.371ns
 
@@ -1206,7 +1213,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 14.644ns (frequency: 68.289MHz)
-  Total number of paths / destination ports: 29212 / 1643
+  Total number of paths / destination ports: 29719 / 1651
 -------------------------------------------------------------------------
 Delay:               7.029ns (Levels of Logic = 5)
   Source:            eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
@@ -1231,9 +1238,9 @@ Delay:               7.029ns (Levels of Logic = 5)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 1536 / 1025
+  Total number of paths / destination ports: 1540 / 1029
 -------------------------------------------------------------------------
-Offset:              5.327ns (Levels of Logic = 2)
+Offset:              5.328ns (Levels of Logic = 2)
   Source:            inRST (PAD)
   Destination:       eI2C_BUS/eCLK_FREQ_DIV/sCLK_CNT_0 (FF)
   Destination Clock: iCLK rising 2.1X
@@ -1243,10 +1250,10 @@ Offset:              5.327ns (Levels of Logic = 2)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             2   1.328   0.726  inRST_IBUF (inRST_IBUF)
-     LUT2:I1->O          871   0.254   2.560  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
+     LUT2:I1->O          875   0.254   2.561  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
      FDCE:CLR                  0.459          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_0
     ----------------------------------------
-    Total                      5.327ns (2.041ns logic, 3.286ns route)
+    Total                      5.328ns (2.041ns logic, 3.287ns route)
                                        (38.3% logic, 61.7% route)
 
 =========================================================================
@@ -1311,11 +1318,11 @@ iCLK           |    7.029|         |         |         |
 
 
 Total REAL time to Xst completion: 12.00 secs
-Total CPU time to Xst completion: 11.79 secs
+Total CPU time to Xst completion: 11.41 secs
  
 --> 
 
-Total memory usage is 261708 kilobytes
+Total memory usage is 262220 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    9 (   0 filtered)

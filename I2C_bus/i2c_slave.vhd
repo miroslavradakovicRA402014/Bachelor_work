@@ -95,8 +95,9 @@ architecture Behavioral of i2c_slave is
 	
 	signal sACK							: std_logic;																					-- Acknowelge signal from mux
 	signal sACK_SEL					: std_logic;																					-- Acknowelge select signal 
-	
-	signal sSDA_SEL					: std_logic;																					-- SDA line data select
+	signal sSDA_SEL					: std_logic;																					-- SDA selection signal
+	signal sACK_FF						: std_logic;																					-- Acknowelge flip-flop  
+	signal sACK_FF_EN					: std_logic;																					-- Acknowelge flip-flop enable 	
 
 	signal sISHW_REG					: std_logic_vector(DATA_WIDTH	- 1 downto 0);											-- Input shift register
 	signal sISHW_EN					: std_logic;																					-- Input shift register enable	
@@ -194,7 +195,7 @@ begin
 	end process fsm_reg;
 	
 	-- Slave FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF) begin
+	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF, sACK_FF) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -268,7 +269,7 @@ begin
 				end if;	
 			when WRITE_ACK =>
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					if (ioSDA = '0') then
+					if (sACK_FF = '0') then
 						sNEXT_STATE <= WRITE_DATA;	-- If transmission for ack period done	write data byte
 					else
 						sNEXT_STATE <= STOP;	-- Get stop condition
@@ -305,6 +306,7 @@ begin
 		sREG_DEC_SEL		 	 <= "0000";
 		sREG_DEC_EN			 	 <= '0';
 		sACK_SEL				 	 <= '0';
+		sACK_FF_EN				 <= '0';
 		sSDA_SEL				 	 <= '0';		
 		case (sCURRENT_STATE) is
 			-- Slave control signals
@@ -351,8 +353,8 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
 				sACK_SEL				 <= '1';		
 			when REPEATED_START =>
-				sIN_BUFF_EN	 		 <= '1';
-				sDATA_CNT_RST 		 <= '1';
+				sIN_BUFF_EN	 		 	 <= '1';
+				sDATA_CNT_RST 		 	 <= '1';
 				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period	
 			when READ_DATA =>		
 				sIN_BUFF_EN	 		 <= '1';	
@@ -384,11 +386,25 @@ begin
 				sBYTE_CNT_EN   	 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
 				sOSHW_LOAD			 <= '1'; -- Load data form registers
-				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address			
+				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address		
+				sACK_FF_EN			 <= '1';	-- Enable for acknowelge enable				
 			when STOP =>
 				sIN_BUFF_EN	 		 <= '1';						
 		end case;
 	end process fsm_out;
+
+	-- Acknowelge flip-flop  
+	ack_ff : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sACK_FF <= '0'; -- Reset flip-flop
+		elsif (iCLK'event and iCLK = '1') then
+			if (sACK_FF_EN = '1') then -- If ack enabled
+				if (sSCL_RISING_EDGE = '1') then 
+					sACK_FF <= ioSDA; -- Write ack or nack form bus to flip-flop
+				end if;	
+			end if;
+		end if;
+	end process ack_ff;
 	
 	-- Data counter process						
 	data_cnt : process (iCLK, inRST) begin				
