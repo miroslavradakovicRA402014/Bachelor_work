@@ -60,7 +60,7 @@ ARCHITECTURE behavior OF scl_gen_tb IS
    signal oSCL : std_logic;
 
    -- Clock period definitions
-   constant iCLK_period : time := 10 ns;
+   constant iCLK_period : time := 21 ns;
  
 BEGIN
  

@@ -16,7 +16,6 @@ Environment Variable      Effect
 NONE                      No environment variables were set
 --------------------------------------------------------------------------------
 
-INFO:Timing:2698 - No timing constraints found, doing default enumeration.
 INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
 INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
    option. All paths that are not constrained will be reported in the 
@@ -26,78 +25,565 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
    and for more information on accounting for different loading conditions, 
    please see the device datasheet.
 
+================================================================================
+Timing constraint: TS_ClkIn = PERIOD TIMEGRP "sCLK" 20 ns HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 29049 paths analyzed, 3182 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   8.570ns.
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6 (SLICE_X12Y59.C4), 142 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     11.430ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      8.192ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.043ns (0.726 - 0.769)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y66.BQ      Tcko                  0.476   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd13
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A1      net (fanout=13)       1.948   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.B5      net (fanout=16)       1.448   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.B       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+    SLICE_X10Y59.A1      net (fanout=1)        0.770   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT22
+    SLICE_X10Y59.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT27
+    SLICE_X12Y59.C4      net (fanout=1)        0.575   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT26
+    SLICE_X12Y59.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<6>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT215
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    -------------------------------------------------  ---------------------------
+    Total                                      8.192ns (1.832ns logic, 6.360ns route)
+                                                       (22.4% logic, 77.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     11.827ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.822ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.292 - 0.308)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y58.AQ      Tcko                  0.525   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A3      net (fanout=4)        1.529   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.B5      net (fanout=16)       1.448   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.B       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+    SLICE_X10Y59.A1      net (fanout=1)        0.770   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT22
+    SLICE_X10Y59.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT27
+    SLICE_X12Y59.C4      net (fanout=1)        0.575   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT26
+    SLICE_X12Y59.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<6>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT215
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    -------------------------------------------------  ---------------------------
+    Total                                      7.822ns (1.881ns logic, 5.941ns route)
+                                                       (24.0% logic, 76.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     12.119ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.502ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.044ns (0.726 - 0.770)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X19Y65.AQ      Tcko                  0.430   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd8
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A6      net (fanout=12)       1.304   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.B5      net (fanout=16)       1.448   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.B       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+    SLICE_X10Y59.A1      net (fanout=1)        0.770   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT22
+    SLICE_X10Y59.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT23
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT27
+    SLICE_X12Y59.C4      net (fanout=1)        0.575   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT26
+    SLICE_X12Y59.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<6>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT215
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_6
+    -------------------------------------------------  ---------------------------
+    Total                                      7.502ns (1.786ns logic, 5.716ns route)
+                                                       (23.8% logic, 76.2% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4 (SLICE_X8Y59.C1), 142 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     11.628ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.993ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.044ns (0.725 - 0.769)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y66.BQ      Tcko                  0.476   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd13
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A1      net (fanout=13)       1.948   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.A5      net (fanout=16)       1.443   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.A       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+    SLICE_X10Y58.A6      net (fanout=1)        0.378   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT42
+    SLICE_X10Y58.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT47
+    SLICE_X8Y59.C1       net (fanout=1)        0.773   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT46
+    SLICE_X8Y59.CLK      Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<4>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT415
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    -------------------------------------------------  ---------------------------
+    Total                                      7.993ns (1.832ns logic, 6.161ns route)
+                                                       (22.9% logic, 77.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     12.025ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.623ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.017ns (0.291 - 0.308)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y58.AQ      Tcko                  0.525   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A3      net (fanout=4)        1.529   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.A5      net (fanout=16)       1.443   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.A       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+    SLICE_X10Y58.A6      net (fanout=1)        0.378   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT42
+    SLICE_X10Y58.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT47
+    SLICE_X8Y59.C1       net (fanout=1)        0.773   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT46
+    SLICE_X8Y59.CLK      Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<4>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT415
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    -------------------------------------------------  ---------------------------
+    Total                                      7.623ns (1.881ns logic, 5.742ns route)
+                                                       (24.7% logic, 75.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     12.317ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.303ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.045ns (0.725 - 0.770)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X19Y65.AQ      Tcko                  0.430   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd8
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A6      net (fanout=12)       1.304   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X13Y59.A5      net (fanout=16)       1.443   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X13Y59.A       Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT32
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+    SLICE_X10Y58.A6      net (fanout=1)        0.378   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT42
+    SLICE_X10Y58.A       Tilo                  0.254   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT43
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT47
+    SLICE_X8Y59.C1       net (fanout=1)        0.773   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT46
+    SLICE_X8Y59.CLK      Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<4>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT415
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_4
+    -------------------------------------------------  ---------------------------
+    Total                                      7.303ns (1.786ns logic, 5.517ns route)
+                                                       (24.5% logic, 75.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7 (SLICE_X12Y61.A6), 142 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     11.666ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.959ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.040ns (0.729 - 0.769)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y66.BQ      Tcko                  0.476   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd13
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A1      net (fanout=13)       1.948   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd9
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X12Y58.D4      net (fanout=16)       1.712   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X12Y58.D       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT13
+    SLICE_X12Y58.A3      net (fanout=1)        0.350   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+    SLICE_X12Y58.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT17
+    SLICE_X12Y61.A6      net (fanout=1)        0.541   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT16
+    SLICE_X12Y61.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<7>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT115
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    -------------------------------------------------  ---------------------------
+    Total                                      7.959ns (1.789ns logic, 6.170ns route)
+                                                       (22.5% logic, 77.5% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     12.063ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.589ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.013ns (0.295 - 0.308)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y58.AQ      Tcko                  0.525   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A3      net (fanout=4)        1.529   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X12Y58.D4      net (fanout=16)       1.712   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X12Y58.D       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT13
+    SLICE_X12Y58.A3      net (fanout=1)        0.350   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+    SLICE_X12Y58.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT17
+    SLICE_X12Y61.A6      net (fanout=1)        0.541   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT16
+    SLICE_X12Y61.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<7>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT115
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    -------------------------------------------------  ---------------------------
+    Total                                      7.589ns (1.838ns logic, 5.751ns route)
+                                                       (24.2% logic, 75.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     12.355ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      7.269ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.041ns (0.729 - 0.770)
+  Source Clock:         sCLK rising at 0.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.335ns
+
+  Clock Uncertainty:          0.335ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.599ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X19Y65.AQ      Tcko                  0.430   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd8
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A6      net (fanout=12)       1.304   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5
+    SLICE_X12Y57.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>7
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1511
+    SLICE_X3Y62.B1       net (fanout=3)        1.619   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>151
+    SLICE_X3Y62.B        Tilo                  0.259   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT69
+                                                       eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>41
+    SLICE_X12Y58.D4      net (fanout=16)       1.712   eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>4
+    SLICE_X12Y58.D       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT13
+    SLICE_X12Y58.A3      net (fanout=1)        0.350   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+    SLICE_X12Y58.A       Tilo                  0.235   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT12
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT17
+    SLICE_X12Y61.A6      net (fanout=1)        0.541   eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT16
+    SLICE_X12Y61.CLK     Tas                   0.349   eI2C_BUS/eI2C_SLAVE/sOSHW_REG<7>
+                                                       eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT115
+                                                       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+    -------------------------------------------------  ---------------------------
+    Total                                      7.269ns (1.743ns logic, 5.526ns route)
+                                                       (24.0% logic, 76.0% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_ClkIn = PERIOD TIMEGRP "sCLK" 20 ns HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eI2C_SLAVE/sDATA_CNT_3 (SLICE_X20Y67.C5), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.390ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               eI2C_BUS/eI2C_SLAVE/sDATA_CNT_2 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sDATA_CNT_3 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.390ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 20.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: eI2C_BUS/eI2C_SLAVE/sDATA_CNT_2 to eI2C_BUS/eI2C_SLAVE/sDATA_CNT_3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y67.CQ      Tcko                  0.200   eI2C_BUS/eI2C_SLAVE/sDATA_CNT<2>
+                                                       eI2C_BUS/eI2C_SLAVE/sDATA_CNT_2
+    SLICE_X20Y67.C5      net (fanout=3)        0.069   eI2C_BUS/eI2C_SLAVE/sDATA_CNT<2>
+    SLICE_X20Y67.CLK     Tah         (-Th)    -0.121   eI2C_BUS/eI2C_SLAVE/sDATA_CNT<2>
+                                                       eI2C_BUS/eI2C_SLAVE/Mcount_sDATA_CNT_xor<3>11
+                                                       eI2C_BUS/eI2C_SLAVE/sDATA_CNT_3
+    -------------------------------------------------  ---------------------------
+    Total                                      0.390ns (0.321ns logic, 0.069ns route)
+                                                       (82.3% logic, 17.7% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_3 (SLICE_X24Y76.B5), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.399ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_2 (FF)
+  Destination:          eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_3 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.399ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 20.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_2 to eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X24Y76.BQ      Tcko                  0.200   eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT<2>
+                                                       eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_2
+    SLICE_X24Y76.B5      net (fanout=3)        0.078   eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT<2>
+    SLICE_X24Y76.CLK     Tah         (-Th)    -0.121   eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT<2>
+                                                       eI2C_BUS/eUART_I2C_MASTER/Mcount_sDATA_CNT_xor<3>11
+                                                       eI2C_BUS/eUART_I2C_MASTER/sDATA_CNT_3
+    -------------------------------------------------  ---------------------------
+    Total                                      0.399ns (0.321ns logic, 0.078ns route)
+                                                       (80.5% logic, 19.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_2 (SLICE_X20Y65.B5), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.405ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_1 (FF)
+  Destination:          eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_2 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.405ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         sCLK rising at 20.000ns
+  Destination Clock:    sCLK rising at 20.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_1 to eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y65.BQ      Tcko                  0.200   eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT<3>
+                                                       eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_1
+    SLICE_X20Y65.B5      net (fanout=4)        0.084   eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT<1>
+    SLICE_X20Y65.CLK     Tah         (-Th)    -0.121   eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT<3>
+                                                       eI2C_BUS/eI2C_SLAVE/Mcount_sTR_PERIOD_CNT_xor<2>11
+                                                       eI2C_BUS/eI2C_SLAVE/sTR_PERIOD_CNT_2
+    -------------------------------------------------  ---------------------------
+    Total                                      0.405ns (0.321ns logic, 0.084ns route)
+                                                       (79.3% logic, 20.7% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_ClkIn = PERIOD TIMEGRP "sCLK" 20 ns HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG<11>/CLK
+  Logical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG_8/CK
+  Location pin: SLICE_X2Y58.CLK
+  Clock network: sCLK
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 20.000ns
+  High pulse: 10.000ns
+  High pulse limit: 0.240ns (Trpw)
+  Physical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG<11>/SR
+  Logical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG_8/SR
+  Location pin: SLICE_X2Y58.SR
+  Clock network: eI2C_BUS/eI2C_SLAVE/inRST_inv
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG<11>/CLK
+  Logical resource: eI2C_BUS/eI2C_SLAVE/reg_gen[5].eSLAVE_REG/sREG_0/CK
+  Location pin: SLICE_X2Y58.CLK
+  Clock network: sCLK
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
 
 
 Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
-Setup/Hold to clock iCLK
-----------------+------------+------------+------------+------------+------------------+--------+
-                |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
-Source          | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
-----------------+------------+------------+------------+------------+------------------+--------+
-iBAUD_SW<0>     |    0.934(R)|      SLOW  |    1.082(R)|      SLOW  |sCLK              |   0.000|
-iBAUD_SW<1>     |   -0.548(R)|      FAST  |    3.083(R)|      SLOW  |sCLK              |   0.000|
-iBAUD_SW<2>     |    1.061(R)|      SLOW  |    0.866(R)|      SLOW  |sCLK              |   0.000|
-iCTS            |    2.795(R)|      SLOW  |   -0.911(R)|      SLOW  |sCLK              |   0.000|
-iDATA_BIT_SW<0> |    0.936(R)|      SLOW  |    1.511(R)|      SLOW  |sCLK              |   0.000|
-iDATA_BIT_SW<1> |    0.361(R)|      FAST  |    1.573(R)|      SLOW  |sCLK              |   0.000|
-iHANDSHAKE_EN_SW|    2.750(R)|      SLOW  |   -0.328(R)|      SLOW  |sCLK              |   0.000|
-iPARITY_EN_SW   |    2.779(R)|      SLOW  |    2.600(R)|      SLOW  |sCLK              |   0.000|
-iPARITY_SW      |    4.640(R)|      SLOW  |   -0.659(R)|      SLOW  |sCLK              |   0.000|
-iRX             |    3.366(R)|      SLOW  |   -1.423(R)|      SLOW  |sCLK              |   0.000|
-inRST           |   10.467(R)|      SLOW  |   -1.538(R)|      SLOW  |sCLK              |   0.000|
-ioLCD_D<3>      |    3.521(R)|      SLOW  |   -0.113(R)|      SLOW  |sCLK              |   0.000|
-----------------+------------+------------+------------+------------+------------------+--------+
-
-Clock iCLK to Pad
-------------+-----------------+------------+-----------------+------------+------------------+--------+
-            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
-Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
-------------+-----------------+------------+-----------------+------------+------------------+--------+
-ioLCD_D<0>  |        22.306(R)|      SLOW  |         7.390(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<1>  |        21.611(R)|      SLOW  |         7.204(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<2>  |        22.042(R)|      SLOW  |         6.544(R)|      FAST  |sCLK              |   0.000|
-ioLCD_D<3>  |        19.904(R)|      SLOW  |         6.736(R)|      FAST  |sCLK              |   0.000|
-oLCD_E      |        18.639(R)|      SLOW  |         6.968(R)|      FAST  |sCLK              |   0.000|
-oLCD_RS     |        16.184(R)|      SLOW  |         6.667(R)|      FAST  |sCLK              |   0.000|
-oLCD_RW     |        16.894(R)|      SLOW  |         7.026(R)|      FAST  |sCLK              |   0.000|
-oLED<0>     |        13.701(R)|      SLOW  |         5.959(R)|      FAST  |sCLK              |   0.000|
-oLED<1>     |        12.377(R)|      SLOW  |         5.205(R)|      FAST  |sCLK              |   0.000|
-oLED<2>     |        14.959(R)|      SLOW  |         6.634(R)|      FAST  |sCLK              |   0.000|
-oLED<3>     |        14.294(R)|      SLOW  |         6.272(R)|      FAST  |sCLK              |   0.000|
-oLED<4>     |        13.211(R)|      SLOW  |         5.677(R)|      FAST  |sCLK              |   0.000|
-oLED<5>     |        14.200(R)|      SLOW  |         6.225(R)|      FAST  |sCLK              |   0.000|
-oLED<6>     |        14.624(R)|      SLOW  |         6.455(R)|      FAST  |sCLK              |   0.000|
-oRTS        |        17.574(R)|      SLOW  |         8.209(R)|      FAST  |sCLK              |   0.000|
-oTX         |        18.826(R)|      SLOW  |         7.358(R)|      FAST  |sCLK              |   0.000|
-------------+-----------------+------------+-----------------+------------+------------------+--------+
-
 Clock to Setup on destination clock iCLK
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    6.414|         |         |         |
+iCLK           |    8.570|         |         |         |
 ---------------+---------+---------+---------+---------+
 
-Pad to Pad
----------------+---------------+---------+
-Source Pad     |Destination Pad|  Delay  |
----------------+---------------+---------+
-iPARITY_SW     |oTX            |   16.786|
----------------+---------------+---------+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 29049 paths, 0 nets, and 4974 connections
+
+Design statistics:
+   Minimum period:   8.570ns{1}   (Maximum frequency: 116.686MHz)
 
 
-Analysis completed Fri Jun 22 18:49:34 2018 
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Mon Jun 25 18:19:44 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 220 MB
+Peak Memory Usage: 219 MB
 
 
 

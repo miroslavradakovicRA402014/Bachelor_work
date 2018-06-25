@@ -1,0 +1,10 @@
+Command line:
+   scl_gen_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51776
+
+Sat Jun 23 13:24:34 2018
+
+
+ Elaboration Time: 0.078125 sec

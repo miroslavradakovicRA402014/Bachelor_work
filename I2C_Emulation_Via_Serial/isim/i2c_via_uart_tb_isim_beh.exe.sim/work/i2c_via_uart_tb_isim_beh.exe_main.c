@@ -36,10 +36,10 @@ int main(int argc, char **argv)
 
     xsi_register_min_prec_unit(-12);
     ieee_p_2592010699_init();
+    ieee_p_1242562249_init();
     work_p_0583247548_init();
     ieee_p_3499444699_init();
     ieee_p_3620187407_init();
-    ieee_p_1242562249_init();
     unisim_p_0947159679_init();
     work_p_1809911496_init();
     work_p_1825677762_init();
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     work_a_3596068334_3212880686_init();
     work_a_3219417343_3212880686_init();
     work_a_3194697436_3212880686_init();
-    work_a_1045291805_3212880686_init();
+    work_a_0928455289_3212880686_init();
     work_a_3895332195_3212880686_init();
     work_a_2168191763_3212880686_init();
     work_a_3194606462_2372691052_init();

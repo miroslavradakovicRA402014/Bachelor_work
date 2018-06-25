@@ -57,7 +57,7 @@ package uart_components is
 				  iDATA_SEL  	 : in   std_logic_vector(1 downto 0);						-- Data bits select 
 				  iCTS		 	 : in   std_logic;												-- Clear to send signal 
 				  iTC    	 	 : in   std_logic;												-- Terminal count from clock divider
-				  iDATA  	 	 : in   std_logic_vector(DATA_WIDTH   - 1 downto 0);  -- Input data
+				  iDATA  	 	 : in   std_logic_vector(DATA_WIDTH - 1 downto 0);  	-- Input data
 				  iSTART 	 	 : in   std_logic;											 	--	Transaction start signal
 				  oTX_READY  	 : out  std_logic;												-- Transmitter ready
 				  oTX    	 	 : out  std_logic);												-- TX ready signal
@@ -75,6 +75,7 @@ package uart_components is
 				  iRD     : in  std_logic;												-- Read from FIFO signal
 				  oFULL   : out std_logic;												-- FIFO full indication
 				  oEMPTY  : out std_logic;												-- FIFO empty indication
+				  oLED 	 : out std_logic_vector(7 downto 0);
 				  oDATA   : out std_logic_vector(DATA_WIDTH - 1 downto 0)); -- Output data
 	end component;	
 

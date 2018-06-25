@@ -29,7 +29,6 @@ package i2c_via_uart_components is
 				  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
 				  oLCD_RS    	: out   std_logic;												-- LCD display register select signal
 				  oLCD_RW      : out   std_logic;												-- LCD read write signa
-				  oLED			: out   std_logic_vector(7 downto 0);  					-- LED control signal
 				  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 	end component;
 	
@@ -53,6 +52,7 @@ package i2c_via_uart_components is
            iUART_RD    		 : in   std_logic;												-- Read from reciver signal			
 			  oTX         		 : out  std_logic;												-- TX signal
 			  oRTS				 : out  std_logic;												-- Request to send signal
+			  oLED			: out   std_logic_vector(7 downto 0);			  
 			  oUART_FULL       : out  std_logic;												-- Reciver FIFO full idication
            oUART_EMPTY      : out  std_logic;												-- Transmitter FULL empty indication
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));	-- Reciver output data

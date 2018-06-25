@@ -52,7 +52,6 @@ entity uart_i2c_master is
 			  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
            oLCD_RS    	: out   std_logic;												-- LCD display register select 
            oLCD_RW      : out   std_logic;												-- LCD display read-write signal
-			  oLED			: out   std_logic_vector(7 downto 0);						-- LED control
 			  ioSDA		   : inout std_logic;												-- SDA signal
 			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 end uart_i2c_master;
@@ -243,7 +242,7 @@ begin
             oE 	   	=> oLCD_E,  
             oRS    	   => oLCD_RS,
             oRW   		=> oLCD_RW,  
-				oLED			=> oLED,
+--				oLED			=> oLED,
             ioD 		  	=> ioLCD_D		
 			);
 
@@ -300,7 +299,11 @@ begin
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_REGISTER_ADDRESS; -- Send slave register address 
+					if (sACK_FF /= '0') then
+						sNEXT_STATE <= I2C_NACK_STOP;  -- Slave doesn't acknowelge 
+					else 
+						sNEXT_STATE <= I2C_REGISTER_ADDRESS; -- Send slave register address
+					end if;
 				end if;	
 			when I2C_SLAVE_ADDRESS_READ =>
 				-- Check if period elapsed 
@@ -309,8 +312,12 @@ begin
 				end if;
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
 				-- Check if period elapsed 
-				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_READ_DATA; -- Get data byte
+				if (sTC_TR_PERIOD_CNT = '1') then
+					if (sACK_FF /= '0') then
+						sNEXT_STATE <= I2C_NACK_STOP;  -- Slave doesn't acknowelge 
+					else 				
+						sNEXT_STATE <= I2C_READ_DATA; -- Get data byte
+					end if;	
 				end if;				
 			when I2C_REGISTER_ADDRESS =>
 				-- Check if period elapsed 
@@ -348,7 +355,9 @@ begin
 			when I2C_WRITE_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					if (sBYTE_CNT = DATA_BYTE_NUM) then
+					if (sACK_FF /= '0') then
+						sNEXT_STATE <= I2C_NACK_STOP; -- Nack  
+					elsif (sBYTE_CNT = DATA_BYTE_NUM) then
 						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
 					else
 						sNEXT_STATE <= I2C_WRITE_DATA; -- Write another byte
@@ -358,7 +367,7 @@ begin
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					if (sBYTE_CNT = DATA_BYTE_NUM) then
-						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
+						sNEXT_STATE <= I2C_STOP; -- All bytes read from slave
 					else
 						sNEXT_STATE <= I2C_READ_DATA; -- Read another byte from slave
 					end if;	
@@ -445,9 +454,9 @@ begin
 				sACK_SEL		 		 	<= '1';
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
-					sREG_DEC_EN			 	<= '1';	
-				end if;	
-				oUART_READ  		 	<= '1';	
+					sREG_DEC_EN			 	<= '1';
+					oUART_READ  		 	<= '1';	
+				end if;		
 			when UART_SLAVE_ADDRESS =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';	
@@ -456,20 +465,24 @@ begin
 						sREG_DEC_EN			 	<= '1';	
 					end if;
 				else
+					if (sSLAVE_ADDR_REG(0) /= '1') then
+						oUART_READ  		 	<= '1';	
+					end if;					
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
 				end if;		
 				sREG_DEC_SEL		 	<= "01";
-				oUART_READ  		 	<= '1';
 			when UART_REGISTER_ADDRESS =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "11";
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
-					sREG_DEC_EN			 	<= '1';	
-				end if;				
-				oUART_READ  		 	<= '1';		
+					sREG_DEC_EN			 	<= '1';
+					if (sSLAVE_ADDR_REG(0) /= '1') then
+						oUART_READ  		 	<= '1';	
+					end if;	
+				end if;						
 			when UART_BYTE_UPPER =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
@@ -506,6 +519,7 @@ begin
 				sTR_PERIOD_CNT_EN  	<= '1';		
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
 				sIN_BUFF_EN	 		 	<= '1';
+				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
 				oFREQ_EN 			 	<= '1';
@@ -526,6 +540,7 @@ begin
 				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
 				sIN_BUFF_EN	 		 	<= '1';
+				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
 				oFREQ_EN 			 	<= '1';
@@ -597,6 +612,7 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';			
 			when I2C_WRITE_DATA_ACK =>
 				sIN_BUFF_EN	 		 <= '1';
+				sACK_FF_EN			 <= '1';
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';

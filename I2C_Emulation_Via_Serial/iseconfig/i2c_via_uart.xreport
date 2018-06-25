@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-06-22T15:25:00</DateModified>
+  <DateModified>2018-06-25T18:44:59</DateModified>
   <ModuleName>i2c_via_uart</ModuleName>
-  <SummaryTimeStamp>2018-06-21T15:23:04</SummaryTimeStamp>
+  <SummaryTimeStamp>2018-06-25T10:24:09</SummaryTimeStamp>
   <SavedFilePath>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/iseconfig/i2c_via_uart.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial\</ImplementationReportsDirectory>
   <DateInitialized>2018-05-22T14:35:21</DateInitialized>
@@ -22,9 +22,9 @@
    <view inputState="Translated" program="map" locator="MAP_IOB_TABLE" contextTags="FPGA_ONLY" type="IOBProperties" file="i2c_via_uart_map.xrpt" label="IOB Properties" />
    <view inputState="Translated" program="map" contextTags="FPGA_ONLY" hidden="true" type="Control_Sets" file="i2c_via_uart_map.xrpt" label="Control Set Information" />
    <view inputState="Translated" program="map" locator="MAP_MODULE_HIERARCHY" contextTags="FPGA_ONLY" type="Module_Utilization" file="i2c_via_uart_map.xrpt" label="Module Level Utilization" />
-   <view inputState="Mapped" program="par" locator="CONSTRAINT_TABLE" contextTags="FPGA_ONLY" type="ConstraintsData" file="i2c_via_uart.ptwx" label="Timing Constraints" translator="ptwxToTableXML.xslt" />
+   <view inputState="Mapped" program="par" locator="CONSTRAINT_TABLE" contextTags="FPGA_ONLY" type="ConstraintsData" file="i2c_via_uart.ptwx" showConstraints="0" label="Timing Constraints" translator="ptwxToTableXML.xslt" />
    <view inputState="Mapped" program="par" locator="PAR_PINOUT_BY_PIN_NUMBER" contextTags="FPGA_ONLY" type="PinoutData" file="i2c_via_uart_par.xrpt" label="Pinout Report" />
-   <view inputState="Mapped" program="par" locator="PAR_CLOCK_TABLE" contextTags="FPGA_ONLY" type="ClocksData" file="i2c_via_uart_par.xrpt" label="Clock Report" />
+   <view inputState="Mapped" program="par" locator="PAR_CLOCK_TABLE" contextTags="FPGA_ONLY" type="ClocksData" file="i2c_via_uart_par.xrpt" showConstraints="0" label="Clock Report" />
    <view inputState="Mapped" program="par" contextTags="FPGA_ONLY,EDK_OFF" type="Timing_Analyzer" file="i2c_via_uart.twx" label="Static Timing" />
    <view inputState="Translated" program="cpldfit" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="EXTERNAL_HTML" file="i2c_via_uart_html/fit/report.htm" label="CPLD Fitter Report" />
    <view inputState="Fitted" program="taengine" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="EXTERNAL_HTML" file="i2c_via_uart_html/tim/report.htm" label="CPLD Timing Report" />

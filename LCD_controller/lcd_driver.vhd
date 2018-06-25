@@ -45,7 +45,6 @@ entity lcd_driver is
            oE 	   	  : out 		std_logic;												 -- LCD display enable control signal
            oRS    	  : out		std_logic;												 -- LCD display register select control signal
            oRW   		  : out 		std_logic;												 -- LCD display read-write control signal
-			  oLED		  : out     std_logic_vector(7 downto 0); 					 -- LED control
            ioD 		  : inout   std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data
 end lcd_driver;
 
@@ -326,7 +325,7 @@ begin
 		end case;
 	end process fsm_next;	
 	
-	oLED <= sSLAVE_ADDR_REG;
+	--oLED <= sSLAVE_ADDR_REG;
 	
 	-- LCD controller FSM output logic
 	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_CODE) begin

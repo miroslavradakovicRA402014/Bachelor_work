@@ -69,62 +69,10 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_S
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 1.00us
-# run 1.00us
-# run 100.00us
-ISim P.68d (signature 0x8ef4fb42)
-----------------------------------------------------------------------
-INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
-INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
-WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
-WARNING:Security:44 - Since no license file was found,
-       please run the Xilinx License Configuration Manager
-       (xlcm or "Manage Xilinx Licenses")
-       to assist in obtaining a license.
-WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
-
-
-----------------------------------------------------------------------
-This is a Full version of ISim.
-# run 1000 ns
-Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
-# run 100.00us
 # run 1000.00us
 # run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
+# run all
+Stopped at time : 130663116360 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -166,15 +114,353 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run 1000.00us
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:75 
+ 
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:75 
+ 
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 56448441 ns : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:75 
+ 
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
 # run 1000.00us
+# run all
+Stopped at time : 12817695240 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 50
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+at 14734185480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14752248840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14770312200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14788375560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14806438920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14824502280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14842565640 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14860629 ns(11), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29392037640 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29410101 ns(11), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29428164360 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29446227720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29464291080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29482354440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29500417800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29518481160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44047349640 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44065413 ns(11), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44083476360 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44101539720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44119603080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44137666440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44155729800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44173793160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:75 
+ 
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
-# run 1000.00us
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 11817779400 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" Line 205
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 32750109 ns : File "D:/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 474
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -217,13 +503,287 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERI
 Finished circuit initialization process.
 # run 1000.00us
 # run 1000.00us
+# run all
+Stopped at time : 25114670280 ps : File "D:/BSc_workspace/Bachelor_work/I2C_bus/slave_reg.vhd" Line 44
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:83 
+ 
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
 # run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+at 7491987720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7501987080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7511986440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7521985800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7531985160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7541984520 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7551983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7561983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7581981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7591981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7601980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7611980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7621979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7631978760 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7641978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14813615880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14823615240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14833614600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14843613960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14853613320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14863612680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14873612040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14883611400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14903610120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14913609480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14923608840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14933608200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14943607560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14953606920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14963606280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22144799880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22154799240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22164798600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22174797960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22184797320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22194796680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22204796040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22214795400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22234794120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22244793480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22254792840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22264792200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22274791560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22284790920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22294790280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29475983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29485983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29495982600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29505981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29515981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29525980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29535980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29545979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29565978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29575977480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29585976840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29595976200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29605975560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29615974920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29625974280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36800111880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36810111240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36820110600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36830109960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36840109320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36850108680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36860108040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36870107400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36890106120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36900105480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36910104840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36920104200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36930103560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36940102920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36950102280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44131295880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44141295240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44151294600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44161293960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44171293320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44181292680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44191292040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44201291400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44221290120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44231289480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44241288840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44251288200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44261287560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44271286920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44281286280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51455423880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51465423240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51475422600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51485421960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51495421320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51505420680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51515420040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51525419400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51545418120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51555417480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51565416840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51575416200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51585415560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51595414920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51605414280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58786607880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58796607240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58806606600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58816605960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58826605320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58836604680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58846604040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58856603400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58876602120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58886601480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58896600840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58906600200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58916599560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58926598920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58936598280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66117791880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66127791240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66137790600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66147789960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66157789320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66167788680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66177788040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66187787400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66207786120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66217785480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66227784840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66237784200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66247783560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66257782920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66267782280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73441919880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73451919240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73461918600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73471917960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73481917320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73491916680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73501916040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73511915400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73531914120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73541913480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73551912840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73561912200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73571911560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73581910920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73591910280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80773103880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80783103240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80793102600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80803101960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80813101320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80823100680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80833100040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80843099400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80863098120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80873097480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80883096840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80893096200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80903095560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80913094920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80923094280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88104287880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88114287240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88124286600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88134285960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88144285320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88154284680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88164284040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88174283400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88194282120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88204281480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88214280840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88224280200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88234279560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88244278920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88254278280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 112845526920 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 44
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -265,29 +825,188 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
+# run all
+at 7491987720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7501987080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7511986440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7521985800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7531985160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7541984520 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7551983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7561983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7581981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7591981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7601980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7611980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7621979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7631978760 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7641978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14813615880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14823615240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14833614600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14843613960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14853613320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14863612680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14873612040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14883611400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14903610120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14913609480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14923608840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14933608200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14943607560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14953606920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14963606280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22144799880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22154799240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22164798600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22174797960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22184797320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22194796680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22204796040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22214795400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22234794120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22244793480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22254792840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22264792200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22274791560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22284790920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22294790280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29475983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29485983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29495982600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29505981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29515981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29525980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29535980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29545979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29565978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29575977480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29585976840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29595976200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29605975560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29615974920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29625974280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36800111880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36810111240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36820110600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36830109960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36840109320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36850108680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36860108040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36870107400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36890106120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36900105480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36910104840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36920104200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36930103560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36940102920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36950102280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44131295880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44141295240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44151294600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44161293960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44171293320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44181292680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44191292040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44201291400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44221290120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44231289480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44241288840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44251288200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44261287560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44271286920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44281286280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51455423880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51465423240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51475422600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51485421960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51495421320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51505420680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51515420040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51525419400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51545418120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51555417480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51565416840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51575416200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51585415560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51595414920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51605414280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58786607880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58796607240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58806606600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58816605960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58826605320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58836604680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58846604040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58856603400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58876602120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58886601480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58896600840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58906600200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58916599560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58926598920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58936598280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66117791880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66127791240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66137790600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66147789960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66157789320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66167788680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66177788040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66187787400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66207786120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66217785480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66227784840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66237784200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66247783560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66257782920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66267782280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73441919880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73451919240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73461918600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73471917960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73481917320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73491916680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73501916040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73511915400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73531914120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73541913480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73551912840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73561912200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73571911560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73581910920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73591910280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80773103880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80783103240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80793102600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80803101960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80813101320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80823100680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80833100040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80843099400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80863098120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80873097480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80883096840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80893096200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80903095560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80913094920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80923094280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88104287880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88114287240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88124286600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88134285960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88144285320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88154284680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88164284040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88174283400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88194282120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88204281480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88214280840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88224280200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88234279560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88244278920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88254278280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 99060764040 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 74
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -328,74 +1047,188 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is 
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# restart
-# run 1000.00us
-Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 1000.00us
-# run 10000.00us
+# run all
+at 7491987720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7501987080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7511986440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7521985800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7531985160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7541984520 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7551983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7561983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7581981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7591981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7601980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7611980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7621979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7631978760 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7641978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14813615880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14823615240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14833614600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14843613960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14853613320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14863612680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14873612040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14883611400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14903610120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14913609480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14923608840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14933608200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14943607560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14953606920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14963606280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22144799880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22154799240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22164798600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22174797960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22184797320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22194796680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22204796040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22214795400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22234794120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22244793480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22254792840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22264792200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22274791560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22284790920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22294790280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29475983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29485983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29495982600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29505981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29515981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29525980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29535980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29545979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29565978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29575977480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29585976840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29595976200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29605975560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29615974920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 29625974280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36800111880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36810111240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36820110600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36830109960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36840109320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36850108680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36860108040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36870107400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36890106120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36900105480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36910104840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36920104200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36930103560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36940102920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 36950102280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44131295880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44141295240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44151294600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44161293960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44171293320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44181292680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44191292040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44201291400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44221290120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44231289480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44241288840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44251288200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44261287560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44271286920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 44281286280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51455423880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51465423240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51475422600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51485421960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51495421320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51505420680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51515420040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51525419400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51545418120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51555417480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51565416840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51575416200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51585415560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51595414920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 51605414280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58786607880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58796607240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58806606600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58816605960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58826605320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58836604680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58846604040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58856603400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58876602120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58886601480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58896600840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58906600200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58916599560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58926598920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 58936598280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66117791880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66127791240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66137790600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66147789960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66157789320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66167788680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66177788040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66187787400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66207786120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66217785480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66227784840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66237784200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66247783560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66257782920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 66267782280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73441919880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73451919240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73461918600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73471917960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73481917320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73491916680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73501916040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73511915400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73531914120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73541913480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73551912840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73561912200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73571911560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73581910920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 73591910280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80773103880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80783103240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80793102600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80803101960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80813101320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80823100680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80833100040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80843099400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80863098120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80873097480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80883096840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80893096200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80903095560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80913094920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 80923094280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88104287880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88114287240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88124286600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88134285960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88144285320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88154284680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88164284040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88174283400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88194282120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88204281480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88214280840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88224280200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88234279560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88244278920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 88254278280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 163187052840 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -436,8 +1269,53 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is 
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 10000.00us
-# run 10000.00us
+# run all
+at 7491987720 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7501987080 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7511986440 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7521985800 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7531985160 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7541984520 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7551983880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7561983240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7581981960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7591981320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7601980680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7611980040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7621979400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7631978760 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 7641978120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14813615880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14823615240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14833614600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14843613960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14853613320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14863612680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14873612040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14883611400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14903610120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14913609480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14923608840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14933608200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14943607560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14953606920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 14963606280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22144799880 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22154799240 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22164798600 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22174797960 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22184797320 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22194796680 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22204796040 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22214795400 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22234794120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22244793480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22254792840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22264792200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22274791560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22284790920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 22294790280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 27377166600 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 74
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -478,33 +1356,49 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is 
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 10000.00us
-# restart
-# run 10000.00us
-Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:83 
+ 
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run all
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
+# run 1000.00us
+INFO: Simulator is stopped.
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -545,4 +1439,138 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is 
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run 10000.00us
+# run all
+ERROR: Index 16 out of bound 15 downto 0. 
+ERROR: In process fifo.vhd:83 
+ 
+INFO: Simulator is stopped.
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 120880254600 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 44
+# run 1000.00us
+# run all
+Stopped at time : 138658169160 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 44
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 81198096840 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/transmitter.vhd" Line 205
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_BUS/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 85764346920 ps : File "D:/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" Line 733
+The simulator has terminated in an unexpected manner.  Please review the ISim log (isim.log) for details.

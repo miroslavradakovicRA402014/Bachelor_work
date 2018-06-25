@@ -1,4 +1,7 @@
 NET "iCLK"  						LOC = M21;
+NET "sCLK" TNM_NET = "sCLK";
+TIMESPEC "TS_ClkIn" = PERIOD "sCLK" 20 ns HIGH 50%;
+
 NET "inRST"							LOC = AB24;
 
 NET "iRX"							LOC = A21;

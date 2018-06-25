@@ -96,6 +96,7 @@ begin
 			iUART_RD    		 => sUART_READ,
 			oTX         		 => oTX,
 			oRTS					 => oRTS,
+			oLED					 => oLED,
 			oUART_FULL         => sUART_FULL,
 			oUART_EMPTY      	 => sUART_EMPTY,
 			oUART_DATA       	 => sIUART_DATA
@@ -115,7 +116,6 @@ begin
 			oLCD_E 	 	 => sLCD_E,   
          oLCD_RS    	 => sLCD_RS,
          oLCD_RW      => sLCD_RW,
-			oLED			 => oLED,
 			ioLCD_D 		 => sLCD_D
 		);
 		

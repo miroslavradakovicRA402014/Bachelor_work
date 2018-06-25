@@ -36,7 +36,6 @@ package i2c_bus_components is
 				  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
 				  oLCD_RS    	: out   std_logic;												-- LCD display register select 
 				  oLCD_RW      : out   std_logic;												-- LCD display read-write signal
-				  oLED			: out   std_logic_vector(7 downto 0);						-- LED control
 				  ioSDA		   : inout std_logic;												-- SDA signal
 				  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 	end component;
@@ -65,7 +64,7 @@ package i2c_bus_components is
 	component i2c_clk_freq_div is
 		 Generic (
 			CLK_FREQUENCY : integer := 50000000; -- Clock frequency	
-			CLK_CNT_WIDTH : integer := 9	 		 -- Width of clock counter
+			CLK_CNT_WIDTH : integer := 5	 		 -- Width of clock counter
 		 );
 		 Port ( iCLK  		: in  std_logic;		 -- Clock signal 50MHz
 				  inRST 		: in  std_logic;		 -- Reset signal

@@ -42,6 +42,7 @@ entity uart is
            iUART_RD    		 : in   std_logic;												-- Read from reciver signal			
 			  oTX         		 : out  std_logic;												-- TX signal
 			  oRTS				 : out  std_logic;												-- Request to send signal
+			  oLED				 : out  std_logic_vector(DATA_WIDTH 	- 1 downto 0);
 			  oUART_FULL       : out  std_logic;												-- Reciver FIFO full idication
            oUART_EMPTY      : out  std_logic;												-- Transmitter FULL empty indication
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));	-- Reciver output data
@@ -63,8 +64,15 @@ architecture Behavioral of uart is
 	
 	-- Baud frequency divider	
 	signal sTC 		   	: std_logic;								   		-- Baud frequency divider terminal count
+	
+	signal sLEDR, sLEDS : std_logic_vector(7 downto 0);
+	signal sLEDD : std_logic;
 
 begin
+	
+	sLEDD <= '0';
+	oLED <= sLEDS when sLEDD = '1' else
+			  sLEDR;
 	
 	-- Baud frequency divider
 	eBAUD_FREQ_DIV : baud_freq_div 
@@ -103,6 +111,7 @@ begin
          iRD    	=> iUART_RD,
          oFULL  	=> sRECV_FULL,
          oEMPTY 	=> oUART_EMPTY,
+			oLED 		=> sLEDR,
          oDATA  	=> oUART_DATA
 		);
 	
@@ -133,6 +142,7 @@ begin
          iRD    => sTX_DONE,
          oFULL  => oUART_FULL,
          oEMPTY => sSEND_EMPTY,
+			oLED 	 => sLEDS,
          oDATA  => sSEND_DATA
 		);		
 	

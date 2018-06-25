@@ -1,0 +1,2 @@
+vhdl work "scl_gen.vhd"
+vhdl work "scl_gen_tb.vhd"

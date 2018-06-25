@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "secureip" -o "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det_tb_isim_beh.exe" -prj "/home/rtrk/Workspace/BSc_workspace/Bachelor_work/I2C_bus/rising_edge_det_tb_beh.prj" "work.rising_edge_det_tb" 
+-intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/I2C_bus/scl_gen_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/I2C_bus/scl_gen_tb_beh.prj" "work.scl_gen_tb" 

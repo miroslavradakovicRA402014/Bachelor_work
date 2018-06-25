@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.68d on Wed Jun 20 17:04:09 2018
+// Written by: Map P.68d on Mon Jun 25 14:38:02 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -243,7 +243,7 @@ PIN eDCM24_TO_50MHz/dcm_sp_inst_pins<2> = BEL "eDCM24_TO_50MHz/dcm_sp_inst"
         PINNAME CLKIN;
 TIMEGRP iCLK = PIN "SP6_BUFIO_INSERT_ML_BUFIO2_0_pins<0>" PIN
         "eDCM24_TO_50MHz/dcm_sp_inst_pins<2>";
-TS_ClkIn = PERIOD TIMEGRP "iCLK" 5 ns HIGH 50%;
+TS_ClkIn = PERIOD TIMEGRP "iCLK" 20 ns HIGH 50%;
 TS_eDCM24_TO_50MHz_clkfx = PERIOD TIMEGRP "eDCM24_TO_50MHz_clkfx" TS_ClkIn /
         2.08333333 HIGH 50%;
 SCHEMATIC END;

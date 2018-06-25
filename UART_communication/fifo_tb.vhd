@@ -48,6 +48,7 @@ ARCHITECTURE behavior OF fifo_tb IS
          iRD : IN  std_logic;
          oFULL : OUT  std_logic;
          oEMPTY : OUT  std_logic;
+			oLED : OUT  std_logic_vector(3 downto 0);
          oDATA : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
@@ -64,6 +65,7 @@ ARCHITECTURE behavior OF fifo_tb IS
    signal oFULL : std_logic;
    signal oEMPTY : std_logic;
    signal oDATA : std_logic_vector(7 downto 0);
+	signal oLED : std_logic_vector(3 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -79,6 +81,7 @@ BEGIN
           iRD => iRD,
           oFULL => oFULL,
           oEMPTY => oEMPTY,
+			 oLED	=> oLED,
           oDATA => oDATA
         );
 
@@ -98,7 +101,7 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for iCLK_period*10;
+      wait for iCLK_period*10.5;
 
       -- insert stimulus here 
 	
@@ -129,6 +132,8 @@ BEGIN
 		
 		iWR   <= '0';
 		iRD   <= '0';
+		
+		iDATA <= x"FF";
 		
 		for i in 0 to 15 loop
 		
@@ -163,17 +168,17 @@ BEGIN
 			iWR   <= '0';
 			iRD   <= '1';
 			
-			wait for iCLK_period;
-			
-			iWR   <= '0';
-			iRD   <= '0';		
+--			wait for iCLK_period;
+--			
+--			iWR   <= '0';
+--			iRD   <= '0';		
 			
 		end loop;		
 		
-		wait for iCLK_period;
-		
-		iWR   <= '1';
-		iRD   <= '0';		
+--		wait for iCLK_period;
+--		
+--		iWR   <= '1';
+--		iRD   <= '0';		
 		
 
       wait;

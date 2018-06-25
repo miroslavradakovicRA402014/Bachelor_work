@@ -38,7 +38,6 @@ entity i2c_bus is
 			  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
            oLCD_RS    	: out   std_logic;												-- LCD display register select signal
            oLCD_RW      : out   std_logic;												-- LCD read write signa
-			  oLED			: out   std_logic_vector(7 downto 0);  					-- LED control signal
 			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
 end i2c_bus;
 
@@ -73,7 +72,6 @@ begin
             oLCD_RS    	 => oLCD_RS,
             oLCD_RW      => oLCD_RW,					
 				ioSDA		    => sSDA,
-				oLED			 => oLED,
 				ioLCD_D		 => ioLCD_D
 			);
 	

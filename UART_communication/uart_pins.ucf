@@ -1,5 +1,5 @@
 NET "iCLK"  					LOC = M21;
-NET "inRST"					LOC = AB24;
+NET "inRST"						LOC = AB24;
 
 NET "iRX"						LOC = A21;
 NET "oTX"						LOC = A20;
@@ -29,5 +29,5 @@ NET "oLED_DATA(6)" 			LOC = H24;
 NET "oLED_DATA(7)" 			LOC = D24;
 
 NET "iCLK" TNM_NET = "iCLK";
-TIMESPEC "TS_ClkIn" = PERIOD "iCLK" 5 ns HIGH 50%;
+TIMESPEC "TS_ClkIn" = PERIOD "iCLK" 20 ns HIGH 50%;
 

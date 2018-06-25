@@ -35,6 +35,7 @@ entity fifo is
            iRD     : in  std_logic;												-- Read from FIFO signal
            oFULL   : out std_logic;												-- FIFO full indication
            oEMPTY  : out std_logic;												-- FIFO empty indication
+			  oLED 	 : out std_logic_vector(7 downto 0);
            oDATA   : out std_logic_vector(DATA_WIDTH - 1 downto 0)); -- Output data
 end fifo;
 
@@ -51,10 +52,13 @@ architecture Behavioral of fifo is
 	
 	signal sEMPTY  : std_logic; -- Empty FIFO state signal
 	signal sFULL   : std_logic; -- Full FIFO state signal
+	
 
 begin
 
-
+	oLED(7 downto 4) <= CONV_STD_LOGIC_VECTOR(sRD_PTR, 4);
+	oLED(3 downto 0) <= CONV_STD_LOGIC_VECTOR(sWR_PTR, 4);
+	
 	-- FIFO memory process
 	fifo_mem : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -69,7 +73,7 @@ begin
 	end process fifo_mem;
 	
 	-- Data output
-	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' else
+	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' and sRD_PTR /=  NUM_OF_WORDS else
 				 (others => 'Z');
 	
 	-- FIFO pointer process
@@ -78,19 +82,22 @@ begin
 			sWR_PTR <= 0; -- Reset write pointer
 			sRD_PTR <= 0; -- Reset read  pointer
 		elsif (iCLK'event and iCLK = '1') then
-			if (iWR = '1' and sFULL = '0') then -- If FIFO is not full and write enable write to it
-				sWR_PTR <= sWR_PTR + 1;  	  -- Increment write pointer	
-			elsif (iRD = '1' and sEMPTY = '0') then
-				sRD_PTR <= sRD_PTR + 1;      -- Increment read pointer
-			else
-				-- Return write pointer to begin
-				if (sWR_PTR = NUM_OF_WORDS) then
-					sWR_PTR <= 0;
-				end if;
-				-- Return read pointer to begin
-				if (sRD_PTR = NUM_OF_WORDS) then
-					sRD_PTR <= 0;
-				end if;			
+			if (iWR = '1') then -- If FIFO is not full and write enable write to it
+				if (sFULL = '0') then
+					sWR_PTR <= sWR_PTR + 1;  	  -- Increment write pointer
+				end if;	
+			elsif (iRD = '1') then
+				if (sEMPTY = '0') then  -- If FIFO is not empty and write enable read from it
+					sRD_PTR <= sRD_PTR + 1;      -- Increment read pointer
+				end if;	
+			end if;
+			-- Return write pointer to begin
+			if (sWR_PTR = NUM_OF_WORDS) then
+				sWR_PTR <= 0;
+			end if;
+			-- Return read pointer to begin
+			if (sRD_PTR = NUM_OF_WORDS) then
+				sRD_PTR <= 0;			
 			end if;			
 		end if;
 	end process ptr_proc;
@@ -116,7 +123,7 @@ begin
 			elsif (iRD = '1') then
 				-- Check if next position of read pointer is equal to write pointer - inidicate to FIFO is empty
 				if (sRD_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
-					if (sWR_PTR = 0) then
+					if (sWR_PTR = 0 or sWR_PTR = NUM_OF_WORDS) then
 						sEMPTY <= '1';
 					end if;
 				else
