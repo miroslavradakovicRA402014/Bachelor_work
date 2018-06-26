@@ -327,19 +327,19 @@ Synthesizing Unit <fifo>.
     Found 8-bit register for signal <sFIFO<15>>.
     Found 5-bit register for signal <sWR_PTR>.
     Found 5-bit register for signal <sRD_PTR>.
-    Found 6-bit adder for signal <n0183> created at line 94.
-    Found 6-bit adder for signal <n0185> created at line 98.
-    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_52_OUT> created at line 83.
-    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 83
-    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 83
-    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_71_o> created at line 125
-    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_76_o> created at line 137
+    Found 6-bit adder for signal <n0184> created at line 87.
+    Found 6-bit adder for signal <n0186> created at line 91.
+    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_52_OUT> created at line 76.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 76
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 76
+    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_72_o> created at line 118
+    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_77_o> created at line 130
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 140 D-type flip-flop(s).
@@ -438,11 +438,11 @@ Synthesizing Unit <uart_i2c_master>.
     Found 2-bit adder for signal <sBYTE_CNT[1]_GND_34_o_add_81_OUT> created at line 1241.
     Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_86_OUT> created at line 1241.
     Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_92_OUT> created at line 1241.
-    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 779.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 794.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 830
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 834
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_42_o> created at line 577
+    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 775.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 790.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 826
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 830
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_42_o> created at line 573
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
 	inferred   4 Adder/Subtractor(s).
@@ -1119,8 +1119,8 @@ Primitive and Black Box Usage:
 #      LUT1                        : 34
 #      LUT2                        : 46
 #      LUT3                        : 354
-#      LUT4                        : 111
-#      LUT5                        : 161
+#      LUT4                        : 113
+#      LUT5                        : 159
 #      LUT6                        : 467
 #      MUXCY                       : 44
 #      MUXF7                       : 48
@@ -1212,7 +1212,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 14.644ns (frequency: 68.289MHz)
-  Total number of paths / destination ports: 29049 / 1645
+  Total number of paths / destination ports: 29047 / 1645
 -------------------------------------------------------------------------
 Delay:               7.029ns (Levels of Logic = 5)
   Source:            eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
@@ -1317,11 +1317,11 @@ iCLK           |    7.029|         |         |         |
 
 
 Total REAL time to Xst completion: 12.00 secs
-Total CPU time to Xst completion: 11.67 secs
+Total CPU time to Xst completion: 12.74 secs
  
 --> 
 
-Total memory usage is 262220 kilobytes
+Total memory usage is 262348 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    9 (   0 filtered)

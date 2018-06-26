@@ -12,8 +12,8 @@
          <ClosedNode>/i2c_bus - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|i2c_bus.vhd/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
          <ClosedNode>/i2c_slave - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|i2c_slave.vhd</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eI2C_SLAVE - i2c_slave - Behavioral</ClosedNode>
-         <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral/eLCD_DRIVER - lcd_driver - Behavioral</ClosedNode>
+         <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART - uart - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eI2C_SLAVE - i2c_slave - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
@@ -23,13 +23,13 @@
          <ClosedNode>/uart_i2c_master - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|uart_i2c_master.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>i2c_via_uart - Behavioral (D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd)</SelectedItem>
+         <SelectedItem>eLCD_DRIVER - lcd_driver - Behavioral (D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001eb000000020000000000000000000000000200000064ffffffff000000810000000300000002000001eb0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>i2c_via_uart - Behavioral (D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd)</CurrentItem>
+      <CurrentItem>eLCD_DRIVER - lcd_driver - Behavioral (D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>

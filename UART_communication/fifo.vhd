@@ -111,7 +111,7 @@ begin
 			if (iWR = '1') then
 				-- Check if next position write of pointer is equal to read pointer - inidicate to FIFO is full 
 				if (sWR_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
-					if (sRD_PTR = 0) then 
+					if (sRD_PTR = 0 or sRD_PTR = NUM_OF_WORDS) then 
 						sFULL  <= '1';
 					end if;
 				else
