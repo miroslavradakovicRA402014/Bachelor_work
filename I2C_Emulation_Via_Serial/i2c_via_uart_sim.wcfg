@@ -21,10 +21,9 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="49" />
+   <WVObjectSize size="51" />
    <wave_markers>
       <marker time="4617415000000" label="" />
-      <marker time="10244899000000" label="" />
       <marker time="-2499999999000" label="" />
       <marker time="-2499999999000" label="" />
       <marker time="58698993160000" label="" />
@@ -32,6 +31,8 @@
       <marker time="58688993160000" label="" />
       <marker time="59163978160000" label="" />
       <marker time="58689024160000" label="" />
+      <marker time="14721041160000" label="" />
+      <marker time="12400000000000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -105,9 +106,19 @@
       <obj_property name="ElementShortName">ssda</obj_property>
       <obj_property name="ObjectShortName">ssda</obj_property>
    </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/stc_per_cnt" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">stc_per_cnt</obj_property>
-      <obj_property name="ObjectShortName">stc_per_cnt</obj_property>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/stc_period_cnt" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_period_cnt</obj_property>
+      <obj_property name="ObjectShortName">stc_period_cnt</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/speriod_cnt_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">speriod_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">speriod_cnt_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/speriod_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">speriod_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">speriod_cnt[3:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eSCL_GEN/sper_cnt" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sper_cnt[3:0]</obj_property>

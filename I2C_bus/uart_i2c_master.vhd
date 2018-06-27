@@ -25,15 +25,13 @@ use IEEE.NUMERIC_STD.ALL;
 entity uart_i2c_master is
 	 Generic (
 		REGISTER_NUM		   : integer := 4;	-- Number of register
-		DATA_BYTE_NUM		   : integer := 2;	-- Nmber of data bytes
-		START_PERIOD		   : integer := 5;   -- Master start sync peirod
-		TC_PERIOD			   : integer := 13;  -- Terminal count period 
+		TC_PERIOD			   : integer := 13;  -- Bus control period 
 		TR_PERIOD			   : integer := 17;  -- Master transmission peirod
 		REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 		DATA_WIDTH 			   : integer := 8;	-- UART word widht 
 		DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
 		START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
-		BYTE_CNT_WIDTH 	   : integer := 2;   -- Byte counter width
+		BYTE_CNT_WIDTH 	   : integer := 8;   -- Byte counter width
 		TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmisssion period counter width
 		PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width
 		LCD_BUS_WIDTH 			: integer := 4		-- Width of LCD interface	
@@ -62,10 +60,10 @@ architecture Behavioral of uart_i2c_master is
 	constant cACK  : std_logic := '0';
 	constant cNACK : std_logic := '1';
 
-	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_LOWER, UART_BYTE_UPPER, UART_STOP,
+	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_DATA_BYTE, UART_BYTE_NUMBER, UART_STOP,
 							 I2C_START, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
 							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
-							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_LOWER, SEND_UART_BYTE_UPPER); 	   		-- Slave FSM states type
+							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_DATA_BYTE, SEND_UART_BYTE_NUMBER); 	   		-- Slave FSM states type
 
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Master FSM current state
@@ -89,8 +87,8 @@ architecture Behavioral of uart_i2c_master is
 	
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
 	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
-	signal sTC_PERIOD_CNT 			: std_logic;		
-	
+	signal sTC_PERIOD_CNT 			: std_logic;																					-- Period counter terminal count
+
 	signal sTR_PERIOD_CNT 			: unsigned(TR_PERIOD_CNT_WIDTH - 1 downto 0);										-- Master transmission period
 	signal sTR_PERIOD_CNT_EN 		: std_logic;																					-- Master transmission period enable
 	signal sTC_TR_PERIOD_CNT 		: std_logic;																					-- Master transmission period terminal count
@@ -106,6 +104,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sREG_MUX_SEL				: std_logic_vector(1 downto 0);															-- Registers multiplexer select
 
 	signal sSCL_EN						: std_logic;																					-- SCL generator enable signal
+	signal sSCL_RST					: std_logic;																					-- SCL generator reset signal
 	
 	signal sSCL_RISING_EDGE    	: std_logic;																					-- SCL rising edge indication
 	
@@ -120,11 +119,8 @@ architecture Behavioral of uart_i2c_master is
 	
 	signal sSDA_SEL					: std_logic;																					-- SDA line data select
 
-	signal sLBYTE_REG_SEL			: std_logic;																					-- Lower byte register multiplexer selection
-	signal sUBYTE_REG_SEL 			: std_logic;																					-- Upper byte register multiplexer selection
-
-	signal sLBYTE_REG_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower byte register multiplexer
-	signal sUBYTE_REG_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper byte register multiplexer
+	signal sDATA_BYTE_SEL			: std_logic;																					-- Data fifo register multiplexer selection
+	signal sDATA_BYTE_MUX			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Data fifo register multiplexer
 
 	signal sOUART_REG_MUX 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART output registers multiplexer
 	signal sOUART_REG_SEL			: std_logic_vector(1 downto 0);															-- UART output registers multiplexer select signal	
@@ -135,8 +131,13 @@ architecture Behavioral of uart_i2c_master is
 	signal sSLAVE_ADDR_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register 
 	signal sREG_ADDR_REG 		   : std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address register register
 	signal sSLAVE_ADDR 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address without mode bit
-	signal sLOWER_BYTE_REG 			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Lower data byte
-	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Upper data byte
+	signal sBYTE_NUM_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Byte number register
+
+	signal sDATA_FIFO_FULL			: std_logic;																					-- Data FIFO full indication
+	signal sDATA_FIFO_EMPTY			: std_logic;																					-- Data FIFO empty indication
+	signal sDATA_BYTE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Data byte				
+
+	signal sBYTE_SEL					: std_logic;																					-- Data byte multiplexer select
 
 	signal sREG_DEC 					: std_logic_vector(REGISTER_NUM - 1 downto 0);										-- Registers decoder
 	signal sREG_DEC_SEL 				: std_logic_vector(REGISTER_SEL_WIDTH - 1 downto 0);								-- Register decoder selection signal
@@ -189,24 +190,27 @@ begin
 				oQ		=> sREG_ADDR_REG
 			);	
 
-	-- Lower data byte register
-	eLOWER_BYTE_REG : entity work.reg 
+	-- Data bytes FIFO
+	eDATA_FIFO : entity work.fifo 	
 			Port map(
-				iCLK  => iCLK,
-				inRST => inRST,
-				iWE   => sREG_DEC(2),
-				iD 	=> sLBYTE_REG_MUX,
-				oQ		=> sLOWER_BYTE_REG
+				iCLK   	=> iCLK,
+				inRST  	=> inRST,
+				iDATA  	=> sDATA_BYTE_MUX,
+				iWR    	=> sREG_DEC(2),
+				iRD    	=> sDATA_BYTE_MUX,
+				oFULL  	=> sDATA_FIFO_FULL,
+				oEMPTY 	=> sDATA_FIFO_EMPTY,
+				oDATA  	=> sDATA_BYTE
 			);
-			
-	-- Upper data byte register
-	eUPPER_BYTE_REG : entity work.reg 
+				
+	-- Data byte number register
+	eBYTE_NUM_REG : entity work.reg 
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
 				iWE   => sREG_DEC(3),
-				iD 	=> sUBYTE_REG_MUX,
-				oQ		=> sUPPER_BYTE_REG
+				iD 	=> sIUART_REG,
+				oQ		=> sBYTE_NUM_REG
 			);	
 			
 	-- SCL rising edge detector
@@ -221,11 +225,12 @@ begin
 	-- SCL generator
 	eSCL_GEN : entity work.scl_gen 
 			Port map(
-				iCLK    => iCLK,
-				inRST   => inRST,
-				iSCL_EN => sSCL_EN,
-				iTC     => iTC,
-				oSCL	  => sSCL
+				iCLK     => iCLK,
+				inRST    => inRST,
+				iSCL_RST => sSCL_RST,
+				iSCL_EN  => sSCL_EN,
+				iTC      => iTC,
+				oSCL	   => sSCL
 			);
 	
    -- LCD driver	
@@ -235,14 +240,13 @@ begin
             inRST  	  	=> inRST,
 			   iSLAVE_ADDR => sSLAVE_ADDR,
 			   iREG_ADDR   => sREG_ADDR_REG,
-			   iLOWER_BYTE => sLOWER_BYTE_REG,
-			   iUPPER_BYTE => sUPPER_BYTE_REG,
+			   iLOWER_BYTE => sDATA_BYTE,
+			   iUPPER_BYTE => sBYTE_NUM_REG,
 			   iMODE 		=> sSLAVE_ADDR_REG(0),  
 			   iDATA_EN	   => sLCD_DATA_EN,
             oE 	   	=> oLCD_E,  
             oRS    	   => oLCD_RS,
             oRW   		=> oLCD_RW,  
---				oLED			=> oLED,
             ioD 		  	=> ioLCD_D		
 			);
 
@@ -269,20 +273,22 @@ begin
 					sNEXT_STATE <= UART_SLAVE_ADDRESS; -- Get slave address from UART 
 				end if;
 			when UART_SLAVE_ADDRESS =>
-				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
-					sNEXT_STATE <= UART_REGISTER_ADDRESS; 
-				elsif (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get lower data byte from UART			
-				end if;				
+				if (iUART_EMPTY = '0') then
+					sNEXT_STATE <= UART_REGISTER_ADDRESS; -- Get register address number from UART			
+				end if;			
 			when UART_REGISTER_ADDRESS =>
 				if (sSLAVE_ADDR_REG(0) = '1') then -- Check mode and if mode is read don't wait for FIFO
-					sNEXT_STATE <= UART_STOP; 
+					sNEXT_STATE <= UART_BYTE_NUMBER;	-- Get data byte number from UART 
 				elsif (iUART_EMPTY = '0') then
-					sNEXT_STATE <= UART_BYTE_UPPER; -- Get upper data byte from UART				
+					sNEXT_STATE <= UART_BYTE_NUMBER; -- Get data byte number from UART				
 				end if;					
-			when UART_BYTE_UPPER =>
-				sNEXT_STATE <= UART_BYTE_LOWER; -- Get lower data byte from UART				
-			when UART_BYTE_LOWER =>
+			when UART_BYTE_NUMBER =>
+				if (sSLAVE_ADDR_REG(0) = '1') then
+					sNEXT_STATE <= UART_STOP; -- Get lower data byte from UART		
+				else
+					sNEXT_STATE <= UART_DATA_BYTE; -- Get first data byte from UART
+				end if;			
+			when UART_DATA_BYTE =>
 				sNEXT_STATE <= UART_STOP; -- End of I2C telegram				
 			when UART_STOP =>
 				sNEXT_STATE <= I2C_START; -- Start send I2C telegram
@@ -357,7 +363,7 @@ begin
 				if (sTC_TR_PERIOD_CNT = '1') then 
 					if (sACK_FF /= '0') then
 						sNEXT_STATE <= I2C_NACK_STOP; -- Nack  
-					elsif (sBYTE_CNT = DATA_BYTE_NUM) then
+					elsif (sBYTE_CNT = sBYTE_NUM_REG) then
 						sNEXT_STATE <= I2C_STOP; -- All bytes written to slave
 					else
 						sNEXT_STATE <= I2C_WRITE_DATA; -- Write another byte
@@ -366,7 +372,7 @@ begin
 			when I2C_READ_DATA_ACK =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					if (sBYTE_CNT = DATA_BYTE_NUM) then
+					if (sBYTE_CNT = sBYTE_NUM_REG) then
 						sNEXT_STATE <= I2C_STOP; -- All bytes read from slave
 					else
 						sNEXT_STATE <= I2C_READ_DATA; -- Read another byte from slave
@@ -395,13 +401,13 @@ begin
 				end if;
 			when SEND_UART_REGISTER_ADDRESS =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_UPPER; -- Send slave register address to UART 
+					sNEXT_STATE <= SEND_UART_BYTE_NUMBER; -- Send slave register address to UART 
 				end if;				
-			when SEND_UART_BYTE_UPPER =>
+			when SEND_UART_BYTE_NUMBER =>
 				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_LOWER; -- Send slave upper byte to UART 
+					sNEXT_STATE <= SEND_UART_DATA_BYTE; -- Send slave upper byte to UART 
 				end if;
-			when SEND_UART_BYTE_LOWER =>
+			when SEND_UART_DATA_BYTE =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= IDLE; -- Send slave lower byte to UART 
 				end if;		
@@ -417,13 +423,13 @@ begin
 		sACK_SEL		 		 	<= '0';
 		sACK_FF_EN				<= '0';
 		sSDA_SEL		 		 	<= '0';
-		sLBYTE_REG_SEL		 	<= '0';		
-		sUBYTE_REG_SEL 	 	<= '0';	
+		sBYTE_SEL		 		<= '0';		
 		sSLAVE_ADDR_SEL		<= '0';				
 		sREG_MUX_SEL		 	<= "00";		
 		sREG_DEC_SEL		 	<= "00";
 		sREG_DEC_EN			 	<= '0';
 		sSCL_EN				 	<= '0';	
+		sSCL_RST					<= '0';
 		oFREQ_EN 			 	<= '0';
 		oUART_READ  		 	<= '0';
 		oUART_WRITE			 	<= '0';
@@ -465,9 +471,7 @@ begin
 						sREG_DEC_EN			 	<= '1';	
 					end if;
 				else
-					if (sSLAVE_ADDR_REG(0) /= '1') then
-						oUART_READ  		 	<= '1';	
-					end if;					
+					oUART_READ  		 	<= '1';	
 					sIUART_REG_EN  		<= '1';
 					sREG_DEC_EN			 	<= '1';	
 				end if;		
@@ -483,18 +487,19 @@ begin
 						oUART_READ  		 	<= '1';	
 					end if;	
 				end if;						
-			when UART_BYTE_UPPER =>
+			when UART_BYTE_NUMBER =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
 				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "10";
 				sREG_DEC_EN			 	<= '1';				
-			when UART_BYTE_LOWER =>
+			when UART_DATA_BYTE =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';	
 			when UART_STOP =>	
 				sOUT_BUFF_EN 			<= '1';
 				sACK_SEL		 		 	<= '1';	
+				sSCL_RST					<= '1';	
 				if (sSLAVE_ADDR_REG(0) = '0') then
 					sLCD_DATA_EN <= '1';
 				end if;				
@@ -594,15 +599,14 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_READ_DATA =>
 				sIN_BUFF_EN	 		 <= '1';
-				sLBYTE_REG_SEL		 <= '1';		
-				sUBYTE_REG_SEL 	 <= '1';	
+				sBYTE_SEL		 	 <= '1';		
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';		
 				sDATA_CNT_EN 		 <= '1';	
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sREG_DEC_SEL		 <= '1' & sBYTE_CNT(1);
+					sREG_DEC_SEL		 <= "10";
 					sREG_DEC_EN			 <= '1';
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
@@ -616,13 +620,13 @@ begin
 				sSCL_EN				 <= '1';	
 				oFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
-				if (sBYTE_CNT /= DATA_BYTE_NUM) then
-					sREG_MUX_SEL		 <= '1' & sBYTE_CNT(0);
+				if (sBYTE_CNT /= sBYTE_NUM_REG) then
+					sREG_MUX_SEL		 <= "10";
 					sOSHW_LOAD			 <= '1';
 				end if;				
 			when I2C_READ_DATA_ACK =>
 				sOUT_BUFF_EN 		 <= '1';			
-				if (sBYTE_CNT = DATA_BYTE_NUM) then
+				if (sBYTE_CNT = sBYTE_NUM_REG) then
 					sACK_SEL		 		 <= '1';
 				end if;					
 				sSCL_EN				 <= '1';	
@@ -655,13 +659,13 @@ begin
 				sACK_SEL		 		 <= '1';
 				oUART_WRITE			 <= '1';
 				sOUART_REG_SEL		 <= "11";					
-			when SEND_UART_BYTE_UPPER =>
+			when SEND_UART_BYTE_NUMBER =>
 				sOUT_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
 				oUART_WRITE			 <= '1';
 				sOUART_REG_SEL		 <= "10";		
-			when SEND_UART_BYTE_LOWER =>
+			when SEND_UART_DATA_BYTE =>
 				sOUT_BUFF_EN 		 <= '1';
 				sACK_SEL		 		 <= '1';
 				oUART_WRITE			 <= '1';									
@@ -721,8 +725,8 @@ begin
 	end process per_cnt;
 	
 	-- Period counter terminal count 
-	sTC_PERIOD_CNT <= '1' when sPERIOD_CNT = TC_PERIOD - 1 else
-							'0';	
+	sTC_PERIOD_CNT 		<= '1'   when sPERIOD_CNT = TC_PERIOD - 1 else
+									'0';
 	
 	-- Transmission period counter
 	tr_per_cnt : process (iCLK, inRST) begin
@@ -770,22 +774,20 @@ begin
 							 sSLAVE_ADDR_REG(DATA_WIDTH - 1 downto 1) & '0';
 							 							 
 	-- Registers multiplexer process
-	reg_mux : process (sREG_MUX_SEL, sSLAVE_ADDR_MUX, sREG_ADDR_REG, sLOWER_BYTE_REG, sUPPER_BYTE_REG) begin
+	reg_mux : process (sREG_MUX_SEL, sSLAVE_ADDR_MUX, sREG_ADDR_REG, sDATA_BYTE, sBYTE_NUM_REG) begin
 		-- Select register
 		case (sREG_MUX_SEL) is
 			when "00" =>
 				sREG_MUX <= sSLAVE_ADDR_MUX;
 			when "01" =>
 				sREG_MUX <= sREG_ADDR_REG;
-			when "10" =>
-				sREG_MUX <= sLOWER_BYTE_REG;
 			when others =>
-				sREG_MUX <= sUPPER_BYTE_REG;		
+				sREG_MUX <= sDATA_BYTE;	
 		end case;
 	end process reg_mux;
 		
 	-- UART output multiplexer
-	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sLOWER_BYTE_REG, sUPPER_BYTE_REG) begin
+	ouart_reg_mux : process (sOUART_REG_SEL, sSLAVE_ADDR_REG, sREG_ADDR_REG, sDATA_BYTE, sBYTE_NUM_REG) begin
 		-- Select UART output register data
 		case (sOUART_REG_SEL) is
 			when "00" =>
@@ -793,9 +795,9 @@ begin
 			when "01" =>
 				sOUART_REG_MUX <= sREG_ADDR_REG;
 			when "10" =>
-				sOUART_REG_MUX <= sLOWER_BYTE_REG;
+				sOUART_REG_MUX <= sDATA_BYTE;
 			when others =>
-				sOUART_REG_MUX <= sUPPER_BYTE_REG;
+				sOUART_REG_MUX <= sBYTE_NUM_REG;
 		end case;
 	end process ouart_reg_mux;
 		
@@ -806,14 +808,10 @@ begin
 					 "0100" when sREG_DEC_SEL = "10" else
 					 "1000";
 	
-	-- Lower byte register multiplexer
-	sLBYTE_REG_MUX <=	sIUART_REG when sLBYTE_REG_SEL = '0' else 
+	-- Data byte multiplexer
+	sDATA_BYTE_MUX <=	sIUART_REG when sBYTE_SEL = '0' else 
 							sISHW_REG;
-							
-	-- Upper byte register multiplexer
-	sUBYTE_REG_MUX <=	sIUART_REG when sUBYTE_REG_SEL = '0' else 
-							sISHW_REG;							
-							
+																		
 	-- Acknowelge multiplexer
 	sACK 		<= cACK 		when sACK_SEL = '0' else
 					cNACK;

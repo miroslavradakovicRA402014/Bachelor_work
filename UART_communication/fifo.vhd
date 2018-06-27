@@ -35,7 +35,6 @@ entity fifo is
            iRD     : in  std_logic;												-- Read from FIFO signal
            oFULL   : out std_logic;												-- FIFO full indication
            oEMPTY  : out std_logic;												-- FIFO empty indication
-			  oLED 	 : out std_logic_vector(7 downto 0);
            oDATA   : out std_logic_vector(DATA_WIDTH - 1 downto 0)); -- Output data
 end fifo;
 
@@ -53,11 +52,7 @@ architecture Behavioral of fifo is
 	signal sEMPTY  : std_logic; -- Empty FIFO state signal
 	signal sFULL   : std_logic; -- Full FIFO state signal
 	
-
 begin
-
-	oLED(7 downto 4) <= CONV_STD_LOGIC_VECTOR(sRD_PTR, 4);
-	oLED(3 downto 0) <= CONV_STD_LOGIC_VECTOR(sWR_PTR, 4);
 	
 	-- FIFO memory process
 	fifo_mem : process (iCLK, inRST) begin

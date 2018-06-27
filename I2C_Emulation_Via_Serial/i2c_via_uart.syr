@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.12 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.12 secs
+Total CPU time to Xst completion: 0.09 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -327,19 +327,19 @@ Synthesizing Unit <fifo>.
     Found 8-bit register for signal <sFIFO<15>>.
     Found 5-bit register for signal <sWR_PTR>.
     Found 5-bit register for signal <sRD_PTR>.
-    Found 6-bit adder for signal <n0184> created at line 87.
-    Found 6-bit adder for signal <n0186> created at line 91.
-    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_52_OUT> created at line 76.
-    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 76
-    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 76
-    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_72_o> created at line 118
-    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_77_o> created at line 130
+    Found 6-bit adder for signal <n0184> created at line 86.
+    Found 6-bit adder for signal <n0186> created at line 90.
+    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_52_OUT> created at line 75.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 75
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 75
+    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_72_o> created at line 117
+    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_77_o> created at line 129
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 140 D-type flip-flop(s).
@@ -401,7 +401,7 @@ Synthesizing Unit <uart_i2c_master>.
     Related source file is "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd".
         REGISTER_NUM = 4
         DATA_BYTE_NUM = 2
-        START_PERIOD = 5
+        START_PERIOD = 9
         TC_PERIOD = 13
         TR_PERIOD = 17
         REGISTER_SEL_WIDTH = 2
@@ -425,7 +425,7 @@ Synthesizing Unit <uart_i2c_master>.
     | States             | 26                                             |
     | Transitions        | 58                                             |
     | Inputs             | 7                                              |
-    | Outputs            | 21                                             |
+    | Outputs            | 22                                             |
     | Clock              | iCLK (rising_edge)                             |
     | Reset              | inRST (negative)                               |
     | Reset type         | asynchronous                                   |
@@ -434,15 +434,15 @@ Synthesizing Unit <uart_i2c_master>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_76_OUT> created at line 1241.
-    Found 2-bit adder for signal <sBYTE_CNT[1]_GND_34_o_add_81_OUT> created at line 1241.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_86_OUT> created at line 1241.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_92_OUT> created at line 1241.
-    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 775.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 790.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 826
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 830
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_42_o> created at line 573
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_77_OUT> created at line 1241.
+    Found 2-bit adder for signal <sBYTE_CNT[1]_GND_34_o_add_82_OUT> created at line 1241.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_87_OUT> created at line 1241.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_93_OUT> created at line 1241.
+    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 778.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 793.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 829
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 833
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_42_o> created at line 576
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
 	inferred   4 Adder/Subtractor(s).
@@ -528,7 +528,7 @@ Synthesizing Unit <lcd_driver>.
     Found 3-bit adder for signal <sSEQ_CNT[2]_GND_39_o_add_115_OUT> created at line 1241.
     Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_119_OUT> created at line 1241.
     Found 5-bit adder for signal <sCHAR_CNT[4]_GND_39_o_add_123_OUT> created at line 1241.
-    Found 4x20-bit Read Only RAM for signal <_n0481>
+    Found 4x20-bit Read Only RAM for signal <_n0229>
     Found 4-bit 4-to-1 multiplexer for signal <_n0181> created at line 564.
     Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 748
     Found 1-bit tristate buffer for signal <ioD<3>> created at line 752
@@ -804,7 +804,7 @@ Synthesizing (advanced) Unit <lcd_driver>.
 The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
 The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0481> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0229> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -1113,14 +1113,14 @@ Top Level Output File Name         : i2c_via_uart.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1335
+# BELS                             : 1336
 #      GND                         : 1
 #      INV                         : 5
 #      LUT1                        : 34
 #      LUT2                        : 46
 #      LUT3                        : 354
-#      LUT4                        : 113
-#      LUT5                        : 159
+#      LUT4                        : 112
+#      LUT5                        : 161
 #      LUT6                        : 467
 #      MUXCY                       : 44
 #      MUXF7                       : 48
@@ -1151,14 +1151,14 @@ Selected Device : 6slx45fgg676-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:             873  out of  54576     1%  
- Number of Slice LUTs:                 1178  out of  27288     4%  
-    Number used as Logic:              1178  out of  27288     4%  
+ Number of Slice LUTs:                 1179  out of  27288     4%  
+    Number used as Logic:              1179  out of  27288     4%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1395
-   Number with an unused Flip Flop:     522  out of   1395    37%  
-   Number with an unused LUT:           217  out of   1395    15%  
-   Number of fully used LUT-FF pairs:   656  out of   1395    47%  
+ Number of LUT Flip Flop pairs used:   1396
+   Number with an unused Flip Flop:     523  out of   1396    37%  
+   Number with an unused LUT:           217  out of   1396    15%  
+   Number of fully used LUT-FF pairs:   656  out of   1396    46%  
    Number of unique control sets:        88
 
 IO Utilization: 
@@ -1212,7 +1212,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 14.644ns (frequency: 68.289MHz)
-  Total number of paths / destination ports: 29047 / 1645
+  Total number of paths / destination ports: 29055 / 1645
 -------------------------------------------------------------------------
 Delay:               7.029ns (Levels of Logic = 5)
   Source:            eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
@@ -1272,7 +1272,7 @@ Offset:              12.583ns (Levels of Logic = 8)
      LUT3:I0->O            1   0.235   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>11 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>11)
      LUT6:I0->O            1   0.254   0.682  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>12 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>12)
      LUT6:I5->O            2   0.254   0.954  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>13 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>1)
-     LUT5:I2->O            1   0.235   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA26_SW0 (N225)
+     LUT5:I2->O            1   0.235   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA26_SW0 (N227)
      LUT6:I0->O            1   0.254   0.910  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA26 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA25)
      LUT6:I3->O            1   0.235   0.790  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA219 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA218)
      LUT4:I2->O            1   0.250   0.681  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA221 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sOUT_DATA<0>)
@@ -1316,12 +1316,12 @@ iCLK           |    7.029|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 12.00 secs
-Total CPU time to Xst completion: 12.74 secs
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 11.03 secs
  
 --> 
 
-Total memory usage is 262348 kilobytes
+Total memory usage is 262220 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    9 (   0 filtered)

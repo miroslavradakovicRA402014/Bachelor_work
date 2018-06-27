@@ -27,11 +27,12 @@ entity scl_gen is
 		PERIOD_CNT_WIDHT : integer := 4; -- Period counter width
 		SCL_CLOCK_PERIOD : integer := 9 	-- Clock period
 	 );
-    Port ( iCLK  	 : in  std_logic;		-- Clock signal 50MHz
-           inRST 	 : in  std_logic;		-- Reset signla
-           iSCL_EN : in  std_logic;    -- SCL generation enable
-           iTC 	 : in  std_logic;		-- Terminal count from clock divider
-           oSCL 	 : out std_logic);   -- SCL signal
+    Port ( iCLK  	  : in  std_logic;	 -- Clock signal 50MHz
+           inRST 	  : in  std_logic;	 -- Reset signal
+			  iSCL_RST : in  std_logic;	 -- Serial clock reset
+           iSCL_EN  : in  std_logic;    -- SCL generation enable
+           iTC 	  : in  std_logic;	 -- Terminal count from clock divider
+           oSCL 	  : out std_logic);   -- SCL signal
 end scl_gen;
 
 architecture Behavioral of scl_gen is
@@ -64,7 +65,7 @@ begin
 		if (inRST = '0') then
 			sPER_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sPER_CNT = SCL_CLOCK_PERIOD - 1) then
+			if (sPER_CNT = SCL_CLOCK_PERIOD - 1 or iSCL_RST = '1') then
 				sPER_CNT <= (others => '0');
 			elsif (iSCL_EN = '1' and iTC = '1') then
 				sPER_CNT <= sPER_CNT + 1; -- Count period

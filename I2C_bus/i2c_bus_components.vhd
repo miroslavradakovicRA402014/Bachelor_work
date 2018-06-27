@@ -9,9 +9,7 @@ package i2c_bus_components is
 	component uart_i2c_master is
 		 Generic (
 			REGISTER_NUM		   : integer := 4;	-- Number of register
-			DATA_BYTE_NUM		   : integer := 2;	-- Nmber of data bytes
-			START_PERIOD		   : integer := 5;   -- Master start sync peirod
-			TC_PERIOD			   : integer := 13;  -- Terminal count period 
+			TC_PERIOD			   : integer := 13;  -- Bus control period 
 			TR_PERIOD			   : integer := 17;  -- Master transmission peirod
 			REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 			DATA_WIDTH 			   : integer := 8;	-- UART word widht 

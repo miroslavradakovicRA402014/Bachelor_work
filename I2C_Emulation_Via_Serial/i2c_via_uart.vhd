@@ -81,7 +81,7 @@ begin
 
 	-- UART
 	eUART : uart 
-		Port map (
+		Port map(
 			iCLK        		 => sCLK,
 			inRST       		 => snRST,
 			iPARITY_EN			 => iPARITY_EN_SW,
@@ -96,7 +96,6 @@ begin
 			iUART_RD    		 => sUART_READ,
 			oTX         		 => oTX,
 			oRTS					 => oRTS,
-			oLED					 => oLED,
 			oUART_FULL         => sUART_FULL,
 			oUART_EMPTY      	 => sUART_EMPTY,
 			oUART_DATA       	 => sIUART_DATA

@@ -75,7 +75,6 @@ package uart_components is
 				  iRD     : in  std_logic;												-- Read from FIFO signal
 				  oFULL   : out std_logic;												-- FIFO full indication
 				  oEMPTY  : out std_logic;												-- FIFO empty indication
-				  oLED 	 : out std_logic_vector(7 downto 0);
 				  oDATA   : out std_logic_vector(DATA_WIDTH - 1 downto 0)); -- Output data
 	end component;	
 
