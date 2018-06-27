@@ -133,6 +133,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sSLAVE_ADDR 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Slave address without mode bit
 	signal sBYTE_NUM_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Byte number register
 
+	signal sDATA_FIFO_READ			: std_logic;																					-- Data FIFO read signal
 	signal sDATA_FIFO_FULL			: std_logic;																					-- Data FIFO full indication
 	signal sDATA_FIFO_EMPTY			: std_logic;																					-- Data FIFO empty indication
 	signal sDATA_BYTE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Data byte				
