@@ -15,7 +15,7 @@ package i2c_bus_components is
 			DATA_WIDTH 			   : integer := 8;	-- UART word widht 
 			DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
 			START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
-			BYTE_CNT_WIDTH 	   : integer := 2;   -- Byte counter width
+			BYTE_CNT_WIDTH 	   : integer := 8;   -- Byte counter width
 			TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmisssion period counter width
 			PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width
 			LCD_BUS_WIDTH 			: integer := 4		-- Width of LCD interface	

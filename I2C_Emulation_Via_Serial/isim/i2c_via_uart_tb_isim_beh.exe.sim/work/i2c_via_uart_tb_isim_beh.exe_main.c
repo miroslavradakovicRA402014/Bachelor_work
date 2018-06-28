@@ -17,8 +17,8 @@ struct XSI_INFO xsi_info;
 char *IEEE_P_2592010699;
 char *STD_STANDARD;
 char *IEEE_P_1242562249;
-char *WORK_P_1809911496;
 char *IEEE_P_3499444699;
+char *WORK_P_1809911496;
 char *IEEE_P_3620187407;
 char *WORK_P_1825677762;
 char *UNISIM_P_0947159679;
@@ -58,6 +58,7 @@ int main(int argc, char **argv)
     work_a_3021253016_3212880686_init();
     work_a_1067640401_3212880686_init();
     work_a_3522877208_3212880686_init();
+    work_a_1156261981_3212880686_init();
     work_a_0892741282_3212880686_init();
     work_a_1489787017_3212880686_init();
     work_a_2023191012_3212880686_init();
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
     work_a_0509931213_3212880686_init();
     work_a_3594044432_3212880686_init();
     work_a_0809595292_3212880686_init();
-    work_a_1728995252_3212880686_init();
+    work_a_3003742562_3212880686_init();
     work_a_3596068334_3212880686_init();
     work_a_3219417343_3212880686_init();
     work_a_3194697436_3212880686_init();
@@ -83,8 +84,8 @@ int main(int argc, char **argv)
     xsi_register_ieee_std_logic_1164(IEEE_P_2592010699);
     STD_STANDARD = xsi_get_engine_memory("std_standard");
     IEEE_P_1242562249 = xsi_get_engine_memory("ieee_p_1242562249");
-    WORK_P_1809911496 = xsi_get_engine_memory("work_p_1809911496");
     IEEE_P_3499444699 = xsi_get_engine_memory("ieee_p_3499444699");
+    WORK_P_1809911496 = xsi_get_engine_memory("work_p_1809911496");
     IEEE_P_3620187407 = xsi_get_engine_memory("ieee_p_3620187407");
     WORK_P_1825677762 = xsi_get_engine_memory("work_p_1825677762");
     UNISIM_P_0947159679 = xsi_get_engine_memory("unisim_p_0947159679");

@@ -70,6 +70,8 @@ architecture Behavioral of i2c_via_uart is
 	
 begin
 
+	oLED <= (others => '1');
+
 	-- DCM 24 to 50MHz
 	eDCM24_TO_50MHz : dcm24_to_50
 		Port map( 

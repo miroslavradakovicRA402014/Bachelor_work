@@ -51,8 +51,7 @@ package i2c_via_uart_components is
 			  iUART_WR 			 : in	  std_logic;												-- Write to transmitter signal
            iUART_RD    		 : in   std_logic;												-- Read from reciver signal			
 			  oTX         		 : out  std_logic;												-- TX signal
-			  oRTS				 : out  std_logic;												-- Request to send signal
-			  oLED			: out   std_logic_vector(7 downto 0);			  
+			  oRTS				 : out  std_logic;												-- Request to send signal		  
 			  oUART_FULL       : out  std_logic;												-- Reciver FIFO full idication
            oUART_EMPTY      : out  std_logic;												-- Transmitter FULL empty indication
            oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));	-- Reciver output data
