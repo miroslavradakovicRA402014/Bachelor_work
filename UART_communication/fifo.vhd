@@ -61,8 +61,8 @@ begin
 				sFIFO(i) <= (others => '0'); -- Reset FIFO
 			end loop;
 		elsif (iCLK'event and iCLK = '1') then
-			if (iWR = '1' and sFULL = '0') then
-				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO 
+			if (iWR = '1' and sFULL = '0' and sWR_PTR /=  NUM_OF_WORDS) then
+				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO		
 			end if;
 		end if;
 	end process fifo_mem;

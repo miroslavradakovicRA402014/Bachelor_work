@@ -19,7 +19,8 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
 
 
 entity lcd_driver is
@@ -32,16 +33,17 @@ entity lcd_driver is
 		SEQ_CNT_WIDTH 		 : integer := 3;		  -- Sequence command widht	
 		INIT_PERIOD 		 : integer := 2160000; -- Clock cycles number for 45ms period
 	   CMD_SEQ_PERIOD 	 : integer := 12000;	  -- Clock cycles number for 250us period		
-		CHAR_NUMBER 	 	 : integer := 27  	  -- Number of characters
+		CHAR_NUMBER 	 	 : integer := 22  	  -- Number of characters without data characters
 	 );
     Port ( iCLK   	  : in 		std_logic;												 -- Clock signal 50MHz
            inRST  	  : in 		std_logic;												 -- Reset signal
 			  iSLAVE_ADDR : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);	 -- Slave address
 			  iREG_ADDR   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0);    -- Slave register address
-			  iLOWER_BYTE : in  		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Lower data byte
-			  iUPPER_BYTE : in 		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Upper data byte 
+			  iDATA_BYTE  : in  		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte
+			  iBYTE_NUM   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte number 
 			  iMODE 		  : in		std_logic;												 -- Mode R/W signal
 			  iDATA_EN	  : in 		std_logic;												 -- Data enable signal
+			  iBYTE_EN	  : in      std_logic;												 -- Data byte enable signal
            oE 	   	  : out 		std_logic;												 -- LCD display enable control signal
            oRS    	  : out		std_logic;												 -- LCD display register select control signal
            oRW   		  : out 		std_logic;												 -- LCD display read-write control signal
@@ -82,7 +84,7 @@ architecture Behavioral of lcd_driver is
 	
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
 							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, 
-							 PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
+							 READ_INPUT_CHAR, PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  					-- LCD controller FSM next state
@@ -107,24 +109,33 @@ architecture Behavioral of lcd_driver is
 	signal sCMD_PER_CNT_EN			: std_logic;													-- Command period counter enable
 	signal sCMD_PER_CNT_RST			: std_logic;													-- Command period counter reset	
 	
-	signal sCHAR_CNT 					: unsigned(4 downto 0);										-- Character counter
+	signal sCHAR_CNT 					: unsigned(5 downto 0);										-- Character counter
 	signal sCHAR_CNT_EN 				: std_logic;													-- Character counter enable
 	signal sCHAR_CNT_RST				: std_logic;													-- Character counter reset
 	
+	signal sCHAR_BYTE 				: std_logic;													-- Character byte counter 
+	signal sCHAR_BYTE_EN 			: std_logic;													-- Character byte counter enable 
+	
+	signal sCHAR_NUM 					: std_logic_vector(5 downto 0);							-- Number of characters
+	
 	signal sSLAVE_ADDR_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Slave address register	
 	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Register address register
-	signal sUPPER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);		 	-- Uppper byte register	
-	signal sLOWER_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Lower byte register
+	signal sDATA_BYTE					: std_logic_vector(DATA_WIDTH - 1 downto 0);		 	-- Data byte 	
+	signal sBYTE_NUM_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Byte number register
+	signal sDATA_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);		 	-- Data byte register
+	signal sDATA_BYTE_REG_EN		: std_logic;		 											-- Data byte register enable
 	signal sMODE_FF 					: std_logic;													-- Mode register
+
+	signal sDATA_FIFO_FULL			: std_logic;													-- Data FIFO full indication 
+	signal sDATA_FIFO_EMPTY			: std_logic;													-- Data FIFO empty indication
+	signal sDATA_FIFO_READ			: std_logic;													-- Data FIFO read signal
 	
 	signal sCHAR_CODE 				: std_logic_vector(CHAR_WIDTH - 1 downto 0); 		-- Character code at display
 	
 	signal sSLAVE_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Slave address char	
 	signal sREG_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0);	-- Register address char
-	signal sUPPER_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Uppper byte char
-	signal sLOWER_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0);	-- Lower byte char
+	signal sDATA_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Data byte char
 
-	
 begin
 
 	-- LCD init delay timer
@@ -173,25 +184,38 @@ begin
 				oQ		=> sREG_ADDR_REG
 			);
 	
-	-- Upper byte register
-	eUPPER_BYTE_REG : entity work.reg
+	-- Data byte FIFO
+	eDATA_BYTE_FIFO : entity work.fifo 	
 			Port map(
-				iCLK  => iCLK,
-				inRST => inRST,
-				iWE   => iDATA_EN,
-				iD 	=> iUPPER_BYTE,
-				oQ		=> sUPPER_BYTE_REG
+				iCLK   	=> iCLK,
+				inRST  	=> inRST,
+				iDATA  	=> iDATA_BYTE,
+				iWR    	=> iBYTE_EN,
+				iRD    	=> sDATA_FIFO_READ,
+				oFULL  	=> sDATA_FIFO_FULL,
+				oEMPTY 	=> sDATA_FIFO_EMPTY,
+				oDATA  	=> sDATA_BYTE
 			);
 	
-	-- Lower byte register	
-	eLOWER_BYTE_REG : entity work.reg
+	-- Byte number register	
+	eBYTE_NUM_REG : entity work.reg
 			Port map(
 				iCLK  => iCLK,
 				inRST => inRST,
 				iWE   => iDATA_EN,
-				iD 	=> iLOWER_BYTE,
-				oQ		=> sLOWER_BYTE_REG
+				iD 	=> iBYTE_NUM,
+				oQ		=> sBYTE_NUM_REG
 			);	
+			
+	-- Data byte register	
+	eDATA_BYTE_REG : entity work.reg
+			Port map(
+				iCLK  => iCLK,
+				inRST => inRST,
+				iWE   => sDATA_BYTE_REG_EN,
+				iD 	=> sDATA_BYTE,
+				oQ		=> sDATA_BYTE_REG
+			);			
 
 	-- Slave address char generator		
 	eSLAVE_ADDR_CHAR_GEN : entity work.char_gen
@@ -207,18 +231,11 @@ begin
 				oCHAR => sREG_ADDR_CHAR
 			);		
 			
-	-- Upper byte char generator		
-	eUPPER_BYTE_CHAR_GEN : entity work.char_gen
+	-- Data byte char generator		
+	eDATA_BYTE_CHAR_GEN : entity work.char_gen
 			Port map(
-				iDATA => sUPPER_BYTE_REG,
-				oCHAR => sUPPER_BYTE_CHAR
-			);	
-
-	-- Lower byte char generator		
-	eLOWER_BYTE_CHAR_GEN : entity work.char_gen
-			Port map(
-				iDATA => sLOWER_BYTE_REG,
-				oCHAR => sLOWER_BYTE_CHAR
+				iDATA => sDATA_BYTE_REG,
+				oCHAR => sDATA_BYTE_CHAR
 			);	
 	
 	-- Mode flip-flop
@@ -243,7 +260,7 @@ begin
 	end process fsm_reg;
 	
 	-- LCD controller FSM next state logic
-	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT) begin
+	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sDATA_FIFO_EMPTY, sCHAR_CNT, sCHAR_NUM) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -293,12 +310,18 @@ begin
 			when READ_INPUT_DATA =>
 				if (iDATA_EN = '1') then -- Wait for input data from master
 					sNEXT_STATE <= PRINT_CHAR_BF;	
-				end if;	
+				end if;
+			when READ_INPUT_CHAR =>
+				sNEXT_STATE <= PRINT_CHAR_BF; 
 			when CHECK_CURSOR => 	
 				if (sCHAR_CNT = 16) then -- If cursor position is on end of first line move to second line
 					sNEXT_STATE <= CURSOR_NEW_LINE;
 				else
-					sNEXT_STATE <= PRINT_CHAR_BF;
+					if (sCHAR_CNT >= 22) then -- If have to wait data bytes
+						sNEXT_STATE <= READ_INPUT_CHAR;
+					else
+						sNEXT_STATE <= PRINT_CHAR_BF;
+					end if;	
 				end if;		
 			when PRINT_CHAR_BF =>
 				if (sIN_DATA(3) = '0') then  -- Check busy flag for next command 
@@ -317,7 +340,7 @@ begin
 					sNEXT_STATE <= READ_INPUT_DATA;	-- Return cursor to begin and wait for next data
 				end if;			
 			when STOP_PRINT =>
-				if (sCHAR_CNT = CHAR_NUMBER - 1) then -- Wait to print all characters
+				if (CONV_STD_LOGIC_VECTOR(sCHAR_CNT, 5) = sCHAR_NUM) then -- Wait to print all characters
 					sNEXT_STATE <= CURSOR_BACK;
 				else
 					sNEXT_STATE <= CHECK_CURSOR;	-- Check cursor position
@@ -325,10 +348,9 @@ begin
 		end case;
 	end process fsm_next;	
 	
-	--oLED <= sSLAVE_ADDR_REG;
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_CODE) begin
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sDATA_FIFO_EMPTY, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
 		sOUT_BUFF_EN	 	<= '0';
 		sSEQ_CNT_EN 	 	<= '0';
@@ -337,9 +359,12 @@ begin
 		sCMD_PER_CNT_RST	<= '0';
 		sCHAR_CNT_EN		<= '0';
 		sCHAR_CNT_RST		<= '0';
+		sCHAR_BYTE_EN 		<= '0';
 		sINIT_PERIOD_EN 	<= '0';	
 		sCMD_PERIOD_EN  	<= '0';	
+		sDATA_BYTE_REG_EN	<= '0';
 		sOUT_DATA		 	<= (others => '0');
+		sDATA_FIFO_READ	<= '0';
 		oE 	  			 	<= '0'; 
       oRS    			 	<= '0';
       oRW   			 	<= '0';	
@@ -482,7 +507,7 @@ begin
 				end if;
 			when ENTRY_MODE =>
 				sOUT_BUFF_EN	 	<= '1';
-				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
+				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stables
 					oE <= '1';
 				end if;
 				if (sSEQ_CNT = 1) then		-- First command sequence 
@@ -540,10 +565,15 @@ begin
 				else
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
-				end if;		
-				
+				end if;			
 			when READ_INPUT_DATA =>
 				sCHAR_CNT_RST <= '1';			-- Reset char counter
+			when READ_INPUT_CHAR =>
+				sCHAR_BYTE_EN <= '1';
+				if (sCHAR_BYTE = '0') then	-- Check if print first char of data byte 
+					sDATA_FIFO_READ <=   '1';			-- Read data byte form FIFO
+					sDATA_BYTE_REG_EN <= '1';
+				end if;		
 			when PRINT_CHAR_BF =>
 				sIN_BUFF_EN	 	 <= '1';						
 				oRW   			 <= '1';						-- Write command 
@@ -634,11 +664,8 @@ begin
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;			
-			when CHECK_CURSOR =>
-			
-	
-			when STOP_PRINT =>
-					
+			when others =>
+								
 		end case;
 	end process fsm_out;	
 	
@@ -681,66 +708,94 @@ begin
 		end if;
 	end process char_cnt;
 	
+	-- Char byte character flip-flop
+	char_byte : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sCHAR_BYTE <= '0'; -- Reset counter
+		elsif (iCLK'event and iCLK = '1') then  
+			if (sCHAR_BYTE_EN = '1') then
+				sCHAR_BYTE <= not (sCHAR_BYTE); -- Move to next char
+			end if;
+		end if;
+	end process char_byte;
+	
+	-- Characters number (byte num is multiplie with 2, every byte is 2 chars)
+	sCHAR_NUM <= CHAR_NUMBER + (sBYTE_NUM_REG(4 downto 0) & '0') when s;
+	
 	-- Char code process 
-	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sUPPER_BYTE_CHAR, sLOWER_BYTE_CHAR) begin
+	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sDATA_BYTE_CHAR) begin
 	   -- Generate char code depends on positon in display
 		case (sCHAR_CNT) is
-			when "00000" =>
+			when "000000" =>
 				sCHAR_CODE <= cCHAR_S; -- S
-			when "00001" =>
+			when "000001" =>
 				sCHAR_CODE <= cCHAR_A; -- A
-			when "00010" =>
+			when "000010" =>
 				sCHAR_CODE <= cCHAR_DOTS; -- :
-			when "00011" =>
+			when "000011" =>
 				sCHAR_CODE <= cCHAR_0; -- 0
-			when "00100" =>
+			when "000100" =>
 				sCHAR_CODE <= cCHAR_x; -- x
-			when "00101" =>
+			when "000101" =>
 				sCHAR_CODE <= sSLAVE_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
-			when "00110" =>
+			when "000110" =>
 				sCHAR_CODE <= sSLAVE_ADDR_CHAR(CHAR_WIDTH - 1  downto 0);  -- _	
-			when "00111" =>
+			when "000111" =>
 				sCHAR_CODE <= cCHAR_VER_LINE; -- |
-			when "01000" =>
+			when "001000" =>
 				sCHAR_CODE <= cCHAR_R; -- R
-			when "01001" =>
+			when "001001" =>
 				sCHAR_CODE <= cCHAR_A; -- A
-			when "01010" =>
+			when "001010" =>
 				sCHAR_CODE <= cCHAR_DOTS; -- :
-			when "01011" =>
+			when "001011" =>
 				sCHAR_CODE <= cCHAR_0; -- 0
-			when "01100" =>
+			when "001100" =>
 				sCHAR_CODE <= cCHAR_x; -- x
-			when "01101" =>
+			when "001101" =>
 				sCHAR_CODE <= sREG_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _	 	
-			when "01110" =>
+			when "001110" =>
 				sCHAR_CODE <= sREG_ADDR_CHAR(CHAR_WIDTH - 1  downto 0); -- _				
-			when "01111" =>
+			when "001111" =>
 				if (sMODE_FF = '1') then
 					sCHAR_CODE <= cCHAR_R; -- R
 				else 
 					sCHAR_CODE <= cCHAR_W; -- W
 				end if;
-			when "10000" =>
+			when "010000" =>
 				sCHAR_CODE <= cCHAR_D; -- D
-			when "10001" =>
+			when "010001" =>
 				sCHAR_CODE <= cCHAR_A; -- A
-			when "10010" =>
+			when "010010" =>
 				sCHAR_CODE <= cCHAR_T; -- T
-			when "10011" =>
+			when "010011" =>
 				sCHAR_CODE <= cCHAR_DOTS; -- :
-			when "10100" =>
+			when "010100" =>
 				sCHAR_CODE <= cCHAR_0; -- 0	
-			when "10101" =>
+			when "010101" =>
 				sCHAR_CODE <= cCHAR_x; -- x
-			when "10110" =>
-				sCHAR_CODE <= sUPPER_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
-			when "10111" =>
-				sCHAR_CODE <= sUPPER_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
-			when "11000" =>
-				sCHAR_CODE <= sLOWER_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "010110" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "010111" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+			when "011000" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "011001" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+			when "011010" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "011011" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+			when "011100" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "011101" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _	
+			when "011110" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+			when "011111" =>
+				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _	
 			when others =>
-				sCHAR_CODE <= sLOWER_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+				sCHAR_CODE <= (others => '0');
 		end case;	
 	end process char_code;
 	

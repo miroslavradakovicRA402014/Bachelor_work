@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -105,6 +105,9 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd" into library work
+Parsing entity <fifo>.
+Parsing architecture <Behavioral> of entity <fifo>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_timer.vhd" into library work
 Parsing entity <lcd_timer>.
 Parsing architecture <Behavioral> of entity <lcd_timer>.
@@ -137,9 +140,6 @@ Parsing architecture <Behavioral> of entity <transmitter>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd" into library work
 Parsing entity <reciver>.
 Parsing architecture <Behavioral> of entity <reciver>.
-Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd" into library work
-Parsing entity <fifo>.
-Parsing architecture <Behavioral> of entity <fifo>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd" into library work
 Parsing entity <baud_freq_div>.
 Parsing architecture <Behavioral> of entity <baud_freq_div>.
@@ -168,7 +168,7 @@ Parsing architecture <Behavioral> of entity <i2c_bus>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" into library work
 Parsing entity <i2c_via_uart>.
 Parsing architecture <Behavioral> of entity <i2c_via_uart>.
-WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 78: Actual for formal port reset is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 80: Actual for formal port reset is neither a static name nor a globally static expression
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -193,6 +193,8 @@ Elaborating entity <i2c_bus> (architecture <Behavioral>) with generics from libr
 Elaborating entity <uart_i2c_master> (architecture <Behavioral>) with generics from library <work>.
 
 Elaborating entity <reg> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <fifo> (architecture <Behavioral>) with generics from library <work>.
 
 Elaborating entity <rising_edge_det> (architecture <Behavioral>) from library <work>.
 
@@ -303,7 +305,7 @@ Synthesizing Unit <reciver>.
 	inferred   1 Finite State Machine(s).
 Unit <reciver> synthesized.
 
-Synthesizing Unit <fifo>.
+Synthesizing Unit <fifo_1>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd".
         DATA_WIDTH = 8
         NUM_OF_WORDS = 16
@@ -327,26 +329,26 @@ Synthesizing Unit <fifo>.
     Found 8-bit register for signal <sFIFO<15>>.
     Found 5-bit register for signal <sWR_PTR>.
     Found 5-bit register for signal <sRD_PTR>.
-    Found 6-bit adder for signal <n0184> created at line 86.
-    Found 6-bit adder for signal <n0186> created at line 90.
-    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_52_OUT> created at line 75.
-    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 75
-    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 75
-    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_72_o> created at line 117
-    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_77_o> created at line 129
+    Found 6-bit adder for signal <n0183> created at line 82.
+    Found 6-bit adder for signal <n0185> created at line 86.
+    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_51_OUT> created at line 71.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 71
+    Found 6-bit comparator not equal for signal <BUS_0003_GND_20_o_equal_71_o> created at line 113
+    Found 6-bit comparator not equal for signal <BUS_0004_GND_20_o_equal_76_o> created at line 125
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 140 D-type flip-flop(s).
 	inferred   2 Comparator(s).
 	inferred   3 Multiplexer(s).
 	inferred   8 Tristate(s).
-Unit <fifo> synthesized.
+Unit <fifo_1> synthesized.
 
 Synthesizing Unit <transmitter>.
     Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd".
@@ -400,32 +402,32 @@ Unit <i2c_bus> synthesized.
 Synthesizing Unit <uart_i2c_master>.
     Related source file is "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd".
         REGISTER_NUM = 4
-        DATA_BYTE_NUM = 2
-        START_PERIOD = 9
         TC_PERIOD = 13
         TR_PERIOD = 17
         REGISTER_SEL_WIDTH = 2
         DATA_WIDTH = 8
         DATA_CNT_WIDTH = 4
-        START_CNT_WIDTH = 3
-        BYTE_CNT_WIDTH = 2
+        BYTE_CNT_WIDTH = 8
         TR_PERIOD_CNT_WIDTH = 5
         PERIOD_CNT_WIDTH = 4
         LCD_BUS_WIDTH = 4
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 205: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 205: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <sACK_FF>.
     Found 4-bit register for signal <sDATA_CNT>.
     Found 4-bit register for signal <sPERIOD_CNT>.
-    Found 2-bit register for signal <sBYTE_CNT>.
-    Found 5-bit register for signal <sTR_PERIOD_CNT>.
-    Found 5-bit register for signal <sCURRENT_STATE>.
+    Found 8-bit register for signal <sDATA_BYTE_CNT>.
+    Found 8-bit register for signal <sBYTE_CNT>.
     Found 8-bit register for signal <sISHW_REG>.
     Found 8-bit register for signal <sOSHW_REG>.
+    Found 5-bit register for signal <sTR_PERIOD_CNT>.
+    Found 5-bit register for signal <sCURRENT_STATE>.
     Found finite state machine <FSM_2> for signal <sCURRENT_STATE>.
     -----------------------------------------------------------------------
-    | States             | 26                                             |
-    | Transitions        | 58                                             |
-    | Inputs             | 7                                              |
-    | Outputs            | 22                                             |
+    | States             | 28                                             |
+    | Transitions        | 61                                             |
+    | Inputs             | 10                                             |
+    | Outputs            | 29                                             |
     | Clock              | iCLK (rising_edge)                             |
     | Reset              | inRST (negative)                               |
     | Reset type         | asynchronous                                   |
@@ -434,21 +436,26 @@ Synthesizing Unit <uart_i2c_master>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_77_OUT> created at line 1241.
-    Found 2-bit adder for signal <sBYTE_CNT[1]_GND_34_o_add_82_OUT> created at line 1241.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_87_OUT> created at line 1241.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_93_OUT> created at line 1241.
-    Found 8-bit 4-to-1 multiplexer for signal <sREG_MUX> created at line 778.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 793.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 829
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 833
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_42_o> created at line 576
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_85_OUT> created at line 757.
+    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_34_o_add_89_OUT> created at line 770.
+    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_34_o_add_94_OUT> created at line 783.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_99_OUT> created at line 796.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_105_OUT> created at line 813.
+    Found 8-bit subtractor for signal <GND_34_o_GND_34_o_sub_39_OUT<7:0>> created at line 431.
+    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 853.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 866.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 902
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 906
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_9_o> created at line 302
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_34_o_equal_40_o> created at line 431
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_47_o> created at line 622
+    Found 8-bit comparator equal for signal <n0049> created at line 667
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
-	inferred   4 Adder/Subtractor(s).
-	inferred  32 D-type flip-flop(s).
-	inferred   1 Comparator(s).
-	inferred  44 Multiplexer(s).
+	inferred   6 Adder/Subtractor(s).
+	inferred  46 D-type flip-flop(s).
+	inferred   4 Comparator(s).
+	inferred  39 Multiplexer(s).
 	inferred   2 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <uart_i2c_master> synthesized.
@@ -460,6 +467,51 @@ Synthesizing Unit <reg>.
     Summary:
 	inferred   8 D-type flip-flop(s).
 Unit <reg> synthesized.
+
+Synthesizing Unit <fifo>.
+    Related source file is "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd".
+        DATA_WIDTH = 8
+        NUM_OF_WORDS = 16
+    Found 1-bit register for signal <sEMPTY>.
+    Found 1-bit register for signal <sFULL>.
+    Found 8-bit register for signal <sFIFO<14>>.
+    Found 8-bit register for signal <sFIFO<13>>.
+    Found 8-bit register for signal <sFIFO<12>>.
+    Found 8-bit register for signal <sFIFO<11>>.
+    Found 8-bit register for signal <sFIFO<10>>.
+    Found 8-bit register for signal <sFIFO<9>>.
+    Found 8-bit register for signal <sFIFO<8>>.
+    Found 8-bit register for signal <sFIFO<7>>.
+    Found 8-bit register for signal <sFIFO<6>>.
+    Found 8-bit register for signal <sFIFO<5>>.
+    Found 8-bit register for signal <sFIFO<4>>.
+    Found 8-bit register for signal <sFIFO<3>>.
+    Found 8-bit register for signal <sFIFO<2>>.
+    Found 8-bit register for signal <sFIFO<1>>.
+    Found 8-bit register for signal <sFIFO<0>>.
+    Found 8-bit register for signal <sFIFO<15>>.
+    Found 5-bit register for signal <sWR_PTR>.
+    Found 5-bit register for signal <sRD_PTR>.
+    Found 6-bit adder for signal <n0183> created at line 82.
+    Found 6-bit adder for signal <n0185> created at line 86.
+    Found 8-bit 16-to-1 multiplexer for signal <sRD_PTR[3]_sFIFO[15][7]_wide_mux_51_OUT> created at line 71.
+    Found 1-bit tristate buffer for signal <oDATA<7>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<6>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<5>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<4>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<3>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<2>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<1>> created at line 71
+    Found 1-bit tristate buffer for signal <oDATA<0>> created at line 71
+    Found 6-bit comparator not equal for signal <BUS_0003_GND_36_o_equal_71_o> created at line 113
+    Found 6-bit comparator not equal for signal <BUS_0004_GND_36_o_equal_76_o> created at line 125
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred 140 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   3 Multiplexer(s).
+	inferred   8 Tristate(s).
+Unit <fifo> synthesized.
 
 Synthesizing Unit <rising_edge_det>.
     Related source file is "D:\BSc_workspace\Bachelor_work\I2C_bus\rising_edge_det.vhd".
@@ -488,7 +540,7 @@ Synthesizing Unit <scl_gen>.
         SCL_CLOCK_PERIOD = 9
     Found 1-bit register for signal <sSCL>.
     Found 4-bit register for signal <sPER_CNT>.
-    Found 4-bit adder for signal <sPER_CNT[3]_GND_37_o_add_1_OUT> created at line 1241.
+    Found 4-bit adder for signal <sPER_CNT[3]_GND_47_o_add_1_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred   5 D-type flip-flop(s).
@@ -505,18 +557,21 @@ Synthesizing Unit <lcd_driver>.
         SEQ_CNT_WIDTH = 3
         INIT_PERIOD = 2160000
         CMD_SEQ_PERIOD = 12000
-        CHAR_NUMBER = 27
+        CHAR_NUMBER = 22
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" line 188: Output port <oFULL> of the instance <eDATA_BYTE_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" line 188: Output port <oEMPTY> of the instance <eDATA_BYTE_FIFO> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <sCHAR_BYTE>.
     Found 1-bit register for signal <sMODE_FF>.
     Found 5-bit register for signal <sCURRENT_STATE>.
-    Found 5-bit register for signal <sCHAR_CNT>.
     Found 3-bit register for signal <sSEQ_CNT>.
     Found 2-bit register for signal <sCMD_PER_CNT>.
+    Found 6-bit register for signal <sCHAR_CNT>.
     Found finite state machine <FSM_4> for signal <sCURRENT_STATE>.
     -----------------------------------------------------------------------
-    | States             | 18                                             |
-    | Transitions        | 36                                             |
-    | Inputs             | 7                                              |
-    | Outputs            | 10                                             |
+    | States             | 19                                             |
+    | Transitions        | 38                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 11                                             |
     | Clock              | iCLK (rising_edge)                             |
     | Reset              | inRST (negative)                               |
     | Reset type         | asynchronous                                   |
@@ -525,23 +580,26 @@ Synthesizing Unit <lcd_driver>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_39_o_add_115_OUT> created at line 1241.
-    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_119_OUT> created at line 1241.
-    Found 5-bit adder for signal <sCHAR_CNT[4]_GND_39_o_add_123_OUT> created at line 1241.
-    Found 4x20-bit Read Only RAM for signal <_n0229>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0181> created at line 564.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 748
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 752
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 752
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 752
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 752
-    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_34_o> created at line 364
+    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_49_o_add_120_OUT> created at line 680.
+    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_49_o_add_124_OUT> created at line 693.
+    Found 6-bit adder for signal <sCHAR_CNT[5]_GND_49_o_add_128_OUT> created at line 706.
+    Found 6-bit adder for signal <sCHAR_NUM> created at line 723.
+    Found 4x20-bit Read Only RAM for signal <_n0479>
+    Found 4-bit 4-to-1 multiplexer for signal <_n0290> created at line 594.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 803
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 807
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 807
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 807
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 807
+    Found 6-bit comparator greater for signal <n0016> created at line 320
+    Found 6-bit comparator equal for signal <GND_49_o_sCHAR_NUM[5]_equal_31_o> created at line 343
+    Found 3-bit comparator greater for signal <GND_49_o_sSEQ_CNT[2]_LessThan_36_o> created at line 389
     Summary:
 	inferred   1 RAM(s).
-	inferred   3 Adder/Subtractor(s).
-	inferred  11 D-type flip-flop(s).
-	inferred   1 Comparator(s).
-	inferred  72 Multiplexer(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  13 D-type flip-flop(s).
+	inferred   3 Comparator(s).
+	inferred  78 Multiplexer(s).
 	inferred   5 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <lcd_driver> synthesized.
@@ -551,7 +609,7 @@ Synthesizing Unit <lcd_timer_1>.
         CLK_PERIOD_NUMBER = 2160000
         CLK_CNT_WIDHT = 22
     Found 22-bit register for signal <sCLK_CNT>.
-    Found 22-bit adder for signal <sCLK_CNT[21]_GND_40_o_add_1_OUT> created at line 1241.
+    Found 22-bit adder for signal <sCLK_CNT[21]_GND_50_o_add_1_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  22 D-type flip-flop(s).
@@ -563,7 +621,7 @@ Synthesizing Unit <lcd_timer_2>.
         CLK_PERIOD_NUMBER = 12000
         CLK_CNT_WIDHT = 14
     Found 14-bit register for signal <sCLK_CNT>.
-    Found 14-bit adder for signal <sCLK_CNT[13]_GND_41_o_add_1_OUT> created at line 1241.
+    Found 14-bit adder for signal <sCLK_CNT[13]_GND_51_o_add_1_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  14 D-type flip-flop(s).
@@ -618,11 +676,11 @@ Synthesizing Unit <i2c_slave>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_53_o_add_51_OUT> created at line 1241.
-    Found 1-bit adder for signal <sBYTE_CNT[0]_PWR_28_o_add_55_OUT<0>> created at line 430.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_53_o_add_57_OUT> created at line 1241.
-    Found 4-bit adder for signal <sRSTART_PERIOD_CNT[3]_GND_53_o_add_63_OUT> created at line 1241.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_53_o_add_69_OUT> created at line 1241.
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_63_o_add_51_OUT> created at line 1241.
+    Found 1-bit adder for signal <sBYTE_CNT[0]_PWR_30_o_add_55_OUT<0>> created at line 430.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_63_o_add_57_OUT> created at line 1241.
+    Found 4-bit adder for signal <sRSTART_PERIOD_CNT[3]_GND_63_o_add_63_OUT> created at line 1241.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_63_o_add_69_OUT> created at line 1241.
     Found 16-bit 16-to-1 multiplexer for signal <sREG_MUX> created at line 516.
     Found 1-bit tristate buffer for signal <sSDA_IN> created at line 593
     Found 1-bit tristate buffer for signal <ioSDA> created at line 596
@@ -671,7 +729,7 @@ Synthesizing Unit <i2c_clk_freq_div>.
         CLK_FREQUENCY = 50000000
         CLK_CNT_WIDTH = 5
     Found 5-bit register for signal <sCLK_CNT>.
-    Found 5-bit adder for signal <sCLK_CNT[4]_GND_58_o_add_1_OUT> created at line 1241.
+    Found 5-bit adder for signal <sCLK_CNT[4]_GND_68_o_add_1_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred   5 D-type flip-flop(s).
@@ -682,58 +740,66 @@ Unit <i2c_clk_freq_div> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 12
- 16x8-bit single-port Read Only RAM                    : 8
+# RAMs                                                 : 10
+ 16x8-bit single-port Read Only RAM                    : 6
  4x20-bit single-port Read Only RAM                    : 1
  4x3-bit single-port Read Only RAM                     : 2
  8x11-bit single-port Read Only RAM                    : 1
-# Adders/Subtractors                                   : 26
+# Adders/Subtractors                                   : 33
  1-bit adder                                           : 1
  11-bit adder                                          : 1
  11-bit subtractor                                     : 1
  14-bit adder                                          : 1
- 2-bit adder                                           : 2
+ 2-bit adder                                           : 1
  22-bit adder                                          : 1
  3-bit adder                                           : 3
  4-bit adder                                           : 8
- 5-bit adder                                           : 4
- 6-bit adder                                           : 4
-# Registers                                            : 103
- 1-bit register                                        : 10
+ 5-bit adder                                           : 3
+ 6-bit adder                                           : 10
+ 8-bit adder                                           : 2
+ 8-bit subtractor                                      : 1
+# Registers                                            : 144
+ 1-bit register                                        : 15
  11-bit register                                       : 2
  14-bit register                                       : 1
  16-bit register                                       : 16
- 2-bit register                                        : 2
+ 2-bit register                                        : 1
  22-bit register                                       : 1
  3-bit register                                        : 5
  4-bit register                                        : 9
- 5-bit register                                        : 8
- 8-bit register                                        : 48
+ 5-bit register                                        : 11
+ 6-bit register                                        : 1
+ 8-bit register                                        : 81
  9-bit register                                        : 1
-# Comparators                                          : 10
+# Comparators                                          : 19
  11-bit comparator equal                               : 1
  3-bit comparator equal                                : 2
  3-bit comparator greater                              : 1
  5-bit comparator greater                              : 1
- 6-bit comparator not equal                            : 4
+ 6-bit comparator equal                                : 1
+ 6-bit comparator greater                              : 1
+ 6-bit comparator not equal                            : 8
+ 8-bit comparator equal                                : 3
  8-bit comparator greater                              : 1
-# Multiplexers                                         : 216
- 1-bit 2-to-1 multiplexer                              : 114
+# Multiplexers                                         : 223
+ 1-bit 2-to-1 multiplexer                              : 113
  11-bit 2-to-1 multiplexer                             : 1
  14-bit 2-to-1 multiplexer                             : 1
  16-bit 16-to-1 multiplexer                            : 1
  16-bit 2-to-1 multiplexer                             : 17
- 2-bit 2-to-1 multiplexer                              : 7
+ 2-bit 2-to-1 multiplexer                              : 1
  22-bit 2-to-1 multiplexer                             : 1
  3-bit 2-to-1 multiplexer                              : 3
- 4-bit 2-to-1 multiplexer                              : 45
+ 4-bit 2-to-1 multiplexer                              : 34
  4-bit 4-to-1 multiplexer                              : 1
- 5-bit 2-to-1 multiplexer                              : 8
- 8-bit 16-to-1 multiplexer                             : 2
- 8-bit 2-to-1 multiplexer                              : 13
- 8-bit 4-to-1 multiplexer                              : 2
-# Tristates                                            : 25
- 1-bit tristate buffer                                 : 25
+ 5-bit 2-to-1 multiplexer                              : 11
+ 6-bit 2-to-1 multiplexer                              : 1
+ 8-bit 16-to-1 multiplexer                             : 4
+ 8-bit 2-to-1 multiplexer                              : 32
+ 8-bit 3-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 1
+# Tristates                                            : 41
+ 1-bit tristate buffer                                 : 41
 # FSMs                                                 : 9
 # Xors                                                 : 14
  1-bit xor2                                            : 11
@@ -747,6 +813,9 @@ Macro Statistics
 =========================================================================
 
 WARNING:Xst:1710 - FF/Latch <sREG_7> (without init value) has a constant value of 0 in block <eSLAVE_ADDR_REG>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <sREG_5> of sequential type is unconnected in block <eBYTE_NUM_REG>.
+WARNING:Xst:2677 - Node <sREG_6> of sequential type is unconnected in block <eBYTE_NUM_REG>.
+WARNING:Xst:2677 - Node <sREG_7> of sequential type is unconnected in block <eBYTE_NUM_REG>.
 
 Synthesizing (advanced) Unit <baud_freq_div>.
 The following registers are absorbed into counter <sCLK_CNT>: 1 register on signal <sCLK_CNT>.
@@ -801,10 +870,10 @@ The following registers are absorbed into counter <sTR_PERIOD_CNT>: 1 register o
 Unit <i2c_slave> synthesized (advanced).
 
 Synthesizing (advanced) Unit <lcd_driver>.
-The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
 The following registers are absorbed into counter <sSEQ_CNT>: 1 register on signal <sSEQ_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0229> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0479> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -862,8 +931,9 @@ INFO:Xst:3217 - HDL ADVISOR - Register <sDATA_BIT_REG> currently described with 
 Unit <transmitter> synthesized (advanced).
 
 Synthesizing (advanced) Unit <uart_i2c_master>.
-The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
 The following registers are absorbed into counter <sPERIOD_CNT>: 1 register on signal <sPERIOD_CNT>.
+The following registers are absorbed into counter <sDATA_CNT>: 1 register on signal <sDATA_CNT>.
+The following registers are absorbed into counter <sDATA_BYTE_CNT>: 1 register on signal <sDATA_BYTE_CNT>.
 The following registers are absorbed into counter <sBYTE_CNT>: 1 register on signal <sBYTE_CNT>.
 The following registers are absorbed into counter <sTR_PERIOD_CNT>: 1 register on signal <sTR_PERIOD_CNT>.
 Unit <uart_i2c_master> synthesized (advanced).
@@ -872,43 +942,49 @@ Unit <uart_i2c_master> synthesized (advanced).
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 12
- 16x8-bit single-port distributed Read Only RAM        : 8
+# RAMs                                                 : 10
+ 16x8-bit single-port distributed Read Only RAM        : 6
  4x20-bit single-port distributed Read Only RAM        : 1
  4x3-bit single-port distributed Read Only RAM         : 2
  8x11-bit single-port distributed Read Only RAM        : 1
-# Adders/Subtractors                                   : 5
+# Adders/Subtractors                                   : 11
  11-bit subtractor                                     : 1
- 6-bit adder                                           : 4
-# Counters                                             : 21
+ 6-bit adder                                           : 9
+ 8-bit subtractor                                      : 1
+# Counters                                             : 22
  1-bit up counter                                      : 1
  11-bit up counter                                     : 1
  14-bit up counter                                     : 1
- 2-bit up counter                                      : 2
+ 2-bit up counter                                      : 1
  22-bit up counter                                     : 1
  3-bit up counter                                      : 3
  4-bit up counter                                      : 8
- 5-bit up counter                                      : 4
-# Registers                                            : 699
- Flip-Flops                                            : 699
-# Comparators                                          : 10
+ 5-bit up counter                                      : 3
+ 6-bit up counter                                      : 1
+ 8-bit up counter                                      : 2
+# Registers                                            : 972
+ Flip-Flops                                            : 972
+# Comparators                                          : 19
  11-bit comparator equal                               : 1
  3-bit comparator equal                                : 2
  3-bit comparator greater                              : 1
  5-bit comparator greater                              : 1
- 6-bit comparator not equal                            : 4
+ 6-bit comparator equal                                : 1
+ 6-bit comparator greater                              : 1
+ 6-bit comparator not equal                            : 8
+ 8-bit comparator equal                                : 3
  8-bit comparator greater                              : 1
-# Multiplexers                                         : 207
- 1-bit 2-to-1 multiplexer                              : 127
+# Multiplexers                                         : 213
+ 1-bit 2-to-1 multiplexer                              : 126
  16-bit 16-to-1 multiplexer                            : 1
  16-bit 2-to-1 multiplexer                             : 17
- 2-bit 2-to-1 multiplexer                              : 5
- 4-bit 2-to-1 multiplexer                              : 37
+ 4-bit 2-to-1 multiplexer                              : 26
  4-bit 4-to-1 multiplexer                              : 1
- 5-bit 2-to-1 multiplexer                              : 4
- 8-bit 16-to-1 multiplexer                             : 2
- 8-bit 2-to-1 multiplexer                              : 11
- 8-bit 4-to-1 multiplexer                              : 2
+ 5-bit 2-to-1 multiplexer                              : 8
+ 8-bit 16-to-1 multiplexer                             : 4
+ 8-bit 2-to-1 multiplexer                              : 28
+ 8-bit 3-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 1
 # FSMs                                                 : 9
 # Xors                                                 : 14
  1-bit xor2                                            : 11
@@ -944,37 +1020,39 @@ Optimizing FSM <eUART/eUART_TRANSMITTER/FSM_1> on signal <sCURRENT_STATE[1:3]> w
  stop      | 101
 -----------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <eI2C_BUS/eUART_I2C_MASTER/FSM_2> on signal <sCURRENT_STATE[1:26]> with one-hot encoding.
------------------------------------------------------------
+Optimizing FSM <eI2C_BUS/eUART_I2C_MASTER/FSM_2> on signal <sCURRENT_STATE[1:28]> with one-hot encoding.
+-------------------------------------------------------------
  State                       | Encoding
------------------------------------------------------------
- idle                        | 00000000000000000000000001
- uart_start                  | 00000000000000000000000010
- uart_slave_address          | 00000000000000000000000100
- uart_register_address       | 00000000000000000000001000
- uart_byte_lower             | 00000000000000000001000000
- uart_byte_upper             | 00000000000000000000010000
- uart_stop                   | 00000000000000000000100000
- i2c_start                   | 00000000000000000010000000
- i2c_slave_address_write     | 00000000000000000100000000
- i2c_slave_address_ack_write | 00000000000000001000000000
- i2c_slave_address_read      | 00000000100000000000000000
- i2c_slave_address_ack_read  | 00000000000001000000000000
- i2c_register_address        | 00000000000000010000000000
- i2c_register_address_ack    | 00000000000100000000000000
- i2c_repeated_start          | 00000000001000000000000000
- i2c_read_data               | 00000000000010000000000000
- i2c_write_data              | 00000000010000000000000000
- i2c_write_data_ack          | 00000010000000000000000000
- i2c_read_data_ack           | 00000001000000000000000000
- i2c_stop                    | 00000100000000000000000000
- i2c_nack_stop               | 00000000000000100000000000
- send_i2c_uart_telegram      | 00001000000000000000000000
- send_uart_slave_address     | 00010000000000000000000000
- send_uart_register_address  | 00100000000000000000000000
- send_uart_byte_lower        | 10000000000000000000000000
- send_uart_byte_upper        | 01000000000000000000000000
------------------------------------------------------------
+-------------------------------------------------------------
+ idle                        | 0000000000000000000000000001
+ uart_start                  | 0000000000000000000000000010
+ uart_slave_address          | 0000000000000000000000000100
+ uart_register_address       | 0000000000000000000000001000
+ uart_byte_number            | 0000000000000000000000010000
+ uart_data_byte              | 0000000000000000000000100000
+ uart_load_byte              | 0000000000000000000010000000
+ uart_next_byte              | 0000000000000000000100000000
+ uart_stop                   | 0000000000000000000001000000
+ i2c_start                   | 0000000000000000001000000000
+ i2c_slave_address_write     | 0000000000000000010000000000
+ i2c_slave_address_ack_write | 0000000000000000100000000000
+ i2c_slave_address_read      | 0000000010000000000000000000
+ i2c_slave_address_ack_read  | 0000000000000100000000000000
+ i2c_register_address        | 0000000000000001000000000000
+ i2c_register_address_ack    | 0000000000010000000000000000
+ i2c_repeated_start          | 0000000000100000000000000000
+ i2c_read_data               | 0000000000001000000000000000
+ i2c_write_data              | 0000000001000000000000000000
+ i2c_write_data_ack          | 0000001000000000000000000000
+ i2c_read_data_ack           | 0000000100000000000000000000
+ i2c_stop                    | 0000010000000000000000000000
+ i2c_nack_stop               | 0000000000000010000000000000
+ send_i2c_uart_telegram      | 0000100000000000000000000000
+ send_uart_slave_address     | 0001000000000000000000000000
+ send_uart_register_address  | 0010000000000000000000000000
+ send_uart_byte_number       | 0100000000000000000000000000
+ send_uart_data_byte         | 1000000000000000000000000000
+-------------------------------------------------------------
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <eI2C_BUS/eUART_I2C_MASTER/FSM_3> on signal <sCURRENT_STATE[1:3]> with one-hot encoding.
 -------------------
@@ -1002,11 +1080,12 @@ Optimizing FSM <eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/FSM_4> on signal <sCURRENT
  check_cursor      | 01010
  address_set_bf    | 01011
  address_set       | 01100
- print_char_bf     | 01101
- print_char        | 01110
- cursor_new_line   | 01111
- cursor_back       | 10000
- stop_print        | 10001
+ read_input_char   | 01101
+ print_char_bf     | 01110
+ print_char        | 01111
+ cursor_new_line   | 10000
+ cursor_back       | 10001
+ stop_print        | 10010
 -------------------------------
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <eI2C_BUS/eI2C_SLAVE/FSM_3> on signal <sCURRENT_STATE[1:3]> with one-hot encoding.
@@ -1053,6 +1132,7 @@ WARNING:Xst:2042 - Unit i2c_via_uart: 2 internal tristates are replaced by logic
 WARNING:Xst:2039 - Unit i2c_via_uart: 1 multi-source signal is replaced by logic (pull-up yes): eI2C_BUS/sSDA.
 WARNING:Xst:2042 - Unit i2c_slave: 2 internal tristates are replaced by logic (pull-up yes): ioSDA, sSDA_IN.
 WARNING:Xst:2042 - Unit fifo: 8 internal tristates are replaced by logic (pull-up yes): oDATA<0>, oDATA<1>, oDATA<2>, oDATA<3>, oDATA<4>, oDATA<5>, oDATA<6>, oDATA<7>.
+WARNING:Xst:2042 - Unit fifo_1: 8 internal tristates are replaced by logic (pull-up yes): oDATA<0>, oDATA<1>, oDATA<2>, oDATA<3>, oDATA<4>, oDATA<5>, oDATA<6>, oDATA<7>.
 INFO:Xst:2261 - The FF/Latch <eI2C_BUS/eUART_I2C_MASTER/eSCL_EDGE_DET/sCURRENT_STATE_FSM_FFd3> in Unit <i2c_via_uart> is equivalent to the following FF/Latch, which will be removed : <eI2C_BUS/eI2C_SLAVE/eSCL_REDGE_DET/sCURRENT_STATE_FSM_FFd3> 
 
 Optimizing unit <i2c_via_uart> ...
@@ -1064,24 +1144,25 @@ Optimizing unit <transmitter> ...
 
 Optimizing unit <baud_freq_div> ...
 
-Optimizing unit <fifo> ...
+Optimizing unit <fifo_1> ...
 
 Optimizing unit <reg> ...
 
+Optimizing unit <fifo> ...
+
 Optimizing unit <scl_gen> ...
 WARNING:Xst:1710 - FF/Latch <eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eSLAVE_ADDR_REG/sREG_7> (without init value) has a constant value of 0 in block <i2c_via_uart>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eBYTE_NUM_REG/sREG_7> of sequential type is unconnected in block <i2c_via_uart>.
+WARNING:Xst:2677 - Node <eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eBYTE_NUM_REG/sREG_6> of sequential type is unconnected in block <i2c_via_uart>.
+WARNING:Xst:2677 - Node <eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eBYTE_NUM_REG/sREG_5> of sequential type is unconnected in block <i2c_via_uart>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block i2c_via_uart, actual ratio is 5.
+Found area constraint ratio of 100 (+ 5) on block i2c_via_uart, actual ratio is 8.
 FlipFlop eI2C_BUS/eI2C_SLAVE/sADDR_REG_0 has been replicated 1 time(s)
 FlipFlop eI2C_BUS/eI2C_SLAVE/sADDR_REG_1 has been replicated 1 time(s)
-FlipFlop eI2C_BUS/eI2C_SLAVE/sADDR_REG_2 has been replicated 1 time(s)
-FlipFlop eI2C_BUS/eI2C_SLAVE/sADDR_REG_3 has been replicated 1 time(s)
 FlipFlop eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1 has been replicated 1 time(s)
 FlipFlop eI2C_BUS/eI2C_SLAVE/sMODE_FF has been replicated 1 time(s)
-FlipFlop eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCURRENT_STATE_FSM_FFd3 has been replicated 1 time(s)
-FlipFlop eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCURRENT_STATE_FSM_FFd4 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -1089,8 +1170,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 873
- Flip-Flops                                            : 873
+# Registers                                            : 1156
+ Flip-Flops                                            : 1156
 
 =========================================================================
 
@@ -1113,24 +1194,24 @@ Top Level Output File Name         : i2c_via_uart.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1336
+# BELS                             : 1633
 #      GND                         : 1
-#      INV                         : 5
+#      INV                         : 6
 #      LUT1                        : 34
-#      LUT2                        : 46
-#      LUT3                        : 354
-#      LUT4                        : 112
-#      LUT5                        : 161
-#      LUT6                        : 467
-#      MUXCY                       : 44
-#      MUXF7                       : 48
-#      MUXF8                       : 16
+#      LUT2                        : 60
+#      LUT3                        : 350
+#      LUT4                        : 159
+#      LUT5                        : 187
+#      LUT6                        : 613
+#      MUXCY                       : 58
+#      MUXF7                       : 69
+#      MUXF8                       : 32
 #      VCC                         : 1
-#      XORCY                       : 47
-# FlipFlops/Latches                : 873
-#      FDC                         : 78
-#      FDCE                        : 778
-#      FDP                         : 7
+#      XORCY                       : 63
+# FlipFlops/Latches                : 1156
+#      FDC                         : 84
+#      FDCE                        : 1053
+#      FDP                         : 9
 #      FDPE                        : 10
 # Clock Buffers                    : 1
 #      BUFG                        : 1
@@ -1150,16 +1231,16 @@ Selected Device : 6slx45fgg676-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             873  out of  54576     1%  
- Number of Slice LUTs:                 1179  out of  27288     4%  
-    Number used as Logic:              1179  out of  27288     4%  
+ Number of Slice Registers:            1156  out of  54576     2%  
+ Number of Slice LUTs:                 1409  out of  27288     5%  
+    Number used as Logic:              1409  out of  27288     5%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1396
-   Number with an unused Flip Flop:     523  out of   1396    37%  
-   Number with an unused LUT:           217  out of   1396    15%  
-   Number of fully used LUT-FF pairs:   656  out of   1396    46%  
-   Number of unique control sets:        88
+ Number of LUT Flip Flop pairs used:   1788
+   Number with an unused Flip Flop:     632  out of   1788    35%  
+   Number with an unused LUT:           379  out of   1788    21%  
+   Number of fully used LUT-FF pairs:   777  out of   1788    43%  
+   Number of unique control sets:       124
 
 IO Utilization: 
  Number of IOs:                          29
@@ -1189,7 +1270,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-iCLK                               | DCM_SP:CLKFX           | 873   |
+iCLK                               | DCM_SP:CLKFX           | 1156  |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -1200,9 +1281,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 14.644ns (Maximum Frequency: 68.289MHz)
-   Minimum input arrival time before clock: 5.327ns
-   Maximum output required time after clock: 12.583ns
+   Minimum period: 14.773ns (Maximum Frequency: 67.691MHz)
+   Minimum input arrival time before clock: 5.407ns
+   Maximum output required time after clock: 13.995ns
    Maximum combinational path delay: 6.371ns
 
 Timing Details:
@@ -1211,35 +1292,34 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
-  Clock period: 14.644ns (frequency: 68.289MHz)
-  Total number of paths / destination ports: 29055 / 1645
+  Clock period: 14.773ns (frequency: 67.691MHz)
+  Total number of paths / destination ports: 33267 / 2203
 -------------------------------------------------------------------------
-Delay:               7.029ns (Levels of Logic = 5)
-  Source:            eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
-  Destination:       eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7 (FF)
+Delay:               7.091ns (Levels of Logic = 4)
+  Source:            eI2C_BUS/eUART_I2C_MASTER/sBYTE_CNT_2 (FF)
+  Destination:       eI2C_BUS/eUART_I2C_MASTER/sOSHW_REG_7 (FF)
   Source Clock:      iCLK rising 2.1X
   Destination Clock: iCLK rising 2.1X
 
-  Data Path: eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 to eI2C_BUS/eI2C_SLAVE/sOSHW_REG_7
+  Data Path: eI2C_BUS/eUART_I2C_MASTER/sBYTE_CNT_2 to eI2C_BUS/eUART_I2C_MASTER/sOSHW_REG_7
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              4   0.525   1.259  eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1)
-     LUT6:I0->O            3   0.254   0.766  eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>1331 (eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>133)
-     LUT3:I2->O           16   0.254   1.410  eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>61 (eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_sREG_MUX<0>6)
-     LUT6:I3->O            1   0.235   0.958  eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT72 (eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT71)
-     LUT6:I2->O            1   0.254   0.790  eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT77 (eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT76)
-     LUT5:I3->O            1   0.250   0.000  eI2C_BUS/eI2C_SLAVE/Mmux_sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT715 (eI2C_BUS/eI2C_SLAVE/sOSHW_REG[7]_sREG_BYTE_MUX[7]_mux_77_OUT<1>)
-     FDCE:D                    0.074          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_1
+     FDCE:C->Q             2   0.525   1.181  eI2C_BUS/eUART_I2C_MASTER/sBYTE_CNT_2 (eI2C_BUS/eUART_I2C_MASTER/sBYTE_CNT_2)
+     LUT6:I0->O            3   0.254   0.874  eI2C_BUS/eUART_I2C_MASTER/n004982 (eI2C_BUS/eUART_I2C_MASTER/n004981)
+     LUT6:I4->O           21   0.250   1.310  eI2C_BUS/eUART_I2C_MASTER/sCURRENT_STATE_FSM_FFd10-In11 (eI2C_BUS/eUART_I2C_MASTER/sCURRENT_STATE_FSM_FFd10-In1)
+     LUT5:I4->O            8   0.254   0.944  eI2C_BUS/eUART_I2C_MASTER/sCURRENT_STATE_sOSHW_LOAD1 (eI2C_BUS/eUART_I2C_MASTER/sOSHW_LOAD)
+     LUT4:I3->O            8   0.254   0.943  eI2C_BUS/eUART_I2C_MASTER/_n0310_inv1 (eI2C_BUS/eUART_I2C_MASTER/_n0310_inv)
+     FDCE:CE                   0.302          eI2C_BUS/eUART_I2C_MASTER/sOSHW_REG_0
     ----------------------------------------
-    Total                      7.029ns (1.846ns logic, 5.183ns route)
-                                       (26.3% logic, 73.7% route)
+    Total                      7.091ns (1.839ns logic, 5.252ns route)
+                                       (25.9% logic, 74.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
-  Total number of paths / destination ports: 1538 / 1027
+  Total number of paths / destination ports: 1674 / 1308
 -------------------------------------------------------------------------
-Offset:              5.327ns (Levels of Logic = 2)
+Offset:              5.407ns (Levels of Logic = 2)
   Source:            inRST (PAD)
   Destination:       eI2C_BUS/eCLK_FREQ_DIV/sCLK_CNT_0 (FF)
   Destination Clock: iCLK rising 2.1X
@@ -1249,37 +1329,37 @@ Offset:              5.327ns (Levels of Logic = 2)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             2   1.328   0.726  inRST_IBUF (inRST_IBUF)
-     LUT2:I1->O          873   0.254   2.560  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
+     LUT2:I1->O         1156   0.254   2.640  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
      FDCE:CLR                  0.459          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_0
     ----------------------------------------
-    Total                      5.327ns (2.041ns logic, 3.286ns route)
-                                       (38.3% logic, 61.7% route)
+    Total                      5.407ns (2.041ns logic, 3.366ns route)
+                                       (37.7% logic, 62.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'iCLK'
-  Total number of paths / destination ports: 530 / 17
+  Total number of paths / destination ports: 1057 / 9
 -------------------------------------------------------------------------
-Offset:              12.583ns (Levels of Logic = 8)
-  Source:            eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3 (FF)
-  Destination:       ioLCD_D<0> (PAD)
+Offset:              13.995ns (Levels of Logic = 8)
+  Source:            eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CNT_2 (FF)
+  Destination:       ioLCD_D<2> (PAD)
   Source Clock:      iCLK rising 2.1X
 
-  Data Path: eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3 to ioLCD_D<0>
+  Data Path: eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CNT_2 to ioLCD_D<2>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             7   0.525   1.138  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eLOWER_BYTE_REG/sREG_3)
-     LUT3:I0->O            1   0.235   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>11 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>11)
-     LUT6:I0->O            1   0.254   0.682  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>12 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>12)
-     LUT6:I5->O            2   0.254   0.954  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>13 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CODE<3>1)
-     LUT5:I2->O            1   0.235   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA26_SW0 (N227)
-     LUT6:I0->O            1   0.254   0.910  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA26 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA25)
-     LUT6:I3->O            1   0.235   0.790  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA219 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA218)
-     LUT4:I2->O            1   0.250   0.681  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA221 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sOUT_DATA<0>)
-     OBUFT:I->O                2.912          ioLCD_D_0_OBUFT (ioLCD_D<0>)
+     FDCE:C->Q            33   0.525   1.967  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CNT_2 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sCHAR_CNT_2)
+     LUT5:I0->O            5   0.254   1.271  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/_n0311<5>11 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/_n0311<5>1)
+     LUT6:I1->O            2   0.254   0.954  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/_n03441 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/_n0344_mmx_out)
+     LUT6:I3->O            1   0.235   1.112  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA62 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA61)
+     LUT6:I1->O            1   0.254   1.137  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA64 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA63)
+     LUT6:I0->O            1   0.254   0.790  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA68 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA67)
+     LUT6:I4->O            1   0.250   0.910  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA618 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA617)
+     LUT6:I3->O            1   0.235   0.681  eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/Mmux_sOUT_DATA620 (eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/sOUT_DATA<2>)
+     OBUFT:I->O                2.912          ioLCD_D_2_OBUFT (ioLCD_D<2>)
     ----------------------------------------
-    Total                     12.583ns (5.154ns logic, 7.429ns route)
-                                       (41.0% logic, 59.0% route)
+    Total                     13.995ns (5.173ns logic, 8.822ns route)
+                                       (37.0% logic, 63.0% route)
 
 =========================================================================
 Timing constraint: Default path analysis
@@ -1310,20 +1390,20 @@ Clock to Setup on destination clock iCLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-iCLK           |    7.029|         |         |         |
+iCLK           |    7.091|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
 Total REAL time to Xst completion: 11.00 secs
-Total CPU time to Xst completion: 11.03 secs
+Total CPU time to Xst completion: 11.17 secs
  
 --> 
 
-Total memory usage is 262220 kilobytes
+Total memory usage is 263372 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    9 (   0 filtered)
-Number of infos    :   10 (   0 filtered)
+Number of warnings :   16 (   0 filtered)
+Number of infos    :   14 (   0 filtered)
 

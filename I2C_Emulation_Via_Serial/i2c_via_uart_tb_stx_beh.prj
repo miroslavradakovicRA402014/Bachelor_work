@@ -1,7 +1,7 @@
+vhdl isim_temp "../UART_communication/fifo.vhd"
 vhdl isim_temp "../LCD_controller/lcd_timer.vhd"
 vhdl isim_temp "../LCD_controller/char_gen.vhd"
 vhdl isim_temp "../I2C_bus/reg.vhd"
-vhdl isim_temp "../UART_communication/fifo.vhd"
 vhdl isim_temp "../LCD_controller/lcd_driver.vhd"
 vhdl isim_temp "../I2C_bus/slave_reg.vhd"
 vhdl isim_temp "../I2C_bus/scl_gen.vhd"

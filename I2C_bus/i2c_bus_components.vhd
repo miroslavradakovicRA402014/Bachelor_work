@@ -14,7 +14,6 @@ package i2c_bus_components is
 			REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 			DATA_WIDTH 			   : integer := 8;	-- UART word widht 
 			DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
-			START_CNT_WIDTH 	   : integer := 3;   -- Start period counter width
 			BYTE_CNT_WIDTH 	   : integer := 8;   -- Byte counter width
 			TR_PERIOD_CNT_WIDTH  : integer := 5;	-- Transmisssion period counter width
 			PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width

@@ -127,7 +127,11 @@ BEGIN
 
 		wait for 50us;
 
-		-- Slave address 01100011
+		for i in 0 to 3 loop
+		
+		wait for 5 ms;
+
+		-- Slave address 01100010
 			
 		-- Start bit	
 		iRX   <= '0';	
@@ -231,7 +235,7 @@ BEGIN
 
 		wait for iCLK_period*16*100;	
 
-		-- Number data byte 00000010
+		-- Number data byte 00000000
 		
 	   -- Start bit	
 		iRX   <= '0';	
@@ -245,7 +249,7 @@ BEGIN
 		
 		wait for iCLK_period*16*170;
 		-- 1
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*160;
 		-- 2
@@ -274,7 +278,7 @@ BEGIN
 		wait for iCLK_period*16*170;
 
 		-- parity
-		iRX  <= '0';
+		iRX  <= '1';
 		
 		wait for iCLK_period*16*170;		
 		
@@ -386,6 +390,8 @@ BEGIN
 		iRX <= '1';
 
 		wait for iCLK_period*16*100;	
+		
+		end loop;
 --		
 --		-- 16 bit transfter done -------------------------------------------------------------------
 --		
