@@ -25,8 +25,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity fifo is
 	 Generic (
-		DATA_WIDTH   : integer := 8; -- Widht of FIFO word
-		NUM_OF_WORDS : integer := 16 -- Number of FIFO locations
+		DATA_WIDTH   : integer := 8; -- Width of FIFO word
+		NUM_OF_WORDS : integer := 4  -- Number of FIFO locations (as 2^n where n is, NUM_OF_WORDS)
 	 );
     Port ( iCLK    : in  std_logic;												-- Clock signal 50MHz
            inRST   : in  std_logic;												-- Reset signal
@@ -40,14 +40,12 @@ end fifo;
 
 architecture Behavioral of fifo is
 
-	type tFIFO is array(NUM_OF_WORDS - 1 downto 0) of std_logic_vector(DATA_WIDTH - 1 downto 0); -- FIFO memory type
+	type tFIFO is array(2 ** NUM_OF_WORDS - 1 downto 0) of std_logic_vector(DATA_WIDTH - 1 downto 0); -- FIFO memory type
 	
-	signal sFIFO : tFIFO := (
-		others => CONV_STD_LOGIC_VECTOR(0, DATA_WIDTH)
-	); -- FIFO memory signal
+	signal sFIFO : tFIFO; -- FIFO memory signal
 
-	signal sWR_PTR : integer range 0 to NUM_OF_WORDS ; -- FIFO write pointer
-	signal sRD_PTR : integer range 0 to NUM_OF_WORDS ; -- FIFO write pointer
+	signal sWR_PTR : integer range 0 to 2 ** NUM_OF_WORDS ; -- FIFO write pointer
+	signal sRD_PTR : integer range 0 to 2 ** NUM_OF_WORDS ; -- FIFO write pointer
 	
 	signal sEMPTY  : std_logic; -- Empty FIFO state signal
 	signal sFULL   : std_logic; -- Full FIFO state signal
@@ -57,18 +55,18 @@ begin
 	-- FIFO memory process
 	fifo_mem : process (iCLK, inRST) begin
 		if (inRST = '0') then
-			for i in 0 to NUM_OF_WORDS - 1  loop
+			for i in 0 to 2 ** NUM_OF_WORDS - 1  loop
 				sFIFO(i) <= (others => '0'); -- Reset FIFO
 			end loop;
 		elsif (iCLK'event and iCLK = '1') then
-			if (iWR = '1' and sFULL = '0' and sWR_PTR /=  NUM_OF_WORDS) then
+			if (iWR = '1' and sFULL = '0' and sWR_PTR /=  2 ** NUM_OF_WORDS) then
 				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO		
 			end if;
 		end if;
 	end process fifo_mem;
 	
 	-- Data output
-	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' and sRD_PTR /=  NUM_OF_WORDS else
+	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' and sRD_PTR /=  2 ** NUM_OF_WORDS else
 				 (others => 'Z');
 	
 	-- FIFO pointer process
@@ -87,11 +85,11 @@ begin
 				end if;	
 			end if;
 			-- Return write pointer to begin
-			if (sWR_PTR = NUM_OF_WORDS) then
+			if (sWR_PTR = 2 ** NUM_OF_WORDS) then
 				sWR_PTR <= 0;
 			end if;
 			-- Return read pointer to begin
-			if (sRD_PTR = NUM_OF_WORDS) then
+			if (sRD_PTR = 2 ** NUM_OF_WORDS) then
 				sRD_PTR <= 0;			
 			end if;			
 		end if;
@@ -105,8 +103,8 @@ begin
 		elsif (iCLK'event and iCLK = '1') then	
 			if (iWR = '1') then
 				-- Check if next position write of pointer is equal to read pointer - inidicate to FIFO is full 
-				if (sWR_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
-					if (sRD_PTR = 0 or sRD_PTR = NUM_OF_WORDS) then 
+				if (sWR_PTR = 2 ** NUM_OF_WORDS - 1) then -- Check for last position in buffer
+					if (sRD_PTR = 0 or sRD_PTR = 2 ** NUM_OF_WORDS) then 
 						sFULL  <= '1';
 					end if;
 				else
@@ -117,8 +115,8 @@ begin
 				sEMPTY <= '0';	-- Whenever you write something FIFO won't be empty
 			elsif (iRD = '1') then
 				-- Check if next position of read pointer is equal to write pointer - inidicate to FIFO is empty
-				if (sRD_PTR = NUM_OF_WORDS - 1) then -- Check for last position in buffer
-					if (sWR_PTR = 0 or sWR_PTR = NUM_OF_WORDS) then
+				if (sRD_PTR = 2 ** NUM_OF_WORDS - 1) then -- Check for last position in buffer
+					if (sWR_PTR = 0 or sWR_PTR = 2 ** NUM_OF_WORDS) then
 						sEMPTY <= '1';
 					end if;
 				else

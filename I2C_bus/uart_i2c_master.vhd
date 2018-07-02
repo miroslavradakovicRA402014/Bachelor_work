@@ -508,13 +508,9 @@ begin
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "11";
-				--if (iUART_EMPTY = '0') then
-				--	sIUART_REG_EN  		<= '1';
-					sREG_DEC_EN			 	<= '1';	
-				--end if;						
+				sREG_DEC_EN			 	<= '1';							
 			when UART_BYTE_NUMBER =>
 				sOUT_BUFF_EN 		 	<= '1';
-				--sIUART_REG_EN  	 	<= '1';
 				sACK_SEL		 		 	<= '1';					
 			when UART_DATA_BYTE =>
 				sOUT_BUFF_EN 		 	<= '1';
@@ -534,7 +530,6 @@ begin
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				sDATA_BYTE_CNT_EN		<= '1';	
-				--sLCD_BYTE_EN			<= '1';
 			when UART_STOP =>	
 				sOUT_BUFF_EN 			<= '1';
 				sACK_SEL		 		 	<= '1';	
@@ -650,8 +645,6 @@ begin
 				sDATA_CNT_EN 		 <= '1';	
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
---					sREG_DEC_SEL		 <= "10";
---					sREG_DEC_EN			 <= '1';
 					sPERIOD_CNT_EN  	 <= '1'; 
 					sTR_PERIOD_CNT_RST <= '1';
 				else

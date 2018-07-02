@@ -66,7 +66,7 @@ package uart_components is
 	component fifo is
 		 Generic (
 			DATA_WIDTH   : integer := 8; -- Widht of FIFO word
-			NUM_OF_WORDS : integer := 16 -- Number of FIFO locations
+			NUM_OF_WORDS : integer := 4  -- Number of FIFO locations (as 2^n where n is, NUM_OF_WORDS)
 		 );
 		 Port ( iCLK    : in  std_logic;												-- Clock signal 50MHz
 				  inRST   : in  std_logic;												-- Reset signal

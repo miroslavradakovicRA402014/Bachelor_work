@@ -83,8 +83,8 @@ architecture Behavioral of lcd_driver is
 	constant cCHAR_T 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010100";
 	
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, 
-							 READ_INPUT_CHAR, PRINT_CHAR_BF, PRINT_CHAR, CURSOR_NEW_LINE, CURSOR_BACK, STOP_PRINT); 		-- LCD controller FSM states type																
+							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET,  READ_INPUT_CHAR, 
+							 CLEAR_PRINT_BF, CLEAR_PRINT ,PRINT_CHAR_BF, PRINT_CHAR, CURSOR_BACK_BF, CURSOR_BACK, CURSOR_NEW_LINE, STOP_PRINT); -- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  					-- LCD controller FSM next state
@@ -128,6 +128,7 @@ architecture Behavioral of lcd_driver is
 
 	signal sDATA_FIFO_FULL			: std_logic;													-- Data FIFO full indication 
 	signal sDATA_FIFO_EMPTY			: std_logic;													-- Data FIFO empty indication
+	signal sDATA_FIFO_WRITE			: std_logic;													-- Data FIFO write signal
 	signal sDATA_FIFO_READ			: std_logic;													-- Data FIFO read signal
 	
 	signal sCHAR_CODE 				: std_logic_vector(CHAR_WIDTH - 1 downto 0); 		-- Character code at display
@@ -190,7 +191,7 @@ begin
 				iCLK   	=> iCLK,
 				inRST  	=> inRST,
 				iDATA  	=> iDATA_BYTE,
-				iWR    	=> iBYTE_EN,
+				iWR    	=> sDATA_FIFO_WRITE,
 				iRD    	=> sDATA_FIFO_READ,
 				oFULL  	=> sDATA_FIFO_FULL,
 				oEMPTY 	=> sDATA_FIFO_EMPTY,
@@ -309,8 +310,24 @@ begin
 				end if;	
 			when READ_INPUT_DATA =>
 				if (iDATA_EN = '1') then -- Wait for input data from master
-					sNEXT_STATE <= PRINT_CHAR_BF;	
+					sNEXT_STATE <= CLEAR_PRINT_BF;	
 				end if;
+			when CLEAR_PRINT_BF =>
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
+					sNEXT_STATE <= CLEAR_PRINT; 
+				end if;				
+			when CLEAR_PRINT =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
+					sNEXT_STATE <= CURSOR_BACK_BF;
+				end if;		
+			when CURSOR_BACK_BF =>
+				if (sIN_DATA(3) = '0') then -- Check busy flag for next command 
+					sNEXT_STATE <= CURSOR_BACK; 
+				end if;	
+			when CURSOR_BACK =>
+				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
+					sNEXT_STATE <= PRINT_CHAR_BF;
+				end if;					
 			when READ_INPUT_CHAR =>
 				sNEXT_STATE <= PRINT_CHAR_BF; 
 			when CHECK_CURSOR => 	
@@ -334,14 +351,10 @@ begin
 			when CURSOR_NEW_LINE =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
 					sNEXT_STATE <= PRINT_CHAR_BF;
-				end if;		
-			when CURSOR_BACK =>
-				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
-					sNEXT_STATE <= READ_INPUT_DATA;	-- Return cursor to begin and wait for next data
-				end if;			
+				end if;				
 			when STOP_PRINT =>
 				if (CONV_STD_LOGIC_VECTOR(sCHAR_CNT, 5) = sCHAR_NUM) then -- Wait to print all characters
-					sNEXT_STATE <= CURSOR_BACK;
+					sNEXT_STATE <= READ_INPUT_DATA;	-- Read another data
 				else
 					sNEXT_STATE <= CHECK_CURSOR;	-- Check cursor position
 				end if;							
@@ -421,8 +434,8 @@ begin
 						sSEQ_CNT_EN 	 <= '1';				-- Move to first sequence
 					end if;	
 				end if;			
-				sINIT_PERIOD_EN <= '1';					
-			when DISPLAY_CONFIG_BF =>	
+				sINIT_PERIOD_EN <= '1';		
+			when DISPLAY_CONFIG_BF | ENTRY_MODE_BF | CLEAR_SCREEN_BF | CLEAR_PRINT_BF  | ADDRESS_SET_BF | PRINT_CHAR_BF | CURSOR_BACK_BF =>	
 				sIN_BUFF_EN	 	 <= '1';						
 				oRW   			 <= '1';						-- Write command 
 				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
@@ -432,7 +445,7 @@ begin
 				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
 					sCMD_PERIOD_EN   <= '1';				-- Count command period
 					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
-				end if;
+				end if;				
 			when DISPLAY_CONFIG =>	
 				sOUT_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
@@ -457,19 +470,8 @@ begin
 				else
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
-				end if;					
-			when CLEAR_SCREEN_BF =>
-				sIN_BUFF_EN	 	 <= '1';						
-				oRW   			 <= '1';						-- Write command 
-				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
-				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
-					oE <= '1';
-				end if;
-				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
-					sCMD_PERIOD_EN   <= '1';				-- Count command period
-					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
-				end if;		
-			when CLEAR_SCREEN =>
+				end if;							
+			when CLEAR_SCREEN | CLEAR_PRINT =>
 				sOUT_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
@@ -493,17 +495,6 @@ begin
 				else
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
-				end if;
-			when ENTRY_MODE_BF =>
-				sIN_BUFF_EN	 	 <= '1';						
-				oRW   			 <= '1';						-- Write command 
-				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
-				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
-					oE <= '1';
-				end if;
-				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
-					sCMD_PERIOD_EN   <= '1';				-- Count command period
-					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;
 			when ENTRY_MODE =>
 				sOUT_BUFF_EN	 	<= '1';
@@ -529,17 +520,6 @@ begin
 				else
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
-				end if;
-			when ADDRESS_SET_BF =>
-				sIN_BUFF_EN	 	 <= '1';						
-				oRW   			 <= '1';						-- Write command 
-				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
-				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
-					oE <= '1';
-				end if;
-				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
-					sCMD_PERIOD_EN   <= '1';				-- Count command period
-					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;
 			when ADDRESS_SET =>
 				sOUT_BUFF_EN	 	<= '1';
@@ -571,19 +551,8 @@ begin
 			when READ_INPUT_CHAR =>
 				sCHAR_BYTE_EN <= '1';
 				if (sCHAR_BYTE = '0') then	-- Check if print first char of data byte 
-					sDATA_FIFO_READ <=   '1';			-- Read data byte form FIFO
+					sDATA_FIFO_READ 	<= '1';			-- Read data byte form FIFO
 					sDATA_BYTE_REG_EN <= '1';
-				end if;		
-			when PRINT_CHAR_BF =>
-				sIN_BUFF_EN	 	 <= '1';						
-				oRW   			 <= '1';						-- Write command 
-				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
-				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
-					oE <= '1';
-				end if;
-				if (sCMD_PER_CNT /= 3) then				-- Check command exexuted, all of three periods done
-					sCMD_PERIOD_EN   <= '1';				-- Count command period
-					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;		
 			when PRINT_CHAR =>
 				sOUT_BUFF_EN	 	 <= '1';					
@@ -663,7 +632,7 @@ begin
 				else
 					sSEQ_CNT_EN 	  <= '1';	-- Count command sequence
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
-				end if;			
+				end if; 			
 			when others =>
 								
 		end case;
@@ -720,7 +689,11 @@ begin
 	end process char_byte;
 	
 	-- Characters number (byte num is multiplie with 2, every byte is 2 chars)
-	sCHAR_NUM <= CHAR_NUMBER + (sBYTE_NUM_REG(4 downto 0) & '0') when s;
+	sCHAR_NUM <= CHAR_NUMBER + (sBYTE_NUM_REG(4 downto 0) & '0');
+	
+	-- Data FIFO write mux, can't write if FIFO is full
+	sDATA_FIFO_WRITE  <= iBYTE_EN when sDATA_FIFO_FULL = '0' else
+								'0';
 	
 	-- Char code process 
 	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sDATA_BYTE_CHAR) begin
