@@ -21,15 +21,15 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="60" />
+   <WVObjectSize size="61" />
    <wave_markers>
       <marker time="-2499999999000" label="" />
       <marker time="-2499999999000" label="" />
-      <marker time="59163978160000" label="" />
       <marker time="58688993160000" label="" />
       <marker time="59163978160000" label="" />
       <marker time="58689024160000" label="" />
       <marker time="-499999999000" label="" />
+      <marker time="-24999999999000" label="" />
       <marker time="-24999999999000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
@@ -200,6 +200,7 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eDATA_FIFO/swr_ptr" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">swr_ptr</obj_property>
       <obj_property name="ObjectShortName">swr_ptr</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eDATA_FIFO/srd_ptr" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">srd_ptr</obj_property>
@@ -283,6 +284,10 @@
    <wvobject fp_name="/i2c_via_uart_tb/sread_i" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">sread_i</obj_property>
       <obj_property name="ObjectShortName">sread_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/ouart_write" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ouart_write</obj_property>
+      <obj_property name="ObjectShortName">ouart_write</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eRECV_FIFO/sfifo" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
@@ -381,6 +386,86 @@
       <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
       <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[15]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[15]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[14]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[14]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[13]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[13]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[12]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[12]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[11]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[11]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[10]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[10]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[9]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[9]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[8]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[8]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[7]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[7]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[6]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[6]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[5]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[5]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[4]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[4]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[3]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[2]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[1]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sfifo[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART/eSEND_FIFO/sempty" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">sempty</obj_property>
@@ -417,6 +502,87 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
       <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[15]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[15]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[14]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[14]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[13]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[13]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[12]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[12]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[11]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[11]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[10]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[10]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[9]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[9]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[8]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[8]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[7]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[7]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[6]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[6]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[5]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[5]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[4]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[4]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[3]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[2]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[1]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/sfifo[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">sfifo[0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_BUS/eUART_I2C_MASTER/eLCD_DRIVER/eDATA_BYTE_FIFO/swr_ptr" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">swr_ptr</obj_property>

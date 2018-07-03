@@ -129,7 +129,7 @@ BEGIN
 
 		for i in 0 to 3 loop
 		
-		wait for 5 ms;
+		wait for 1 ms;
 
 		-- Slave address 01100010
 			
@@ -235,7 +235,7 @@ BEGIN
 
 		wait for iCLK_period*16*100;	
 
-		-- Number data byte 00000000
+		-- Number data byte 00000010
 		
 	   -- Start bit	
 		iRX   <= '0';	
@@ -249,7 +249,7 @@ BEGIN
 		
 		wait for iCLK_period*16*170;
 		-- 1
-		iRX  <= '0';
+		iRX  <= '1';
 		
 		wait for iCLK_period*16*160;
 		-- 2
@@ -278,7 +278,7 @@ BEGIN
 		wait for iCLK_period*16*170;
 
 		-- parity
-		iRX  <= '1';
+		iRX  <= '0';
 		
 		wait for iCLK_period*16*170;		
 		
@@ -610,7 +610,7 @@ BEGIN
 		
 		for i in 0 to  8 loop
 		
-			wait for 5 ms;
+			wait for 1 ms;
 			
 			-- Slave address 01100011
 			

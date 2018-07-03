@@ -414,7 +414,9 @@ begin
 				end if;				
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
-				sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
+				if (iUART_FULL = '0') then
+					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
+				end if;
 			when SEND_UART_SLAVE_ADDRESS =>
 				if (iUART_FULL = '0') then
 					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send slave address to UART 
@@ -429,15 +431,13 @@ begin
 				end if;
 			when SEND_UART_DATA_BYTE =>
 				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG - 1) then -- Check if all bytes sent to UART 
-					sNEXT_STATE <= IDLE;
-				else 
-					sNEXT_STATE <= SEND_UART_DATA_BYTE; -- Send slave data byte to UART 					
+					sNEXT_STATE <= IDLE; 					
 				end if;	
 		end case;
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
+	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
 		sIN_BUFF_EN	 		 	<= '0';
 		sOUT_BUFF_EN 		 	<= '0';
 		sIUART_REG_EN  	 	<= '0';
@@ -717,9 +717,11 @@ begin
 				sOUT_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				sDATA_BYTE_CNT_EN	 <= '1';
-				sDATA_FIFO_READ	 <= '1';
-				oUART_WRITE			 <= '1';
+				if (iUART_FULL = '0') then
+					sDATA_BYTE_CNT_EN	 <= '1';
+					sDATA_FIFO_READ	 <= '1';
+					oUART_WRITE			 <= '1';
+				end if;	
 				sOUART_REG_SEL		 <= "10";	
 				sLCD_BYTE_EN		 <= '1';
 				sLCD_BYTE_SEL		 <= '1';

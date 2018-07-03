@@ -60,7 +60,7 @@ begin
 			end loop;
 		elsif (iCLK'event and iCLK = '1') then
 			if (iWR = '1' and sFULL = '0' and sWR_PTR /=  2 ** NUM_OF_WORDS) then
-				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO		
+				sFIFO(sWR_PTR) <= iDATA;  	  -- Write to FIFO if not full		
 			end if;
 		end if;
 	end process fifo_mem;

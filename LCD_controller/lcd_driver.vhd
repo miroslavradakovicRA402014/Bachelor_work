@@ -112,11 +112,15 @@ architecture Behavioral of lcd_driver is
 	signal sCHAR_CNT 					: unsigned(5 downto 0);										-- Character counter
 	signal sCHAR_CNT_EN 				: std_logic;													-- Character counter enable
 	signal sCHAR_CNT_RST				: std_logic;													-- Character counter reset
-	
+		
 	signal sCHAR_BYTE 				: std_logic;													-- Character byte counter 
 	signal sCHAR_BYTE_EN 			: std_logic;													-- Character byte counter enable 
 	
+	signal sBYTE_EN_CNT 				: unsigned(2 downto 0);													
+	signal sBYTE_EN_CNT_RST			: std_logic;
+	
 	signal sCHAR_NUM 					: std_logic_vector(5 downto 0);							-- Number of characters
+	signal sBYTE_NUM_LIM				: std_logic_vector(5 downto 0);							-- Byte num limiter
 	
 	signal sSLAVE_ADDR_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Slave address register	
 	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Register address register
@@ -372,6 +376,7 @@ begin
 		sCMD_PER_CNT_RST	<= '0';
 		sCHAR_CNT_EN		<= '0';
 		sCHAR_CNT_RST		<= '0';
+		sBYTE_EN_CNT_RST	<= '0';
 		sCHAR_BYTE_EN 		<= '0';
 		sINIT_PERIOD_EN 	<= '0';	
 		sCMD_PERIOD_EN  	<= '0';	
@@ -547,7 +552,8 @@ begin
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;			
 			when READ_INPUT_DATA =>
-				sCHAR_CNT_RST <= '1';			-- Reset char counter
+				sCHAR_CNT_RST 	  <= '1';			-- Reset char counter
+				sBYTE_EN_CNT_RST <= '1';			-- Reset byte enable counter
 			when READ_INPUT_CHAR =>
 				sCHAR_BYTE_EN <= '1';
 				if (sCHAR_BYTE = '0') then	-- Check if print first char of data byte 
@@ -677,6 +683,19 @@ begin
 		end if;
 	end process char_cnt;
 	
+	-- Byte enable counter
+	byte_en_cnt : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sBYTE_EN_CNT <= (others => '0'); -- Reset counter
+		elsif (iCLK'event and iCLK = '1') then  
+			if (sBYTE_EN_CNT_RST = '1') then
+				sBYTE_EN_CNT <= (others => '0'); -- Reset counter
+			elsif (iBYTE_EN = '1') then
+				sBYTE_EN_CNT <= sBYTE_EN_CNT + 1; -- Count byte enable
+			end if;
+		end if;
+	end process byte_en_cnt;
+	
 	-- Char byte character flip-flop
 	char_byte : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -687,12 +706,16 @@ begin
 			end if;
 		end if;
 	end process char_byte;
+		
+	-- Byte number limiter
+	sBYTE_NUM_LIM <= sBYTE_NUM_REG(5 downto 0) when sBYTE_NUM_REG < 5  else
+						  "000100";
 	
 	-- Characters number (byte num is multiplie with 2, every byte is 2 chars)
-	sCHAR_NUM <= CHAR_NUMBER + (sBYTE_NUM_REG(4 downto 0) & '0');
+	sCHAR_NUM <= CHAR_NUMBER + (sBYTE_NUM_LIM(4 downto 0) & '0');
 	
 	-- Data FIFO write mux, can't write if FIFO is full
-	sDATA_FIFO_WRITE  <= iBYTE_EN when sDATA_FIFO_FULL = '0' else
+	sDATA_FIFO_WRITE  <= iBYTE_EN when sDATA_FIFO_FULL = '0' and sBYTE_EN_CNT < 4 else
 								'0';
 	
 	-- Char code process 
