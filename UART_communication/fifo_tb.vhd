@@ -48,7 +48,7 @@ ARCHITECTURE behavior OF fifo_tb IS
          iRD : IN  std_logic;
          oFULL : OUT  std_logic;
          oEMPTY : OUT  std_logic;
-			oLED : OUT  std_logic_vector(3 downto 0);
+--			oLED : OUT  std_logic_vector(3 downto 0);
          oDATA : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
@@ -65,7 +65,7 @@ ARCHITECTURE behavior OF fifo_tb IS
    signal oFULL : std_logic;
    signal oEMPTY : std_logic;
    signal oDATA : std_logic_vector(7 downto 0);
-	signal oLED : std_logic_vector(3 downto 0);
+--	signal oLED : std_logic_vector(3 downto 0);
 
    -- Clock period definitions
    constant iCLK_period : time := 10 ns;
@@ -81,7 +81,7 @@ BEGIN
           iRD => iRD,
           oFULL => oFULL,
           oEMPTY => oEMPTY,
-			 oLED	=> oLED,
+--			 oLED	=> oLED,
           oDATA => oDATA
         );
 

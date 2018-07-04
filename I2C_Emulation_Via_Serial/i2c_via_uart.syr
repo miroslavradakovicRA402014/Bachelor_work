@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -411,8 +411,8 @@ Synthesizing Unit <uart_i2c_master>.
         TR_PERIOD_CNT_WIDTH = 5
         PERIOD_CNT_WIDTH = 4
         LCD_BUS_WIDTH = 4
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 205: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 205: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 207: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 207: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <sACK_FF>.
     Found 4-bit register for signal <sDATA_CNT>.
     Found 4-bit register for signal <sPERIOD_CNT>.
@@ -436,26 +436,26 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" lin
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_86_OUT> created at line 752.
-    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_34_o_add_90_OUT> created at line 765.
-    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_34_o_add_95_OUT> created at line 778.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_100_OUT> created at line 791.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_106_OUT> created at line 808.
-    Found 8-bit subtractor for signal <GND_34_o_GND_34_o_sub_40_OUT<7:0>> created at line 433.
-    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 848.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 861.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 897
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 901
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_9_o> created at line 302
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_34_o_equal_41_o> created at line 433
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_48_o> created at line 617
-    Found 8-bit comparator equal for signal <n0049> created at line 660
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_87_OUT> created at line 757.
+    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_34_o_add_91_OUT> created at line 770.
+    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_34_o_add_96_OUT> created at line 783.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_101_OUT> created at line 796.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_107_OUT> created at line 813.
+    Found 8-bit subtractor for signal <GND_34_o_GND_34_o_sub_40_OUT<7:0>> created at line 440.
+    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 853.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 866.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 902
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 906
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_9_o> created at line 309
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_34_o_equal_41_o> created at line 440
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_34_o_LessThan_48_o> created at line 622
+    Found 8-bit comparator equal for signal <n0049> created at line 665
 INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal ioLCD_D<3> may hinder XST clustering optimizations.
     Summary:
 	inferred   6 Adder/Subtractor(s).
 	inferred  46 D-type flip-flop(s).
 	inferred   4 Comparator(s).
-	inferred  42 Multiplexer(s).
+	inferred  41 Multiplexer(s).
 	inferred   2 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <uart_i2c_master> synthesized.
@@ -585,7 +585,7 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" l
     Found 6-bit adder for signal <sCHAR_CNT[5]_GND_49_o_add_125_OUT> created at line 681.
     Found 3-bit adder for signal <sBYTE_EN_CNT[2]_GND_49_o_add_129_OUT> created at line 694.
     Found 6-bit adder for signal <sCHAR_NUM> created at line 715.
-    Found 4x20-bit Read Only RAM for signal <_n0331>
+    Found 4x20-bit Read Only RAM for signal <_n0474>
     Found 4-bit 4-to-1 multiplexer for signal <_n0305> created at line 569.
     Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 799
     Found 1-bit tristate buffer for signal <ioD<3>> created at line 803
@@ -784,8 +784,8 @@ Macro Statistics
  6-bit comparator greater                              : 1
  8-bit comparator equal                                : 3
  8-bit comparator greater                              : 2
-# Multiplexers                                         : 232
- 1-bit 2-to-1 multiplexer                              : 117
+# Multiplexers                                         : 231
+ 1-bit 2-to-1 multiplexer                              : 116
  11-bit 2-to-1 multiplexer                             : 1
  14-bit 2-to-1 multiplexer                             : 1
  16-bit 16-to-1 multiplexer                            : 1
@@ -874,7 +874,7 @@ The following registers are absorbed into counter <sSEQ_CNT>: 1 register on sign
 The following registers are absorbed into counter <sBYTE_EN_CNT>: 1 register on signal <sBYTE_EN_CNT>.
 The following registers are absorbed into counter <sCMD_PER_CNT>: 1 register on signal <sCMD_PER_CNT>.
 The following registers are absorbed into counter <sCHAR_CNT>: 1 register on signal <sCHAR_CNT>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0331> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0474> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -976,8 +976,8 @@ Macro Statistics
  6-bit comparator greater                              : 1
  8-bit comparator equal                                : 3
  8-bit comparator greater                              : 2
-# Multiplexers                                         : 221
- 1-bit 2-to-1 multiplexer                              : 130
+# Multiplexers                                         : 220
+ 1-bit 2-to-1 multiplexer                              : 129
  16-bit 16-to-1 multiplexer                            : 1
  16-bit 2-to-1 multiplexer                             : 17
  4-bit 2-to-1 multiplexer                              : 37
@@ -1203,10 +1203,10 @@ Primitive and Black Box Usage:
 #      GND                         : 1
 #      INV                         : 13
 #      LUT1                        : 34
-#      LUT2                        : 70
-#      LUT3                        : 350
-#      LUT4                        : 147
-#      LUT5                        : 213
+#      LUT2                        : 69
+#      LUT3                        : 351
+#      LUT4                        : 148
+#      LUT5                        : 212
 #      LUT6                        : 527
 #      MUXCY                       : 58
 #      MUXF7                       : 76
@@ -1241,11 +1241,11 @@ Slice Logic Utilization:
     Number used as Logic:              1354  out of  27288     4%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1755
-   Number with an unused Flip Flop:     578  out of   1755    32%  
-   Number with an unused LUT:           401  out of   1755    22%  
-   Number of fully used LUT-FF pairs:   776  out of   1755    44%  
-   Number of unique control sets:       125
+ Number of LUT Flip Flop pairs used:   1754
+   Number with an unused Flip Flop:     577  out of   1754    32%  
+   Number with an unused LUT:           400  out of   1754    22%  
+   Number of fully used LUT-FF pairs:   777  out of   1754    44%  
+   Number of unique control sets:       126
 
 IO Utilization: 
  Number of IOs:                          29
@@ -1287,7 +1287,7 @@ Timing Summary:
 Speed Grade: -2
 
    Minimum period: 14.965ns (Maximum Frequency: 66.824MHz)
-   Minimum input arrival time before clock: 5.413ns
+   Minimum input arrival time before clock: 5.414ns
    Maximum output required time after clock: 15.782ns
    Maximum combinational path delay: 6.371ns
 
@@ -1298,7 +1298,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 14.965ns (frequency: 66.824MHz)
-  Total number of paths / destination ports: 34478 / 2228
+  Total number of paths / destination ports: 34470 / 2366
 -------------------------------------------------------------------------
 Delay:               7.183ns (Levels of Logic = 5)
   Source:            eI2C_BUS/eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
@@ -1325,7 +1325,7 @@ Delay:               7.183ns (Levels of Logic = 5)
 Timing constraint: Default OFFSET IN BEFORE for Clock 'iCLK'
   Total number of paths / destination ports: 1843 / 1339
 -------------------------------------------------------------------------
-Offset:              5.413ns (Levels of Logic = 2)
+Offset:              5.414ns (Levels of Logic = 2)
   Source:            inRST (PAD)
   Destination:       eI2C_BUS/eCLK_FREQ_DIV/sCLK_CNT_0 (FF)
   Destination Clock: iCLK rising 2.1X
@@ -1334,11 +1334,11 @@ Offset:              5.413ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             2   1.328   0.726  inRST_IBUF (inRST_IBUF)
-     LUT2:I1->O         1177   0.254   2.646  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
+     IBUF:I->O             3   1.328   0.766  inRST_IBUF (inRST_IBUF)
+     LUT2:I1->O         1039   0.254   2.607  eI2C_BUS/eI2C_SLAVE/inRST_inv1 (eI2C_BUS/eI2C_SLAVE/inRST_inv)
      FDCE:CLR                  0.459          eI2C_BUS/eI2C_SLAVE/sOSHW_REG_0
     ----------------------------------------
-    Total                      5.413ns (2.041ns logic, 3.372ns route)
+    Total                      5.414ns (2.041ns logic, 3.373ns route)
                                        (37.7% logic, 62.3% route)
 
 =========================================================================
@@ -1404,12 +1404,12 @@ iCLK           |    7.183|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 10.00 secs
+Total REAL time to Xst completion: 12.00 secs
+Total CPU time to Xst completion: 11.58 secs
  
 --> 
 
-Total memory usage is 261072 kilobytes
+Total memory usage is 262096 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   10 (   0 filtered)

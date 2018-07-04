@@ -142,7 +142,9 @@ architecture Behavioral of uart_i2c_master is
 	signal sDATA_FIFO_READ			: std_logic;																					-- Data FIFO read signal
 	signal sDATA_FIFO_FULL			: std_logic;																					-- Data FIFO full indication
 	signal sDATA_FIFO_EMPTY			: std_logic;																					-- Data FIFO empty indication
-	signal sDATA_BYTE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Data byte				
+	signal sDATA_BYTE 				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- Data byte		
+	signal sDATA_FIFO_RST			: std_logic;																					-- Data FIFO reset multiplexer
+	signal sDATA_FIFO_RST_SEL		: std_logic;																					-- Data FIFO reset multiplexer select
 
 	signal sBYTE_SEL					: std_logic;																					-- Data byte multiplexer select
 
@@ -205,7 +207,7 @@ begin
 	eDATA_FIFO : entity work.fifo 	
 			Port map(
 				iCLK   	=> iCLK,
-				inRST  	=> inRST,
+				inRST  	=> sDATA_FIFO_RST,
 				iDATA  	=> sDATA_BYTE_MUX,
 				iWR    	=> sREG_DEC(2),
 				iRD    	=> sDATA_FIFO_READ,
@@ -213,6 +215,11 @@ begin
 				oEMPTY 	=> sDATA_FIFO_EMPTY,
 				oDATA  	=> sDATA_BYTE
 			);
+			
+	-- Data FIFO reset 
+	sDATA_FIFO_RST <= '0' when sDATA_FIFO_RST_SEL = '1' else
+							inRST;
+	
 				
 	-- Data byte number register
 	eBYTE_NUM_REG : entity work.reg 
@@ -302,7 +309,7 @@ begin
 				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG) then
 					sNEXT_STATE <= UART_STOP; -- End of I2C telegram all bytes recived
 				else
-					if (iUART_EMPTY = '0') then -- Check can you can read from UART
+					if (iUART_EMPTY = '0') then -- Check can you can read from UART and can write to
 						sNEXT_STATE <= UART_LOAD_BYTE; -- Load data byte from input UART register
 					end if;	
 				end if;	
@@ -414,20 +421,20 @@ begin
 				end if;				
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;
+				if (iUART_FULL = '0') then -- Check if UART is FULL
+					sNEXT_STATE <= SEND_UART_SLAVE_ADDRESS;	-- Send slave address to UART 
 				end if;
 			when SEND_UART_SLAVE_ADDRESS =>
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send slave address to UART 
+				if (iUART_FULL = '0') then	-- Check if UART is FULL
+					sNEXT_STATE <= SEND_UART_REGISTER_ADDRESS; -- Send register address to UART 
 				end if;
 			when SEND_UART_REGISTER_ADDRESS =>
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_BYTE_NUMBER; -- Send slave register address to UART 
+				if (iUART_FULL = '0') then -- Check if UART is FULL
+					sNEXT_STATE <= SEND_UART_BYTE_NUMBER; -- Send data byte number to UART 
 				end if;				
 			when SEND_UART_BYTE_NUMBER =>
-				if (iUART_FULL = '0') then
-					sNEXT_STATE <= SEND_UART_DATA_BYTE; -- Send slave upper byte to UART 
+				if (iUART_FULL = '0') then -- Check if UART is FULL
+					sNEXT_STATE <= SEND_UART_DATA_BYTE; -- Send data bytes to UART 
 				end if;
 			when SEND_UART_DATA_BYTE =>
 				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG - 1) then -- Check if all bytes sent to UART 
@@ -451,6 +458,7 @@ begin
 		sREG_DEC_SEL		 	<= "00";
 		sREG_DEC_EN			 	<= '0';
 		sDATA_FIFO_READ		<= '0';
+		sDATA_FIFO_RST_SEL	<= '0';
 		sSCL_EN				 	<= '0';	
 		sSCL_RST					<= '0';
 		oFREQ_EN 			 	<= '0';
@@ -482,25 +490,22 @@ begin
 					oUART_READ  		 	<= '1';
 				end if;
 				sBYTE_CNT_RST 		 	<= '1';	
-				sDATA_BYTE_CNT_RST 	<= '1';				
+				sDATA_BYTE_CNT_RST 	<= '1';		
+				sDATA_FIFO_RST_SEL	<= '1';	
 			when UART_START =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
-					sREG_DEC_EN			 	<= '1';
 					oUART_READ  		 	<= '1';	
+					sREG_DEC_EN			 	<= '1';
 				end if;		
 			when UART_SLAVE_ADDRESS =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';	
-				if (iUART_EMPTY = '1') then
-					if (sSLAVE_ADDR_REG(0) = '1') then
-						sREG_DEC_EN			 	<= '1';	
-					end if;
-				else
-					oUART_READ  		 	<= '1';	
+				if (iUART_EMPTY = '0') then	
 					sIUART_REG_EN  		<= '1';
+					oUART_READ  		 	<= '1';
 					sREG_DEC_EN			 	<= '1';	
 				end if;		
 				sREG_DEC_SEL		 	<= "01";
