@@ -1,0 +1,10 @@
+Command line:
+   fifo_tb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  50099
+
+Wed Jul 04 09:46:34 2018
+
+
+ Elaboration Time: 0.125 sec

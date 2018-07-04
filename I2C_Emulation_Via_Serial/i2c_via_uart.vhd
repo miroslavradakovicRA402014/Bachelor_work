@@ -53,15 +53,11 @@ architecture Behavioral of i2c_via_uart is
 	signal sCLK			 : std_logic;													-- Clock signal from DCM 50MHz
 	signal snRST		 : std_logic;													-- Reset signal for all system
 	signal sLOCKED		 : std_logic;													-- Locked signal from DCM
-	
-	-- UART signals
-	signal sUART_EMPTY : std_logic;													-- UART fifo empty
-	signal sUART_FULL  : std_logic;													-- UART fifo full	
-	signal sUART_READ  : std_logic;													-- UART write signal
-	signal sUART_WRITE : std_logic;													-- UART read signal
-	signal sIUART_DATA : std_logic_vector(DATA_WIDTH - 1 downto 0);		-- UART input data	
-	signal sOUART_DATA : std_logic_vector(DATA_WIDTH - 1 downto 0);		-- UART output data
-	
+		
+	-- I2C bus signals
+	signal sSCL			 : std_logic;													-- Serial clock 
+	signal sSDA			 : std_logic;													-- Serial data
+		
 	-- LCD control signal
 	signal sLCD_E      : std_logic;													-- LCD enable signal 
 	signal sLCD_RS		 : std_logic;													-- LCD RS signal
@@ -81,49 +77,42 @@ begin
 			LOCKED    => sLOCKED
 		 );
 
-	-- UART
-	eUART : uart 
+	-- Uart I2C bridge
+	eUART_I2C_BRIDGE : uart_i2c_bridge
+		Port map( 
+			iCLK        		=> sCLK,
+			inRST       		=> inRST,
+			iPARITY_EN_SW	 	=> iPARITY_EN_SW,
+			iPARITY_SW			=> iPARITY_SW,
+			iHANDSHAKE_EN_SW 	=> iHANDSHAKE_EN_SW,
+			iDATA_BIT_SW		=> iDATA_BIT_SW,
+			iBAUD_SW			 	=> iBAUD_SW,
+			iCTS				 	=> iCTS,
+			iRX         		=> iRX,												
+         oLCD_E 	   		=> sLCD_E,
+         oLCD_RS    	  	 	=> sLCD_RS,
+         oLCD_RW   		 	=> sLCD_RW,
+			oTX         		=> oTX,		
+			oRTS				 	=> oRTS,
+			oSCL		   	 	=> sSCL,
+			ioSDA		   	 	=> sSDA,
+			ioLCD_D 		  	 	=> sLCD_D
+		);	
+
+	--	I2C 16 bit slave	
+	eI2C_SLAVE : i2c_slave
 		Port map(
-			iCLK        		 => sCLK,
-			inRST       		 => snRST,
-			iPARITY_EN			 => iPARITY_EN_SW,
-			iPARITY				 => iPARITY_SW,
-			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
-			iDATA_SEL			 => iDATA_BIT_SW,
-			iBAUD_SEL			 => iBAUD_SW,
-			iCTS					 => iCTS,
-			iRX         		 => iRX,
-			iUART_DATA		 	 => sOUART_DATA,
-			iUART_WR 			 => sUART_WRITE,
-			iUART_RD    		 => sUART_READ,
-			oTX         		 => oTX,
-			oRTS					 => oRTS,
-			oUART_FULL         => sUART_FULL,
-			oUART_EMPTY      	 => sUART_EMPTY,
-			oUART_DATA       	 => sIUART_DATA
+			iCLK 	=> iCLK,
+			inRST => inRST,
+			iSCL 	=> sSCL,
+			ioSDA => sSDA
 		);
-		
-	-- I2C bus
-	eI2C_BUS : i2c_bus
-		Port map(
-			iCLK  		 => sCLK,
-         inRST 		 => snRST,
-			iUART_FULL   => sUART_FULL, 
-			iUART_EMPTY  => sUART_EMPTY,
-			iUART_DATA   => sIUART_DATA,
-			oUART_READ   => sUART_READ,
-			oUART_WRITE  => sUART_WRITE,
-			oUART_DATA   => sOUART_DATA,
-			oLCD_E 	 	 => sLCD_E,   
-         oLCD_RS    	 => sLCD_RS,
-         oLCD_RW      => sLCD_RW,
-			ioLCD_D 		 => sLCD_D
-		);
+
 		
 	-- If clock is not stable hold reset state of system	
 	snRST <= inRST when sLOCKED = '1' else
 				'0';
-		
+			
 	-- LCD control output
 	oLCD_E  <= sLCD_E;
 	oLCD_RS <= sLCD_RS;

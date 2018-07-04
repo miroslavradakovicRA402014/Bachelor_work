@@ -39,7 +39,6 @@ entity i2c_slave is
 	 );
     Port ( iCLK 	: in  	std_logic;														 -- Clock signal 50MHz
            inRST 	: in  	std_logic;														 -- Reset signal
-			  iTC		: in 		std_logic;														 -- Terminal count signal 
            iSCL 	: in  	std_logic;														 -- SCL signal
            ioSDA  : inout  std_logic);														 -- SDA signal
 end i2c_slave;

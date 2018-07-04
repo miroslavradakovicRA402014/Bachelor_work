@@ -38,11 +38,9 @@ entity uart_i2c_master is
 	 );
     Port ( iCLK  		   : in 	  std_logic;												-- Clock signal 50MHz
            inRST 		   : in 	  std_logic;												-- Reset signal 
-			  iTC 		   : in 	  std_logic;												-- Terminal count for period from clock divider
 			  iUART_FULL   : in 	  std_logic; 												-- UART full indication
 			  iUART_EMPTY  : in    std_logic;												-- UART empty indication
 			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);   -- Input data from UART FIFO
-			  oFREQ_EN 		: out   std_logic;												-- Frequency divider enable 
 			  oUART_READ   : out   std_logic;												-- Read from UART signal
 			  oUART_WRITE  : out   std_logic;												-- Write to UART signal
 			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);	-- Output data to UART FIFO
@@ -70,6 +68,9 @@ architecture Behavioral of uart_i2c_master is
 	signal sNEXT_STATE    	   	: tSTATES; 																			 			-- Master FSM next state
 
 	signal sSCL							: std_logic;																					-- SCL signal
+	
+	signal sTC							: std_logic;																					-- Frequency clock divider terminal count
+	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
 
 	signal sOUT_BUFF_EN	 	   	: std_logic;																					-- Output tri-state buffer enable
 	signal sIN_BUFF_EN	 	   	: std_logic;																					-- Input tri-state buffer enable
@@ -247,7 +248,7 @@ begin
 				inRST    => inRST,
 				iSCL_RST => sSCL_RST,
 				iSCL_EN  => sSCL_EN,
-				iTC      => iTC,
+				sTC      => sTC,
 				oSCL	   => sSCL
 			);
 	
@@ -268,7 +269,15 @@ begin
             oRW   		=> oLCD_RW,  
             ioD 		  	=> ioLCD_D		
 			);
-
+			
+		-- I2C bus clock frequency divider		
+	eCLK_FREQ_DIV : entity.work.i2c_clk_freq_div
+			Port map(
+				iCLK		=> iCLK,
+				inRST 	=> inRST,
+				iFREQ_EN => sFREQ_EN,
+				oTC   	=>	sTC		
+			);		
 	
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
@@ -461,7 +470,7 @@ begin
 		sDATA_FIFO_RST_SEL	<= '0';
 		sSCL_EN				 	<= '0';	
 		sSCL_RST					<= '0';
-		oFREQ_EN 			 	<= '0';
+		sFREQ_EN 			 	<= '0';
 		oUART_READ  		 	<= '0';
 		oUART_WRITE			 	<= '0';
 		sDATA_CNT_EN 		 	<= '0';
@@ -547,14 +556,14 @@ begin
 			when I2C_START =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sSCL_EN					<= '1';	
-				oFREQ_EN 				<= '1';
+				sFREQ_EN 				<= '1';
 				sPERIOD_CNT_EN 	 	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_WRITE => 
 				sOUT_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';	
+				sFREQ_EN 			 	<= '1';	
 				sDATA_CNT_EN 		 	<= '1';					
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
@@ -568,14 +577,14 @@ begin
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';
+				sFREQ_EN 			 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_READ => 
 				sOUT_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';		
+				sFREQ_EN 			 	<= '1';		
 				sDATA_CNT_EN 		 	<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1'; 
@@ -589,13 +598,13 @@ begin
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';
+				sFREQ_EN 			 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';							
 			when I2C_REGISTER_ADDRESS => 
 				sOUT_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';
-				oFREQ_EN 			 	<= '1';					
+				sFREQ_EN 			 	<= '1';					
 				sDATA_CNT_EN 			<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
 					sPERIOD_CNT_EN  	 <= '1';
@@ -615,7 +624,7 @@ begin
 					end if;		
 				end if;				
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';
+				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
 			when I2C_REPEATED_START =>
 				sOUT_BUFF_EN 		 	<= '1';
@@ -624,14 +633,14 @@ begin
 				end if;
 				sSLAVE_ADDR_SEL		<= '1';				
 				sSCL_EN				 	<= '1';	
-				oFREQ_EN 			 	<= '1';
+				sFREQ_EN 			 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_WRITE_DATA =>
 				sOUT_BUFF_EN 		 <= '1';
 				sSDA_SEL		 		 <= '1';
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';	
+				sFREQ_EN 			 <= '1';	
 				sDATA_CNT_EN 		 <= '1';
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
@@ -646,7 +655,7 @@ begin
 				sBYTE_SEL		 	 <= '1';		
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';		
+				sFREQ_EN 			 <= '1';		
 				sDATA_CNT_EN 		 <= '1';	
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
@@ -660,7 +669,7 @@ begin
 				sIN_BUFF_EN	 		 <= '1';
 				sACK_FF_EN			 <= '1';
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';
+				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
 				if (CONV_STD_LOGIC_VECTOR(sBYTE_CNT, DATA_WIDTH) /= sBYTE_NUM_REG) then
 					sREG_MUX_SEL		 <= "10";
@@ -680,17 +689,17 @@ begin
 					sREG_DEC_EN			 <= '1';
 				end if;
 				sSCL_EN				 <= '1';	
-				oFREQ_EN 			 <= '1';
+				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_STOP =>
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
-				oFREQ_EN 			 <= '1';
+				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';	
 			when I2C_NACK_STOP =>
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';	
-				oFREQ_EN 			 <= '1';
+				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';					
 			when SEND_I2C_UART_TELEGRAM =>
 				sOUT_BUFF_EN 		 <= '1';
@@ -792,7 +801,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sPERIOD_CNT = TC_PERIOD - 1) then -- Check counted periods
 				sPERIOD_CNT <= (others => '0'); 
-			elsif (iTC = '1' and sPERIOD_CNT_EN = '1') then 
+			elsif (sTC = '1' and sPERIOD_CNT_EN = '1') then 
 				sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
 			end if;
 		end if;
@@ -809,7 +818,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sTR_PERIOD_CNT = TR_PERIOD - 1 or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
 				sTR_PERIOD_CNT <= (others => '0'); 
-			elsif (iTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
+			elsif (sTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
 				sTR_PERIOD_CNT <= sTR_PERIOD_CNT + 1; -- Count period
 			end if;
 		end if;
