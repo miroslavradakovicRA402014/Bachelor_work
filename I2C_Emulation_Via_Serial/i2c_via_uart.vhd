@@ -59,10 +59,17 @@ architecture Behavioral of i2c_via_uart is
 	signal sSDA			 : std_logic;													-- Serial data
 		
 	-- LCD control signal
-	signal sLCD_E      : std_logic;													-- LCD enable signal 
-	signal sLCD_RS		 : std_logic;													-- LCD RS signal
-	signal sLCD_RW		 : std_logic;													-- LCD R/W signal
-	signal sLCD_D 		 : std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);	-- LCD data signal
+	signal sLCD_SLAVE_ADDR	: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver slave address data
+	signal sLCD_REG_ADDR		: std_logic_vector(DATA_WIDTH - 1 downto 0); 	-- LCD display driver register address data
+	signal sLCD_DATA_BYTE	: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
+	signal sLCD_BYTE_NUM		: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
+	signal sLCD_MODE			: std_logic;												-- LCD display driver mode data
+	signal sLCD_DATA_EN		: std_logic;												-- LCD display driver data enable
+	signal sLCD_BYTE_EN		: std_logic;												-- LCD display driver data byte enable
+	signal sLCD_E      		: std_logic;												-- LCD enable signal 
+	signal sLCD_RS				: std_logic;												-- LCD RS signal
+	signal sLCD_RW		 		: std_logic;												-- LCD R/W signal
+	signal sLCD_D 		 		: std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);	-- LCD data signal
 	
 begin
 
@@ -88,10 +95,14 @@ begin
 			iDATA_BIT_SW		=> iDATA_BIT_SW,
 			iBAUD_SW			 	=> iBAUD_SW,
 			iCTS				 	=> iCTS,
-			iRX         		=> iRX,												
-         oLCD_E 	   		=> sLCD_E,
-         oLCD_RS    	  	 	=> sLCD_RS,
-         oLCD_RW   		 	=> sLCD_RW,
+			iRX         		=> iRX,	
+			oLCD_SLAVE_ADDR	=> sLCD_SLAVE_ADDR,
+			oLCD_REG_ADDR		=> sLCD_REG_ADDR,
+			oLCD_DATA_BYTE		=> sLCD_DATA_BYTE,
+			oLCD_BYTE_NUM		=> sLCD_BYTE_NUM,
+			oLCD_MODE			=> sLCD_MODE,
+			oLCD_DATA_EN		=> sLCD_DATA_EN,
+			oLCD_BYTE_EN		=> sLCD_BYTE_EN,			
 			oTX         		=> oTX,		
 			oRTS				 	=> oRTS,
 			oSCL		   	 	=> sSCL,
@@ -107,7 +118,24 @@ begin
 			iSCL 	=> sSCL,
 			ioSDA => sSDA
 		);
-
+		
+   -- LCD driver	
+	eLCD_DRIVER : lcd_driver 
+		Port map(
+			iCLK   	  	=> sCLK,
+         inRST  	  	=> snRST,
+			iSLAVE_ADDR => sLCD_SLAVE_ADDR,
+			iREG_ADDR   => sLCD_REG_ADDR,
+			iDATA_BYTE 	=> sLCD_DATA_BYTE,
+			iBYTE_NUM 	=> sLCD_BYTE_NUM,
+			iMODE 		=> sLCD_MODE,  
+			iDATA_EN	   => sLCD_DATA_EN,
+			iBYTE_EN		=> sLCD_BYTE_EN,
+         oE 	   	=> sLCD_E,  
+         oRS    	   => sLCD_RS,
+         oRW   		=> sLCD_RW,  
+         ioD 		  	=> sLCD_D		
+		);
 		
 	-- If clock is not stable hold reset state of system	
 	snRST <= inRST when sLOCKED = '1' else

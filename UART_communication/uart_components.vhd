@@ -25,7 +25,7 @@ package uart_components is
 			TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
 			DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
 			TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
-			DATA_BIT_SEL	 : integer := 2
+			DATA_BIT_SEL	 : integer := 2	-- Data bit selecet
 		 );
 		 Port ( iCLK        : in   std_logic;												-- Clock signal 50MHz	
 				  inRST       : in   std_logic;												-- Reset signal

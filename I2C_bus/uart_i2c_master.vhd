@@ -36,20 +36,23 @@ entity uart_i2c_master is
 		PERIOD_CNT_WIDTH     : integer := 4;	-- Period counter width
 		LCD_BUS_WIDTH 			: integer := 4		-- Width of LCD interface	
 	 );
-    Port ( iCLK  		   : in 	  std_logic;												-- Clock signal 50MHz
-           inRST 		   : in 	  std_logic;												-- Reset signal 
-			  iUART_FULL   : in 	  std_logic; 												-- UART full indication
-			  iUART_EMPTY  : in    std_logic;												-- UART empty indication
-			  iUART_DATA   : in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);   -- Input data from UART FIFO
-			  oUART_READ   : out   std_logic;												-- Read from UART signal
-			  oUART_WRITE  : out   std_logic;												-- Write to UART signal
-			  oUART_DATA   : out   std_logic_vector(DATA_WIDTH - 1  downto 0);	-- Output data to UART FIFO
-			  oSCL		   : out   std_logic;												-- SCL signal
-			  oLCD_E 	   : out   std_logic;												-- LCD display enable signal
-           oLCD_RS    	: out   std_logic;												-- LCD display register select 
-           oLCD_RW      : out   std_logic;												-- LCD display read-write signal
-			  ioSDA		   : inout std_logic;												-- SDA signal
-			  ioLCD_D 		: inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));-- LCD display data signal
+    Port ( iCLK  		   	: in 	  std_logic;												-- Clock signal 50MHz
+           inRST 		   	: in 	  std_logic;												-- Reset signal 
+			  iUART_FULL   	: in 	  std_logic; 												-- UART full indication
+			  iUART_EMPTY  	: in    std_logic;												-- UART empty indication
+			  iUART_DATA   	: in 	  std_logic_vector(DATA_WIDTH - 1  downto 0);   -- Input data from UART FIFO
+			  oUART_READ   	: out   std_logic;												-- Read from UART signal
+			  oUART_WRITE  	: out   std_logic;												-- Write to UART signal
+			  oUART_DATA   	: out   std_logic_vector(DATA_WIDTH - 1  downto 0);	-- Output data to UART FIFO
+			  oSCL		   	: out   std_logic;												-- SCL signal
+			  oLCD_SLAVE_ADDR	: out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver slave address data
+			  oLCD_REG_ADDR	: out   std_logic_vector(DATA_WIDTH - 1 downto 0); 	-- LCD display driver register address data
+			  oLCD_DATA_BYTE	: out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
+			  oLCD_BYTE_NUM	: out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
+			  oLCD_MODE			: out   std_logic;												-- LCD display driver mode data
+			  oLCD_DATA_EN		: out   std_logic;												-- LCD display driver data enable
+			  oLCD_BYTE_EN		: out   std_logic;												-- LCD display driver data byte enable
+			  ioSDA		   	: inout std_logic);												-- SDA signal
 end uart_i2c_master;
 
 architecture Behavioral of uart_i2c_master is
@@ -251,25 +254,7 @@ begin
 				iTC      => sTC,
 				oSCL	   => sSCL
 			);
-	
-   -- LCD driver	
-	eLCD_DRIVER : entity work.lcd_driver 
-			Port map(
-			   iCLK   	  	=> iCLK,
-            inRST  	  	=> inRST,
-			   iSLAVE_ADDR => sSLAVE_ADDR,
-			   iREG_ADDR   => sREG_ADDR_REG,
-			   iDATA_BYTE 	=> sLCD_BYTE_MUX,
-			   iBYTE_NUM 	=> sBYTE_NUM_REG,
-			   iMODE 		=> sSLAVE_ADDR_REG(0),  
-			   iDATA_EN	   => sLCD_DATA_EN,
-				iBYTE_EN		=> sLCD_BYTE_EN,
-            oE 	   	=> oLCD_E,  
-            oRS    	   => oLCD_RS,
-            oRW   		=> oLCD_RW,  
-            ioD 		  	=> ioLCD_D		
-			);
-			
+				
 	-- I2C bus clock frequency divider		
 	eCLK_FREQ_DIV : entity work.i2c_clk_freq_div
 			Port map(
@@ -921,5 +906,14 @@ begin
 	-- Output data
 	oUART_DATA <= sOUART_REG;
 					
+	-- LCD dispalty driver data
+	oLCD_SLAVE_ADDR <= sSLAVE_ADDR;
+	oLCD_REG_ADDR	 <= sREG_ADDR_REG;
+	oLCD_DATA_BYTE	 <= sLCD_BYTE_MUX;
+	oLCD_BYTE_NUM	 <= sBYTE_NUM_REG; 
+	oLCD_MODE		 <= sSLAVE_ADDR_REG(0);	
+	oLCD_DATA_EN	 <= sLCD_DATA_EN;	
+	oLCD_BYTE_EN	 <= sLCD_BYTE_EN;	
+	
 end Behavioral;
 

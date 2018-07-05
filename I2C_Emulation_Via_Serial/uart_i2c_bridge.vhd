@@ -37,10 +37,14 @@ entity uart_i2c_bridge is
 			  iDATA_BIT_SW		 : in    std_logic_vector(DATA_BIT_SEL  - 1 downto 0);	-- Data bit mode signal from switches
 			  iBAUD_SW			 : in    std_logic_vector(BAUD_RATE_SEL - 1 downto 0);	-- Baud rate mode from switches
 			  iCTS				 : in    std_logic;													-- Clear to send signal
-			  iRX         		 : in    std_logic;													-- RX UART signal 														
-           oLCD_E 	   	 : out   std_logic;													-- LCD display enable signal
-           oLCD_RS    	  	 : out   std_logic;													-- LCD display register select signal
-           oLCD_RW   		 : out   std_logic;													-- LCD display read-write operation signal
+			  iRX         		 : in    std_logic;													-- RX UART signal 
+			  oLCD_SLAVE_ADDR	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver slave address data
+			  oLCD_REG_ADDR	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- LCD display driver register address data
+			  oLCD_DATA_BYTE	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
+			  oLCD_BYTE_NUM	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
+			  oLCD_MODE			 : out   std_logic;													-- LCD display driver mode data
+			  oLCD_DATA_EN		 : out   std_logic;													-- LCD display driver data enable
+			  oLCD_BYTE_EN		 : out   std_logic;													-- LCD display driver data byte enable			  
 			  oTX         		 : out   std_logic;													-- TX UART signal
 			  oRTS				 : out   std_logic;													-- Request to send signal
 			  oSCL		   	 : out   std_logic;													-- SCL signal
@@ -85,22 +89,24 @@ begin
 	-- I2C bus master 
 	eUART_I2C_MASTER : uart_i2c_master 
 		Port map(
-			iCLK  		 => iCLK,
-			inRST 		 => inRST,
-			iUART_FULL   => sUART_FULL,
-			iUART_EMPTY  => sUART_EMPTY,
-			iUART_DATA   => sIUART_DATA,		
-			oUART_READ   => sUART_READ,
-			oUART_WRITE  => sUART_WRITE,
-			oUART_DATA   => sOUART_DATA,
-			oSCL		    => oSCL,
-			oLCD_E 	    => oLCD_E,
-         oLCD_RS    	 => oLCD_RS,
-         oLCD_RW      => oLCD_RW,					
-			ioSDA		    => ioSDA,
-			ioLCD_D		 => ioLCD_D
+			iCLK  		 		=> iCLK,
+			inRST 		 		=> inRST,
+			iUART_FULL   		=> sUART_FULL,
+			iUART_EMPTY  		=> sUART_EMPTY,
+			iUART_DATA   		=> sIUART_DATA,		
+			oUART_READ   		=> sUART_READ,
+			oUART_WRITE  		=> sUART_WRITE,
+			oUART_DATA   		=> sOUART_DATA,
+			oSCL		    		=> oSCL,
+			oLCD_SLAVE_ADDR	=> oLCD_SLAVE_ADDR,
+			oLCD_REG_ADDR		=> oLCD_REG_ADDR,
+			oLCD_DATA_BYTE		=> oLCD_DATA_BYTE,
+			oLCD_BYTE_NUM		=> oLCD_BYTE_NUM,
+			oLCD_MODE			=> oLCD_MODE,
+			oLCD_DATA_EN		=> oLCD_DATA_EN,
+			oLCD_BYTE_EN		=> oLCD_BYTE_EN,					
+			ioSDA		    		=> ioSDA
 		);	
-
-		
+				
 end Behavioral;
 
