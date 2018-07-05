@@ -13,7 +13,7 @@ package i2c_via_uart_components is
 		 );
 	end component;
 	
-	entity uart_i2c_bridge is
+	component uart_i2c_bridge is
 		 Generic (
 			BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
 			DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
@@ -34,11 +34,10 @@ package i2c_via_uart_components is
 				  oLCD_RW   		 : out   std_logic;													-- LCD display read-write operation signal
 				  oTX         		 : out   std_logic;													-- TX UART signal
 				  oRTS				 : out   std_logic;													-- Request to send signal
-				  oLED				 : out   std_logic_vector(7 downto 0);							-- LED control
 				  oSCL		   	 : out   std_logic;													-- SCL signal
 				  ioSDA		   	 : inout std_logic;													-- SDA signal
 				  ioLCD_D 		  	 : inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));	-- LCD display data signal
-	end uart_i2c_bridge;
+	end component;
 	
 	component i2c_slave is
 		 Generic(

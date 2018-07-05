@@ -29,7 +29,7 @@ char *ieee_p_1242562249_sub_1919437128_1035706684(char *, char *, char *, char *
 unsigned char ieee_p_1242562249_sub_2110375371_1035706684(char *, char *, char *, char *, char *);
 
 
-static void work_a_0928455289_3212880686_p_0(char *t0)
+static void work_a_2216069251_3212880686_p_0(char *t0)
 {
     char t19[16];
     char *t1;
@@ -158,7 +158,7 @@ LAB15:    xsi_size_not_matching(5U, t21, 0);
 
 }
 
-static void work_a_0928455289_3212880686_p_1(char *t0)
+static void work_a_2216069251_3212880686_p_1(char *t0)
 {
     char t3[16];
     char *t1;
@@ -218,9 +218,9 @@ LAB6:    goto LAB2;
 }
 
 
-extern void work_a_0928455289_3212880686_init()
+extern void work_a_2216069251_3212880686_init()
 {
-	static char *pe[] = {(void *)work_a_0928455289_3212880686_p_0,(void *)work_a_0928455289_3212880686_p_1};
-	xsi_register_didat("work_a_0928455289_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_0928455289_3212880686.didat");
+	static char *pe[] = {(void *)work_a_2216069251_3212880686_p_0,(void *)work_a_2216069251_3212880686_p_1};
+	xsi_register_didat("work_a_2216069251_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_2216069251_3212880686.didat");
 	xsi_register_executes(pe);
 }

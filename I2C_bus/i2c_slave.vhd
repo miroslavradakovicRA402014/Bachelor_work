@@ -64,6 +64,9 @@ architecture Behavioral of i2c_slave is
 	signal sSDA_IN			 	   	: std_logic;																					-- SDA input signal
 	signal sSDA_OUT 		 	   	: std_logic;																					-- SDA output signal
 
+	signal sTC							: std_logic;																					-- Frequency clock divider terminal count
+	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
+
 	signal sDATA_CNT 		 	   	: unsigned(DATA_CNT_WIDTH - 1 downto 0);												-- Data counter
 	signal sDATA_CNT_EN 	 	   	: std_logic;																					-- Data counter enable		
 	signal sDATA_CNT_RST				: std_logic;																					-- Data counter reset signal
@@ -161,6 +164,15 @@ begin
 				iSIG  => ioSDA,
 				oEDGE => sSDA_FALLING_EDGE
 			);
+	
+	-- I2C bus clock frequency divider		
+	eCLK_FREQ_DIV : entity work.i2c_clk_freq_div
+			Port map(
+				iCLK		=> iCLK,
+				inRST 	=> inRST,
+				iFREQ_EN => sFREQ_EN,
+				oTC   	=>	sTC		
+			);		
 	
 	-- Mode R/W flip-flop 
 	mode_ff : process (iCLK, inRST) begin
@@ -279,8 +291,6 @@ begin
 				if (iSCL = '1' and sSDA_RISING_EDGE = '1') then
 					sNEXT_STATE <= IDLE;   
 				end if;				
-			when others =>
-				sNEXT_STATE <= IDLE;
 		end case;
 	end process fsm_next;
 	
@@ -288,6 +298,7 @@ begin
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sMODE_FF, sADDR_REG) begin
 		sIN_BUFF_EN	 		 	 <= '0';
 		sOUT_BUFF_EN 		 	 <= '0';
+		sFREQ_EN					 <= '0';
 		sDATA_CNT_EN   	 	 <= '0';
 		sDATA_CNT_RST 		 	 <= '0'; 
 		sBYTE_CNT_EN   	 	 <= '0';
@@ -314,9 +325,11 @@ begin
 				sDATA_CNT_RST 		 <= '1'; -- Reset data counters
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 			when START => 
-				sIN_BUFF_EN	 		 <= '1';				
+				sIN_BUFF_EN	 		 <= '1';	
+				sFREQ_EN				 <= '1';	
 			when SLAVE_ADDRESS_MODE =>		
 				sIN_BUFF_EN	 		 <= '1';	
+				sFREQ_EN				 <= '1';
 				sDATA_CNT_EN 		 <= '1'; -- Count slave address and mode bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all address bit and mode recived  get mode and start sync period
 					sMODE_FF_EN		 <= '1'; -- Get R/W mode, write to register 
@@ -326,6 +339,7 @@ begin
 				end if;
 			when SLAVE_ADDRESS_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line 
+				sFREQ_EN				 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	
 					sOSHW_LOAD			 <= '1';
@@ -333,6 +347,7 @@ begin
 				end if;
 			when REGISTER_ADDRESS =>		
 				sIN_BUFF_EN	 		 <= '1';
+				sFREQ_EN				 <= '1';
 				sDATA_CNT_EN 		 <= '1'; -- Count register address bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all register address bits recived start sync period
 					sPERIOD_CNT_EN  <= '1';	-- Start sync period
@@ -342,6 +357,7 @@ begin
 				end if;
 			when REGISTER_ADDRESS_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sFREQ_EN				 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
 					sOSHW_LOAD		 <= '1'; -- Load data to shift register
@@ -349,14 +365,17 @@ begin
 				end if;				
 			when REGISTER_ADDRESS_NACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sFREQ_EN				 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
 				sACK_SEL				 <= '1';		
 			when REPEATED_START =>
 				sIN_BUFF_EN	 		 	 <= '1';
+				sFREQ_EN				 	 <= '1';
 				sDATA_CNT_RST 		 	 <= '1';
 				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period	
 			when READ_DATA =>		
 				sIN_BUFF_EN	 		 <= '1';	
+				sFREQ_EN				 <= '1';
 				sDATA_CNT_EN 		 <= '1'; -- Count data bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits recived write data form shift register to register
 					sPERIOD_CNT_EN  <= '1'; -- Start snyc period
@@ -367,10 +386,12 @@ begin
 				end if;		
 			when READ_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sFREQ_EN				 <= '1';
 				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period					
 			when WRITE_DATA =>		
 				sOUT_BUFF_EN 		 <= '1';	-- Get SDA line
+				sFREQ_EN				 <= '1';	
 				sDATA_CNT_EN 		 <= '1'; -- Count sent data
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits sent to master 
 					sPERIOD_CNT_EN 	 <= '1'; -- Start sync period
@@ -382,6 +403,7 @@ begin
 				sSDA_SEL				 <= '1';	  -- Select data bit from output shift register 		
 			when WRITE_ACK =>	
 				sIN_BUFF_EN	 		 <= '1'; 
+				sFREQ_EN				 <= '1';
 				sBYTE_CNT_EN   	 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
 				sOSHW_LOAD			 <= '1'; -- Load data form registers
@@ -441,7 +463,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sPERIOD_CNT = TC_PERIOD - 1) then -- Check counted periods
 				sPERIOD_CNT <= (others => '0'); 
-			elsif (iTC = '1' and sPERIOD_CNT_EN = '1') then 
+			elsif (sTC = '1' and sPERIOD_CNT_EN = '1') then 
 				sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
 			end if;
 		end if;
@@ -458,7 +480,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sRSTART_PERIOD_CNT = REP_START_PERIOD - 1) then -- Check counted periods
 				sRSTART_PERIOD_CNT <= (others => '0'); 
-			elsif (iTC = '1' and sRSTART_PERIOD_CNT_EN = '1') then 
+			elsif (sTC = '1' and sRSTART_PERIOD_CNT_EN = '1') then 
 				sRSTART_PERIOD_CNT <= sRSTART_PERIOD_CNT + 1; -- Count period
 			end if;
 		end if;
@@ -475,7 +497,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sTR_PERIOD_CNT = TR_PERIOD - 1 or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
 				sTR_PERIOD_CNT <= (others => '0'); 
-			elsif (iTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
+			elsif (sTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
 				sTR_PERIOD_CNT <= sTR_PERIOD_CNT + 1; -- Count period
 			end if;
 		end if;

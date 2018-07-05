@@ -102,8 +102,8 @@ begin
 	--	I2C 16 bit slave	
 	eI2C_SLAVE : i2c_slave
 		Port map(
-			iCLK 	=> iCLK,
-			inRST => inRST,
+			iCLK 	=> sCLK,
+			inRST => snRST,
 			iSCL 	=> sSCL,
 			ioSDA => sSDA
 		);

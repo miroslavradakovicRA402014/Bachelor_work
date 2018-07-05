@@ -63,8 +63,8 @@ begin
 	-- UART
 	eUART : uart 
 		Port map(
-			iCLK        		 => sCLK,
-			inRST       		 => snRST,
+			iCLK        		 => iCLK,
+			inRST       		 => inRST,
 			iPARITY_EN			 => iPARITY_EN_SW,
 			iPARITY				 => iPARITY_SW,
 			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
@@ -87,17 +87,17 @@ begin
 		Port map(
 			iCLK  		 => iCLK,
 			inRST 		 => inRST,
-			iUART_FULL   => iUART_FULL,
-			iUART_EMPTY  => iUART_EMPTY,
-			iUART_DATA   => iUART_DATA,		
+			iUART_FULL   => sUART_FULL,
+			iUART_EMPTY  => sUART_EMPTY,
+			iUART_DATA   => sIUART_DATA,		
 			oUART_READ   => sUART_READ,
 			oUART_WRITE  => sUART_WRITE,
-			oUART_DATA   => sUART_DATA,
+			oUART_DATA   => sOUART_DATA,
 			oSCL		    => oSCL,
 			oLCD_E 	    => oLCD_E,
          oLCD_RS    	 => oLCD_RS,
          oLCD_RW      => oLCD_RW,					
-			ioSDA		    => oSDA,
+			ioSDA		    => ioSDA,
 			ioLCD_D		 => ioLCD_D
 		);	
 

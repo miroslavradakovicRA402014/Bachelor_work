@@ -248,7 +248,7 @@ begin
 				inRST    => inRST,
 				iSCL_RST => sSCL_RST,
 				iSCL_EN  => sSCL_EN,
-				sTC      => sTC,
+				iTC      => sTC,
 				oSCL	   => sSCL
 			);
 	
@@ -270,8 +270,8 @@ begin
             ioD 		  	=> ioLCD_D		
 			);
 			
-		-- I2C bus clock frequency divider		
-	eCLK_FREQ_DIV : entity.work.i2c_clk_freq_div
+	-- I2C bus clock frequency divider		
+	eCLK_FREQ_DIV : entity work.i2c_clk_freq_div
 			Port map(
 				iCLK		=> iCLK,
 				inRST 	=> inRST,

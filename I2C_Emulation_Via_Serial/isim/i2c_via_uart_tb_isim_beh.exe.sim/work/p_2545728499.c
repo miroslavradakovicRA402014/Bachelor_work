@@ -25,7 +25,7 @@
 
 
 
-extern void work_a_3895332195_3212880686_init()
+extern void work_p_2545728499_init()
 {
-	xsi_register_didat("work_a_3895332195_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_3895332195_3212880686.didat");
+	xsi_register_didat("work_p_2545728499", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/p_2545728499.didat");
 }
