@@ -48,8 +48,7 @@ entity uart_i2c_bridge is
 			  oTX         		 : out   std_logic;													-- TX UART signal
 			  oRTS				 : out   std_logic;													-- Request to send signal
 			  oSCL		   	 : out   std_logic;													-- SCL signal
-			  ioSDA		   	 : inout std_logic;													-- SDA signal
-			  ioLCD_D 		  	 : inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));	-- LCD display data signal
+			  ioSDA		   	 : inout std_logic);													-- SDA signal
 end uart_i2c_bridge;
 
 architecture Behavioral of uart_i2c_bridge is

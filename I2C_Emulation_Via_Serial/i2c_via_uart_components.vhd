@@ -39,8 +39,7 @@ package i2c_via_uart_components is
 				 oTX         		 : out   std_logic;													-- TX UART signal
 				 oRTS				 	 : out   std_logic;													-- Request to send signal
 				 oSCL		   	 	 : out   std_logic;													-- SCL signal
-				 ioSDA		   	 : inout std_logic;													-- SDA signal
-				 ioLCD_D 		  	 : inout std_logic_vector(LCD_BUS_WIDTH - 1 downto 0));	-- LCD display data signal
+				 ioSDA		   	 : inout std_logic);													-- SDA signal
 	end component;
 	
 	component i2c_slave is
@@ -65,15 +64,16 @@ package i2c_via_uart_components is
 	
 	component lcd_driver is
 		 Generic(
-			INIT_SEQ_NUMBER 	 : integer := 4;		  -- Init commands sequence
-			CMD_SEQ_NUMBER  	 : integer := 3;		  -- Command of 4-bit sequence number
-			LCD_BUS_WIDTH	 	 : integer := 4;		  -- LCD controler interface width 
-			DATA_WIDTH		 	 : integer := 8;		  -- Input data width
-			CHAR_WIDTH   		 : integer := 8;		  -- Data character width
-			SEQ_CNT_WIDTH 		 : integer := 3;		  -- Sequence command widht	
-			INIT_PERIOD 		 : integer := 2160000; -- Clock cycles number for 45ms period
-			CMD_SEQ_PERIOD 	 : integer := 12000;	  -- Clock cycles number for 250us period		
-			CHAR_NUMBER 	 	 : integer := 22  	  -- Number of characters without data characters
+			INIT_SEQ_NUMBER 	 	: integer := 4;		  -- Init commands sequence
+			CMD_SEQ_NUMBER  	 	: integer := 3;		  -- Command of 4-bit sequence number
+			CMD_PERIOD_CNT_WIDTH : integer := 2;		  -- Command period counter width
+			LCD_BUS_WIDTH	 	 	: integer := 4;		  -- LCD controler interface width 
+			DATA_WIDTH		 	 	: integer := 8;		  -- Input data width
+			CHAR_WIDTH   		 	: integer := 8;		  -- Data character width
+			SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht	
+			INIT_PERIOD 		 	: integer := 2160000;  -- Clock cycles number for 45ms period
+			CMD_SEQ_PERIOD 	 	: integer := 12000;	  -- Clock cycles number for 250us period		
+			CHAR_NUMBER 	 	 	: integer := 22  	  	  -- Number of characters without data characters
 		 );
 		 Port( iCLK   	  	  : in 		std_logic;												 -- Clock signal 50MHz
 				 inRST  	  	  : in 		std_logic;												 -- Reset signal

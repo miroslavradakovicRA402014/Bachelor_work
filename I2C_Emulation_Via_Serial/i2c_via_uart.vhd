@@ -106,8 +106,7 @@ begin
 			oTX         		=> oTX,		
 			oRTS				 	=> oRTS,
 			oSCL		   	 	=> sSCL,
-			ioSDA		   	 	=> sSDA,
-			ioLCD_D 		  	 	=> sLCD_D
+			ioSDA		   	 	=> sSDA
 		);	
 
 	--	I2C 16 bit slave	

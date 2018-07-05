@@ -9,7 +9,7 @@ package uart_i2c_bridge_components is
 		 Generic (
 			BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
 			DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
-			DATA_WIDTH    : integer := 8	 -- Data widht 
+			DATA_WIDTH    : integer := 8	 -- Data width 
 		 );
 		 Port ( iCLK        		 : in   std_logic;												-- Clock signal 50MHz
 				  inRST       		 : in   std_logic;												-- Reset signal

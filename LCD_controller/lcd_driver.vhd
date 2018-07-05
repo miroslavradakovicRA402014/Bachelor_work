@@ -25,15 +25,16 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 
 entity lcd_driver is
 	 Generic(
-		INIT_SEQ_NUMBER 	 : integer := 4;		  -- Init commands sequence
-		CMD_SEQ_NUMBER  	 : integer := 3;		  -- Command of 4-bit sequence number
-		LCD_BUS_WIDTH	 	 : integer := 4;		  -- LCD controler interface width 
-		DATA_WIDTH		 	 : integer := 8;		  -- Input data width
-		CHAR_WIDTH   		 : integer := 8;		  -- Data character width
-		SEQ_CNT_WIDTH 		 : integer := 3;		  -- Sequence command widht	
-		INIT_PERIOD 		 : integer := 2160000; -- Clock cycles number for 45ms period
-	   CMD_SEQ_PERIOD 	 : integer := 12000;	  -- Clock cycles number for 250us period		
-		CHAR_NUMBER 	 	 : integer := 22  	  -- Number of characters without data characters
+		INIT_SEQ_NUMBER 	 	: integer := 4;		  -- Init commands sequence
+		CMD_SEQ_NUMBER  	 	: integer := 3;		  -- Command of 4-bit sequence number
+		CMD_PERIOD_CNT_WIDTH : integer := 2;		  -- Command period counter width
+		LCD_BUS_WIDTH	 	 	: integer := 4;		  -- LCD controler interface width 
+		DATA_WIDTH		 	 	: integer := 8;		  -- Input data width
+		CHAR_WIDTH   		 	: integer := 8;		  -- Data character width
+		SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht	
+		INIT_PERIOD 		 	: integer := 2160000;  -- Clock cycles number for 45ms period
+	   CMD_SEQ_PERIOD 	 	: integer := 12000;	  -- Clock cycles number for 250us period		
+		CHAR_NUMBER 	 	 	: integer := 22  	  	  -- Number of characters without data characters
 	 );
     Port ( iCLK   	  : in 		std_logic;												 -- Clock signal 50MHz
            inRST  	  : in 		std_logic;												 -- Reset signal
@@ -105,7 +106,7 @@ architecture Behavioral of lcd_driver is
 	signal sSEQ_CNT_EN 				: std_logic;													-- Command sequence number counter enable
 	signal sSEQ_CNT_RST				: std_logic;													-- Command sequence number counter reset
 	
-	signal sCMD_PER_CNT 				: unsigned(1 downto 0);										-- Command period counter		 
+	signal sCMD_PER_CNT 				: unsigned(CMD_PERIOD_CNT_WIDTH - 1 downto 0);		-- Command period counter		 
 	signal sCMD_PER_CNT_EN			: std_logic;													-- Command period counter enable
 	signal sCMD_PER_CNT_RST			: std_logic;													-- Command period counter reset	
 	
@@ -190,7 +191,10 @@ begin
 			);
 	
 	-- Data byte FIFO
-	eDATA_BYTE_FIFO : entity work.fifo 	
+	eDATA_BYTE_FIFO : entity work.fifo 
+			Generic map(
+				NUM_OF_WORDS => 2
+			)
 			Port map(
 				iCLK   	=> iCLK,
 				inRST  	=> inRST,
