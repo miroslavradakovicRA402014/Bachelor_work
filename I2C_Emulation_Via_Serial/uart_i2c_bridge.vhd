@@ -29,7 +29,7 @@ entity uart_i2c_bridge is
 		LCD_BUS_WIDTH : integer := 4;  -- Width of LCD interface
 		DATA_WIDTH    : integer := 8	 -- Data widht 
 	 );
-	 Port ( iCLK        		 : in    std_logic;													-- External clock 24MHz
+	 Port ( iCLK        		 : in    std_logic;													-- Clock signal 50MHz
 			  inRST       		 : in    std_logic;												 	-- Reset signal 
 			  iPARITY_EN_SW	 : in    std_logic;													-- Parity mode signal from switch
 			  iPARITY_SW		 : in    std_logic;													-- Parity enable signal from switch	
@@ -66,23 +66,23 @@ begin
 	-- UART
 	eUART : uart 
 		Port map(
-			iCLK        		 => iCLK,
-			inRST       		 => inRST,
-			iPARITY_EN			 => iPARITY_EN_SW,
-			iPARITY				 => iPARITY_SW,
-			iHANDSHAKE_EN		 => iHANDSHAKE_EN_SW,
-			iDATA_SEL			 => iDATA_BIT_SW,
-			iBAUD_SEL			 => iBAUD_SW,
-			iCTS					 => iCTS,
-			iRX         		 => iRX,
-			iUART_DATA		 	 => sOUART_DATA,
-			iUART_WR 			 => sUART_WRITE,
-			iUART_RD    		 => sUART_READ,
-			oTX         		 => oTX,
-			oRTS					 => oRTS,
-			oUART_FULL         => sUART_FULL,
-			oUART_EMPTY      	 => sUART_EMPTY,
-			oUART_DATA       	 => sIUART_DATA
+			iCLK        	=> iCLK,
+			inRST       	=> inRST,
+			iPARITY_EN		=> iPARITY_EN_SW,
+			iPARITY			=> iPARITY_SW,
+			iHANDSHAKE_EN	=> iHANDSHAKE_EN_SW,
+			iDATA_SEL		=> iDATA_BIT_SW,
+			iBAUD_SEL		=> iBAUD_SW,
+			iCTS				=> iCTS,
+			iRX         	=> iRX,
+			iUART_DATA		=> sOUART_DATA,
+			iUART_WR 		=> sUART_WRITE,
+			iUART_RD    	=> sUART_READ,
+			oTX         	=> oTX,
+			oRTS				=> oRTS,
+			oUART_FULL     => sUART_FULL,
+			oUART_EMPTY    => sUART_EMPTY,
+			oUART_DATA     => sIUART_DATA
 		);
 		
 	-- I2C bus master 

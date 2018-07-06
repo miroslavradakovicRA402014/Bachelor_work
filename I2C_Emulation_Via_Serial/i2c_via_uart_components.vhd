@@ -67,10 +67,12 @@ package i2c_via_uart_components is
 			INIT_SEQ_NUMBER 	 	: integer := 4;		  -- Init commands sequence
 			CMD_SEQ_NUMBER  	 	: integer := 3;		  -- Command of 4-bit sequence number
 			CMD_PERIOD_CNT_WIDTH : integer := 2;		  -- Command period counter width
+			DATA_BYTE_CNT_WIDTH	: integer := 3;		  -- Byte enable counter 
+			SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht
 			LCD_BUS_WIDTH	 	 	: integer := 4;		  -- LCD controler interface width 
 			DATA_WIDTH		 	 	: integer := 8;		  -- Input data width
-			CHAR_WIDTH   		 	: integer := 8;		  -- Data character width
-			SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht	
+			CHAR_WIDTH   		 	: integer := 8;		  -- Data character width	
+			CHAR_NUMBER_WIDTH		: integer := 6;		  -- Char number width
 			INIT_PERIOD 		 	: integer := 2160000;  -- Clock cycles number for 45ms period
 			CMD_SEQ_PERIOD 	 	: integer := 12000;	  -- Clock cycles number for 250us period		
 			CHAR_NUMBER 	 	 	: integer := 22  	  	  -- Number of characters without data characters

@@ -61,7 +61,7 @@ architecture Behavioral of reciver is
 	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 							 -- Reciver FSM next state 
 	
 	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  							 -- Recived data bits counter 
-	signal sDATA_BIT_REG			: unsigned(2	downto 0);											 					 -- Data bit number register
+	signal sDATA_BIT_REG			: unsigned(2 downto 0);											 					    -- Data bit number register
 	signal sDATA_BIT				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 -- Data bit number 
 	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  						 	 -- Terminal count counter
 	

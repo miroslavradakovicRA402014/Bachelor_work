@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -651,14 +651,16 @@ Synthesizing Unit <lcd_driver>.
         INIT_SEQ_NUMBER = 4
         CMD_SEQ_NUMBER = 3
         CMD_PERIOD_CNT_WIDTH = 2
+        DATA_BYTE_CNT_WIDTH = 3
+        SEQ_CNT_WIDTH = 3
         LCD_BUS_WIDTH = 4
         DATA_WIDTH = 8
         CHAR_WIDTH = 8
-        SEQ_CNT_WIDTH = 3
+        CHAR_NUMBER_WIDTH = 6
         INIT_PERIOD = 2160000
         CMD_SEQ_PERIOD = 12000
         CHAR_NUMBER = 22
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" line 194: Output port <oEMPTY> of the instance <eDATA_BYTE_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" line 196: Output port <oEMPTY> of the instance <eDATA_BYTE_FIFO> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <sCHAR_BYTE>.
     Found 1-bit register for signal <sMODE_FF>.
     Found 5-bit register for signal <sCURRENT_STATE>.
@@ -680,23 +682,23 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" l
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_57_o_add_117_OUT> created at line 659.
-    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_57_o_add_121_OUT> created at line 672.
-    Found 6-bit adder for signal <sCHAR_CNT[5]_GND_57_o_add_125_OUT> created at line 685.
-    Found 3-bit adder for signal <sBYTE_EN_CNT[2]_GND_57_o_add_129_OUT> created at line 698.
-    Found 6-bit adder for signal <sCHAR_NUM> created at line 719.
+    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_57_o_add_117_OUT> created at line 661.
+    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_57_o_add_121_OUT> created at line 674.
+    Found 6-bit adder for signal <sCHAR_CNT[5]_GND_57_o_add_125_OUT> created at line 687.
+    Found 3-bit adder for signal <sBYTE_EN_CNT[2]_GND_57_o_add_129_OUT> created at line 700.
+    Found 6-bit adder for signal <sCHAR_NUM> created at line 721.
     Found 4x20-bit Read Only RAM for signal <_n0366>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0305> created at line 573.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 803
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 807
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 807
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 807
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 807
-    Found 6-bit comparator greater for signal <n0021> created at line 345
-    Found 6-bit comparator equal for signal <GND_57_o_sCHAR_NUM[5]_equal_35_o> created at line 364
-    Found 3-bit comparator greater for signal <GND_57_o_sSEQ_CNT[2]_LessThan_40_o> created at line 411
-    Found 8-bit comparator greater for signal <sBYTE_NUM_REG[7]_GND_57_o_LessThan_134_o> created at line 715
-    Found 3-bit comparator greater for signal <sBYTE_EN_CNT[2]_GND_57_o_LessThan_137_o> created at line 722
+    Found 4-bit 4-to-1 multiplexer for signal <_n0305> created at line 575.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 805
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 809
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 809
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 809
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 809
+    Found 6-bit comparator greater for signal <n0021> created at line 347
+    Found 6-bit comparator equal for signal <GND_57_o_sCHAR_NUM[5]_equal_35_o> created at line 366
+    Found 3-bit comparator greater for signal <GND_57_o_sSEQ_CNT[2]_LessThan_40_o> created at line 413
+    Found 8-bit comparator greater for signal <sBYTE_NUM_REG[7]_GND_57_o_LessThan_134_o> created at line 717
+    Found 3-bit comparator greater for signal <sBYTE_EN_CNT[2]_PWR_30_o_LessThan_137_o> created at line 724
     Summary:
 	inferred   1 RAM(s).
 	inferred   5 Adder/Subtractor(s).
@@ -1244,10 +1246,10 @@ Primitive and Black Box Usage:
 #      INV                         : 13
 #      LUT1                        : 34
 #      LUT2                        : 73
-#      LUT3                        : 358
+#      LUT3                        : 354
 #      LUT4                        : 136
 #      LUT5                        : 203
-#      LUT6                        : 502
+#      LUT6                        : 506
 #      MUXCY                       : 58
 #      MUXF7                       : 63
 #      MUXF8                       : 24
@@ -1338,7 +1340,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 14.965ns (frequency: 66.824MHz)
-  Total number of paths / destination ports: 33160 / 2178
+  Total number of paths / destination ports: 33120 / 2178
 -------------------------------------------------------------------------
 Delay:               7.183ns (Levels of Logic = 5)
   Source:            eI2C_SLAVE/sCURRENT_STATE_FSM_FFd1_1 (FF)
@@ -1444,8 +1446,8 @@ iCLK           |    7.183|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 10.15 secs
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 11.12 secs
  
 --> 
 

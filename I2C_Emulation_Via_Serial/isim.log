@@ -19,65 +19,24 @@ Time resolution is 1 ps
 # wave add /
 # run 1000 ns
 Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
-# restart
-# run all
+Stopped at time : 0 fs : File "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" Line 172
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
 Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
-at 13529019 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 13536537 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20116929 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20126925 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20136921 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20146917 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 26777793 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 26787789 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 31310097 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 31317615 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-Stopped at time : 34234157160 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+Stopped at time : 0 fs : File "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" Line 170
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -108,63 +67,15 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : W
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
-# run all
-at 13529019 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 13536537 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20116929 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20126925 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20136921 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20146917 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-Stopped at time : 21553456680 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
-# restart
-# run all
-Simulator is doing circuit initialization process.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-Finished circuit initialization process.
-at 13529019 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 13536537 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20116929 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20126925 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20136921 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 20146917 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 26777793 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 26787789 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 31310097 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 31317615 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 35724801 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 35734797 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 35744793 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-at 35754789 ns(2), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-Stopped at time : 36114067080 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 56
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -195,16 +106,83 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : W
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
-at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run all
-Stopped at time : 37545679080 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 44
+Stopped at time : 35397419400 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/reciver.vhd" Line 198
 # run all
-Stopped at time : 87273867240 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+Stopped at time : 178491143880 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd" Line 658
+# restart
+# run all
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+Stopped at time : 109837292040 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_driver.vhd" Line 254
+ISim P.68d (signature 0x8ef4fb42)
+----------------------------------------------------------------------
+INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
+INFO:Security:53 - The LM_LICENSE_FILE environment variable is not set.
+WARNING:Security:43 - No license file was found in the standard Xilinx license directory.
+WARNING:Security:44 - Since no license file was found,
+       please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses")
+       to assist in obtaining a license.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eBAUD_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eSCL_GEN/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 0 ps, Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+# run all
+Stopped at time : 121856825160 ps : File "D:/BSc_workspace/Bachelor_work/I2C_bus/uart_i2c_master.vhd" Line 272

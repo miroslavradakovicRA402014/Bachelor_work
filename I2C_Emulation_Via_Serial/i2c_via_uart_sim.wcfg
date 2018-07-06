@@ -65,9 +65,90 @@
       <obj_property name="ElementShortName">iclk_period</obj_property>
       <obj_property name="ObjectShortName">iclk_period</obj_property>
    </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/sread_i" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">sread_i</obj_property>
-      <obj_property name="ObjectShortName">sread_i</obj_property>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sregs[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sregs[15:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[15]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[15]</obj_property>
+         <obj_property name="ObjectShortName">sregs[15]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[14]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[14]</obj_property>
+         <obj_property name="ObjectShortName">sregs[14]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[13]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[13]</obj_property>
+         <obj_property name="ObjectShortName">sregs[13]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[12]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[12]</obj_property>
+         <obj_property name="ObjectShortName">sregs[12]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[11]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">sregs[11]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[10]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">sregs[10]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[9]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">sregs[9]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[8]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">sregs[8]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[7]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">sregs[7]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[6]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">sregs[6]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[5]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">sregs[5]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[4]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">sregs[4]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">sregs[3]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">sregs[2]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">sregs[1]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">sregs[0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sfifo" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sfifo[15:0]</obj_property>

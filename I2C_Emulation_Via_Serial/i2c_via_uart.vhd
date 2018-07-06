@@ -50,13 +50,13 @@ end i2c_via_uart;
 architecture Behavioral of i2c_via_uart is
 
 	-- DCM signals
-	signal sCLK			 : std_logic;													-- Clock signal from DCM 50MHz
-	signal snRST		 : std_logic;													-- Reset signal for all system
-	signal sLOCKED		 : std_logic;													-- Locked signal from DCM
+	signal sCLK			 : std_logic;														-- Clock signal from DCM 50MHz
+	signal snRST		 : std_logic;														-- Reset signal for all system
+	signal sLOCKED		 : std_logic;														-- Locked signal from DCM
 		
 	-- I2C bus signals
-	signal sSCL			 : std_logic;													-- Serial clock 
-	signal sSDA			 : std_logic;													-- Serial data
+	signal sSCL			 : std_logic;														-- Serial clock 
+	signal sSDA			 : std_logic;														-- Serial data
 		
 	-- LCD control signal
 	signal sLCD_SLAVE_ADDR	: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver slave address data

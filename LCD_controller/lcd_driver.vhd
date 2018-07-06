@@ -28,10 +28,12 @@ entity lcd_driver is
 		INIT_SEQ_NUMBER 	 	: integer := 4;		  -- Init commands sequence
 		CMD_SEQ_NUMBER  	 	: integer := 3;		  -- Command of 4-bit sequence number
 		CMD_PERIOD_CNT_WIDTH : integer := 2;		  -- Command period counter width
+		DATA_BYTE_CNT_WIDTH	: integer := 3;		  -- Byte enable counter 
+		SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht
 		LCD_BUS_WIDTH	 	 	: integer := 4;		  -- LCD controler interface width 
 		DATA_WIDTH		 	 	: integer := 8;		  -- Input data width
-		CHAR_WIDTH   		 	: integer := 8;		  -- Data character width
-		SEQ_CNT_WIDTH 		 	: integer := 3;		  -- Sequence command widht	
+		CHAR_WIDTH   		 	: integer := 8;		  -- Data character width	
+		CHAR_NUMBER_WIDTH		: integer := 6;		  -- Char number width
 		INIT_PERIOD 		 	: integer := 2160000;  -- Clock cycles number for 45ms period
 	   CMD_SEQ_PERIOD 	 	: integer := 12000;	  -- Clock cycles number for 250us period		
 		CHAR_NUMBER 	 	 	: integer := 22  	  	  -- Number of characters without data characters
@@ -117,11 +119,11 @@ architecture Behavioral of lcd_driver is
 	signal sCHAR_BYTE 				: std_logic;													-- Character byte counter 
 	signal sCHAR_BYTE_EN 			: std_logic;													-- Character byte counter enable 
 	
-	signal sBYTE_EN_CNT 				: unsigned(2 downto 0);													
-	signal sBYTE_EN_CNT_RST			: std_logic;
+	signal sBYTE_EN_CNT 				: unsigned(DATA_BYTE_CNT_WIDTH - 1 downto 0);		-- Data byte counter				
+	signal sBYTE_EN_CNT_RST			: std_logic;													-- Data byte counter reset
 	
-	signal sCHAR_NUM 					: std_logic_vector(5 downto 0);							-- Number of characters
-	signal sBYTE_NUM_LIM				: std_logic_vector(5 downto 0);							-- Byte num limiter
+	signal sCHAR_NUM 					: std_logic_vector(CHAR_NUMBER_WIDTH - 1 downto 0);-- Number of characters
+	signal sBYTE_NUM_LIM				: std_logic_vector(CHAR_NUMBER_WIDTH - 1 downto 0);-- Byte number limiter
 	
 	signal sSLAVE_ADDR_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Slave address register	
 	signal sREG_ADDR_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Register address register
