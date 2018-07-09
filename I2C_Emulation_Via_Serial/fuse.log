@@ -31,8 +31,8 @@ Starting static elaboration
 WARNING:HDLCompiler:746 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Range is empty (null range)
 WARNING:HDLCompiler:220 - "N:/P.68d/rtf/vhdl/src/ieee/numeric_std.vhd" Line 3314: Assignment ignored
 Completed static elaboration
-Fuse Memory Usage: 171564 KB
-Fuse CPU Usage: 358 ms
+Fuse Memory Usage: 171436 KB
+Fuse CPU Usage: 343 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
@@ -60,6 +60,7 @@ Compiling architecture behavioral of entity fifo [\fifo(8,4)\]
 Compiling architecture behavioral of entity transmitter [\transmitter(8,16,3,4,2)\]
 Compiling architecture behavioral of entity uart [\uart(3,2,8)\]
 Compiling architecture behavioral of entity reg [reg_default]
+Compiling architecture behavioral of entity fifo [\fifo(8,8)\]
 Compiling architecture behavioral of entity rising_edge_det [rising_edge_det_default]
 Compiling architecture behavioral of entity scl_gen [scl_gen_default]
 Compiling architecture behavioral of entity i2c_clk_freq_div [i2c_clk_freq_div_default]
@@ -76,8 +77,7 @@ Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3,2,3,3,4,
 Compiling architecture behavioral of entity i2c_via_uart [\i2c_via_uart(3,2,4,8)\]
 Compiling architecture behavior of entity i2c_via_uart_tb
 Time Resolution for simulation is 1ps.
-Waiting for 1 sub-compilation(s) to finish...
 Compiled 72 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 214892 KB
-Fuse CPU Usage: 1468 ms
+Fuse Memory Usage: 215788 KB
+Fuse CPU Usage: 1312 ms

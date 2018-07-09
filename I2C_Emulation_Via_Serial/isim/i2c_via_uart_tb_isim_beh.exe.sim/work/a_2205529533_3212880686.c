@@ -749,10 +749,3 @@ extern void work_a_2205529533_3212880686_init()
 	xsi_register_didat("work_a_2205529533_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_2205529533_3212880686.didat");
 	xsi_register_executes(pe);
 }
-
-extern void work_a_1156261981_3212880686_init()
-{
-	static char *pe[] = {(void *)work_a_2205529533_3212880686_p_0,(void *)work_a_2205529533_3212880686_p_1,(void *)work_a_2205529533_3212880686_p_2,(void *)work_a_2205529533_3212880686_p_3,(void *)work_a_2205529533_3212880686_p_4,(void *)work_a_2205529533_3212880686_p_5};
-	xsi_register_didat("work_a_1156261981_3212880686", "isim/i2c_via_uart_tb_isim_beh.exe.sim/work/a_1156261981_3212880686.didat");
-	xsi_register_executes(pe);
-}

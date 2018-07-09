@@ -64,8 +64,10 @@ architecture Behavioral of i2c_slave is
 	signal sSDA_IN			 	   	: std_logic;																					-- SDA input signal
 	signal sSDA_OUT 		 	   	: std_logic;																					-- SDA output signal
 
-	signal sTC							: std_logic;																					-- Frequency clock divider terminal count
+	signal sTC							: std_logic;																					-- Frequency clock divider terminal count 
 	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
+	signal sFREQ_RST					: std_logic;																					-- Frequency clock divider reset multiplexer
+	signal sFREQ_RST_SEL				: std_logic;																					-- Frequency clock divider reset multiplexer select
 
 	signal sDATA_CNT 		 	   	: unsigned(DATA_CNT_WIDTH - 1 downto 0);												-- Data counter
 	signal sDATA_CNT_EN 	 	   	: std_logic;																					-- Data counter enable		
@@ -169,11 +171,15 @@ begin
 	eCLK_FREQ_DIV : entity work.i2c_clk_freq_div
 			Port map(
 				iCLK		=> iCLK,
-				inRST 	=> inRST,
+				inRST 	=> sFREQ_RST,
 				iFREQ_EN => sFREQ_EN,
 				oTC   	=>	sTC		
-			);		
-	
+			);	
+
+	-- I2C bus clock frequency divider reset
+	sFREQ_RST <= '0' when sFREQ_RST_SEL = '1' else
+					 inRST;	
+						
 	-- Mode R/W flip-flop 
 	mode_ff : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -299,6 +305,7 @@ begin
 		sIN_BUFF_EN	 		 	 <= '0';
 		sOUT_BUFF_EN 		 	 <= '0';
 		sFREQ_EN					 <= '0';
+		sFREQ_RST_SEL			 <= '0';
 		sDATA_CNT_EN   	 	 <= '0';
 		sDATA_CNT_RST 		 	 <= '0'; 
 		sBYTE_CNT_EN   	 	 <= '0';
@@ -322,6 +329,7 @@ begin
 			-- Slave control signals
 			when IDLE =>
 				sIN_BUFF_EN	 		 <= '1';
+				sFREQ_RST_SEL		 <= '1'; -- Reset clock divider	
 				sDATA_CNT_RST 		 <= '1'; -- Reset data counters
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 			when START => 
@@ -361,7 +369,7 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
 					sOSHW_LOAD		 <= '1'; -- Load data to shift register
-					sREG_MUX_SEL	 <= sADDR_REG; -- 
+					sREG_MUX_SEL	 <= sADDR_REG; -- Get register addres
 				end if;				
 			when REGISTER_ADDRESS_NACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line

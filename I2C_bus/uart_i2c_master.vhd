@@ -62,8 +62,8 @@ architecture Behavioral of uart_i2c_master is
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_NUMBER, UART_DATA_BYTE, UART_LOAD_BYTE, UART_NEXT_BYTE, UART_STOP,
-							 I2C_START, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
-							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
+							 I2C_START_CONDITION, I2C_START, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
+							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START_SETUP, I2C_REPEATED_START_HOLD, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
 							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE); -- Slave FSM states type
 
 
@@ -208,7 +208,10 @@ begin
 			);	
 
 	-- Data bytes FIFO
-	eDATA_FIFO : entity work.fifo 	
+	eDATA_FIFO : entity work.fifo 
+			Generic map(
+				NUM_OF_WORDS => 8
+			)
 			Port map(
 				iCLK   	=> iCLK,
 				inRST  	=> sDATA_FIFO_RST,
@@ -312,7 +315,9 @@ begin
 			when UART_NEXT_BYTE =>
 				sNEXT_STATE <= UART_DATA_BYTE; 
 			when UART_STOP =>
-				sNEXT_STATE <= I2C_START; -- Start send I2C telegram
+				sNEXT_STATE <= I2C_START_CONDITION; -- Generate start condition
+			when I2C_START_CONDITION =>
+				sNEXT_STATE <= I2C_START;	-- Start send I2C telegram
 			when I2C_START =>
 				-- Check if period elapsed
 				if (sTC_PERIOD_CNT = '1') then
@@ -360,15 +365,20 @@ begin
 						if (sSLAVE_ADDR_REG(0) = '0') then 
 							sNEXT_STATE <= I2C_WRITE_DATA; -- Write data to slave
 						else 
-							sNEXT_STATE <= I2C_REPEATED_START; -- Generate repeated start
+							sNEXT_STATE <= I2C_REPEATED_START_SETUP; -- Generate repeated start
 						end if;
 					end if;
 				end if;
-			when I2C_REPEATED_START =>
+			when I2C_REPEATED_START_SETUP =>
 				-- Check if period elapsed 
 				if (sTC_TR_PERIOD_CNT = '1') then 
-					sNEXT_STATE <= I2C_SLAVE_ADDRESS_READ; -- Send slave register address 
+					sNEXT_STATE <= I2C_REPEATED_START_HOLD;
 				end if;	
+			when I2C_REPEATED_START_HOLD =>
+				-- Check if period elapsed 
+				if (sTC_PERIOD_CNT = '1') then 
+					sNEXT_STATE <= I2C_SLAVE_ADDRESS_READ; -- Send slave register address 
+				end if;					
 			when I2C_WRITE_DATA => 
 				-- Check if period elapsed 
 				if (sTC_PERIOD_CNT = '1') then
@@ -438,7 +448,7 @@ begin
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
+	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sTC_TR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
 		sIN_BUFF_EN	 		 	<= '0';
 		sOUT_BUFF_EN 		 	<= '0';
 		sIUART_REG_EN  	 	<= '0';
@@ -537,7 +547,9 @@ begin
 				sREG_DEC_SEL		 	<= "10";
 				if (sSLAVE_ADDR_REG(0) = '0') then
 					sLCD_DATA_EN <= '1';
-				end if;				
+				end if;	
+			when I2C_START_CONDITION =>
+				sOUT_BUFF_EN 		 	<= '1';	
 			when I2C_START =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sSCL_EN					<= '1';	
@@ -608,19 +620,28 @@ begin
 						sDATA_FIFO_READ	 <= '1';
 					end if;		
 				end if;				
-				sSCL_EN				 <= '1';	
+				sSCL_EN				 <= '1';
 				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
-			when I2C_REPEATED_START =>
+			when I2C_REPEATED_START_SETUP =>
 				sOUT_BUFF_EN 		 	<= '1';
-				if (sTR_PERIOD_CNT < 8) then
-					sACK_SEL		 		 	<= '1';					
-				end if;
-				sSLAVE_ADDR_SEL		<= '1';				
-				sSCL_EN				 	<= '1';	
+				if (sTR_PERIOD_CNT < 12) then
+					sACK_SEL		 		 	<= '1';
+					if (sTR_PERIOD_CNT < 2) then
+						sSCL_EN				 	<= '1';
+					end if;
+				else
+					sSCL_RST				 	<= '1';
+				end if;			
 				sFREQ_EN 			 	<= '1';
-				sTR_PERIOD_CNT_EN  	<= '1';
-				sOSHW_LOAD			 	<= '1';		
+				sTR_PERIOD_CNT_EN  	<= '1';	
+			when I2C_REPEATED_START_HOLD =>
+				sOUT_BUFF_EN 		 	<= '1';
+				sSLAVE_ADDR_SEL		<= '1';
+				sSCL_EN				 	<= '1';				
+				sFREQ_EN 			 	<= '1';
+				sPERIOD_CNT_EN			<= '1';
+				sOSHW_LOAD			 	<= '1';				
 			when I2C_WRITE_DATA =>
 				sOUT_BUFF_EN 		 <= '1';
 				sSDA_SEL		 		 <= '1';
@@ -714,9 +735,9 @@ begin
 				sLCD_BYTE_SEL		 <= '1';	
 			when SEND_UART_DATA_BYTE =>
 				sOUT_BUFF_EN 		 <= '1';
-				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
 				if (iUART_FULL = '0') then
+					sOUART_REG_EN		 <= '1';
 					sDATA_BYTE_CNT_EN	 <= '1';
 					sDATA_FIFO_READ	 <= '1';
 					oUART_WRITE			 <= '1';
