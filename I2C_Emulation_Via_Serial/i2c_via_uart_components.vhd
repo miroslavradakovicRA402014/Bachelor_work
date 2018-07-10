@@ -18,9 +18,9 @@ package i2c_via_uart_components is
 			BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
 			DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
 			LCD_BUS_WIDTH : integer := 4;  -- Width of LCD interface
-			DATA_WIDTH    : integer := 8	 -- Data widht 
+			DATA_WIDTH    : integer := 8	 -- Data width 
 		 );
-		 Port( iCLK        		 : in    std_logic;													-- External clock 24MHz
+		 Port( iCLK        		 : in    std_logic;													-- Clock signal 50MHz
 				 inRST       		 : in    std_logic;												 	-- Reset signal 
 				 iPARITY_EN_SW		 : in    std_logic;													-- Parity mode signal from switch
 				 iPARITY_SW		 	 : in    std_logic;													-- Parity enable signal from switch	

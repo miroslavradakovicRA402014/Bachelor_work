@@ -65,7 +65,7 @@ architecture Behavioral of uart_i2c_master is
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_NUMBER, UART_DATA_BYTE, UART_LOAD_BYTE, UART_NEXT_BYTE, UART_STOP,
 							 I2C_START_CONDITION, I2C_START_PERIOD, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
 							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START_SETUP, I2C_REPEATED_START_HOLD, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
-							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE); -- Slave FSM states type
+							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE, I2C_BUS_FREE); -- Slave FSM states type
 
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Master FSM current state
@@ -415,13 +415,13 @@ begin
 					if (sSLAVE_ADDR_REG(0) = '1') then -- If read form slave return back to UART 
 						sNEXT_STATE <= SEND_I2C_UART_TELEGRAM;
 					else
-						sNEXT_STATE <= IDLE;
+						sNEXT_STATE <= I2C_BUS_FREE;
 					end if;
 				end if;
 			when I2C_NACK_STOP =>
 				-- Check if period elapsed
 				if (sTC_TR_PERIOD_CNT = '1') then
-					sNEXT_STATE <= IDLE;
+					sNEXT_STATE <= I2C_BUS_FREE;
 				end if;				
 			when SEND_I2C_UART_TELEGRAM =>
 				-- Start to send I2C telegram to UART
@@ -442,8 +442,12 @@ begin
 				end if;
 			when SEND_UART_DATA_BYTE =>
 				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG - 1) then -- Check if all bytes sent to UART 
-					sNEXT_STATE <= IDLE; 					
+					sNEXT_STATE <= I2C_BUS_FREE; 					
 				end if;	
+			when I2C_BUS_FREE =>
+				if (sTC_TR_PERIOD_CNT = '1') then -- If bus free period elapsed
+					sNEXT_STATE <= IDLE;
+				end if;
 		end case;
 	end process fsm_next;	
 
@@ -745,6 +749,11 @@ begin
 				sOUART_REG_SEL		 <= "10";	
 				sLCD_BYTE_EN		 <= '1';
 				sLCD_BYTE_SEL		 <= '1';
+			when I2C_BUS_FREE =>
+				sOUT_BUFF_EN 		 	<= '1';
+				sACK_SEL		 		 	<= '1';
+				sTR_PERIOD_CNT_EN  	<= '1';	
+				sFREQ_EN 			 	<= '1';
 		end case;
 	end process fsm_out;
 	

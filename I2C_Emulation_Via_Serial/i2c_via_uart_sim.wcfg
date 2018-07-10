@@ -21,7 +21,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="34" />
+   <WVObjectSize size="37" />
    <wave_markers>
       <marker time="-2499999999000" label="" />
       <marker time="-2499999999000" label="" />
@@ -64,6 +64,102 @@
    <wvobject fp_name="/i2c_via_uart_tb/iclk_period" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">iclk_period</obj_property>
       <obj_property name="ObjectShortName">iclk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sfifo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/swr_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">swr_ptr</obj_property>
+      <obj_property name="ObjectShortName">swr_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/srd_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">srd_ptr</obj_property>
+      <obj_property name="ObjectShortName">srd_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sempty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sempty</obj_property>
+      <obj_property name="ObjectShortName">sempty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sfull" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sfull</obj_property>
+      <obj_property name="ObjectShortName">sfull</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sfifo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/swr_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">swr_ptr</obj_property>
+      <obj_property name="ObjectShortName">swr_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/srd_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">srd_ptr</obj_property>
+      <obj_property name="ObjectShortName">srd_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sempty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sempty</obj_property>
+      <obj_property name="ObjectShortName">sempty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sfull" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sfull</obj_property>
+      <obj_property name="ObjectShortName">sfull</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/sscl" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sscl</obj_property>
+      <obj_property name="ObjectShortName">sscl</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/ssda" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ssda</obj_property>
+      <obj_property name="ObjectShortName">ssda</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/sslave_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sslave_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sslave_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/sreg_addr_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sreg_addr_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sreg_addr_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/sbyte_num_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sbyte_num_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sbyte_num_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/stc_period_cnt" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc_period_cnt</obj_property>
+      <obj_property name="ObjectShortName">stc_period_cnt</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/stc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">stc</obj_property>
+      <obj_property name="ObjectShortName">stc</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/sfreq_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sfreq_en</obj_property>
+      <obj_property name="ObjectShortName">sfreq_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sfifo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/swr_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">swr_ptr</obj_property>
+      <obj_property name="ObjectShortName">swr_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/srd_ptr" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">srd_ptr</obj_property>
+      <obj_property name="ObjectShortName">srd_ptr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sempty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sempty</obj_property>
+      <obj_property name="ObjectShortName">sempty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sfull" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sfull</obj_property>
+      <obj_property name="ObjectShortName">sfull</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/sregs" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sregs[15:0]</obj_property>
@@ -149,90 +245,6 @@
          <obj_property name="ObjectShortName">sregs[0]</obj_property>
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sfifo" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/swr_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">swr_ptr</obj_property>
-      <obj_property name="ObjectShortName">swr_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/srd_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">srd_ptr</obj_property>
-      <obj_property name="ObjectShortName">srd_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sempty" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sempty</obj_property>
-      <obj_property name="ObjectShortName">sempty</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eRECV_FIFO/sfull" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sfull</obj_property>
-      <obj_property name="ObjectShortName">sfull</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sfifo" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/swr_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">swr_ptr</obj_property>
-      <obj_property name="ObjectShortName">swr_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/srd_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">srd_ptr</obj_property>
-      <obj_property name="ObjectShortName">srd_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sempty" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sempty</obj_property>
-      <obj_property name="ObjectShortName">sempty</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eSEND_FIFO/sfull" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sfull</obj_property>
-      <obj_property name="ObjectShortName">sfull</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/scurrent_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">scurrent_state</obj_property>
-      <obj_property name="ObjectShortName">scurrent_state</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/sscl" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sscl</obj_property>
-      <obj_property name="ObjectShortName">sscl</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/ssda" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">ssda</obj_property>
-      <obj_property name="ObjectShortName">ssda</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/stc_period_cnt" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">stc_period_cnt</obj_property>
-      <obj_property name="ObjectShortName">stc_period_cnt</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/stc" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">stc</obj_property>
-      <obj_property name="ObjectShortName">stc</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/sfreq_en" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sfreq_en</obj_property>
-      <obj_property name="ObjectShortName">sfreq_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sfifo" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">sfifo[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sfifo[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/swr_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">swr_ptr</obj_property>
-      <obj_property name="ObjectShortName">swr_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/srd_ptr" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">srd_ptr</obj_property>
-      <obj_property name="ObjectShortName">srd_ptr</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sempty" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sempty</obj_property>
-      <obj_property name="ObjectShortName">sempty</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eDATA_FIFO/sfull" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sfull</obj_property>
-      <obj_property name="ObjectShortName">sfull</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>

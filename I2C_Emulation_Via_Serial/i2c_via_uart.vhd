@@ -27,7 +27,7 @@ entity i2c_via_uart is
 		BAUD_RATE_SEL : integer := 3;  -- Width of baud rate select
 		DATA_BIT_SEL  : integer := 2;  -- Width of data bit number select
 		LCD_BUS_WIDTH : integer := 4;  -- Width of LCD interface
-		DATA_WIDTH    : integer := 8	 -- Data widht 
+		DATA_WIDTH    : integer := 8	 -- Data width 
 	 );
 	 Port ( iCLK        		 : in    std_logic;													-- External clock 24MHz
 			  inRST       		 : in    std_logic;												 	-- Reset signal 
