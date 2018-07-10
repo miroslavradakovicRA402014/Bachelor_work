@@ -1,9 +1,6 @@
-set -tmpdir "xst/projnav.tmp"
-set -xsthdpdir "xst"
-run
--ifn i2c_via_uart.prj
--ofn i2c_via_uart
--ofmt NGC
+set -tmpdir "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/xst/projnav.tmp"
+set -xsthdpdir "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/xst"
+run -compileonly yes
 -p xc6slx45-2-fgg676
 -top i2c_via_uart
 -opt_mode Speed
@@ -50,3 +47,4 @@ run
 -iob Auto
 -equivalent_register_removal YES
 -slice_utilization_ratio_maxmargin 5
+-ifn i2c_via_uart.prj

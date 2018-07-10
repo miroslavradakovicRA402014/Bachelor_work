@@ -334,10 +334,10 @@ begin
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 			when START => 
 				sIN_BUFF_EN	 		 <= '1';	
-				sFREQ_EN				 <= '1';	
+				sFREQ_EN				 <= '1';	-- Enable clock divider
 			when SLAVE_ADDRESS_MODE =>		
 				sIN_BUFF_EN	 		 <= '1';	
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count slave address and mode bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all address bit and mode recived  get mode and start sync period
 					sMODE_FF_EN		 <= '1'; -- Get R/W mode, write to register 
@@ -347,15 +347,15 @@ begin
 				end if;
 			when SLAVE_ADDRESS_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line 
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	
-					sOSHW_LOAD			 <= '1';
-					sREG_MUX_SEL		 <= sADDR_REG;
+					sOSHW_LOAD			 <= '1'; -- Load slave address to shift register
+					sREG_MUX_SEL		 <= sADDR_REG; -- Select slave address 
 				end if;
 			when REGISTER_ADDRESS =>		
 				sIN_BUFF_EN	 		 <= '1';
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count register address bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all register address bits recived start sync period
 					sPERIOD_CNT_EN  <= '1';	-- Start sync period
@@ -365,7 +365,7 @@ begin
 				end if;
 			when REGISTER_ADDRESS_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
 					sOSHW_LOAD		 <= '1'; -- Load data to shift register
@@ -373,17 +373,17 @@ begin
 				end if;				
 			when REGISTER_ADDRESS_NACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
-				sACK_SEL				 <= '1';		
+				sACK_SEL				 <= '1';	-- Generate nack	
 			when REPEATED_START =>
 				sIN_BUFF_EN	 		 	 <= '1';
-				sFREQ_EN				 	 <= '1';
-				sDATA_CNT_RST 		 	 <= '1';
+				sFREQ_EN				 	 <= '1'; -- Enable clock divider
+				sDATA_CNT_RST 		 	 <= '1'; -- Reset data counter
 				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period	
 			when READ_DATA =>		
 				sIN_BUFF_EN	 		 <= '1';	
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count data bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits recived write data form shift register to register
 					sPERIOD_CNT_EN  <= '1'; -- Start snyc period
@@ -394,12 +394,12 @@ begin
 				end if;		
 			when READ_ACK =>	
 				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
-				sFREQ_EN				 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period					
 			when WRITE_DATA =>		
 				sOUT_BUFF_EN 		 <= '1';	-- Get SDA line
-				sFREQ_EN				 <= '1';	
+				sFREQ_EN				 <= '1';	-- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count sent data
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits sent to master 
 					sPERIOD_CNT_EN 	 <= '1'; -- Start sync period
@@ -411,8 +411,8 @@ begin
 				sSDA_SEL				 <= '1';	  -- Select data bit from output shift register 		
 			when WRITE_ACK =>	
 				sIN_BUFF_EN	 		 <= '1'; 
-				sFREQ_EN				 <= '1';
-				sBYTE_CNT_EN   	 <= '1';
+				sFREQ_EN				 <= '1'; -- Enable clock divider
+				sBYTE_CNT_EN   	 <= '1'; -- Count data byte
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
 				sOSHW_LOAD			 <= '1'; -- Load data form registers
 				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address		

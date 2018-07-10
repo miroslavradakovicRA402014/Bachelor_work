@@ -26,6 +26,7 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 entity uart_i2c_master is
 	 Generic (
 		REGISTER_NUM		   : integer := 4;	-- Number of register
+		MAX_BYTE_NUM			: integer := 4;	-- Maximum number of bytes which can send and recive as a exp of 2
 		TC_PERIOD			   : integer := 13;  -- Bus control period 
 		TR_PERIOD			   : integer := 17;  -- Master transmission peirod
 		REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
@@ -62,7 +63,7 @@ architecture Behavioral of uart_i2c_master is
 	constant cNACK : std_logic := '1';
 
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_NUMBER, UART_DATA_BYTE, UART_LOAD_BYTE, UART_NEXT_BYTE, UART_STOP,
-							 I2C_START_CONDITION, I2C_START, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
+							 I2C_START_CONDITION, I2C_START_PERIOD, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
 							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START_SETUP, I2C_REPEATED_START_HOLD, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
 							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE); -- Slave FSM states type
 
@@ -210,7 +211,7 @@ begin
 	-- Data bytes FIFO
 	eDATA_FIFO : entity work.fifo 
 			Generic map(
-				NUM_OF_WORDS => 8
+				NUM_OF_WORDS => MAX_BYTE_NUM
 			)
 			Port map(
 				iCLK   	=> iCLK,
@@ -226,8 +227,7 @@ begin
 	-- Data FIFO reset 
 	sDATA_FIFO_RST <= '0' when sDATA_FIFO_RST_SEL = '1' else
 							inRST;
-	
-				
+			
 	-- Data byte number register
 	eBYTE_NUM_REG : entity work.reg 
 			Port map(
@@ -295,7 +295,7 @@ begin
 			when UART_REGISTER_ADDRESS =>
 				sNEXT_STATE <= UART_BYTE_NUMBER;	-- Get data byte number from UART 								
 			when UART_BYTE_NUMBER =>
-				if (sBYTE_NUM_REG = "00000000") then -- If you don't want to read or write bytes 
+				if (sBYTE_NUM_REG = "00000000" or sBYTE_NUM_REG > 2**MAX_BYTE_NUM) then -- If you don't want to read or write bytes or overflow max byte number
 					sNEXT_STATE <= IDLE;
 				elsif (sSLAVE_ADDR_REG(0) = '1') then
 					sNEXT_STATE <= UART_STOP; -- Get lower data byte from UART		
@@ -317,8 +317,8 @@ begin
 			when UART_STOP =>
 				sNEXT_STATE <= I2C_START_CONDITION; -- Generate start condition
 			when I2C_START_CONDITION =>
-				sNEXT_STATE <= I2C_START;	-- Start send I2C telegram
-			when I2C_START =>
+				sNEXT_STATE <= I2C_START_PERIOD;	-- Start send I2C telegram
+			when I2C_START_PERIOD =>
 				-- Check if period elapsed
 				if (sTC_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_WRITE; -- Send I2C address to slave
@@ -550,7 +550,7 @@ begin
 				end if;	
 			when I2C_START_CONDITION =>
 				sOUT_BUFF_EN 		 	<= '1';	
-			when I2C_START =>
+			when I2C_START_PERIOD =>
 				sOUT_BUFF_EN 		 	<= '1';
 				sSCL_EN					<= '1';	
 				sFREQ_EN 				<= '1';

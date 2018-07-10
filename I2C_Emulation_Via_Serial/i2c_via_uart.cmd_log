@@ -929,3 +929,9 @@ map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -re
 par -w -intstyle ise -ol high -mt off i2c_via_uart_map.ncd i2c_via_uart.ncd i2c_via_uart.pcf 
 trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml i2c_via_uart.twx i2c_via_uart.ncd -o i2c_via_uart.twr i2c_via_uart.pcf -ucf system_pins.ucf 
 bitgen -intstyle ise -f i2c_via_uart.ut i2c_via_uart.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.xst" -ofn "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc system_pins.ucf -p xc6slx45-fgg676-2 i2c_via_uart.ngc i2c_via_uart.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o i2c_via_uart_map.ncd i2c_via_uart.ngd i2c_via_uart.pcf 
+par -w -intstyle ise -ol high -mt off i2c_via_uart_map.ncd i2c_via_uart.ncd i2c_via_uart.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml i2c_via_uart.twx i2c_via_uart.ncd -o i2c_via_uart.twr i2c_via_uart.pcf -ucf system_pins.ucf 
+bitgen -intstyle ise -f i2c_via_uart.ut i2c_via_uart.ncd 
