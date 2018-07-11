@@ -226,7 +226,7 @@ LAB4:
 LAB8:    t21 = xsi_get_transient_memory(8U);
     memset(t21, 0, 8U);
     t22 = t21;
-    memset(t22, (unsigned char)4, 8U);
+    memset(t22, (unsigned char)2, 8U);
     t23 = (t0 + 3528);
     t24 = (t23 + 32U);
     t25 = *((char **)t24);

@@ -271,7 +271,7 @@ begin
 	end process fsm_reg;
 	
 	-- LCD controller FSM next state logic
-	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sDATA_FIFO_EMPTY, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT, sCHAR_NUM) begin
+	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT, sCHAR_NUM) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -345,9 +345,7 @@ begin
 					sNEXT_STATE <= CURSOR_NEW_LINE;
 				else
 					if (sCHAR_CNT >= 22) then -- If have to wait data bytes
-						if (sDATA_FIFO_EMPTY = '1') then
-							sNEXT_STATE <= READ_INPUT_CHAR;
-						end if;	
+						sNEXT_STATE <= READ_INPUT_CHAR;	
 					else
 						sNEXT_STATE <= PRINT_CHAR_BF;
 					end if;	
@@ -375,7 +373,7 @@ begin
 	
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sDATA_FIFO_EMPTY, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
 		sOUT_BUFF_EN	 	<= '0';
 		sSEQ_CNT_EN 	 	<= '0';
@@ -565,8 +563,10 @@ begin
 			when READ_INPUT_CHAR =>
 				sCHAR_BYTE_EN <= '1';
 				if (sCHAR_BYTE = '0') then	-- Check if print first char of data byte 
-					sDATA_FIFO_READ 	<= '1';			-- Read data byte form FIFO
-					sDATA_BYTE_REG_EN <= '1';	
+					if (sDATA_FIFO_EMPTY = '0') then
+						sDATA_FIFO_READ 	<= '1';			-- Read data byte form FIFO
+						sDATA_BYTE_REG_EN <= '1';
+					end if;				
 				end if;		
 			when PRINT_CHAR =>
 				sOUT_BUFF_EN	 	 <= '1';					

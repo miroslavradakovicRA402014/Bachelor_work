@@ -67,7 +67,7 @@ begin
 	
 	-- Data output
 	oDATA  <= sFIFO(sRD_PTR) when iRD = '1' and sEMPTY = '0' else
-				 (others => 'Z');
+				 (others => '0');
 	
 	-- FIFO pointer process
 	ptr_proc : process (iCLK, inRST) begin
