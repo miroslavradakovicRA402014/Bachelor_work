@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    09:05:44 05/14/2018 
--- Design Name: 
+-- Design Name: 	 UART bridge I2C master
 -- Module Name:    uart_i2c_master - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6 
 -- Description: 
 --
 -- Dependencies: 

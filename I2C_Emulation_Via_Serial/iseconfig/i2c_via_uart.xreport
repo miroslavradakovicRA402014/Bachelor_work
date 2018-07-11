@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-07-10T11:13:14</DateModified>
+  <DateModified>2018-07-11T10:04:31</DateModified>
   <ModuleName>i2c_via_uart</ModuleName>
-  <SummaryTimeStamp>2018-07-10T09:49:10</SummaryTimeStamp>
+  <SummaryTimeStamp>2018-07-10T16:53:08</SummaryTimeStamp>
   <SavedFilePath>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/iseconfig/i2c_via_uart.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial\</ImplementationReportsDirectory>
   <DateInitialized>2018-05-22T14:35:21</DateInitialized>
@@ -19,7 +19,7 @@
     <toc-item title="Detailed Reports" target="Detailed Reports" />
    </view>
    <view inputState="Unknown" program="implementation" contextTags="FPGA_ONLY" hidden="true" type="HTML" file="i2c_via_uart_envsettings.html" label="System Settings" />
-   <view inputState="Translated" program="map" locator="MAP_IOB_TABLE" contextTags="FPGA_ONLY" type="IOBProperties" file="i2c_via_uart_map.xrpt" label="IOB Properties" />
+   <view inputState="Translated" program="map" locator="MAP_IOB_TABLE" contextTags="FPGA_ONLY" type="IOBProperties" file="i2c_via_uart_map.xrpt" showConstraints="0" label="IOB Properties" />
    <view inputState="Translated" program="map" contextTags="FPGA_ONLY" hidden="true" type="Control_Sets" file="i2c_via_uart_map.xrpt" label="Control Set Information" />
    <view inputState="Translated" program="map" locator="MAP_MODULE_HIERARCHY" contextTags="FPGA_ONLY" type="Module_Utilization" file="i2c_via_uart_map.xrpt" label="Module Level Utilization" />
    <view inputState="Mapped" program="par" locator="CONSTRAINT_TABLE" contextTags="FPGA_ONLY" type="ConstraintsData" file="i2c_via_uart.ptwx" showConstraints="0" label="Timing Constraints" translator="ptwxToTableXML.xslt" />

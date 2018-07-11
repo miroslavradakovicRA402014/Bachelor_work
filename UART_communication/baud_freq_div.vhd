@@ -3,12 +3,12 @@
 -- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    09:58:49 04/16/2018 
--- Design Name: 
+-- Design Name: 	 UART baud frequency divider
 -- Module Name:    baud_freq_div - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
+-- Description: 	 	
 --
 -- Dependencies: 
 --
@@ -24,7 +24,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity baud_freq_div is
 	 Generic (
-		CLK_FREQUENCY 	: integer := 50000000;	 -- Clock frequency MHz
+		CLK_FREQUENCY 	: integer := 50000000;	 -- Clock frequency Hz
 		BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
 		CLK_CNT_WIDTH  : integer := 11		    -- Width of clock counter
 	 );

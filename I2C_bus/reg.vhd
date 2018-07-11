@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    15:59:13 05/14/2018 
--- Design Name: 
+-- Design Name: 	 Register
 -- Module Name:    reg - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 

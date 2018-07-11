@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    12:56:14 04/16/2018 
--- Design Name: 
+-- Design Name: 	 FIFO ring buffer
 -- Module Name:    fifo - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 

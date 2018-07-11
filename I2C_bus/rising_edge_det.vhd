@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    10:55:42 05/07/2018 
--- Design Name: 
+-- Design Name: 	 Rising edge detector
 -- Module Name:    rising_edge_det - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 

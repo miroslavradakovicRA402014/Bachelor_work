@@ -7,7 +7,7 @@ package uart_components is
 	
 	component baud_freq_div is
 		 Generic (
-			CLK_FREQUENCY 	: integer := 50000000;	 -- Clock frequency MHz
+			CLK_FREQUENCY 	: integer := 50000000;	 -- Clock frequency Hz
 			BAUD_RATE_SEL	: integer := 3;		 	 -- Num of baud rate select bits
 			CLK_CNT_WIDTH  : integer := 11		    -- Width of clock counter
 		 );

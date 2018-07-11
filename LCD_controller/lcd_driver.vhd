@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    12:19:15 06/01/2018 
--- Design Name: 
+-- Design Name: 	 LCD driver
 -- Module Name:    lcd_driver - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 
@@ -271,7 +271,7 @@ begin
 	end process fsm_reg;
 	
 	-- LCD controller FSM next state logic
-	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sDATA_FIFO_EMPTY, sCHAR_CNT, sCHAR_NUM) begin
+	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sDATA_FIFO_EMPTY, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT, sCHAR_NUM) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -345,7 +345,9 @@ begin
 					sNEXT_STATE <= CURSOR_NEW_LINE;
 				else
 					if (sCHAR_CNT >= 22) then -- If have to wait data bytes
-						sNEXT_STATE <= READ_INPUT_CHAR;
+						if (sDATA_FIFO_EMPTY = '1') then
+							sNEXT_STATE <= READ_INPUT_CHAR;
+						end if;	
 					else
 						sNEXT_STATE <= PRINT_CHAR_BF;
 					end if;	
@@ -373,7 +375,7 @@ begin
 	
 	
 	-- LCD controller FSM output logic
-	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sDATA_FIFO_EMPTY, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
+	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
 		sIN_BUFF_EN	 	 	<= '0';
 		sOUT_BUFF_EN	 	<= '0';
 		sSEQ_CNT_EN 	 	<= '0';
@@ -564,7 +566,7 @@ begin
 				sCHAR_BYTE_EN <= '1';
 				if (sCHAR_BYTE = '0') then	-- Check if print first char of data byte 
 					sDATA_FIFO_READ 	<= '1';			-- Read data byte form FIFO
-					sDATA_BYTE_REG_EN <= '1';
+					sDATA_BYTE_REG_EN <= '1';	
 				end if;		
 			when PRINT_CHAR =>
 				sOUT_BUFF_EN	 	 <= '1';					

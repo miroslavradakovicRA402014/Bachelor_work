@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    17:02:18 06/11/2018 
--- Design Name: 
+-- Design Name: 	 Char generator
 -- Module Name:    char_gen - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 

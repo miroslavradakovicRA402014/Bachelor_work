@@ -3,11 +3,11 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    18:52:59 05/20/2018 
--- Design Name: 
+-- Design Name: 	 I2C clock frequency divider	
 -- Module Name:    i2c_clk_freq_div - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
 -- Description: 
 --
 -- Dependencies: 
@@ -24,7 +24,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2c_clk_freq_div is
 	 Generic (
-		CLK_FREQUENCY : integer := 50000000; -- Clock frequency	
+		CLK_FREQUENCY : integer := 50000000; -- Clock frequency Hz	
 		CLK_CNT_WIDTH : integer := 5	 		 -- Width of clock counter
 	 );
     Port ( iCLK  		: in  std_logic;		 -- Clock signal 50MHz

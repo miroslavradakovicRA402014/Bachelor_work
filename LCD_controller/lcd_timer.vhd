@@ -1,13 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 		 RT-RK computer based systems
+-- Engineer: 		 Miroslav Radakovic 
 -- 
 -- Create Date:    15:47:33 06/01/2018 
--- Design Name: 
+-- Design Name: 	 LCD driver timer	
 -- Module Name:    lcd_timer - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6 
 -- Description: 
 --
 -- Dependencies: 

@@ -20,7 +20,7 @@ package uart_i2c_bridge_components is
 				  iBAUD_SEL			 : in   std_logic_vector(BAUD_RATE_SEL - 1 downto 0); -- Baud rate selection
 				  iCTS				 : in   std_logic;												-- Clear to send signal
 				  iRX         		 : in   std_logic;												-- RX signal
-				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH 	- 1 downto 0); -- Transmitter input data
+				  iUART_DATA		 : in   std_logic_vector(DATA_WIDTH - 1 downto 0); 	-- Transmitter input data
 				  iUART_WR 			 : in	  std_logic;												-- Write to transmitter signal
 				  iUART_RD    		 : in   std_logic;												-- Read from reciver signal			
 				  oTX         		 : out  std_logic;												-- TX signal
