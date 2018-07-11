@@ -51,6 +51,7 @@ entity uart_i2c_master is
 			  oLCD_DATA_BYTE	: out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
 			  oLCD_BYTE_NUM	: out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
 			  oLCD_MODE			: out   std_logic;												-- LCD display driver mode data
+			  oLCD_READ_VALID	: out   std_logic;												-- LCD display driver read valid
 			  oLCD_DATA_EN		: out   std_logic;												-- LCD display driver data enable
 			  oLCD_BYTE_EN		: out   std_logic;												-- LCD display driver data byte enable
 			  ioSDA		   	: inout std_logic);												-- SDA signal
@@ -159,10 +160,10 @@ architecture Behavioral of uart_i2c_master is
 
 	signal sLCD_DATA_EN				: std_logic;																					-- LCD driver data enable signal
 	signal sLCD_BYTE_EN				: std_logic;																					-- LCD driver data byte enable
-
 	signal sLCD_BYTE_MUX				: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- LCD data byte multiplexer
 	signal sLCD_BYTE_SEL				: std_logic;																					-- LCD data byte multiplexer selection
-
+	signal sLCD_READ_VALID 			: std_logic;																					-- LCD read valid operation
+	
 begin
 
 	-- Input UART data register
@@ -488,6 +489,7 @@ begin
 		sLCD_DATA_EN 			<= '0';
 		sLCD_BYTE_EN			<= '0';
 		sLCD_BYTE_SEL			<= '0';
+		sLCD_READ_VALID  		<= '1';
 		case (sCURRENT_STATE) is
 			-- Master control signals
 			when IDLE =>
@@ -710,7 +712,11 @@ begin
 				sOUT_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';	
 				sFREQ_EN 			 <= '1';
-				sTR_PERIOD_CNT_EN  <= '1';					
+				sTR_PERIOD_CNT_EN  <= '1';	
+				if (sSLAVE_ADDR_REG(0) = '1') then
+					sLCD_DATA_EN	  <= '1';
+					sLCD_READ_VALID  <= '0';
+				end if;	
 			when SEND_I2C_UART_TELEGRAM =>
 				sOUT_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
@@ -942,6 +948,7 @@ begin
 	oLCD_DATA_BYTE	 <= sLCD_BYTE_MUX;
 	oLCD_BYTE_NUM	 <= sBYTE_NUM_REG; 
 	oLCD_MODE		 <= sSLAVE_ADDR_REG(0);	
+	oLCD_READ_VALID <= sLCD_READ_VALID;
 	oLCD_DATA_EN	 <= sLCD_DATA_EN;	
 	oLCD_BYTE_EN	 <= sLCD_BYTE_EN;	
 	

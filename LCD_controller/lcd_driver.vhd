@@ -45,6 +45,7 @@ entity lcd_driver is
 			  iDATA_BYTE  : in  		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte
 			  iBYTE_NUM   : in 		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte number 
 			  iMODE 		  : in		std_logic;												 -- Mode R/W signal
+			  iREAD_VALID : in		std_logic;												 -- Read operation valid signal
 			  iDATA_EN	  : in 		std_logic;												 -- Data enable signal
 			  iBYTE_EN	  : in      std_logic;												 -- Data byte enable signal
            oE 	   	  : out 		std_logic;												 -- LCD display enable control signal
@@ -85,8 +86,8 @@ architecture Behavioral of lcd_driver is
 	constant cCHAR_D 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01000100";
 	constant cCHAR_T 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010100";
 	
-	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, 
-							 ENTRY_MODE_BF, ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET,  READ_INPUT_CHAR, 
+	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, ENTRY_MODE_BF, 
+							 ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, READ_INPUT_CHAR, CHECK_READ_VALID, 
 							 CLEAR_PRINT_BF, CLEAR_PRINT ,PRINT_CHAR_BF, PRINT_CHAR, CURSOR_BACK_BF, CURSOR_BACK, CURSOR_NEW_LINE, STOP_PRINT); -- LCD controller FSM states type																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
@@ -131,7 +132,8 @@ architecture Behavioral of lcd_driver is
 	signal sBYTE_NUM_REG				: std_logic_vector(DATA_WIDTH - 1 downto 0); 		-- Byte number register
 	signal sDATA_BYTE_REG			: std_logic_vector(DATA_WIDTH - 1 downto 0);		 	-- Data byte register
 	signal sDATA_BYTE_REG_EN		: std_logic;		 											-- Data byte register enable
-	signal sMODE_FF 					: std_logic;													-- Mode register
+	signal sMODE_FF 					: std_logic;													-- Mode flip-flop
+	signal sREAD_VALID_FF 			: std_logic;													-- Read valid flip-flop
 
 	signal sDATA_FIFO_FULL			: std_logic;													-- Data FIFO full indication 
 	signal sDATA_FIFO_EMPTY			: std_logic;													-- Data FIFO empty indication
@@ -259,6 +261,17 @@ begin
 			end if;
 		end if;
 	end process mode_ff;
+	
+	-- Read valid flip-flop
+	read_valid_ff : process (iCLK, inRST) begin
+		if (inRST = '0') then
+			sREAD_VALID_FF <= '0'; -- Reset FF
+		elsif (iCLK'event and iCLK = '1') then
+			if (iDATA_EN = '1') then
+				sREAD_VALID_FF <= iREAD_VALID; -- Write mode
+			end if;
+		end if;
+	end process read_valid_ff;	
 			
 
 	-- FSM state register process
@@ -271,7 +284,7 @@ begin
 	end process fsm_reg;
 	
 	-- LCD controller FSM next state logic
-	fsm_next : process (sCURRENT_STATE, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, iDATA_EN, sCHAR_CNT, sCHAR_NUM) begin
+	fsm_next : process (sCURRENT_STATE, iDATA_EN, sSEQ_CNT, sINIT_PERIOD_TC, sIN_DATA, sMODE_FF, sREAD_VALID_FF, sCHAR_CNT, sCHAR_NUM) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -337,7 +350,13 @@ begin
 			when CURSOR_BACK =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
 					sNEXT_STATE <= PRINT_CHAR_BF;
-				end if;					
+				end if;	
+			when CHECK_READ_VALID =>
+				if (sREAD_VALID_FF = '0') then -- Check if read operation was valid
+					sNEXT_STATE <= READ_INPUT_DATA;
+				else	
+					sNEXT_STATE <= PRINT_CHAR_BF; -- Read operation was valid continue to print characters
+				end if;
 			when READ_INPUT_CHAR =>
 				sNEXT_STATE <= PRINT_CHAR_BF; 
 			when CHECK_CURSOR => 	
@@ -360,7 +379,11 @@ begin
 				end if;		
 			when CURSOR_NEW_LINE =>
 				if (sSEQ_CNT = CMD_SEQ_NUMBER) then -- Wait for command sequence done 
-					sNEXT_STATE <= PRINT_CHAR_BF;
+					if (sMODE_FF = '0') then
+						sNEXT_STATE <= PRINT_CHAR_BF;		-- 
+					else
+						sNEXT_STATE <= CHECK_READ_VALID; -- If mode is read check for operation valid
+					end if;
 				end if;				
 			when STOP_PRINT =>
 				if (CONV_STD_LOGIC_VECTOR(sCHAR_CNT, 5) = sCHAR_NUM) then -- Wait to print all characters
@@ -370,7 +393,6 @@ begin
 				end if;							
 		end case;
 	end process fsm_next;	
-	
 	
 	-- LCD controller FSM output logic
 	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sDATA_FIFO_EMPTY, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin

@@ -43,6 +43,7 @@ entity uart_i2c_bridge is
 			  oLCD_DATA_BYTE	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
 			  oLCD_BYTE_NUM	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
 			  oLCD_MODE			 : out   std_logic;													-- LCD display driver mode data
+			  oLCD_READ_VALID	 : out   std_logic;													-- LCD display driver read valid
 			  oLCD_DATA_EN		 : out   std_logic;													-- LCD display driver data enable
 			  oLCD_BYTE_EN		 : out   std_logic;													-- LCD display driver data byte enable			  
 			  oTX         		 : out   std_logic;													-- TX UART signal
@@ -102,6 +103,7 @@ begin
 			oLCD_DATA_BYTE		=> oLCD_DATA_BYTE,
 			oLCD_BYTE_NUM		=> oLCD_BYTE_NUM,
 			oLCD_MODE			=> oLCD_MODE,
+			oLCD_READ_VALID   => oLCD_READ_VALID,
 			oLCD_DATA_EN		=> oLCD_DATA_EN,
 			oLCD_BYTE_EN		=> oLCD_BYTE_EN,					
 			ioSDA		    		=> ioSDA

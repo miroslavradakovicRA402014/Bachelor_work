@@ -64,6 +64,7 @@ architecture Behavioral of i2c_via_uart is
 	signal sLCD_DATA_BYTE	: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
 	signal sLCD_BYTE_NUM		: std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
 	signal sLCD_MODE			: std_logic;												-- LCD display driver mode data
+	signal sLCD_READ_VALID	: std_logic;												-- LCD display read operation valid
 	signal sLCD_DATA_EN		: std_logic;												-- LCD display driver data enable
 	signal sLCD_BYTE_EN		: std_logic;												-- LCD display driver data byte enable
 	signal sLCD_E      		: std_logic;												-- LCD enable signal 
@@ -101,6 +102,7 @@ begin
 			oLCD_DATA_BYTE		=> sLCD_DATA_BYTE,
 			oLCD_BYTE_NUM		=> sLCD_BYTE_NUM,
 			oLCD_MODE			=> sLCD_MODE,
+			oLCD_READ_VALID	=> sLCD_READ_VALID,
 			oLCD_DATA_EN		=> sLCD_DATA_EN,
 			oLCD_BYTE_EN		=> sLCD_BYTE_EN,			
 			oTX         		=> oTX,		
@@ -128,6 +130,7 @@ begin
 			iDATA_BYTE 	=> sLCD_DATA_BYTE,
 			iBYTE_NUM 	=> sLCD_BYTE_NUM,
 			iMODE 		=> sLCD_MODE,  
+			iREAD_VALID => sLCD_READ_VALID,
 			iDATA_EN	   => sLCD_DATA_EN,
 			iBYTE_EN		=> sLCD_BYTE_EN,
          oE 	   	=> sLCD_E,  

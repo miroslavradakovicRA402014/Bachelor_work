@@ -34,6 +34,7 @@ package i2c_via_uart_components is
 				 oLCD_DATA_BYTE	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte 
 				 oLCD_BYTE_NUM	 	 : out   std_logic_vector(DATA_WIDTH - 1 downto 0);		-- LCD display driver data byte number data 
 				 oLCD_MODE			 : out   std_logic;													-- LCD display driver mode data
+				 oLCD_READ_VALID	 : out   std_logic;													-- LCD display driver read valid
 				 oLCD_DATA_EN		 : out   std_logic;													-- LCD display driver data enable
 				 oLCD_BYTE_EN		 : out   std_logic;													-- LCD display driver data byte enable			  
 				 oTX         		 : out   std_logic;													-- TX UART signal
@@ -84,6 +85,7 @@ package i2c_via_uart_components is
 				 iDATA_BYTE   : in  		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte
 				 iBYTE_NUM    : in 		std_logic_vector(DATA_WIDTH - 1 downto 0); 	 -- Data byte number 
 				 iMODE 		  : in		std_logic;												 -- Mode R/W signal
+				 iREAD_VALID  : in		std_logic;												 -- Read operation valid signal
 				 iDATA_EN	  : in 		std_logic;												 -- Data enable signal
 				 iBYTE_EN	  : in      std_logic;												 -- Data byte enable signal
 				 oE 	   	  : out 		std_logic;												 -- LCD display enable control signal
