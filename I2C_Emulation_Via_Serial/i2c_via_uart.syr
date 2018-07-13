@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -304,7 +304,7 @@ Synthesizing Unit <reciver>.
     Found 4-bit adder for signal <sTC_CNT[3]_GND_20_o_add_15_OUT> created at line 1241.
     Found 3-bit adder for signal <sDATA_CNT[2]_GND_20_o_add_22_OUT> created at line 1241.
     Found 4x3-bit Read Only RAM for signal <sDATA_BIT>
-    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_22_o> created at line 188
+    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_22_o> created at line 189
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -380,7 +380,7 @@ Synthesizing Unit <transmitter>.
     Found 4-bit adder for signal <sTC_CNT[3]_GND_24_o_add_19_OUT> created at line 1241.
     Found 3-bit adder for signal <sDATA_CNT[2]_GND_24_o_add_25_OUT> created at line 1241.
     Found 4x3-bit Read Only RAM for signal <sDATA_BIT>
-    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_25_o> created at line 195
+    Found 3-bit comparator equal for signal <sDATA_CNT[2]_sDATA_BIT_REG[2]_equal_25_o> created at line 193
     Summary:
 	inferred   1 RAM(s).
 	inferred   2 Adder/Subtractor(s).
@@ -403,8 +403,8 @@ Synthesizing Unit <uart_i2c_master>.
         TR_PERIOD_CNT_WIDTH = 5
         PERIOD_CNT_WIDTH = 4
         LCD_BUS_WIDTH = 4
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 213: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 213: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 214: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 214: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <sACK_FF>.
     Found 4-bit register for signal <sDATA_CNT>.
     Found 4-bit register for signal <sPERIOD_CNT>.
@@ -428,22 +428,22 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" lin
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_26_o_add_92_OUT> created at line 787.
-    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_26_o_add_96_OUT> created at line 800.
-    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_26_o_add_101_OUT> created at line 813.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_26_o_add_106_OUT> created at line 826.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_26_o_add_112_OUT> created at line 843.
-    Found 8-bit subtractor for signal <GND_26_o_GND_26_o_sub_42_OUT<7:0>> created at line 445.
-    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 883.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 896.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 932
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 936
-    Found 8-bit comparator greater for signal <GND_26_o_sBYTE_NUM_REG[7]_LessThan_7_o> created at line 299
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_10_o> created at line 307
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_26_o_equal_43_o> created at line 445
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_51_o> created at line 634
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_52_o> created at line 636
-    Found 8-bit comparator equal for signal <n0055> created at line 686
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_26_o_add_92_OUT> created at line 788.
+    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_26_o_add_96_OUT> created at line 801.
+    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_26_o_add_101_OUT> created at line 814.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_26_o_add_106_OUT> created at line 827.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_26_o_add_112_OUT> created at line 844.
+    Found 8-bit subtractor for signal <GND_26_o_GND_26_o_sub_42_OUT<7:0>> created at line 446.
+    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 884.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 897.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 933
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 937
+    Found 8-bit comparator greater for signal <GND_26_o_sBYTE_NUM_REG[7]_LessThan_7_o> created at line 300
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_10_o> created at line 308
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_26_o_equal_43_o> created at line 446
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_51_o> created at line 635
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_52_o> created at line 637
+    Found 8-bit comparator equal for signal <n0055> created at line 687
     Summary:
 	inferred   6 Adder/Subtractor(s).
 	inferred  46 D-type flip-flop(s).
@@ -546,14 +546,14 @@ Synthesizing Unit <i2c_slave>.
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
     Found 4-bit adder for signal <sDATA_CNT[3]_GND_34_o_add_53_OUT> created at line 1241.
-    Found 1-bit adder for signal <sBYTE_CNT[0]_PWR_26_o_add_57_OUT<0>> created at line 459.
+    Found 1-bit adder for signal <sBYTE_CNT[0]_PWR_26_o_add_57_OUT<0>> created at line 460.
     Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_34_o_add_59_OUT> created at line 1241.
     Found 4-bit adder for signal <sRSTART_PERIOD_CNT[3]_GND_34_o_add_65_OUT> created at line 1241.
     Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_34_o_add_71_OUT> created at line 1241.
-    Found 16-bit 16-to-1 multiplexer for signal <sREG_MUX> created at line 545.
-    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 622
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 625
-    Found 8-bit comparator greater for signal <sREGISTER_ADDRESS_OK> created at line 610
+    Found 16-bit 16-to-1 multiplexer for signal <sREG_MUX> created at line 546.
+    Found 1-bit tristate buffer for signal <sSDA_IN> created at line 623
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 626
+    Found 8-bit comparator greater for signal <sREGISTER_ADDRESS_OK> created at line 611
     Summary:
 	inferred   5 Adder/Subtractor(s).
 	inferred  40 D-type flip-flop(s).
@@ -629,23 +629,23 @@ Synthesizing Unit <lcd_driver>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_39_o_add_119_OUT> created at line 685.
-    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_123_OUT> created at line 698.
-    Found 6-bit adder for signal <sCHAR_CNT[5]_GND_39_o_add_127_OUT> created at line 711.
-    Found 3-bit adder for signal <sBYTE_EN_CNT[2]_GND_39_o_add_131_OUT> created at line 724.
-    Found 6-bit adder for signal <sCHAR_NUM> created at line 745.
+    Found 3-bit adder for signal <sSEQ_CNT[2]_GND_39_o_add_119_OUT> created at line 686.
+    Found 2-bit adder for signal <sCMD_PER_CNT[1]_GND_39_o_add_123_OUT> created at line 699.
+    Found 6-bit adder for signal <sCHAR_CNT[5]_GND_39_o_add_127_OUT> created at line 712.
+    Found 3-bit adder for signal <sBYTE_EN_CNT[2]_GND_39_o_add_131_OUT> created at line 725.
+    Found 6-bit adder for signal <sCHAR_NUM> created at line 746.
     Found 4x20-bit Read Only RAM for signal <_n0376>
-    Found 4-bit 4-to-1 multiplexer for signal <_n0317> created at line 599.
-    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 829
-    Found 1-bit tristate buffer for signal <ioD<3>> created at line 833
-    Found 1-bit tristate buffer for signal <ioD<2>> created at line 833
-    Found 1-bit tristate buffer for signal <ioD<1>> created at line 833
-    Found 1-bit tristate buffer for signal <ioD<0>> created at line 833
-    Found 6-bit comparator greater for signal <n0026> created at line 366
-    Found 6-bit comparator equal for signal <GND_39_o_sCHAR_NUM[5]_equal_37_o> created at line 389
-    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_42_o> created at line 435
-    Found 8-bit comparator greater for signal <sBYTE_NUM_REG[7]_GND_39_o_LessThan_136_o> created at line 741
-    Found 3-bit comparator greater for signal <sBYTE_EN_CNT[2]_PWR_29_o_LessThan_139_o> created at line 748
+    Found 4-bit 4-to-1 multiplexer for signal <_n0317> created at line 600.
+    Found 1-bit tristate buffer for signal <sIN_DATA<3>> created at line 830
+    Found 1-bit tristate buffer for signal <ioD<3>> created at line 834
+    Found 1-bit tristate buffer for signal <ioD<2>> created at line 834
+    Found 1-bit tristate buffer for signal <ioD<1>> created at line 834
+    Found 1-bit tristate buffer for signal <ioD<0>> created at line 834
+    Found 6-bit comparator greater for signal <n0026> created at line 367
+    Found 6-bit comparator equal for signal <GND_39_o_sCHAR_NUM[5]_equal_37_o> created at line 390
+    Found 3-bit comparator greater for signal <GND_39_o_sSEQ_CNT[2]_LessThan_42_o> created at line 436
+    Found 8-bit comparator greater for signal <sBYTE_NUM_REG[7]_GND_39_o_LessThan_136_o> created at line 742
+    Found 3-bit comparator greater for signal <sBYTE_EN_CNT[2]_PWR_29_o_LessThan_139_o> created at line 749
     Summary:
 	inferred   1 RAM(s).
 	inferred   5 Adder/Subtractor(s).
@@ -1384,11 +1384,11 @@ iCLK           |    7.183|         |         |         |
 
 
 Total REAL time to Xst completion: 11.00 secs
-Total CPU time to Xst completion: 11.34 secs
+Total CPU time to Xst completion: 11.07 secs
  
 --> 
 
-Total memory usage is 262156 kilobytes
+Total memory usage is 262668 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    8 (   0 filtered)

@@ -40,23 +40,22 @@ ARCHITECTURE behavior OF i2c_via_uart_tb IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT i2c_via_uart
-    PORT(
-         iCLK : IN  std_logic;
-         inRST : IN  std_logic;
-         iPARITY_EN_SW : IN  std_logic;
-         iPARITY_SW : IN  std_logic;
-         iHANDSHAKE_EN_SW : IN  std_logic;
-         iDATA_BIT_SW : IN  std_logic_vector(1 downto 0);
-         iBAUD_SW : IN  std_logic_vector(2 downto 0);
-         iCTS : IN  std_logic;
-         iRX : IN  std_logic;
-         oTX : OUT  std_logic;
-         oRTS : OUT  std_logic
+    component i2c_via_uart
+    port(
+         iCLK 					: in  std_logic;
+         inRST 				: in  std_logic;
+         iPARITY_EN_SW 		: in  std_logic;
+         iPARITY_SW 			: in  std_logic;
+         iHANDSHAKE_EN_SW  : in  std_logic;
+         iDATA_BIT_SW 		: in  std_logic_vector(1 downto 0);
+         iBAUD_SW			   : in  std_logic_vector(2 downto 0);
+         iCTS 					: in  std_logic;
+         iRX 					: in  std_logic;
+         oTX 					: out  std_logic;
+         oRTS 					: out  std_logic
         );
-    END COMPONENT;
+    end component;
     
-
    --Inputs
    signal iCLK : std_logic := '0';
    signal inRST : std_logic := '0';
