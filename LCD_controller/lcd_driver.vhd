@@ -86,9 +86,10 @@ architecture Behavioral of lcd_driver is
 	constant cCHAR_D 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01000100";
 	constant cCHAR_T 				: std_logic_vector(CHAR_WIDTH - 1 downto 0) := "01010100";
 	
+	-- LCD controller FSM states type
 	type   tSTATES is (IDLE, LCD_INIT_SEQ, LCD_CONFIG, DISPLAY_CONFIG, DISPLAY_CONFIG_BF, CLEAR_SCREEN_BF, CLEAR_SCREEN, ENTRY_MODE_BF, 
 							 ENTRY_MODE, READ_INPUT_DATA, CHECK_CURSOR, ADDRESS_SET_BF , ADDRESS_SET, READ_INPUT_CHAR, CHECK_READ_VALID, 
-							 CLEAR_PRINT_BF, CLEAR_PRINT ,PRINT_CHAR_BF, PRINT_CHAR, CURSOR_BACK_BF, CURSOR_BACK, CURSOR_NEW_LINE, STOP_PRINT); -- LCD controller FSM states type																
+							 CLEAR_PRINT_BF, CLEAR_PRINT ,PRINT_CHAR_BF, PRINT_CHAR, CURSOR_BACK_BF, CURSOR_BACK, CURSOR_NEW_LINE, STOP_PRINT);																
 
 	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  					-- LCD controller FSM next state

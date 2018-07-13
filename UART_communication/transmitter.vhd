@@ -58,26 +58,24 @@ architecture Behavioral of transmitter is
 	signal sNEXT_STATE    	 : tSTATES;	   						      	  		-- Reciver FSM next state
 	
 	signal sDATA_CNT      	 : unsigned(DATA_CNT_WIDTH - 1 downto 0);   		-- Recived data bits counter 
+	signal sDATA_CNT_EN 		 : std_logic;										  		-- Data counter enable	
+	
 	signal sTC_CNT        	 : unsigned(TC_CNT_WIDTH   - 1 downto 0);	  		-- Terminal count counter
+	signal sTC_CNT_EN 		 : std_logic;										  		-- Terminal count counter enable	
+	signal sTC_CNT_DONE 		 : std_logic;										  		-- Terminal count counter count done
+	
 	signal sDATA_BIT_REG		 : unsigned(2 downto 0);								-- Data bit number register
-	signal sDATA_BIT			 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number 	
-	
-	
-   signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register
-	
-	signal sDATA_CNT_EN 		 : std_logic;										  		-- Data counter enable
-	signal sTC_CNT_EN 		 : std_logic;										  		-- Terminal count counter enable
-	signal sSHW_EN				 : std_logic;										  		-- Shifter enable
-	signal sDATA_BIT_EN		 : std_logic;											   -- Enable signal for data bit register
-
-	signal sTC_CNT_DONE 		 : std_logic;										  		-- Terminal count counter count done	
+	signal sDATA_BIT_EN		 : std_logic;											   -- Enable signal for data bit register	
 	
 	signal sDATA_LOAD		    : std_logic;										 		-- Registers data load signal
+	signal sDATA_BIT			 : unsigned(DATA_CNT_WIDTH - 1 downto 0);			-- Data bit number 	
 	
+   signal sSHW_REG 		 	 : std_logic_vector(DATA_WIDTH - 1 downto 0);   -- Shift register
+	signal sSHW_EN				 : std_logic;										  		-- Shifter enable
+			
 	signal sPARITY_REG 		 : std_logic_vector(DATA_WIDTH - 1 downto 0);	-- Parity register
 	signal sPARITY				 : std_logic;												-- Parity signals
-	
-	
+		
 begin
 
 	-- FSM state register process

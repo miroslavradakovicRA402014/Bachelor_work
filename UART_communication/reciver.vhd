@@ -61,22 +61,23 @@ architecture Behavioral of reciver is
 	signal sNEXT_STATE    	 	: tSTATES;	   						      	  			 							 -- Reciver FSM next state 
 	
 	signal sDATA_CNT      	 	: unsigned(DATA_CNT_WIDTH - 1 downto 0);   			  							 -- Recived data bits counter 
-	signal sDATA_BIT_REG			: unsigned(2 downto 0);											 					    -- Data bit number register
-	signal sDATA_BIT				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 -- Data bit number 
-	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH   - 1 downto 0);	  			  						 	 -- Terminal count counter
+	signal sDATA_CNT_EN 		 	: std_logic;										  			  							 -- Data counter enable
+
+	signal sDATA_BIT_REG			: unsigned(2 downto 0);											 						 -- Data bit number register
+	signal sDATA_BIT_EN			: std_logic;																				 -- Enable signal for data bit register
 	
+	signal sDATA_BIT 				: unsigned(DATA_CNT_WIDTH - 1	downto 0);											 -- Data bit number 
+	
+	signal sTC_CNT        	 	: unsigned(TC_CNT_WIDTH - 1 downto 0);	  			  						 	 	 -- Terminal count counter
+	signal sTC_CNT_EN 		 	: std_logic;										  			 	  						 -- Terminal count counter enable
 	signal sTC_CNT_RST       	: std_logic;	  			  																 -- Terminal count counter reset
+	signal sTC_CNT_DONE 		 	: std_logic;										  			  							 -- Terminal count counter count done	
 	
 	signal sSHW_REG 		 	 	: std_logic_vector(DATA_WIDTH downto 0);   	 		  							 -- Shift register for recived data
-
-	signal sDATA_CNT_EN 		 	: std_logic;										  			  							 -- Data counter enable
-	signal sTC_CNT_EN 		 	: std_logic;										  			 	  						 -- Terminal count counter enable
 	signal sSHW_EN				 	: std_logic;										  			  							 -- Shifter enable
-	signal sDATA_BIT_EN			: std_logic;																				 -- Enable signal for data bit register
 
 	signal sSTART_TC_CNT_DONE 	: std_logic;										  			  							 -- Start terminal count counter count done
-	signal sTC_CNT_DONE 		 	: std_logic;										  			  							 -- Terminal count counter count done
-	
+		
 	signal sPARITY_OK 		 	: std_logic;													  							 -- Parity check signal
 		 
 begin

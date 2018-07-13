@@ -63,10 +63,11 @@ architecture Behavioral of uart_i2c_master is
 	constant cACK  : std_logic := '0';
 	constant cNACK : std_logic := '1';
 
+	-- Slave FSM states type
 	type   tSTATES is (IDLE, UART_START, UART_SLAVE_ADDRESS, UART_REGISTER_ADDRESS, UART_BYTE_NUMBER, UART_DATA_BYTE, UART_LOAD_BYTE, UART_NEXT_BYTE, UART_STOP,
 							 I2C_START_CONDITION, I2C_START_PERIOD, I2C_SLAVE_ADDRESS_WRITE, I2C_SLAVE_ADDRESS_ACK_WRITE, I2C_SLAVE_ADDRESS_READ, I2C_SLAVE_ADDRESS_ACK_READ, 
 							 I2C_REGISTER_ADDRESS, I2C_REGISTER_ADDRESS_ACK, I2C_REPEATED_START_SETUP, I2C_REPEATED_START_HOLD, I2C_READ_DATA, I2C_WRITE_DATA, I2C_WRITE_DATA_ACK, 
-							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE, I2C_BUS_FREE); -- Slave FSM states type
+							 I2C_READ_DATA_ACK, I2C_STOP, I2C_NACK_STOP, SEND_I2C_UART_TELEGRAM, SEND_UART_SLAVE_ADDRESS, SEND_UART_REGISTER_ADDRESS, SEND_UART_BYTE_NUMBER, SEND_UART_DATA_BYTE, I2C_BUS_FREE); 
 
 
 	signal sCURRENT_STATE 	   	: tSTATES;																				 		-- Master FSM current state
@@ -124,7 +125,7 @@ architecture Behavioral of uart_i2c_master is
 	signal sOUART_REG					: std_logic_vector(DATA_WIDTH - 1 downto 0);											-- UART input register signal
 	signal sOUART_REG_EN				: std_logic;																					-- UART output register enable
 
-	signal sACK							: std_logic;																					-- Acknowelge signal from mux
+	signal sACK							: std_logic;																					-- Acknowelge signal from multiplexer
 	signal sACK_SEL					: std_logic;																					-- Acknowelge select signal 
 	signal sACK_FF						: std_logic;																					-- Acknowelge flip-flop  
 	signal sACK_FF_EN					: std_logic;																					-- Acknowelge flip-flop enable  	
