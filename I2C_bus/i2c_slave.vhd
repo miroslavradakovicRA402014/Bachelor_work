@@ -57,13 +57,12 @@ architecture Behavioral of i2c_slave is
 	signal sNEXT_STATE    	   	: tSTATES; 																			 			-- Slave FSM next state
 
 	type   tREGS is array (REGISTER_NUM - 1 downto 0) of std_logic_vector(2 * DATA_WIDTH - 1 downto 0);    	-- Slave registers type
-	signal sREGS : tREGS;		
-																																				-- Slave registers  
-	signal sOUT_BUFF_EN	 	   	: std_logic;																					-- Output tri-state buffer enable
-	signal sIN_BUFF_EN	 	   	: std_logic;																					-- Input tri-state buffer enable
+	signal sREGS : tREGS;																												-- Slave registers 	
+																																				 
+	signal sSDA_BUFF_EN	 	   	: std_logic;																					-- Output tri-state buffer enable
 
-	signal sSDA_IN			 	   	: std_logic;																					-- SDA input signal
 	signal sSDA_OUT 		 	   	: std_logic;																					-- SDA output signal
+	signal sSDA_IN						: std_logic;																					-- SDA input signal
 
 	signal sTC							: std_logic;																					-- Frequency clock divider terminal count 
 	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
@@ -213,12 +212,12 @@ begin
 	end process fsm_reg;
 	
 	-- Slave FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iSCL, ioSDA, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF, sACK_FF) begin
+	fsm_next : process (sCURRENT_STATE, iSCL, sSDA_IN, sSLAVE_ADDRESS_OK, sREGISTER_ADDRESS_OK, sSDA_RISING_EDGE, sSDA_FALLING_EDGE, sTC_PERIOD_CNT, sTC_RSTART_PERIOD_CNT, sTC_TR_PERIOD_CNT, sMODE_FF, sACK_FF) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
 				-- Wait for start condition
-				if (iSCL = '1' and ioSDA = '0') then
+				if (iSCL = '1' and sSDA_IN = '0') then
 					sNEXT_STATE <= START;   
 				end if;
 			when START =>
@@ -303,8 +302,7 @@ begin
 	
 	-- Slave FSM output logic
 	fsm_out : process (sCURRENT_STATE, sDATA_CNT, sMODE_FF, sADDR_REG) begin
-		sIN_BUFF_EN	 		 	 <= '0';
-		sOUT_BUFF_EN 		 	 <= '0';
+		sSDA_BUFF_EN 		 	 <= '0';
 		sFREQ_EN					 <= '0';
 		sFREQ_RST_SEL			 <= '0';
 		sDATA_CNT_EN   	 	 <= '0';
@@ -329,15 +327,12 @@ begin
 		case (sCURRENT_STATE) is
 			-- Slave control signals
 			when IDLE =>
-				sIN_BUFF_EN	 		 <= '1';
 				sFREQ_RST_SEL		 <= '1'; -- Reset clock divider	
 				sDATA_CNT_RST 		 <= '1'; -- Reset data counters
 				sBYTE_CNT_RST 		 <= '1';	-- Reset byte counters			
 			when START => 
-				sIN_BUFF_EN	 		 <= '1';	
 				sFREQ_EN				 <= '1';	-- Enable clock divider
 			when SLAVE_ADDRESS_MODE =>		
-				sIN_BUFF_EN	 		 <= '1';	
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count slave address and mode bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all address bit and mode recived  get mode and start sync period
@@ -347,7 +342,7 @@ begin
 					sISHW_EN			 <= '1'; -- Get data bit and shift register
 				end if;
 			when SLAVE_ADDRESS_ACK =>	
-				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line 
+				sSDA_BUFF_EN 		 <= '1'; -- Get SDA line 
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	
@@ -355,7 +350,6 @@ begin
 					sREG_MUX_SEL		 <= sADDR_REG; -- Select slave address 
 				end if;
 			when REGISTER_ADDRESS =>		
-				sIN_BUFF_EN	 		 <= '1';
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count register address bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all register address bits recived start sync period
@@ -365,7 +359,7 @@ begin
 					sISHW_EN			 <= '1'; -- Get register address bit 
 				end if;
 			when REGISTER_ADDRESS_ACK =>	
-				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sSDA_BUFF_EN 		 <= '1'; -- Get SDA line
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transmission period
 				if (sMODE_FF = '1') then	-- If mode is read load data to output shift register
@@ -373,17 +367,15 @@ begin
 					sREG_MUX_SEL	 <= sADDR_REG; -- Get register addres
 				end if;				
 			when REGISTER_ADDRESS_NACK =>	
-				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sSDA_BUFF_EN 		 <= '1'; -- Get SDA line
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision period
 				sACK_SEL				 <= '1';	-- Generate nack	
 			when REPEATED_START =>
-				sIN_BUFF_EN	 		 	 <= '1';
 				sFREQ_EN				 	 <= '1'; -- Enable clock divider
 				sDATA_CNT_RST 		 	 <= '1'; -- Reset data counter
 				sRSTART_PERIOD_CNT_EN <= '1'; -- Start repeated start period	
 			when READ_DATA =>		
-				sIN_BUFF_EN	 		 <= '1';	
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count data bits
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits recived write data form shift register to register
@@ -394,12 +386,12 @@ begin
 					sISHW_EN			 <= '1'; -- Get data bits
 				end if;		
 			when READ_ACK =>	
-				sOUT_BUFF_EN 		 <= '1'; -- Get SDA line
+				sSDA_BUFF_EN 		 <= '1'; -- Get SDA line
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sBYTE_CNT_EN   	 <= '1'; -- Reset byte number
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmison period					
 			when WRITE_DATA =>		
-				sOUT_BUFF_EN 		 <= '1';	-- Get SDA line
+				sSDA_BUFF_EN 		 <= '1';	-- Get SDA line
 				sFREQ_EN				 <= '1';	-- Enable clock divider
 				sDATA_CNT_EN 		 <= '1'; -- Count sent data
 				if (sDATA_CNT = DATA_WIDTH) then -- If all data bits sent to master 
@@ -411,7 +403,6 @@ begin
 				end if;
 				sSDA_SEL				 <= '1';	  -- Select data bit from output shift register 		
 			when WRITE_ACK =>	
-				sIN_BUFF_EN	 		 <= '1'; 
 				sFREQ_EN				 <= '1'; -- Enable clock divider
 				sBYTE_CNT_EN   	 <= '1'; -- Count data byte
 				sTR_PERIOD_CNT_EN  <= '1'; -- Start transsmision counter to get acknowelge
@@ -419,7 +410,7 @@ begin
 				sREG_MUX_SEL		 <= sADDR_REG; -- Select register with register address		
 				sACK_FF_EN			 <= '1';	-- Enable for acknowelge enable				
 			when STOP =>
-				sIN_BUFF_EN	 		 <= '1';						
+					
 		end case;
 	end process fsm_out;
 
@@ -430,7 +421,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sACK_FF_EN = '1') then -- If ack enabled
 				if (sSCL_RISING_EDGE = '1') then 
-					sACK_FF <= ioSDA; -- Write ack or nack form bus to flip-flop
+					sACK_FF <= sSDA_IN; -- Write ack or nack form bus to flip-flop
 				end if;	
 			end if;
 		end if;
@@ -618,13 +609,13 @@ begin
 	-- Output data multiplexer
 	sSDA_OUT	<= sACK  	when sSDA_SEL = '0' else 		  
 					sOSHW_REG(7);
-		
-	-- Input tri-state buffer
-	sSDA_IN  <= ioSDA 	when sIN_BUFF_EN  = '1' else  
+			
+	-- SDA output tri-state buffer
+	ioSDA    <= sSDA_OUT when sSDA_BUFF_EN = '1' else  
 				   'Z';
-	-- Output tri-state buffer
-	ioSDA    <= sSDA_OUT when sOUT_BUFF_EN = '1' else  
-				   'Z';				  
+
+	-- SDA input 
+	sSDA_IN	<= ioSDA;
 
 end Behavioral;
 

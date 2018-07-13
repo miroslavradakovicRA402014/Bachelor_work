@@ -78,11 +78,9 @@ architecture Behavioral of uart_i2c_master is
 	signal sTC							: std_logic;																					-- Frequency clock divider terminal count
 	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
 
-	signal sOUT_BUFF_EN	 	   	: std_logic;																					-- Output tri-state buffer enable
-	signal sIN_BUFF_EN	 	   	: std_logic;																					-- Input tri-state buffer enable
-
-	signal sSDA_IN			 	   	: std_logic;																					-- SDA input signal
+	signal sSDA_BUFF_EN	 	   	: std_logic;																					-- SDA output tri-state buffer enable
 	signal sSDA_OUT 		 	   	: std_logic;																					-- SDA output signal
+	signal sSDA_IN						: std_logic;																					-- SDA input signal
 
 	signal sDATA_CNT 		 	   	: unsigned(DATA_CNT_WIDTH - 1 downto 0);												-- Data bits counter
 	signal sDATA_CNT_EN 	 	   	: std_logic;																					-- Data bits counter enable		
@@ -279,7 +277,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, ioSDA, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_NUM_REG, sIUART_REG, sDATA_BYTE_CNT, sBYTE_CNT, sSLAVE_ADDR_MUX, sACK_FF) begin
+	fsm_next : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_NUM_REG, sIUART_REG, sDATA_BYTE_CNT, sBYTE_CNT, sSLAVE_ADDR_MUX, sACK_FF) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -455,8 +453,7 @@ begin
 
 	-- Master FSM output logic
 	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sTC_TR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
-		sIN_BUFF_EN	 		 	<= '0';
-		sOUT_BUFF_EN 		 	<= '0';
+		sSDA_BUFF_EN 		 	<= '0';
 		sIUART_REG_EN  	 	<= '0';
 		sOUART_REG_EN		 	<= '0';
 		sACK_SEL		 		 	<= '0';
@@ -494,7 +491,7 @@ begin
 		case (sCURRENT_STATE) is
 			-- Master control signals
 			when IDLE =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  	 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				if (iUART_EMPTY = '0') then
@@ -504,7 +501,7 @@ begin
 				sDATA_BYTE_CNT_RST 	<= '1';		
 				sDATA_FIFO_RST_SEL	<= '1';	
 			when UART_START =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  		<= '1';
@@ -512,7 +509,7 @@ begin
 					sREG_DEC_EN			 	<= '1';
 				end if;		
 			when UART_SLAVE_ADDRESS =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';	
 				if (iUART_EMPTY = '0') then	
 					sIUART_REG_EN  		<= '1';
@@ -521,15 +518,15 @@ begin
 				end if;		
 				sREG_DEC_SEL		 	<= "01";
 			when UART_REGISTER_ADDRESS =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';		
 				sREG_DEC_SEL		 	<= "11";
 				sREG_DEC_EN			 	<= '1';							
 			when UART_BYTE_NUMBER =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';					
 			when UART_DATA_BYTE =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sIUART_REG_EN  		<= '1';
 				sACK_SEL		 		 	<= '1';	
 				if (iUART_EMPTY = '0') then
@@ -537,17 +534,17 @@ begin
 				end if;
 				sREG_DEC_SEL		 	<= "10";
 			when UART_LOAD_BYTE =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';	
 				sREG_DEC_EN			 	<= '1';	
 				sREG_DEC_SEL		 	<= "10";
 				sLCD_BYTE_EN			<= '1';
 			when UART_NEXT_BYTE =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				sDATA_BYTE_CNT_EN		<= '1';	
 			when UART_STOP =>	
-				sOUT_BUFF_EN 			<= '1';
+				sSDA_BUFF_EN 			<= '1';
 				sACK_SEL		 		 	<= '1';	
 				sSCL_RST					<= '1';
 				sDATA_BYTE_CNT_RST 	<= '1';
@@ -556,15 +553,15 @@ begin
 					sLCD_DATA_EN <= '1';
 				end if;	
 			when I2C_START_CONDITION =>
-				sOUT_BUFF_EN 		 	<= '1';	
+				sSDA_BUFF_EN 		 	<= '1';	
 			when I2C_START_PERIOD =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sSCL_EN					<= '1';	
 				sFREQ_EN 				<= '1';
 				sPERIOD_CNT_EN 	 	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_WRITE => 
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';	
 				sFREQ_EN 			 	<= '1';	
@@ -577,7 +574,6 @@ begin
 				end if;
 				sTR_PERIOD_CNT_EN  	<= '1';		
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
-				sIN_BUFF_EN	 		 	<= '1';
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
@@ -585,7 +581,7 @@ begin
 				sTR_PERIOD_CNT_EN  	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_READ => 
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';	
 				sFREQ_EN 			 	<= '1';		
@@ -598,14 +594,13 @@ begin
 				end if;
 				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
-				sIN_BUFF_EN	 		 	<= '1';
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
 				sSCL_EN				 	<= '1';	
 				sFREQ_EN 			 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';							
 			when I2C_REGISTER_ADDRESS => 
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sSDA_SEL		 		 	<= '1';
 				sSCL_EN				 	<= '1';
 				sFREQ_EN 			 	<= '1';					
@@ -618,7 +613,6 @@ begin
 				end if;
 				sTR_PERIOD_CNT_EN  	<= '1';			
 			when I2C_REGISTER_ADDRESS_ACK =>
-				sIN_BUFF_EN	 		 <= '1';
 				sACK_FF_EN			 <= '1';
 				if (sSLAVE_ADDR_REG(0) = '0') then
 					sREG_MUX_SEL		 <= "10";				
@@ -631,7 +625,7 @@ begin
 				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';
 			when I2C_REPEATED_START_SETUP =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				if (sTR_PERIOD_CNT < 12) then
 					sACK_SEL		 		 	<= '1';
 					if (sTR_PERIOD_CNT < 2) then
@@ -643,14 +637,14 @@ begin
 				sFREQ_EN 			 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';	
 			when I2C_REPEATED_START_HOLD =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sSLAVE_ADDR_SEL		<= '1';
 				sSCL_EN				 	<= '1';				
 				sFREQ_EN 			 	<= '1';
 				sPERIOD_CNT_EN			<= '1';
 				sOSHW_LOAD			 	<= '1';				
 			when I2C_WRITE_DATA =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sSDA_SEL		 		 <= '1';
 				sSCL_EN				 <= '1';	
 				sFREQ_EN 			 <= '1';	
@@ -664,7 +658,6 @@ begin
 				end if;
 				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_READ_DATA =>
-				sIN_BUFF_EN	 		 <= '1';
 				sBYTE_SEL		 	 <= '1';		
 				sREG_MUX_SEL		 <= "10";	
 				sSCL_EN				 <= '1';	
@@ -679,7 +672,6 @@ begin
 				end if;
 				sTR_PERIOD_CNT_EN  <= '1';			
 			when I2C_WRITE_DATA_ACK =>
-				sIN_BUFF_EN	 		 <= '1';
 				sACK_FF_EN			 <= '1';
 				sSCL_EN				 <= '1';	
 				sFREQ_EN 			 <= '1';
@@ -692,7 +684,7 @@ begin
 					end if;
 				end if;				
 			when I2C_READ_DATA_ACK =>
-				sOUT_BUFF_EN 		 <= '1';			
+				sSDA_BUFF_EN 		 <= '1';			
 				if (CONV_STD_LOGIC_VECTOR(sBYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG) then
 					sACK_SEL		 		 <= '1';
 				end if;	
@@ -705,12 +697,12 @@ begin
 				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';				
 			when I2C_STOP =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';
 				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';	
 			when I2C_NACK_STOP =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sIUART_REG_EN  	 <= '1';	
 				sFREQ_EN 			 <= '1';
 				sTR_PERIOD_CNT_EN  <= '1';	
@@ -719,25 +711,25 @@ begin
 					sLCD_READ_VALID  <= '0';
 				end if;	
 			when SEND_I2C_UART_TELEGRAM =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';	
 				sDATA_BYTE_CNT_RST <= '1';
 				sLCD_DATA_EN		 <= '1';				
 			when SEND_UART_SLAVE_ADDRESS =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
 				oUART_WRITE			 <= '1';	
 				sOUART_REG_SEL		 <= "01";	
 			when SEND_UART_REGISTER_ADDRESS =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
 				oUART_WRITE			 <= '1';
 				sOUART_REG_SEL		 <= "11";					
 			when SEND_UART_BYTE_NUMBER =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
 				sDATA_FIFO_READ	 <= '1';
@@ -745,7 +737,7 @@ begin
 				sOUART_REG_SEL		 <= "10";	
 				sLCD_BYTE_SEL		 <= '1';	
 			when SEND_UART_DATA_BYTE =>
-				sOUT_BUFF_EN 		 <= '1';
+				sSDA_BUFF_EN 		 <= '1';
 				sACK_SEL		 		 <= '1';
 				if (iUART_FULL = '0') then
 					sOUART_REG_EN		 <= '1';
@@ -757,7 +749,7 @@ begin
 				sLCD_BYTE_EN		 <= '1';
 				sLCD_BYTE_SEL		 <= '1';
 			when I2C_BUS_FREE =>
-				sOUT_BUFF_EN 		 	<= '1';
+				sSDA_BUFF_EN 		 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				sTR_PERIOD_CNT_EN  	<= '1';	
 				sFREQ_EN 			 	<= '1';
@@ -771,7 +763,7 @@ begin
 		elsif (iCLK'event and iCLK = '1') then
 			if (sACK_FF_EN = '1') then -- If ack enabled
 				if (sSCL_RISING_EDGE = '1') then 
-					sACK_FF <= ioSDA; -- Write ack or nack form bus to flip-flop
+					sACK_FF <= sSDA_IN; -- Write ack or nack form bus to flip-flop
 				end if;	
 			end if;
 		end if;
@@ -928,14 +920,13 @@ begin
 	-- Output data multiplexer
 	sSDA_OUT	<= sACK  	when sSDA_SEL = '0' else 		  
 					sOSHW_REG(7);	
-
-	-- Input tri-state buffer
-	sSDA_IN  <= ioSDA 	when sIN_BUFF_EN  = '1' else  
-				   'Z';
-					
-	-- Output tri-state buffer
-	ioSDA    <= sSDA_OUT when sOUT_BUFF_EN = '1' else  
-				   'Z';		
+									
+	-- SDA output tri-state buffer
+	ioSDA    <= sSDA_OUT when sSDA_BUFF_EN = '1' else  
+					'Z';		
+	
+	-- SDA input
+	sSDA_IN  <= ioSDA;				
 
 	-- Output SCL 
 	oSCL <= sSCL;

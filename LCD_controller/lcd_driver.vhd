@@ -94,8 +94,7 @@ architecture Behavioral of lcd_driver is
 	signal sCURRENT_STATE 	   	: tSTATES;									  					-- LCD controller FSM current state
 	signal sNEXT_STATE    	   	: tSTATES; 									  					-- LCD controller FSM next state
 
-	signal sOUT_BUFF_EN	 	   	: std_logic;								   				-- Output tri-state buffer enable
-	signal sIN_BUFF_EN	 	   	: std_logic;	   						  					-- Input tri-state buffer enable
+	signal sLCD_BUFF_EN	 	   	: std_logic;								   				-- Output tri-state buffer enable
 
 	signal sOUT_DATA					: std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);	   -- Output data
 	signal sIN_DATA					: std_logic_vector(LCD_BUS_WIDTH - 1 downto 0);		-- Input data
@@ -397,8 +396,7 @@ begin
 	
 	-- LCD controller FSM output logic
 	fsm_out : process (sCURRENT_STATE, sINIT_PERIOD_TC, sDATA_FIFO_EMPTY, sSEQ_CNT, sCMD_PER_CNT, sCHAR_CNT, sCHAR_BYTE, sCHAR_CODE) begin
-		sIN_BUFF_EN	 	 	<= '0';
-		sOUT_BUFF_EN	 	<= '0';
+		sLCD_BUFF_EN	 	<= '0';
 		sSEQ_CNT_EN 	 	<= '0';
 		sSEQ_CNT_RST 	 	<= '0';
 		sCMD_PER_CNT_EN	<= '0';	
@@ -417,10 +415,10 @@ begin
       oRW   			 	<= '0';	
 		case (sCURRENT_STATE) is
 			when IDLE =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				sINIT_PERIOD_EN	<= '1';	-- Start init period
 			when LCD_INIT_SEQ =>
-				sOUT_BUFF_EN	 	<= '1';	
+				sLCD_BUFF_EN	 	<= '1';	
 				if (sINIT_PERIOD_TC = '1') then	-- If init period elapsed move no next init sequence
 					sSEQ_CNT_EN 	  <= '1';		-- Increment command sequence 
 					sCMD_PER_CNT_RST <= '1';		-- Reset command sequence period counter
@@ -443,7 +441,7 @@ begin
 					sOUT_DATA 		 <= cLCD_INIT_L; -- Lower command sequence data			
 				end if;						
 			when LCD_CONFIG =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;		
@@ -469,8 +467,7 @@ begin
 					end if;	
 				end if;			
 				sINIT_PERIOD_EN <= '1';		
-			when DISPLAY_CONFIG_BF | ENTRY_MODE_BF | CLEAR_SCREEN_BF | CLEAR_PRINT_BF  | ADDRESS_SET_BF | PRINT_CHAR_BF | CURSOR_BACK_BF =>	
-				sIN_BUFF_EN	 	 <= '1';						
+			when DISPLAY_CONFIG_BF | ENTRY_MODE_BF | CLEAR_SCREEN_BF | CLEAR_PRINT_BF  | ADDRESS_SET_BF | PRINT_CHAR_BF | CURSOR_BACK_BF =>					
 				oRW   			 <= '1';						-- Write command 
 				sSEQ_CNT_RST 	 <= '1';						-- Reset command sequence counter, next sequnce
 				if (sCMD_PER_CNT = 1) then 				-- Enable LCD command, inputs are stable 
@@ -481,7 +478,7 @@ begin
 					sCMD_PER_CNT_EN  <= '1';				-- Enable command period
 				end if;				
 			when DISPLAY_CONFIG =>	
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;
@@ -506,7 +503,7 @@ begin
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;							
 			when CLEAR_SCREEN | CLEAR_PRINT =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;
@@ -531,7 +528,7 @@ begin
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
 			when ENTRY_MODE =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stables
 					oE <= '1';
 				end if;
@@ -556,7 +553,7 @@ begin
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
 			when ADDRESS_SET =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;
@@ -592,7 +589,7 @@ begin
 					end if;				
 				end if;		
 			when PRINT_CHAR =>
-				sOUT_BUFF_EN	 	 <= '1';					
+				sLCD_BUFF_EN	 	 <= '1';					
 				oRS <= '1';										-- Rerister select assert to one
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
@@ -621,7 +618,7 @@ begin
 					end if;
 				end if;	
 			when CURSOR_NEW_LINE =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;
@@ -646,7 +643,7 @@ begin
 					sCMD_PER_CNT_RST <= '1';	-- Reset command sequence
 				end if;
 			when CURSOR_BACK =>
-				sOUT_BUFF_EN	 	<= '1';
+				sLCD_BUFF_EN	 	<= '1';
 				if (sCMD_PER_CNT = 1) then -- Enable LCD command, inputs are stable
 					oE <= '1';
 				end if;
@@ -826,12 +823,11 @@ begin
 		end case;	
 	end process char_code;
 	
-	-- Input tri-state buffer
-	sIN_DATA  <= ioD 		 when sIN_BUFF_EN  = '1' else  
-				   (others => 'Z');
-					
-	-- Output tri-state buffer
-	ioD       <= sOUT_DATA when sOUT_BUFF_EN = '1' else  
+	-- LCD input data
+	sIN_DATA  <= ioD; 
+	
+	-- LCD output tri-state buffer
+	ioD       <= sOUT_DATA when sLCD_BUFF_EN = '1' else  
 				   (others  => 'Z');	
 
 

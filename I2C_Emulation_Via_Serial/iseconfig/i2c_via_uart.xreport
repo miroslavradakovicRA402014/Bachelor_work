@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-07-13T14:05:17</DateModified>
+  <DateModified>2018-07-13T18:04:53</DateModified>
   <ModuleName>i2c_via_uart</ModuleName>
-  <SummaryTimeStamp>2018-07-13T11:36:00</SummaryTimeStamp>
+  <SummaryTimeStamp>2018-07-13T15:09:46</SummaryTimeStamp>
   <SavedFilePath>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/iseconfig/i2c_via_uart.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial\</ImplementationReportsDirectory>
   <DateInitialized>2018-05-22T14:35:21</DateInitialized>
