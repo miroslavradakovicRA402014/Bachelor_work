@@ -3,15 +3,14 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    14:02:44 05/21/2018 
--- Design Name: 	 I2C via UART top
+-- Design Name: 	 I2C via UART top module
 -- Module Name:    i2c_via_uart - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
---
--- Dependencies: 
---
+-- Description: 	 I2C via UART system with I2C slave and LCD display driver
+-- Dependencies: 	 dcm24_to_50.vhd, uart_i2c_bridge.vhd, i2c_slave_vhd, lcd_driver.vhd 
+--						 i2c_via_uart_components.vhd
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 

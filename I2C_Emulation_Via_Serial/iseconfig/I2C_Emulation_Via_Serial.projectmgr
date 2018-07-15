@@ -21,6 +21,10 @@
          <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART_I2C_BRIDGE - uart_i2c_bridge - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART_I2C_BRIDGE - uart_i2c_bridge - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral D:|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART_I2C_BRIDGE - uart_i2c_bridge - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral/eLCD_DRIVER - lcd_driver - Behavioral</ClosedNode>
+         <ClosedNode>/i2c_via_uart - Behavioral |home|mika|Projects|projects_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_SLAVE - i2c_slave - Behavioral</ClosedNode>
+         <ClosedNode>/i2c_via_uart - Behavioral |home|mika|Projects|projects_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eLCD_DRIVER - lcd_driver - Behavioral</ClosedNode>
+         <ClosedNode>/i2c_via_uart - Behavioral |home|mika|Projects|projects_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART_I2C_BRIDGE - uart_i2c_bridge - Behavioral/eUART - uart - Behavioral</ClosedNode>
+         <ClosedNode>/i2c_via_uart - Behavioral |home|mika|Projects|projects_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eUART_I2C_BRIDGE - uart_i2c_bridge - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eI2C_SLAVE - i2c_slave - Behavioral</ClosedNode>
          <ClosedNode>/i2c_via_uart - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_Emulation_Via_Serial|i2c_via_uart.vhd/eI2C_BUS - i2c_bus - Behavioral/eUART_I2C_MASTER - uart_i2c_master - Behavioral</ClosedNode>
@@ -30,13 +34,13 @@
          <ClosedNode>/uart_i2c_master - Behavioral |home|rtrk|Workspace|BSc_workspace|Bachelor_work|I2C_bus|uart_i2c_master.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>i2c_via_uart - Behavioral (D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd)</SelectedItem>
+         <SelectedItem>eUART - uart - Behavioral (/home/mika/Projects/projects_workspace/Bachelor_work/UART_communication/uart.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001cd000000020000000000000000000000000200000064ffffffff000000810000000300000002000001cd0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000024a000000020000000000000000000000000200000064ffffffff0000008100000003000000020000024a0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>i2c_via_uart - Behavioral (D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart.vhd)</CurrentItem>
+      <CurrentItem>eUART - uart - Behavioral (/home/mika/Projects/projects_workspace/Bachelor_work/UART_communication/uart.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -44,13 +48,13 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem/>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000013f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000013f0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem/>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes>
@@ -61,7 +65,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000003a3000000040101000100000000000000000000000064ffffffff000000810000000000000004000000420000000100000000000000240000000100000000000000660000000100000000000002d70000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000004e8000000040101000100000000000000000000000064ffffffff0000008100000000000000040000004200000001000000000000002400000001000000000000006600000001000000000000041c0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>baud_freq_div.vhd</CurrentItem>
    </ItemView>
@@ -72,9 +76,9 @@
       <SelectedItems>
          <SelectedItem>uart_i2c_bridge_components.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >12</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000013f000000010001000100000000000000000000000064ffffffff0000008100000000000000010000013f0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000119000000010001000100000000000000000000000064ffffffff000000810000000000000001000001190000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>uart_i2c_bridge_components.vhd</CurrentItem>
    </ItemView>
@@ -89,13 +93,13 @@
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Generate Programming File</SelectedItem>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >2</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000012e000000010000000100000000000000000000000064ffffffff0000008100000000000000010000012e0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001e8000000010000000100000000000000000000000064ffffffff000000810000000000000001000001e80000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>Generate Programming File</CurrentItem>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>

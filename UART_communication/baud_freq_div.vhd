@@ -6,11 +6,11 @@
 -- Design Name: 	 UART baud frequency divider
 -- Module Name:    baud_freq_div - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 	 	
---
--- Dependencies: 
+-- Description: 	 Baud rate frequency divider, depends on baud rate 	
+--						 generate terminal count for UART oversampling period	
+-- Dependencies: 	 none
 --
 -- Revision: 
 -- Revision 0.01 - File Created

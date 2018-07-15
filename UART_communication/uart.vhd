@@ -6,12 +6,12 @@
 -- Design Name: 	 UART	
 -- Module Name:    uart - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 	 
---
--- Dependencies: 
---						 	
+-- Description: 	 UART module which recives I2C telegrams stores to FIFO and forwards
+--						 them to I2C master 
+-- Dependencies:   reciver.vhd, transmitter.vhd, baud_freq_div.vhd, fifo.vhd
+--						 uart_components.vhd	
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 
