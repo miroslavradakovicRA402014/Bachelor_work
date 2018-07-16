@@ -3,14 +3,14 @@
 -- Engineer: 		 Miroslav Radakovic
 -- 
 -- Create Date:    23:11:44 05/21/2018 
--- Design Name: 
+-- Design Name:    Falling edge detector
 -- Module Name:    falling_edge_det - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
+-- Project Name:   I2C via UART
+-- Target Devices: E2LP development board(Spartan 6)
+-- Tool versions:  Xilinx ISE 14.6
+-- Description:    Falling edge detector
 --
--- Dependencies: 
+-- Dependencies: 	 none
 --
 -- Revision: 
 -- Revision 0.01 - File Created

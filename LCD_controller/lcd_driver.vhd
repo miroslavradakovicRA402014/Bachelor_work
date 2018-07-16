@@ -6,11 +6,11 @@
 -- Design Name: 	 LCD driver
 -- Module Name:    lcd_driver - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
+-- Description:    LCD driver, print I2C telegrams
 --
--- Dependencies: 
+-- Dependencies:   lcd_timer.vhd, reg.vhd, fifo.vhd, char_gen.vhd
 --
 -- Revision: 
 -- Revision 0.01 - File Created

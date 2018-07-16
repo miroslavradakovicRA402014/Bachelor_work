@@ -1,7 +1,7 @@
 Release 14.6 par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-RTRKW866::  Fri Jul 13 18:45:18 2018
+RTRKW866::  Mon Jul 16 10:57:27 2018
 
 par -w -intstyle ise -ol high -mt off i2c_via_uart_map.ncd i2c_via_uart.ncd
 i2c_via_uart.pcf 
@@ -108,35 +108,35 @@ Router effort level (-rl):    High
 WARNING:Timing:3402 - The Clock Modifying COMP, eDCM24_TO_50MHz/dcm_sp_inst, has the attribute CLK_FEEDBACK set to NONE.  No phase
    relationship exists between the input and output clocks of this Clock Modifying COMP. Data paths between these clock domains must be
    constrained using FROM/TO constraints.
-Starting initial Timing Analysis.  REAL time: 4 secs 
-Finished initial Timing Analysis.  REAL time: 4 secs 
+Starting initial Timing Analysis.  REAL time: 3 secs 
+Finished initial Timing Analysis.  REAL time: 3 secs 
 
 Starting Router
 
 
-Phase  1  : 6961 unrouted;      REAL time: 5 secs 
+Phase  1  : 6961 unrouted;      REAL time: 4 secs 
 
-Phase  2  : 6356 unrouted;      REAL time: 5 secs 
+Phase  2  : 6356 unrouted;      REAL time: 4 secs 
 
-Phase  3  : 2789 unrouted;      REAL time: 8 secs 
+Phase  3  : 2789 unrouted;      REAL time: 6 secs 
 
-Phase  4  : 2789 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
+Phase  4  : 2789 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 7 secs 
 
 Updating file: i2c_via_uart.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
 
-Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 9 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 12 secs 
-Total REAL time to Router completion: 12 secs 
-Total CPU time to Router completion: 12 secs 
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 10 secs 
+Total REAL time to Router completion: 10 secs 
+Total CPU time to Router completion: 10 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -186,8 +186,8 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 13 secs 
-Total CPU time to PAR completion: 13 secs 
+Total REAL time to PAR completion: 10 secs 
+Total CPU time to PAR completion: 10 secs 
 
 Peak Memory Usage:  381 MB
 

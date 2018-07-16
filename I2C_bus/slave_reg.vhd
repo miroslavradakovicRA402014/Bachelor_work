@@ -6,11 +6,11 @@
 -- Design Name:    Slave register
 -- Module Name:    slave_reg - Behavioral 
 -- Project Name:   i2c_via_uart
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
+-- Description: 	 Slave register
 --
--- Dependencies: 
+-- Dependencies:   none
 --
 -- Revision: 
 -- Revision 0.01 - File Created

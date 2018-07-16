@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -168,7 +168,7 @@ Parsing architecture <Behavioral> of entity <i2c_slave>.
 Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" into library work
 Parsing entity <i2c_via_uart>.
 Parsing architecture <Behavioral> of entity <i2c_via_uart>.
-WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 84: Actual for formal port reset is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 83: Actual for formal port reset is neither a static name nor a globally static expression
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -1379,12 +1379,12 @@ iCLK           |    7.183|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 10.50 secs
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 10.70 secs
  
 --> 
 
-Total memory usage is 262604 kilobytes
+Total memory usage is 261644 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    7 (   0 filtered)

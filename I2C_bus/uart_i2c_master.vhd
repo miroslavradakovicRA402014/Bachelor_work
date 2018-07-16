@@ -6,12 +6,12 @@
 -- Design Name: 	 UART bridge I2C master
 -- Module Name:    uart_i2c_master - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6 
--- Description: 
---
--- Dependencies: 
---
+-- Description: 	 UART I2C bridge, recives I2C telegrams 
+-- 					 from UART reciver (UART recive FIFO) then generate I2C transaction										
+-- Dependencies: 	 reg.vhd, fifo.vhd, rising_edge_det.vhd	
+--						 scl_gen.vhd, i2c_clk_freq_div.vhd 		
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 

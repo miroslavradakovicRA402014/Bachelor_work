@@ -6,11 +6,11 @@
 -- Design Name: 	 Register
 -- Module Name:    reg - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
+-- Description: 	 Register(n-bit)
 --
--- Dependencies: 
+-- Dependencies:   none
 --
 -- Revision: 
 -- Revision 0.01 - File Created
@@ -25,11 +25,11 @@ entity reg is
 	 Generic (
 		DATA_WIDTH : integer := 8 -- Register data widht
 	 );
-    Port ( iCLK  : in  std_logic;
-           inRST : in  std_logic;
-			  iWE   : in  std_logic;
-			  iD 	  : in  std_logic_vector(DATA_WIDTH - 1 downto 0);
-			  oQ    : out std_logic_vector(DATA_WIDTH - 1 downto 0));
+    Port ( iCLK  : in  std_logic;											-- Clock signal
+           inRST : in  std_logic;											-- Reset signal 
+			  iWE   : in  std_logic;											-- Write enable
+			  iD 	  : in  std_logic_vector(DATA_WIDTH - 1 downto 0);	-- Input data
+			  oQ    : out std_logic_vector(DATA_WIDTH - 1 downto 0));-- Output data
 end reg;
 
 architecture Behavioral of reg is

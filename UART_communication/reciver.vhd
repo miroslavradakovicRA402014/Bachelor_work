@@ -6,11 +6,11 @@
 -- Design Name: 	 UART reciver
 -- Module Name:    reciver - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
---
--- Dependencies: 
+-- Description: 	 UART reciver module, recive UART data 
+-- 					 and store it to FIFO	
+-- Dependencies: 	 none
 --
 -- Revision: 
 -- Revision 0.01 - File Created

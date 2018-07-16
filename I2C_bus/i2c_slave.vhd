@@ -6,12 +6,12 @@
 -- Design Name: 	 I2C slave
 -- Module Name:    i2c_slave - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
+-- Description: 	 I2C slave device(contains 16 16-bit registers)
 --
--- Dependencies: 
---
+-- Dependencies: 	 slave_reg.vhd, rising_edge_det.vhd, falling_edge_det.vhd
+--						 i2c_clk_freq_div.vhd
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 

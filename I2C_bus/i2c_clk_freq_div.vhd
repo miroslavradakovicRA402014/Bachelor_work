@@ -6,11 +6,11 @@
 -- Design Name: 	 I2C clock frequency divider	
 -- Module Name:    i2c_clk_freq_div - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 
+-- Description: 	 I2C clock frequency divider
 --
--- Dependencies: 
+-- Dependencies:   none
 --
 -- Revision: 
 -- Revision 0.01 - File Created

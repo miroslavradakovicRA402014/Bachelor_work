@@ -11,7 +11,7 @@ Target Device  : xc6slx45
 Target Package : fgg676
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Fri Jul 13 18:44:58 2018
+Mapped Date    : Mon Jul 16 10:57:07 2018
 
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to
@@ -38,34 +38,34 @@ WARNING:Timing:3402 - The Clock Modifying COMP, eDCM24_TO_50MHz/dcm_sp_inst, has
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 4 secs 
+Total REAL time at the beginning of Placer: 5 secs 
 Total CPU  time at the beginning of Placer: 4 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:5ff1ce55) REAL time: 5 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:5ff1ce55) REAL time: 6 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:5ff1ce55) REAL time: 5 secs 
+Phase 2.7  Design Feasibility Check (Checksum:5ff1ce55) REAL time: 6 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:5ff1ce55) REAL time: 5 secs 
+Phase 3.31  Local Placement Optimization (Checksum:5ff1ce55) REAL time: 6 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:9c564030) REAL time: 11 secs 
+(Checksum:9c564030) REAL time: 12 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:9c564030) REAL time: 11 secs 
+Phase 5.36  Local Placement Optimization (Checksum:9c564030) REAL time: 12 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:9c564030) REAL time: 11 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:9c564030) REAL time: 12 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:9c564030) REAL time: 11 secs 
+Phase 7.3  Local Placement Optimization (Checksum:9c564030) REAL time: 12 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:9c564030) REAL time: 11 secs 
+Phase 8.5  Local Placement Optimization (Checksum:9c564030) REAL time: 12 secs 
 
 Phase 9.8  Global Placement
 .....................
@@ -84,8 +84,8 @@ Phase 12.5  Local Placement Optimization (Checksum:2be1b536) REAL time: 15 secs
 Phase 13.34  Placement Validation
 Phase 13.34  Placement Validation (Checksum:79957559) REAL time: 15 secs 
 
-Total REAL time to Placer completion: 17 secs 
-Total CPU  time to Placer completion: 17 secs 
+Total REAL time to Placer completion: 16 secs 
+Total CPU  time to Placer completion: 15 secs 
 Running post-placement packing...
 Writing output files...
 
@@ -165,9 +165,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.40
 
-Peak Memory Usage:  410 MB
-Total REAL time to MAP completion:  18 secs 
-Total CPU time to MAP completion:   18 secs 
+Peak Memory Usage:  409 MB
+Total REAL time to MAP completion:  17 secs 
+Total CPU time to MAP completion:   16 secs 
 
 Mapping completed.
 See MAP report file "i2c_via_uart_map.mrp" for details.

@@ -6,11 +6,11 @@
 -- Design Name: 	 LCD driver timer	
 -- Module Name:    lcd_timer - Behavioral 
 -- Project Name:   I2C via UART
--- Target Devices: E2LP(Spartan 6)
+-- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6 
--- Description: 
+-- Description:    LCD timer
 --
--- Dependencies: 
+-- Dependencies:   none
 --
 -- Revision: 
 -- Revision 0.01 - File Created
