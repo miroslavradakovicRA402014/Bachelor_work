@@ -25,18 +25,15 @@
 -- to guarantee that the testbench will bind correctly to the post-implementation 
 -- simulation model.
 --------------------------------------------------------------------------------
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
  
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
  
-ENTITY i2c_via_uart_tb IS
-END i2c_via_uart_tb;
+entity i2c_via_uart_tb is
+end i2c_via_uart_tb;
  
-ARCHITECTURE behavior OF i2c_via_uart_tb IS 
+architecture behavior of i2c_via_uart_tb is 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
@@ -386,6 +383,7 @@ BEGIN
 				
 				wait for iCLK_period*15*sCLK_BAUD;
 				
+				wait for 5us;
 				
 				for i in 0 to 1 loop 
 				
@@ -562,7 +560,7 @@ BEGIN
 				-- Start bit	
 				iRX   <= '0';	
 		  
-				wait for iCLK_period*8*sCLK_BAUD;
+				wait for iCLK_period*15*sCLK_BAUD;
 				
 				-- Data bits
 				

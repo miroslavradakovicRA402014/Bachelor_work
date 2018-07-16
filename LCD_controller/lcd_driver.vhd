@@ -853,13 +853,12 @@ begin
 		end case;	
 	end process char_code;
 	
-	-- LCD input data
-	sIN_DATA  <= ioD; 
-	
 	-- LCD output tri-state buffer
 	ioD       <= sOUT_DATA when sLCD_BUFF_EN = '1' else  
 				   (others  => 'Z');	
 
+	-- LCD input data
+	sIN_DATA  <= ioD; 
 
 end Behavioral;
 

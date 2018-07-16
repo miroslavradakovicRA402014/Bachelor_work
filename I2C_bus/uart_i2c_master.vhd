@@ -924,12 +924,12 @@ begin
 	-- SDA output tri-state buffer
 	ioSDA    <= sSDA_OUT when sSDA_BUFF_EN = '1' else  
 					'Z';		
-	
-	-- SDA input
-	sSDA_IN  <= ioSDA;				
-
+					
 	-- Output SCL 
 	oSCL <= sSCL;
+	
+	-- SDA input
+	sSDA_IN  <= ioSDA;	
 	
 	-- Output data
 	oUART_DATA <= sOUART_REG;

@@ -32,6 +32,7 @@
       <marker time="37525992840000" label="" />
       <marker time="1835000000000" label="" />
       <marker time="2315000000000" label="" />
+      <marker time="391085196600000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
