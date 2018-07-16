@@ -8,7 +8,7 @@
 -- Project Name:   I2C via UART
 -- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description:    LCD driver, print I2C telegrams
+-- Description:    LCD driver, print I2C telegramms(slave address, register address, mode, data)
 --
 -- Dependencies:   lcd_timer.vhd, reg.vhd, fifo.vhd, char_gen.vhd
 --
@@ -141,10 +141,9 @@ architecture Behavioral of lcd_driver is
 	signal sDATA_FIFO_READ			: std_logic;													-- Data FIFO read signal
 	
 	signal sCHAR_CODE 				: std_logic_vector(CHAR_WIDTH - 1 downto 0); 		-- Character code at display
-	
-	signal sSLAVE_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Slave address char	
-	signal sREG_ADDR_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0);	-- Register address char
-	signal sDATA_BYTE_CHAR			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Data byte char
+			
+	signal sCHAR_GEN_MUX 			: std_logic_vector(DATA_WIDTH - 1 downto 0);			-- Character generator multiplexer
+	signal sCHAR_GEN_DATA			: std_logic_vector(2 * CHAR_WIDTH - 1 downto 0); 	-- Character generator output	
 
 begin
 
@@ -230,27 +229,13 @@ begin
 				oQ		=> sDATA_BYTE_REG
 			);			
 
-	-- Slave address char generator		
-	eSLAVE_ADDR_CHAR_GEN : entity work.char_gen
+	-- Char generator		
+	eCHAR_GEN : entity work.char_gen
 			Port map(
-				iDATA => sSLAVE_ADDR_REG,
-				oCHAR => sSLAVE_ADDR_CHAR
+				iDATA => sCHAR_GEN_MUX,
+				oCHAR => sCHAR_GEN_DATA
 			);
 			
-	-- Register address char generator		
-	eREG_ADDR_CHAR_GEN : entity work.char_gen
-			Port map(
-				iDATA => sREG_ADDR_REG,
-				oCHAR => sREG_ADDR_CHAR
-			);		
-			
-	-- Data byte char generator		
-	eDATA_BYTE_CHAR_GEN : entity work.char_gen
-			Port map(
-				iDATA => sDATA_BYTE_REG,
-				oCHAR => sDATA_BYTE_CHAR
-			);	
-	
 	-- Mode flip-flop
 	mode_ff : process (iCLK, inRST) begin
 		if (inRST = '0') then
@@ -746,8 +731,53 @@ begin
 	sDATA_FIFO_WRITE  <= iBYTE_EN when sDATA_FIFO_FULL = '0' and sBYTE_EN_CNT < 4 else
 								'0';
 	
+	-- Char generator multiplexer
+	char_gen_mux : process (sCHAR_CNT, sSLAVE_ADDR_REG, sREG_ADDR_REG, sDATA_BYTE_REG) begin
+		-- Generate char depends on position on display
+		case (sCHAR_CNT) is
+			when "000100" =>
+				sCHAR_GEN_MUX <= sSLAVE_ADDR_REG; 
+			when "000101" =>
+				sCHAR_GEN_MUX <= sSLAVE_ADDR_REG;
+			when "000110" =>
+				sCHAR_GEN_MUX <= sSLAVE_ADDR_REG;
+			when "001100" =>
+				sCHAR_GEN_MUX <= sREG_ADDR_REG; 
+			when "001101" =>
+				sCHAR_GEN_MUX <= sREG_ADDR_REG;
+			when "001110" =>
+				sCHAR_GEN_MUX <= sREG_ADDR_REG;			
+			when "010101" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "010110" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "010111" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011000" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011001" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011010" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011011" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011100" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011101" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011110" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "011111" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;
+			when "111111" =>
+				sCHAR_GEN_MUX <= sDATA_BYTE_REG;	
+			when others =>
+				sCHAR_GEN_MUX <= (others => '0');				
+		end case;
+	end process char_gen_mux;
+	
 	-- Char code process 
-	char_code : process (sCHAR_CNT, sSLAVE_ADDR_CHAR, sREG_ADDR_CHAR, sMODE_FF, sDATA_BYTE_CHAR) begin
+	char_code : process (sCHAR_CNT, sMODE_FF, sCHAR_GEN_DATA) begin
 	   -- Generate char code depends on positon in display
 		case (sCHAR_CNT) is
 			when "000000" =>
@@ -761,9 +791,9 @@ begin
 			when "000100" =>
 				sCHAR_CODE <= cCHAR_x; -- x
 			when "000101" =>
-				sCHAR_CODE <= sSLAVE_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "000110" =>
-				sCHAR_CODE <= sSLAVE_ADDR_CHAR(CHAR_WIDTH - 1  downto 0);  -- _	
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0);  -- _	
 			when "000111" =>
 				sCHAR_CODE <= cCHAR_VER_LINE; -- |
 			when "001000" =>
@@ -777,9 +807,9 @@ begin
 			when "001100" =>
 				sCHAR_CODE <= cCHAR_x; -- x
 			when "001101" =>
-				sCHAR_CODE <= sREG_ADDR_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _	 	
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _	 	
 			when "001110" =>
-				sCHAR_CODE <= sREG_ADDR_CHAR(CHAR_WIDTH - 1  downto 0); -- _				
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _				
 			when "001111" =>
 				if (sMODE_FF = '1') then
 					sCHAR_CODE <= cCHAR_R; -- R
@@ -799,25 +829,25 @@ begin
 			when "010101" =>
 				sCHAR_CODE <= cCHAR_x; -- x
 			when "010110" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "010111" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _
 			when "011000" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "011001" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _
 			when "011010" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "011011" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _
 			when "011100" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "011101" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _	
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _	
 			when "011110" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
+				sCHAR_CODE <= sCHAR_GEN_DATA(2 * CHAR_WIDTH - 1  downto CHAR_WIDTH); -- _
 			when "011111" =>
-				sCHAR_CODE <= sDATA_BYTE_CHAR(CHAR_WIDTH - 1  downto 0); -- _	
+				sCHAR_CODE <= sCHAR_GEN_DATA(CHAR_WIDTH - 1  downto 0); -- _	
 			when others =>
 				sCHAR_CODE <= (others => '0');
 		end case;	

@@ -8,7 +8,7 @@
 -- Project Name:   I2C via UART
 -- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6 
--- Description: 	 UART I2C bridge, recives I2C telegrams 
+-- Description: 	 UART I2C bridge, recives I2C telegramms 
 -- 					 from UART reciver (UART recive FIFO) then generate I2C transaction										
 -- Dependencies: 	 reg.vhd, fifo.vhd, rising_edge_det.vhd	
 --						 scl_gen.vhd, i2c_clk_freq_div.vhd 		

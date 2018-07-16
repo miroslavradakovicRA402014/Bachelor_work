@@ -8,8 +8,8 @@
 -- Project Name:   i2c_via_uart
 -- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description: 	 Slave register
---
+-- Description: 	 Slave register, can write and read form 
+--						 upper and lower part of register
 -- Dependencies:   none
 --
 -- Revision: 

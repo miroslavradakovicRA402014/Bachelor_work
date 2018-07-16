@@ -1,7 +1,7 @@
 Release 14.6 par P.68d (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-RTRKW866::  Mon Jul 16 10:57:27 2018
+RTRKW866::  Mon Jul 16 11:52:09 2018
 
 par -w -intstyle ise -ol high -mt off i2c_via_uart_map.ncd i2c_via_uart.ncd
 i2c_via_uart.pcf 
@@ -40,25 +40,25 @@ Slice Logic Utilization:
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                      1,079 out of  27,288    3%
-    Number used as logic:                    1,065 out of  27,288    3%
-      Number using O6 output only:             750
+  Number of Slice LUTs:                      1,053 out of  27,288    3%
+    Number used as logic:                    1,047 out of  27,288    3%
+      Number using O6 output only:             739
       Number using O5 output only:              33
-      Number using O5 and O6:                  282
+      Number using O5 and O6:                  275
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   6,408    0%
-    Number used exclusively as route-thrus:     14
-      Number with same-slice register load:     12
+    Number used exclusively as route-thrus:      6
+      Number with same-slice register load:      4
       Number with same-slice carry load:         2
       Number with other load:                    0
 
 Slice Logic Distribution:
   Number of occupied Slices:                   440 out of   6,822    6%
   Number of MUXCYs used:                        68 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:        1,474
-    Number with an unused Flip Flop:           567 out of   1,474   38%
-    Number with an unused LUT:                 395 out of   1,474   26%
-    Number of fully used LUT-FF pairs:         512 out of   1,474   34%
+  Number of LUT Flip Flop pairs used:        1,472
+    Number with an unused Flip Flop:           556 out of   1,472   37%
+    Number with an unused LUT:                 419 out of   1,472   28%
+    Number of fully used LUT-FF pairs:         497 out of   1,472   33%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -114,13 +114,13 @@ Finished initial Timing Analysis.  REAL time: 3 secs
 Starting Router
 
 
-Phase  1  : 6961 unrouted;      REAL time: 4 secs 
+Phase  1  : 6857 unrouted;      REAL time: 3 secs 
 
-Phase  2  : 6356 unrouted;      REAL time: 4 secs 
+Phase  2  : 6255 unrouted;      REAL time: 4 secs 
 
-Phase  3  : 2789 unrouted;      REAL time: 6 secs 
+Phase  3  : 2761 unrouted;      REAL time: 6 secs 
 
-Phase  4  : 2789 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 7 secs 
+Phase  4  : 2761 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 7 secs 
 
 Updating file: i2c_via_uart.ncd with current fully routed design.
 
@@ -154,7 +154,7 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|                sCLK |  BUFGMUX_X2Y3| No   |  279 |  0.063     |  1.771      |
+|                sCLK |  BUFGMUX_X2Y3| No   |  283 |  0.059     |  1.772      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -174,7 +174,7 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  TS_ClkIn = PERIOD TIMEGRP "sCLK" 20 ns HI | SETUP       |    11.858ns|     8.142ns|       0|           0
+  TS_ClkIn = PERIOD TIMEGRP "sCLK" 20 ns HI | SETUP       |    11.911ns|     8.089ns|       0|           0
   GH 50%                                    | HOLD        |     0.377ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
@@ -189,7 +189,7 @@ All signals are completely routed.
 Total REAL time to PAR completion: 10 secs 
 Total CPU time to PAR completion: 10 secs 
 
-Peak Memory Usage:  381 MB
+Peak Memory Usage:  383 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
