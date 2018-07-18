@@ -8,9 +8,6 @@
 <msg type="warning" file="HDLCompiler" num="946" delta="old" >"D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd" Line 99: Actual for formal port <arg fmt="%s" index="1">reset</arg> is neither a static name nor a globally static expression
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd</arg>&quot; line <arg fmt="%s" index="2">104</arg>: Output port &lt;<arg fmt="%s" index="3">oLED</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">eUART</arg>&gt; is unconnected or connected to loadless signal.
-</msg>
-
 <msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">D:\BSc_workspace\Bachelor_work\UART_communication\uart_verification_return.vhd</arg>&quot; line <arg fmt="%s" index="2">104</arg>: Output port &lt;<arg fmt="%s" index="3">oUART_FULL</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">eUART</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
@@ -29,7 +26,8 @@
 <msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">sDATA_BIT_REG_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">1</arg> in block &lt;<arg fmt="%s" index="3">transmitter</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
 </msg>
 
-<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">fifo</arg>: <arg fmt="%d" index="2">8</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+<msg type="info" file="Xst" num="3203" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">uart_verification_return</arg>&gt; is the opposite to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;eUART/eBAUD_FREQ_DIV/sBAUD_RATE_REG_1&gt; </arg>
+</msg>
 
 </messages>
 

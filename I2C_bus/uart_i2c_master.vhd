@@ -27,8 +27,8 @@ entity uart_i2c_master is
 	 Generic (
 		REGISTER_NUM		   : integer := 4;	-- Number of register
 		MAX_BYTE_NUM			: integer := 4;	-- Maximum number of bytes which can send and recive as a exp of 2
-		TC_PERIOD			   : integer := 13;  -- Bus control period 
-		TR_PERIOD			   : integer := 17;  -- Master transmission peirod
+		TC_PERIOD			   : integer := 12;  -- Bus control period 
+		TR_PERIOD			   : integer := 16;  -- Master transmission peirod
 		REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 		DATA_WIDTH 			   : integer := 8;	-- UART word widht 
 		DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width
@@ -441,7 +441,7 @@ begin
 					sNEXT_STATE <= SEND_UART_DATA_BYTE; -- Send data bytes to UART 
 				end if;
 			when SEND_UART_DATA_BYTE =>
-				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG - 1) then -- Check if all bytes sent to UART 
+				if (CONV_STD_LOGIC_VECTOR(sDATA_BYTE_CNT, DATA_WIDTH) = sBYTE_NUM_REG - 1 and iUART_FULL = '0') then -- Check if all bytes sent to UART 
 					sNEXT_STATE <= I2C_BUS_FREE; 					
 				end if;	
 			when I2C_BUS_FREE =>
@@ -718,22 +718,28 @@ begin
 				sLCD_DATA_EN		 <= '1';				
 			when SEND_UART_SLAVE_ADDRESS =>
 				sSDA_BUFF_EN 		 <= '1';
-				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				oUART_WRITE			 <= '1';	
+				if (iUART_FULL = '0') then
+					sOUART_REG_EN		 <= '1';
+					oUART_WRITE			 <= '1';				
+				end if;	
 				sOUART_REG_SEL		 <= "01";	
 			when SEND_UART_REGISTER_ADDRESS =>
 				sSDA_BUFF_EN 		 <= '1';
-				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				oUART_WRITE			 <= '1';
+				if (iUART_FULL = '0') then
+					sOUART_REG_EN		 <= '1';
+					oUART_WRITE			 <= '1';
+				end if;
 				sOUART_REG_SEL		 <= "11";					
 			when SEND_UART_BYTE_NUMBER =>
 				sSDA_BUFF_EN 		 <= '1';
-				sOUART_REG_EN		 <= '1';
 				sACK_SEL		 		 <= '1';
-				sDATA_FIFO_READ	 <= '1';
-				oUART_WRITE			 <= '1';
+				if (iUART_FULL = '0') then
+					sOUART_REG_EN		 <= '1';
+					sDATA_FIFO_READ	 <= '1';
+					oUART_WRITE			 <= '1';
+				end if;
 				sOUART_REG_SEL		 <= "10";	
 				sLCD_BYTE_SEL		 <= '1';	
 			when SEND_UART_DATA_BYTE =>
@@ -744,9 +750,9 @@ begin
 					sDATA_BYTE_CNT_EN	 <= '1';
 					sDATA_FIFO_READ	 <= '1';
 					oUART_WRITE			 <= '1';
+					sLCD_BYTE_EN		 <= '1';
 				end if;	
 				sOUART_REG_SEL		 <= "10";	
-				sLCD_BYTE_EN		 <= '1';
 				sLCD_BYTE_SEL		 <= '1';
 			when I2C_BUS_FREE =>
 				sSDA_BUFF_EN 		 	<= '1';
@@ -813,7 +819,7 @@ begin
 		if (inRST = '0') then
 			sPERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sPERIOD_CNT = TC_PERIOD - 1) then -- Check counted periods
+			if (sPERIOD_CNT = TC_PERIOD) then -- Check counted periods
 				sPERIOD_CNT <= (others => '0'); 
 			elsif (sTC = '1' and sPERIOD_CNT_EN = '1') then 
 				sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
@@ -822,15 +828,15 @@ begin
 	end process per_cnt;
 	
 	-- Period counter terminal count 
-	sTC_PERIOD_CNT 		<= '1'   when sPERIOD_CNT = TC_PERIOD - 1 else
-									'0';
+	sTC_PERIOD_CNT 	<= '1'   when sPERIOD_CNT = TC_PERIOD else
+								'0';
 	
 	-- Transmission period counter
 	tr_per_cnt : process (iCLK, inRST) begin
 		if (inRST = '0') then
 			sTR_PERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTR_PERIOD_CNT = TR_PERIOD - 1 or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
+			if (sTR_PERIOD_CNT = TR_PERIOD or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
 				sTR_PERIOD_CNT <= (others => '0'); 
 			elsif (sTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
 				sTR_PERIOD_CNT <= sTR_PERIOD_CNT + 1; -- Count period
@@ -839,7 +845,7 @@ begin
 	end process tr_per_cnt;
 	
 	-- Transmission period counter terminal count 
-	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD - 1 else
+	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD else
 								'0'; 	
 								
 	-- Input shift register process		

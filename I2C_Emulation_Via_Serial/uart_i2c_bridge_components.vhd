@@ -34,8 +34,8 @@ package uart_i2c_bridge_components is
 		 Generic (
 			REGISTER_NUM		   : integer := 4;	-- Number of register
 			MAX_BYTE_NUM			: integer := 4;	-- Maximum number of bytes which can send and recive as a exp of 2			
-			TC_PERIOD			   : integer := 13;  -- Bus control period 
-			TR_PERIOD			   : integer := 17;  -- Master transmission peirod
+			TC_PERIOD			   : integer := 12;  -- Bus control period 
+			TR_PERIOD			   : integer := 16;  -- Master transmission peirod
 			REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 			DATA_WIDTH 			   : integer := 8;	-- UART word widht 
 			DATA_CNT_WIDTH 	   : integer := 4;   -- Data counter width

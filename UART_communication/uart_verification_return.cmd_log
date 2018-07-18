@@ -857,3 +857,33 @@ map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -re
 par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
 trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
 bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc uart_pins.ucf -p xc6slx45-fgg676-2 uart_verification_return.ngc uart_verification_return.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o uart_verification_return_map.ncd uart_verification_return.ngd uart_verification_return.pcf 
+par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
+bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc uart_pins.ucf -p xc6slx45-fgg676-2 uart_verification_return.ngc uart_verification_return.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o uart_verification_return_map.ncd uart_verification_return.ngd uart_verification_return.pcf 
+par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
+bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc uart_pins.ucf -p xc6slx45-fgg676-2 uart_verification_return.ngc uart_verification_return.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o uart_verification_return_map.ncd uart_verification_return.ngd uart_verification_return.pcf 
+par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
+bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc uart_pins.ucf -p xc6slx45-fgg676-2 uart_verification_return.ngc uart_verification_return.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o uart_verification_return_map.ncd uart_verification_return.ngd uart_verification_return.pcf 
+par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
+bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 
+xst -intstyle ise -ifn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.xst" -ofn "D:/BSc_workspace/Bachelor_work/UART_communication/uart_verification_return.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc uart_pins.ucf -p xc6slx45-fgg676-2 uart_verification_return.ngc uart_verification_return.ngd  
+map -intstyle ise -p xc6slx45-fgg676-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o uart_verification_return_map.ncd uart_verification_return.ngd uart_verification_return.pcf 
+par -w -intstyle ise -ol high -mt off uart_verification_return_map.ncd uart_verification_return.ncd uart_verification_return.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml uart_verification_return.twx uart_verification_return.ncd -o uart_verification_return.twr uart_verification_return.pcf -ucf uart_pins.ucf 
+bitgen -intstyle ise -f uart_verification_return.ut uart_verification_return.ncd 

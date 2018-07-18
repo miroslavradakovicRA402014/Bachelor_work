@@ -25,7 +25,6 @@ static const char *ng0 = "D:/BSc_workspace/Bachelor_work/I2C_bus/i2c_clk_freq_di
 extern char *IEEE_P_1242562249;
 
 char *ieee_p_1242562249_sub_1919365254_1035706684(char *, char *, char *, char *, int );
-char *ieee_p_1242562249_sub_1919437128_1035706684(char *, char *, char *, char *, int );
 unsigned char ieee_p_1242562249_sub_2110375371_1035706684(char *, char *, char *, char *, char *);
 
 
@@ -160,13 +159,13 @@ LAB15:    xsi_size_not_matching(5U, t21, 0);
 
 static void work_a_2216069251_3212880686_p_1(char *t0)
 {
-    char t3[16];
     char *t1;
     char *t2;
+    char *t3;
     char *t4;
-    char *t5;
+    unsigned char t5;
     char *t6;
-    unsigned char t7;
+    char *t7;
     char *t8;
     char *t9;
     char *t10;
@@ -176,41 +175,38 @@ static void work_a_2216069251_3212880686_p_1(char *t0)
     char *t14;
     char *t15;
     char *t16;
-    char *t17;
-    char *t18;
 
 LAB0:    xsi_set_current_line(58, ng0);
     t1 = (t0 + 960U);
     t2 = *((char **)t1);
     t1 = (t0 + 3912U);
-    t4 = (t0 + 1268U);
-    t5 = *((char **)t4);
-    t4 = (t0 + 3896U);
-    t6 = ieee_p_1242562249_sub_1919437128_1035706684(IEEE_P_1242562249, t3, t5, t4, 1);
-    t7 = ieee_p_1242562249_sub_2110375371_1035706684(IEEE_P_1242562249, t2, t1, t6, t3);
-    if (t7 != 0)
+    t3 = (t0 + 1268U);
+    t4 = *((char **)t3);
+    t3 = (t0 + 3896U);
+    t5 = ieee_p_1242562249_sub_2110375371_1035706684(IEEE_P_1242562249, t2, t1, t4, t3);
+    if (t5 != 0)
         goto LAB3;
 
 LAB4:
-LAB5:    t13 = (t0 + 2252);
-    t14 = (t13 + 32U);
+LAB5:    t11 = (t0 + 2252);
+    t12 = (t11 + 32U);
+    t13 = *((char **)t12);
+    t14 = (t13 + 40U);
     t15 = *((char **)t14);
-    t16 = (t15 + 40U);
-    t17 = *((char **)t16);
-    *((unsigned char *)t17) = (unsigned char)2;
-    xsi_driver_first_trans_fast_port(t13);
+    *((unsigned char *)t15) = (unsigned char)2;
+    xsi_driver_first_trans_fast_port(t11);
 
-LAB2:    t18 = (t0 + 2172);
-    *((int *)t18) = 1;
+LAB2:    t16 = (t0 + 2172);
+    *((int *)t16) = 1;
 
 LAB1:    return;
-LAB3:    t8 = (t0 + 2252);
-    t9 = (t8 + 32U);
+LAB3:    t6 = (t0 + 2252);
+    t7 = (t6 + 32U);
+    t8 = *((char **)t7);
+    t9 = (t8 + 40U);
     t10 = *((char **)t9);
-    t11 = (t10 + 40U);
-    t12 = *((char **)t11);
-    *((unsigned char *)t12) = (unsigned char)3;
-    xsi_driver_first_trans_fast_port(t8);
+    *((unsigned char *)t10) = (unsigned char)3;
+    xsi_driver_first_trans_fast_port(t6);
     goto LAB2;
 
 LAB6:    goto LAB2;

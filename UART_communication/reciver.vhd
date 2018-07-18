@@ -28,7 +28,7 @@ entity reciver is
 		START_TC_PERIOD : integer := 8;  -- Start terminal count period for oversampling
 		TC_PERIOD  		 : integer := 16; -- Terminal count period for oversampling
 		DATA_CNT_WIDTH  : integer := 3;  -- Width of data bit counter
-		TC_CNT_WIDTH	 : integer := 4;  -- Width of terminal count counter
+		TC_CNT_WIDTH	 : integer := 5;  -- Width of terminal count counter
 		DATA_BIT_SEL	 : integer := 2   -- Width of data bit number select
 	 );
     Port ( iCLK        : in   std_logic;												-- Clock signal 50MHz	
@@ -165,7 +165,7 @@ begin
 		if (inRST = '0') then
 			sTC_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTC_CNT_RST = '1' or sTC_CNT = TC_PERIOD - 1) then -- Check counted periods 
+			if (sTC_CNT_RST = '1' or sTC_CNT = TC_PERIOD) then -- Check counted periods 
 				sTC_CNT <= (others => '0'); 
 			elsif (iTC = '1' and sTC_CNT_EN = '1') then -- Check for counter enable
 				sTC_CNT <= sTC_CNT + 1; -- Count terminal counts 
@@ -174,11 +174,11 @@ begin
 	end process tc_cnt;
 	
 	-- Terminal count done for start bit
-	sSTART_TC_CNT_DONE <= '1' when sTC_CNT = START_TC_PERIOD - 1 else
+	sSTART_TC_CNT_DONE <= '1' when sTC_CNT = START_TC_PERIOD else
 								 '0';
 	
 	-- Terminal count done statement
-	sTC_CNT_DONE <= '1' when sTC_CNT = TC_PERIOD - 1 else 
+	sTC_CNT_DONE <= '1' when sTC_CNT = TC_PERIOD else 
 						 '0';
 						 
 	-- Data bits counter process

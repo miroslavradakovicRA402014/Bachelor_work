@@ -41,7 +41,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   1
 
-Total memory usage is 156880 kilobytes
+Total memory usage is 156688 kilobytes
 
 Writing NGD file "uart_verification_return.ngd" ...
 Total REAL time to NGDBUILD completion:  1 sec

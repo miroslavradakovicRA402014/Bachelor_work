@@ -46,9 +46,9 @@ package i2c_via_uart_components is
 	component i2c_slave is
 		 Generic(
 			REGISTER_NUM		 		: integer := 16;  										 -- Number of slave registers
-			TC_PERIOD			 		: integer := 13;  										 -- Terminal count period for ack start
-			TR_PERIOD			 		: integer := 17;  										 -- Slave transmission peirod
-			REP_START_PERIOD 			: integer := 9;											 -- Repeated start period
+			TC_PERIOD			 		: integer := 12;  										 -- Terminal count period for ack start
+			TR_PERIOD			 		: integer := 16;  										 -- Slave transmission peirod
+			REP_START_PERIOD 			: integer := 8;											 -- Repeated start period
 			DATA_WIDTH 			 		: integer := 8; 											 -- Data width
 			DATA_CNT_WIDTH 	 		: integer := 4;											 -- Data counter width
 			PERIOD_CNT_WIDTH   		: integer := 4;											 -- Period counter width

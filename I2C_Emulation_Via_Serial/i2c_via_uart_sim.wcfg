@@ -21,7 +21,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="44" />
+   <WVObjectSize size="45" />
    <wave_markers>
       <marker time="-2499999999000" label="" />
       <marker time="-2499999999000" label="" />
@@ -29,10 +29,11 @@
       <marker time="-24999999999000" label="" />
       <marker time="-24999999999000" label="" />
       <marker time="65108333333000" label="" />
-      <marker time="37525992840000" label="" />
       <marker time="1835000000000" label="" />
       <marker time="2315000000000" label="" />
-      <marker time="391085196600000" label="" />
+      <marker time="259000000000000" label="" />
+      <marker time="405156876600000" label="" />
+      <marker time="704825297400000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -66,6 +67,14 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_TRANSMITTER/scurrent_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">scurrent_state</obj_property>
+      <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/sshw_reg" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sshw_reg[8:0]</obj_property>
       <obj_property name="ObjectShortName">sshw_reg[8:0]</obj_property>
@@ -78,10 +87,6 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/sdata_cnt" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">sdata_cnt[2:0]</obj_property>
       <obj_property name="ObjectShortName">sdata_cnt[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART/eUART_RECIVER/scurrent_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">scurrent_state</obj_property>
-      <obj_property name="ObjectShortName">scurrent_state</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/iclk_period" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">iclk_period</obj_property>

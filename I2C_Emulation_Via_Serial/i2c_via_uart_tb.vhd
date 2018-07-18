@@ -212,7 +212,7 @@ BEGIN
 		iHANDSHAKE_EN_SW <= '0';
 		iDATA_BIT_SW <= "11";
 
-      wait for iCLK_period*15*sCLK_BAUD;
+      wait for iCLK_period*16*sCLK_BAUD;
 				
 		inRST   <= '1';
 		sLOOP_J <= 0;
@@ -222,6 +222,7 @@ BEGIN
 			wait for 50us;
 
 			sLOOP_I <= 0;
+			sMODE   <= '0';
 
 			for i in 0 to 15 loop
 			
@@ -232,207 +233,207 @@ BEGIN
 				-- Start bit	
 				iRX   <= '0';	
 			  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 					
 				-- Data bits
 					
 				-- 0
 				iRX  <= sMODE;
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sSLAVE_ADDR(0);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sSLAVE_ADDR(1);
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sSLAVE_ADDR(2);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sSLAVE_ADDR(3);
 					
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sSLAVE_ADDR(4);
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sSLAVE_ADDR(5);
 					
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sSLAVE_ADDR(6);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <= not ((sMODE xor sSLAVE_ADDR(0) xor sSLAVE_ADDR(1) xor sSLAVE_ADDR(2) xor sSLAVE_ADDR(3) xor sSLAVE_ADDR(4) xor sSLAVE_ADDR(5) xor sSLAVE_ADDR(6)));
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 						
 				-- Stop bit
 				iRX <= '1';		
 
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				
 				-- Register address
 				
 				-- Start bit	
 				iRX   <= '0';	
 		  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				
 				-- Data bits
 				
 				-- 0
 				iRX  <= sSLAVE_REG_ADDR(0);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sSLAVE_REG_ADDR(1);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sSLAVE_REG_ADDR(2);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sSLAVE_REG_ADDR(3);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sSLAVE_REG_ADDR(4);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sSLAVE_REG_ADDR(5);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sSLAVE_REG_ADDR(6);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sSLAVE_REG_ADDR(7);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <=  not ((sSLAVE_REG_ADDR(0) xor sSLAVE_REG_ADDR(1) xor sSLAVE_REG_ADDR(2) xor sSLAVE_REG_ADDR(3) xor sSLAVE_REG_ADDR(4) xor sSLAVE_REG_ADDR(5) xor sSLAVE_REG_ADDR(6) xor sSLAVE_REG_ADDR(7)));
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				
 				-- Stop bit
 				iRX <= '1';	
 
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 
 				-- Number data byte
 				
 				-- Start bit	
 				iRX   <= '0';	
 		  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				
 				-- Data bits
 				
 				-- 0
 				iRX  <= sBYTE_NUM(0);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sBYTE_NUM(1);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sBYTE_NUM(2);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sBYTE_NUM(3);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sBYTE_NUM(4);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sBYTE_NUM(5);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sBYTE_NUM(6);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sBYTE_NUM(7);
 			
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <= not ((sBYTE_NUM(0) xor sBYTE_NUM(1) xor sBYTE_NUM(2) xor sBYTE_NUM(3) xor sBYTE_NUM(4) xor sBYTE_NUM(5) xor sBYTE_NUM(6) xor sBYTE_NUM(7)));
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				
 				-- Stop bit
 				iRX <= '1';			
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				
 				wait for 5us;
 				
-				for i in 0 to 1 loop 
+				for k in 0 to 1 loop 
 				
 					-- Data byte 
 					
 					-- Start bit	
 					iRX   <= '0';	
 			  
-					wait for iCLK_period*15*sCLK_BAUD;
+					wait for iCLK_period*16*sCLK_BAUD;
 					
 					-- Data bits
 					
 					-- 0
 					iRX  <= sDATA_BYTE(0);
 					
-					wait for iCLK_period*15*sCLK_BAUD;
+					wait for iCLK_period*16*sCLK_BAUD;
 					-- 1
 					iRX  <= sDATA_BYTE(1);
 					
-					wait for iCLK_period*15*sCLK_BAUD;
+					wait for iCLK_period*16*sCLK_BAUD;
 					-- 2
 					iRX  <= sDATA_BYTE(2);
 					
-					wait for iCLK_period*15*sCLK_BAUD;		
+					wait for iCLK_period*16*sCLK_BAUD;		
 					-- 3
 					iRX  <= sDATA_BYTE(3);
 					
-					wait for iCLK_period*15*sCLK_BAUD;
+					wait for iCLK_period*16*sCLK_BAUD;
 					-- 4
 					iRX  <= sDATA_BYTE(4);
 					
-					wait for iCLK_period*15*sCLK_BAUD;	
+					wait for iCLK_period*16*sCLK_BAUD;	
 					-- 5
 					iRX  <= sDATA_BYTE(5);
 					
-					wait for iCLK_period*15*sCLK_BAUD;		
+					wait for iCLK_period*16*sCLK_BAUD;		
 					-- 6
 					iRX  <= sDATA_BYTE(6);
 					
-					wait for iCLK_period*15*sCLK_BAUD;	
+					wait for iCLK_period*16*sCLK_BAUD;	
 					-- 7
 					iRX  <= sDATA_BYTE(7);
 					
-					wait for iCLK_period*15*sCLK_BAUD;
+					wait for iCLK_period*16*sCLK_BAUD;
 
 					-- parity
 					iRX  <= not ((sDATA_BYTE(0) xor sDATA_BYTE(1) xor sDATA_BYTE(2) xor sDATA_BYTE(3) xor sDATA_BYTE(4) xor sDATA_BYTE(5) xor sDATA_BYTE(6) xor sDATA_BYTE(7)));
 					
-					wait for iCLK_period*15*sCLK_BAUD;		
+					wait for iCLK_period*16*sCLK_BAUD;		
 					
 					-- Stop bit
 					iRX <= '1';	
@@ -445,7 +446,7 @@ BEGIN
 			end loop;
 
 			sLOOP_I <= 0;	
-			sMODE <= '1';
+			sMODE   <= '1';
 
 			for i in 0 to 15 loop
 			
@@ -456,160 +457,160 @@ BEGIN
 				-- Start bit	
 				iRX   <= '0';	
 			  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 					
 				-- Data bits
 					
 				-- 0
 				iRX  <= sMODE;
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sSLAVE_ADDR(0);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sSLAVE_ADDR(1);
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sSLAVE_ADDR(2);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sSLAVE_ADDR(3);
 					
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sSLAVE_ADDR(4);
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sSLAVE_ADDR(5);
 					
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sSLAVE_ADDR(6);
 					
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <= not ((sMODE xor sSLAVE_ADDR(0) xor sSLAVE_ADDR(1) xor sSLAVE_ADDR(2) xor sSLAVE_ADDR(3) xor sSLAVE_ADDR(4) xor sSLAVE_ADDR(5) xor sSLAVE_ADDR(6)));
 					
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 						
 				-- Stop bit
 				iRX <= '1';		
 
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				
 				-- Register address
 				
 				-- Start bit	
 				iRX   <= '0';	
 		  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				
 				-- Data bits
 				
 				-- 0
 				iRX  <= sSLAVE_REG_ADDR(0);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sSLAVE_REG_ADDR(1);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sSLAVE_REG_ADDR(2);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sSLAVE_REG_ADDR(3);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sSLAVE_REG_ADDR(4);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sSLAVE_REG_ADDR(5);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sSLAVE_REG_ADDR(6);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sSLAVE_REG_ADDR(7);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <=  not ((sSLAVE_REG_ADDR(0) xor sSLAVE_REG_ADDR(1) xor sSLAVE_REG_ADDR(2) xor sSLAVE_REG_ADDR(3) xor sSLAVE_REG_ADDR(4) xor sSLAVE_REG_ADDR(5) xor sSLAVE_REG_ADDR(6) xor sSLAVE_REG_ADDR(7)));
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				
 				-- Stop bit
 				iRX <= '1';	
 
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 
 				-- Number data byte
 				
 				-- Start bit	
 				iRX   <= '0';	
 		  
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				
 				-- Data bits
 				
 				-- 0
 				iRX  <= sBYTE_NUM(0);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 1
 				iRX  <= sBYTE_NUM(1);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 2
 				iRX  <= sBYTE_NUM(2);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 3
 				iRX  <= sBYTE_NUM(3);
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 				-- 4
 				iRX  <= sBYTE_NUM(4);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 5
 				iRX  <= sBYTE_NUM(5);
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				-- 6
 				iRX  <= sBYTE_NUM(6);
 				
-				wait for iCLK_period*15*sCLK_BAUD;	
+				wait for iCLK_period*16*sCLK_BAUD;	
 				-- 7
 				iRX  <= sBYTE_NUM(7);
 			
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 
 				-- parity
 				iRX  <= not ((sBYTE_NUM(0) xor sBYTE_NUM(1) xor sBYTE_NUM(2) xor sBYTE_NUM(3) xor sBYTE_NUM(4) xor sBYTE_NUM(5) xor sBYTE_NUM(6) xor sBYTE_NUM(7)));
 				
-				wait for iCLK_period*15*sCLK_BAUD;		
+				wait for iCLK_period*16*sCLK_BAUD;		
 				
 				-- Stop bit
 				iRX <= '1';			
 				
-				wait for iCLK_period*15*sCLK_BAUD;
+				wait for iCLK_period*16*sCLK_BAUD;
 					
 				sLOOP_I <= sLOOP_I + 1;
 				
-				end loop;
+			end loop;
 			
 			wait for 100 us;
 			

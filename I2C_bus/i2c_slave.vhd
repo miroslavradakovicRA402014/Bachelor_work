@@ -26,9 +26,9 @@ use IEEE.NUMERIC_STD.ALL;
 entity i2c_slave is
 	 Generic(
 		REGISTER_NUM		 		: integer := 16;  										 -- Number of slave registers
-		TC_PERIOD			 		: integer := 13;  										 -- Terminal count period for ack start
-		TR_PERIOD			 		: integer := 17;  										 -- Slave transmission peirod
-		REP_START_PERIOD 			: integer := 9;											 -- Repeated start period
+		TC_PERIOD			 		: integer := 12;  										 -- Terminal count period for ack start
+		TR_PERIOD			 		: integer := 16;  										 -- Slave transmission peirod
+		REP_START_PERIOD 			: integer := 8;											 -- Repeated start period
 		DATA_WIDTH 			 		: integer := 8; 											 -- Data width
 		DATA_CNT_WIDTH 	 		: integer := 4;											 -- Data counter width
 		PERIOD_CNT_WIDTH   		: integer := 4;											 -- Period counter width
@@ -461,7 +461,7 @@ begin
 		if (inRST = '0') then
 			sPERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sPERIOD_CNT = TC_PERIOD - 1) then -- Check counted periods
+			if (sPERIOD_CNT = TC_PERIOD) then -- Check counted periods
 				sPERIOD_CNT <= (others => '0'); 
 			elsif (sTC = '1' and sPERIOD_CNT_EN = '1') then 
 				sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
@@ -470,7 +470,7 @@ begin
 	end process per_cnt;
 	
 	-- Period counter terminal count 
-	sTC_PERIOD_CNT <= '1' when sPERIOD_CNT = TC_PERIOD - 1 else
+	sTC_PERIOD_CNT <= '1' when sPERIOD_CNT = TC_PERIOD else
 							'0';
 								  
 	-- Repeated start period counter
@@ -478,7 +478,7 @@ begin
 		if (inRST = '0') then
 			sRSTART_PERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sRSTART_PERIOD_CNT = REP_START_PERIOD - 1) then -- Check counted periods
+			if (sRSTART_PERIOD_CNT = REP_START_PERIOD) then -- Check counted periods
 				sRSTART_PERIOD_CNT <= (others => '0'); 
 			elsif (sTC = '1' and sRSTART_PERIOD_CNT_EN = '1') then 
 				sRSTART_PERIOD_CNT <= sRSTART_PERIOD_CNT + 1; -- Count period
@@ -487,7 +487,7 @@ begin
 	end process rep_start_per_cnt;
 	
 	-- Period counter terminal count 
-	sTC_RSTART_PERIOD_CNT <= '1' when sRSTART_PERIOD_CNT = REP_START_PERIOD - 1 else
+	sTC_RSTART_PERIOD_CNT <= '1' when sRSTART_PERIOD_CNT = REP_START_PERIOD else
 									 '0';							  
 								  
 	-- Transmission period counter
@@ -495,7 +495,7 @@ begin
 		if (inRST = '0') then
 			sTR_PERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sTR_PERIOD_CNT = TR_PERIOD - 1 or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
+			if (sTR_PERIOD_CNT = TR_PERIOD or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
 				sTR_PERIOD_CNT <= (others => '0'); 
 			elsif (sTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
 				sTR_PERIOD_CNT <= sTR_PERIOD_CNT + 1; -- Count period
@@ -504,7 +504,7 @@ begin
 	end process tr_per_cnt;
 	
 	-- Transmission period counter terminal count 
-	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD - 1 else
+	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD else
 								'0'; 							  
 	
 	-- Input shift register process		
