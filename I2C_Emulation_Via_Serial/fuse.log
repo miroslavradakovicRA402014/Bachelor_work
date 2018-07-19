@@ -1,4 +1,4 @@
-Running: C:\Xilinx\14.6\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib secureip -o D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe -prj D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_beh.prj i2c_via_uart_tb 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "secureip" -o "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe" -prj "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_beh.prj" "i2c_via_uart_tb" 
 ISim P.68d (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 8
 Turning on mult-threading, number of parallel sub-compilation jobs: 16 
@@ -29,8 +29,8 @@ WARNING:HDLCompiler:946 - "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Seri
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 171564 KB
-Fuse CPU Usage: 343 ms
+Fuse Memory Usage: 172076 KB
+Fuse CPU Usage: 359 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
@@ -77,5 +77,5 @@ Time Resolution for simulation is 1ps.
 Waiting for 1 sub-compilation(s) to finish...
 Compiled 70 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 215056 KB
-Fuse CPU Usage: 1280 ms
+Fuse Memory Usage: 215404 KB
+Fuse CPU Usage: 1343 ms

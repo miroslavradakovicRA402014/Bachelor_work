@@ -8,7 +8,7 @@
 -- Project Name:   I2C via UART
 -- Target Devices: E2LP development board(Spartan 6)
 -- Tool versions:  Xilinx ISE 14.6
--- Description:    LCD driver, print I2C telegramms(slave address, register address, mode, data)
+-- Description:    LCD driver, print I2C telegrams(slave address, register address, mode, data)
 --
 -- Dependencies:   lcd_timer.vhd, reg.vhd, fifo.vhd, char_gen.vhd
 --
