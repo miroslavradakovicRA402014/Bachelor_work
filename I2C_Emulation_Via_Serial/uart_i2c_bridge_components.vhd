@@ -24,7 +24,7 @@ package uart_i2c_bridge_components is
 				  iUART_WR 			 : in	  std_logic;												-- Write to transmitter signal
 				  iUART_RD    		 : in   std_logic;												-- Read from reciver signal			
 				  oTX         		 : out  std_logic;												-- TX signal
-				  oRTS				 : out  std_logic;												-- Request to send signal		  
+				  oRTS				 : out  std_logic;												-- Request to send signal		                                                                                                                                                                                                                            
 				  oUART_FULL       : out  std_logic;												-- Reciver FIFO full idication
 				  oUART_EMPTY      : out  std_logic;												-- Transmitter FULL empty indication
 				  oUART_DATA       : out  std_logic_vector(DATA_WIDTH - 1 downto 0));	-- Reciver output data
@@ -34,7 +34,7 @@ package uart_i2c_bridge_components is
 		 Generic (
 			REGISTER_NUM		   : integer := 4;	-- Number of register
 			MAX_BYTE_NUM			: integer := 4;	-- Maximum number of bytes which can send and recive as a exp of 2			
-			TC_PERIOD			   : integer := 12;  -- Bus control period 
+			BS_PERIOD			   : integer := 12;  -- Bus control period 
 			TR_PERIOD			   : integer := 16;  -- Master transmission peirod
 			REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 			DATA_WIDTH 			   : integer := 8;	-- UART word widht 

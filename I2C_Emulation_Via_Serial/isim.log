@@ -43,7 +43,14 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: N
 at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run all
-Stopped at time : 218841736680 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+at 24799146120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24809145480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24819144840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24829144200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24839143560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24849142920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24859142280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 33470708040 ps : File "D:/BSc_workspace/Bachelor_work/I2C_bus/i2c_clk_freq_div.vhd" Line 59
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -84,7 +91,14 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: N
 at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run all
-Stopped at time : 3975844045320 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+at 24799146120 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24809145480 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24819144840 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24829144200 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24839143560 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24849142920 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+at 24859142280 ps(4), Instance /i2c_via_uart_tb/uut/eI2C_SLAVE/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Stopped at time : 34863874920 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/fifo.vhd" Line 74
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -125,7 +139,7 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: N
 at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run all
-Stopped at time : 109443123720 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
+Stopped at time : 60587853480 ps : File "D:/BSc_workspace/Bachelor_work/UART_communication/baud_freq_div.vhd" Line 57
 ISim P.68d (signature 0x8ef4fb42)
 ----------------------------------------------------------------------
 INFO:Security:50 - The XILINXD_LICENSE_FILE environment variable is set to '2100@licserver'.
@@ -166,4 +180,4 @@ at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_INIT_TIMER/ : Warning: N
 at 0 ps, Instance /i2c_via_uart_tb/uut/eLCD_DRIVER/eLCD_CMD_TIMER/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 Finished circuit initialization process.
 # run all
-Stopped at time : 82855127880 ps : File "D:/BSc_workspace/Bachelor_work/LCD_controller/lcd_timer.vhd" Line 56
+Stopped at time : 45456936840 ps : File "D:/BSc_workspace/Bachelor_work/I2C_bus/i2c_slave.vhd" Line 185

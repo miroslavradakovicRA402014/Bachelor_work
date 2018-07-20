@@ -27,7 +27,7 @@ entity uart_i2c_master is
 	 Generic (
 		REGISTER_NUM		   : integer := 4;	-- Number of register
 		MAX_BYTE_NUM			: integer := 4;	-- Maximum number of bytes which can send and recive as a exp of 2
-		TC_PERIOD			   : integer := 12;  -- Bus control period 
+		BS_PERIOD			   : integer := 12;  -- Bus sync control period 
 		TR_PERIOD			   : integer := 16;  -- Master transmission peirod
 		REGISTER_SEL_WIDTH   : integer := 2;	-- Register mux and decoder select widht
 		DATA_WIDTH 			   : integer := 8;	-- UART word widht 
@@ -98,14 +98,12 @@ architecture Behavioral of uart_i2c_master is
 	signal sBYTE_CNT_RST				: std_logic;																					-- Recived/transmitted data byte counter reset signal
 	
 	signal sPERIOD_CNT 		   	: unsigned(PERIOD_CNT_WIDTH - 1 downto 0);											-- Period counter
-	signal sPERIOD_CNT_EN 	   	: std_logic;																					-- Period counter enable
-	signal sTC_PERIOD_CNT 			: std_logic;																					-- Period counter terminal count
-
-	signal sTR_PERIOD_CNT 			: unsigned(TR_PERIOD_CNT_WIDTH - 1 downto 0);										-- Master transmission period
+	signal sPERIOD_CNT_RST 	   	: std_logic;																					-- Period counter enable
+	signal sBS_PERIOD_CNT_EN 	   : std_logic;																					-- Period counter enable
+	signal sTC_BS_PERIOD_CNT		: std_logic;																					-- Master sync period counter terminal count
 	signal sTR_PERIOD_CNT_EN 		: std_logic;																					-- Master transmission period enable
 	signal sTC_TR_PERIOD_CNT 		: std_logic;																					-- Master transmission period terminal count
-	signal sTR_PERIOD_CNT_RST		: std_logic;																					-- Master transmission period counter reset signal	
-
+	
 	signal sISHW_REG					: std_logic_vector(DATA_WIDTH	- 1 downto 0);											-- Input shift register
 	signal sISHW_EN					: std_logic;																					-- Input shift register enable	
 	signal sOSHW_REG					: std_logic_vector(DATA_WIDTH	- 1 downto 0);											-- Output shift register
@@ -283,7 +281,7 @@ begin
 	end process fsm_reg;
 	
 	-- Master FSM next state logic
-	fsm_next : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_NUM_REG, sIUART_REG, sDATA_BYTE_CNT, sBYTE_CNT, sSLAVE_ADDR_MUX, sACK_FF) begin
+	fsm_next : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, iUART_DATA, sTC_TR_PERIOD_CNT, sTC_BS_PERIOD_CNT, sSLAVE_ADDR_REG, sBYTE_NUM_REG, sIUART_REG, sDATA_BYTE_CNT, sBYTE_CNT, sSLAVE_ADDR_MUX, sACK_FF) begin
 		sNEXT_STATE <= sCURRENT_STATE;
 		case (sCURRENT_STATE) is
 			when IDLE =>
@@ -326,12 +324,12 @@ begin
 				sNEXT_STATE <= I2C_START_PERIOD;	-- Start send I2C telegram
 			when I2C_START_PERIOD =>
 				-- Check if period elapsed
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_WRITE; -- Send I2C address to slave
 				end if;			
 			when I2C_SLAVE_ADDRESS_WRITE =>
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_WRITE; -- Get slave address ack
 				end if;
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
@@ -345,7 +343,7 @@ begin
 				end if;	
 			when I2C_SLAVE_ADDRESS_READ =>
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_ACK_READ; -- Get slave address ack
 				end if;
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
@@ -359,7 +357,7 @@ begin
 				end if;				
 			when I2C_REGISTER_ADDRESS =>
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_REGISTER_ADDRESS_ACK;
 				end if;
 			when I2C_REGISTER_ADDRESS_ACK => 	
@@ -382,17 +380,17 @@ begin
 				end if;	
 			when I2C_REPEATED_START_HOLD =>
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then 
+				if (sTC_BS_PERIOD_CNT = '1') then 
 					sNEXT_STATE <= I2C_SLAVE_ADDRESS_READ; -- Send slave register address 
 				end if;					
 			when I2C_WRITE_DATA => 
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_WRITE_DATA_ACK;
 				end if;	
 			when I2C_READ_DATA =>
 				-- Check if period elapsed 
-				if (sTC_PERIOD_CNT = '1') then
+				if (sTC_BS_PERIOD_CNT = '1') then
 					sNEXT_STATE <= I2C_READ_DATA_ACK;
 				end if;		
 			when I2C_WRITE_DATA_ACK =>
@@ -458,7 +456,7 @@ begin
 	end process fsm_next;	
 
 	-- Master FSM output logic
-	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sTR_PERIOD_CNT, sTC_TR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
+	fsm_out : process (sCURRENT_STATE, iUART_EMPTY, iUART_FULL, sSLAVE_ADDR_REG, sPERIOD_CNT, sTC_TR_PERIOD_CNT, sDATA_CNT, sBYTE_CNT, sBYTE_NUM_REG, sSCL_RISING_EDGE) begin
 		sSDA_BUFF_EN 		 	<= '0';
 		sIUART_REG_EN  	 	<= '0';
 		sOUART_REG_EN		 	<= '0';
@@ -484,8 +482,8 @@ begin
 		sDATA_BYTE_CNT_RST 	<= '0';		
 		sBYTE_CNT_EN   	 	<= '0';
 		sBYTE_CNT_RST 		 	<= '0';					
-		sPERIOD_CNT_EN 	 	<= '0';
-		sTR_PERIOD_CNT_RST 	<= '0';
+		sBS_PERIOD_CNT_EN 	<= '0';
+		sPERIOD_CNT_RST 		<= '0';
 		sTR_PERIOD_CNT_EN  	<= '0';
 		sISHW_EN			    	<= '0';				
 		sOSHW_EN				 	<= '0';
@@ -566,7 +564,7 @@ begin
 				sSDA_BUFF_EN 		 	<= '1';
 				sSCL_EN					<= '1';	
 				sFREQ_EN 				<= '1';
-				sPERIOD_CNT_EN 	 	<= '1';
+				sBS_PERIOD_CNT_EN 	<= '1';
 				sOSHW_LOAD			 	<= '1';		
 			when I2C_SLAVE_ADDRESS_WRITE => 
 				sSDA_BUFF_EN 		 	<= '1';
@@ -575,12 +573,11 @@ begin
 				sFREQ_EN 			 	<= '1';	
 				sDATA_CNT_EN 		 	<= '1';					
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sPERIOD_CNT_EN  	 <= '1'; 
-					sTR_PERIOD_CNT_RST <= '1';
+					sBS_PERIOD_CNT_EN <= '1'; 
 				else
-					sOSHW_EN			    <= '1'; 
-				end if;
-				sTR_PERIOD_CNT_EN  	<= '1';		
+					sOSHW_EN			   <= '1'; 
+					sTR_PERIOD_CNT_EN <= '1';					
+				end if;		
 			when I2C_SLAVE_ADDRESS_ACK_WRITE =>
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
@@ -595,12 +592,11 @@ begin
 				sFREQ_EN 			 	<= '1';		
 				sDATA_CNT_EN 		 	<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sPERIOD_CNT_EN  	 <= '1'; 
-					sTR_PERIOD_CNT_RST <= '1';
+					sBS_PERIOD_CNT_EN <= '1'; 
 				else
-					sOSHW_EN			    <= '1'; 
-				end if;
-				sTR_PERIOD_CNT_EN  	<= '1';			
+					sOSHW_EN			   <= '1'; 
+					sTR_PERIOD_CNT_EN <= '1';					
+				end if;			
 			when I2C_SLAVE_ADDRESS_ACK_READ =>
 				sACK_FF_EN				<= '1';
 				sREG_MUX_SEL		 	<= "01";				
@@ -614,12 +610,11 @@ begin
 				sFREQ_EN 			 	<= '1';					
 				sDATA_CNT_EN 			<= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sPERIOD_CNT_EN  	 <= '1';
-					sTR_PERIOD_CNT_RST <= '1';					
+					sBS_PERIOD_CNT_EN  <= '1';				
 				else
-					sOSHW_EN			 	 <= '1'; 
-				end if;
-				sTR_PERIOD_CNT_EN  	<= '1';			
+					sOSHW_EN			 	 <= '1';
+					sTR_PERIOD_CNT_EN  <= '1';					
+				end if;			
 			when I2C_REGISTER_ADDRESS_ACK =>
 				sACK_FF_EN			 <= '1';
 				if (sSLAVE_ADDR_REG(0) = '0') then
@@ -634,9 +629,9 @@ begin
 				sTR_PERIOD_CNT_EN  <= '1';
 			when I2C_REPEATED_START_SETUP =>
 				sSDA_BUFF_EN 		 	<= '1';
-				if (sTR_PERIOD_CNT < 12) then
+				if (sPERIOD_CNT < 12) then
 					sACK_SEL		 		 	<= '1';
-					if (sTR_PERIOD_CNT < 2) then
+					if (sPERIOD_CNT < 2) then
 						sSCL_EN				 	<= '1';
 					end if;
 				else
@@ -649,7 +644,7 @@ begin
 				sSLAVE_ADDR_SEL		<= '1';
 				sSCL_EN				 	<= '1';				
 				sFREQ_EN 			 	<= '1';
-				sPERIOD_CNT_EN			<= '1';
+				sBS_PERIOD_CNT_EN		<= '1';
 				sOSHW_LOAD			 	<= '1';				
 			when I2C_WRITE_DATA =>
 				sSDA_BUFF_EN 		 <= '1';
@@ -659,12 +654,11 @@ begin
 				sDATA_CNT_EN 		 <= '1';
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sPERIOD_CNT_EN  	 <= '1'; 
-					sTR_PERIOD_CNT_RST <= '1';
+					sBS_PERIOD_CNT_EN  <= '1'; 
 				else
-					sOSHW_EN			    <= '1'; 
-				end if;
-				sTR_PERIOD_CNT_EN  <= '1';				
+					sOSHW_EN			    <= '1'; 				
+					sTR_PERIOD_CNT_EN  <= '1';				
+				end if;				
 			when I2C_READ_DATA =>
 				sBYTE_SEL		 	 <= '1';		
 				sREG_MUX_SEL		 <= "10";	
@@ -673,12 +667,11 @@ begin
 				sDATA_CNT_EN 		 <= '1';	
 				sBYTE_CNT_EN   	 <= '1';				
 				if (sDATA_CNT = DATA_WIDTH) then 
-					sPERIOD_CNT_EN  	 <= '1'; 
-					sTR_PERIOD_CNT_RST <= '1';
+					sBS_PERIOD_CNT_EN  <= '1'; 
 				else
-					sISHW_EN			    <= '1'; 
-				end if;
-				sTR_PERIOD_CNT_EN  <= '1';			
+					sISHW_EN			    <= '1';
+					sTR_PERIOD_CNT_EN  <= '1';						
+				end if;		
 			when I2C_WRITE_DATA_ACK =>
 				sACK_FF_EN			 <= '1';
 				sSCL_EN				 <= '1';	
@@ -788,7 +781,7 @@ begin
 		if (inRST = '0') then
 			sDATA_CNT <= (others => '0'); -- Reset counter		
 		elsif (iCLK'event and iCLK = '1') then	
-			if (sTC_PERIOD_CNT = '1' or sDATA_CNT_RST = '1') then 
+			if (sTC_BS_PERIOD_CNT = '1' or sDATA_CNT_RST = '1') then 
 				sDATA_CNT <= (others => '0'); -- Reset counter when all data recived and period elapsed
 			elsif (sSCL_RISING_EDGE = '1' and sDATA_CNT_EN = '1') then
 				sDATA_CNT <= sDATA_CNT + 1; -- Count data bits
@@ -827,35 +820,32 @@ begin
 		if (inRST = '0') then
 			sPERIOD_CNT <= (others => '0'); -- Reset counter 
 		elsif (iCLK'event and iCLK = '1') then
-			if (sPERIOD_CNT = TC_PERIOD) then -- Check counted periods
-				sPERIOD_CNT <= (others => '0'); 
-			elsif (sTC = '1' and sPERIOD_CNT_EN = '1') then 
-				sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
+			if (sPERIOD_CNT_RST = '1') then
+				sPERIOD_CNT <= (others => '0'); -- Reset counter 	
+			elsif (sBS_PERIOD_CNT_EN = '1') then
+				if (sPERIOD_CNT = BS_PERIOD) then -- Check if counter counted bus sync periods number 
+					sPERIOD_CNT <= (others => '0');	-- Then reset counter
+				elsif (sTC = '1') then
+					sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
+				end if;
+			elsif (sTR_PERIOD_CNT_EN = '1') then
+				if (sPERIOD_CNT = TR_PERIOD) then -- Check if counter counted transmission periods number 
+					sPERIOD_CNT <= (others => '0');	-- Then reset counter
+				elsif (sTC = '1') then
+					sPERIOD_CNT <= sPERIOD_CNT + 1; -- Count period
+				end if;				
 			end if;
 		end if;
 	end process per_cnt;
 	
 	-- Period counter terminal count 
-	sTC_PERIOD_CNT 	<= '1'   when sPERIOD_CNT = TC_PERIOD else
+	sTC_BS_PERIOD_CNT <= '1' when sPERIOD_CNT = BS_PERIOD and sBS_PERIOD_CNT_EN = '1'    else
 								'0';
-	
-	-- Transmission period counter
-	tr_per_cnt : process (iCLK, inRST) begin
-		if (inRST = '0') then
-			sTR_PERIOD_CNT <= (others => '0'); -- Reset counter 
-		elsif (iCLK'event and iCLK = '1') then
-			if (sTR_PERIOD_CNT = TR_PERIOD or sTR_PERIOD_CNT_RST = '1') then -- Check counted periods
-				sTR_PERIOD_CNT <= (others => '0'); 
-			elsif (sTC = '1' and sTR_PERIOD_CNT_EN = '1') then 
-				sTR_PERIOD_CNT <= sTR_PERIOD_CNT + 1; -- Count period
-			end if;
-		end if;
-	end process tr_per_cnt;
-	
-	-- Transmission period counter terminal count 
-	sTC_TR_PERIOD_CNT <= '1' when sTR_PERIOD_CNT = TR_PERIOD else
-								'0'; 	
 								
+	-- Transmission period counter terminal count 
+	sTC_TR_PERIOD_CNT <= '1' when sPERIOD_CNT = TR_PERIOD and sTR_PERIOD_CNT_EN = '1' else
+								'0';								
+									
 	-- Input shift register process		
 	ishift_reg : process (iCLK, inRST) begin
 		if (inRST = '0') then

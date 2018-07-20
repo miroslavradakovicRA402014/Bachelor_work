@@ -1,0 +1,118 @@
+Release 14.6 - xst P.68d (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> Parameter xsthdpdir set to D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> Reading design: i2c_via_uart.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart_components.vhd" into library work
+Parsing package <uart_components>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\transmitter.vhd" into library work
+Parsing entity <transmitter>.
+Parsing architecture <Behavioral> of entity <transmitter>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\reciver.vhd" into library work
+Parsing entity <reciver>.
+Parsing architecture <Behavioral> of entity <reciver>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\fifo.vhd" into library work
+Parsing entity <fifo>.
+Parsing architecture <Behavioral> of entity <fifo>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\baud_freq_div.vhd" into library work
+Parsing entity <baud_freq_div>.
+Parsing architecture <Behavioral> of entity <baud_freq_div>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\scl_gen.vhd" into library work
+Parsing entity <scl_gen>.
+Parsing architecture <Behavioral> of entity <scl_gen>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\rising_edge_det.vhd" into library work
+Parsing entity <rising_edge_det>.
+Parsing architecture <Behavioral> of entity <rising_edge_det>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\reg.vhd" into library work
+Parsing entity <reg>.
+Parsing architecture <Behavioral> of entity <reg>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\i2c_clk_freq_div.vhd" into library work
+Parsing entity <i2c_clk_freq_div>.
+Parsing architecture <Behavioral> of entity <i2c_clk_freq_div>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\UART_communication\uart.vhd" into library work
+Parsing entity <uart>.
+Parsing architecture <Behavioral> of entity <uart>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_timer.vhd" into library work
+Parsing entity <lcd_timer>.
+Parsing architecture <Behavioral> of entity <lcd_timer>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\char_gen.vhd" into library work
+Parsing entity <char_gen>.
+Parsing architecture <Behavioral> of entity <char_gen>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\uart_i2c_bridge_components.vhd" into library work
+Parsing package <uart_i2c_bridge_components>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" into library work
+Parsing entity <uart_i2c_master>.
+Parsing architecture <Behavioral> of entity <uart_i2c_master>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\slave_reg.vhd" into library work
+Parsing entity <slave_reg>.
+Parsing architecture <Behavioral> of entity <slave_reg>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\falling_edge_det.vhd" into library work
+Parsing entity <falling_edge_det>.
+Parsing architecture <Behavioral> of entity <falling_edge_det>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\LCD_controller\lcd_driver.vhd" into library work
+Parsing entity <lcd_driver>.
+Parsing architecture <Behavioral> of entity <lcd_driver>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\uart_i2c_bridge.vhd" into library work
+Parsing entity <uart_i2c_bridge>.
+Parsing architecture <Behavioral> of entity <uart_i2c_bridge>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\ipcore_dir\dcm24_to_50.vhd" into library work
+Parsing entity <dcm24_to_50>.
+Parsing architecture <xilinx> of entity <dcm24_to_50>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart_components.vhd" into library work
+Parsing package <i2c_via_uart_components>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_bus\i2c_slave.vhd" into library work
+Parsing entity <i2c_slave>.
+Parsing architecture <Behavioral> of entity <i2c_slave>.
+Parsing VHDL file "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" into library work
+Parsing entity <i2c_via_uart>.
+Parsing architecture <Behavioral> of entity <i2c_via_uart>.
+WARNING:HDLCompiler:946 - "D:\BSc_workspace\Bachelor_work\I2C_Emulation_Via_Serial\i2c_via_uart.vhd" Line 83: Actual for formal port reset is neither a static name nor a globally static expression
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 2.20 secs
+ 
+--> 
+
+Total memory usage is 218240 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+
