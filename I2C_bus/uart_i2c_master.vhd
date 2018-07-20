@@ -76,6 +76,8 @@ architecture Behavioral of uart_i2c_master is
 	signal sSCL							: std_logic;																					-- SCL signal
 	
 	signal sTC							: std_logic;																					-- Frequency clock divider terminal count
+	signal sFREQ_RST					: std_logic;																					-- Frequency clock divider reset
+	signal sFREQ_RST_SEL				: std_logic;																					-- Frequency clock divider reset selection
 	signal sFREQ_EN					: std_logic;																					-- Frequency clock divider enable 
 
 	signal sSDA_BUFF_EN	 	   	: std_logic;																					-- SDA output tri-state buffer enable
@@ -262,10 +264,14 @@ begin
 	eCLK_FREQ_DIV : entity work.i2c_clk_freq_div
 			Port map(
 				iCLK		=> iCLK,
-				inRST 	=> inRST,
+				inRST 	=> sFREQ_RST,
 				iFREQ_EN => sFREQ_EN,
 				oTC   	=>	sTC		
-			);		
+			);	
+
+	-- I2C bus clock frequency divider reset
+	sFREQ_RST <= '0' when sFREQ_RST_SEL = '1' else
+						  inRST;			
 	
 	-- FSM state register process
 	fsm_reg : process (iCLK, inRST) begin
@@ -468,6 +474,7 @@ begin
 		sDATA_FIFO_RST_SEL	<= '0';
 		sSCL_EN				 	<= '0';	
 		sSCL_RST					<= '0';
+		sFREQ_RST_SEL			<= '0';
 		sFREQ_EN 			 	<= '0';
 		oUART_READ  		 	<= '0';
 		oUART_WRITE			 	<= '0';
@@ -492,12 +499,12 @@ begin
 			-- Master control signals
 			when IDLE =>
 				sSDA_BUFF_EN 		 	<= '1';
-				--sIUART_REG_EN  	 	<= '1';
 				sACK_SEL		 		 	<= '1';
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  	 	<= '1';
 					oUART_READ  		 	<= '1';
 				end if;
+				sFREQ_RST_SEL			<= '1';
 				sBYTE_CNT_RST 		 	<= '1';	
 				sDATA_BYTE_CNT_RST 	<= '1';		
 				sDATA_FIFO_RST_SEL	<= '1';	
@@ -528,7 +535,6 @@ begin
 				sACK_SEL		 		 	<= '1';					
 			when UART_DATA_BYTE =>
 				sSDA_BUFF_EN 		 	<= '1';
-				--sIUART_REG_EN  		<= '1';
 				sACK_SEL		 		 	<= '1';	
 				if (iUART_EMPTY = '0') then
 					sIUART_REG_EN  	 	<= '1';

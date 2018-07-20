@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.15 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.15 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Reading design: i2c_via_uart.prj
 
@@ -403,8 +403,8 @@ Synthesizing Unit <uart_i2c_master>.
         TR_PERIOD_CNT_WIDTH = 5
         PERIOD_CNT_WIDTH = 4
         LCD_BUS_WIDTH = 4
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 212: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 212: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 214: Output port <oFULL> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" line 214: Output port <oEMPTY> of the instance <eDATA_FIFO> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <sACK_FF>.
     Found 4-bit register for signal <sDATA_CNT>.
     Found 4-bit register for signal <sPERIOD_CNT>.
@@ -428,21 +428,21 @@ INFO:Xst:3210 - "D:\BSc_workspace\Bachelor_work\I2C_bus\uart_i2c_master.vhd" lin
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 4-bit adder for signal <sDATA_CNT[3]_GND_26_o_add_91_OUT> created at line 786.
-    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_26_o_add_95_OUT> created at line 799.
-    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_26_o_add_100_OUT> created at line 812.
-    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_26_o_add_105_OUT> created at line 825.
-    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_26_o_add_111_OUT> created at line 842.
-    Found 8-bit subtractor for signal <GND_26_o_GND_26_o_sub_42_OUT<7:0>> created at line 444.
-    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 882.
-    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 895.
-    Found 1-bit tristate buffer for signal <ioSDA> created at line 931
-    Found 8-bit comparator greater for signal <GND_26_o_sBYTE_NUM_REG[7]_LessThan_7_o> created at line 298
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_10_o> created at line 306
-    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_26_o_equal_43_o> created at line 444
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_51_o> created at line 629
-    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_52_o> created at line 631
-    Found 8-bit comparator equal for signal <n0056> created at line 679
+    Found 4-bit adder for signal <sDATA_CNT[3]_GND_26_o_add_92_OUT> created at line 794.
+    Found 8-bit adder for signal <sDATA_BYTE_CNT[7]_GND_26_o_add_96_OUT> created at line 807.
+    Found 8-bit adder for signal <sBYTE_CNT[7]_GND_26_o_add_101_OUT> created at line 820.
+    Found 4-bit adder for signal <sPERIOD_CNT[3]_GND_26_o_add_106_OUT> created at line 833.
+    Found 5-bit adder for signal <sTR_PERIOD_CNT[4]_GND_26_o_add_112_OUT> created at line 850.
+    Found 8-bit subtractor for signal <GND_26_o_GND_26_o_sub_42_OUT<7:0>> created at line 450.
+    Found 8-bit 3-to-1 multiplexer for signal <sREG_MUX> created at line 890.
+    Found 8-bit 4-to-1 multiplexer for signal <sOUART_REG_MUX> created at line 903.
+    Found 1-bit tristate buffer for signal <ioSDA> created at line 939
+    Found 8-bit comparator greater for signal <GND_26_o_sBYTE_NUM_REG[7]_LessThan_7_o> created at line 304
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_sBYTE_NUM_REG[7]_equal_10_o> created at line 312
+    Found 8-bit comparator equal for signal <sDATA_BYTE_CNT[7]_GND_26_o_equal_43_o> created at line 450
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_51_o> created at line 637
+    Found 5-bit comparator greater for signal <sTR_PERIOD_CNT[4]_GND_26_o_LessThan_52_o> created at line 639
+    Found 8-bit comparator equal for signal <n0056> created at line 687
     Summary:
 	inferred   6 Adder/Subtractor(s).
 	inferred  46 D-type flip-flop(s).
@@ -1174,17 +1174,17 @@ Top Level Output File Name         : i2c_via_uart.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 1500
+# BELS                             : 1507
 #      GND                         : 1
 #      INV                         : 13
 #      LUT1                        : 34
-#      LUT2                        : 52
-#      LUT3                        : 333
-#      LUT4                        : 140
-#      LUT5                        : 176
-#      LUT6                        : 546
+#      LUT2                        : 58
+#      LUT3                        : 335
+#      LUT4                        : 134
+#      LUT5                        : 178
+#      LUT6                        : 550
 #      MUXCY                       : 58
-#      MUXF7                       : 59
+#      MUXF7                       : 58
 #      MUXF8                       : 24
 #      VCC                         : 1
 #      XORCY                       : 63
@@ -1212,14 +1212,14 @@ Selected Device : 6slx45fgg676-2
 
 Slice Logic Utilization: 
  Number of Slice Registers:            1087  out of  54576     1%  
- Number of Slice LUTs:                 1294  out of  27288     4%  
-    Number used as Logic:              1294  out of  27288     4%  
+ Number of Slice LUTs:                 1302  out of  27288     4%  
+    Number used as Logic:              1302  out of  27288     4%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1646
-   Number with an unused Flip Flop:     559  out of   1646    33%  
-   Number with an unused LUT:           352  out of   1646    21%  
-   Number of fully used LUT-FF pairs:   735  out of   1646    44%  
+ Number of LUT Flip Flop pairs used:   1655
+   Number with an unused Flip Flop:     568  out of   1655    34%  
+   Number with an unused LUT:           353  out of   1655    21%  
+   Number of fully used LUT-FF pairs:   734  out of   1655    44%  
    Number of unique control sets:       116
 
 IO Utilization: 
@@ -1273,7 +1273,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'iCLK'
   Clock period: 15.156ns (frequency: 65.979MHz)
-  Total number of paths / destination ports: 33032 / 2182
+  Total number of paths / destination ports: 32613 / 2187
 -------------------------------------------------------------------------
 Delay:               7.275ns (Levels of Logic = 5)
   Source:            eI2C_SLAVE/sCURRENT_STATE_FSM_FFd5 (FF)
@@ -1378,12 +1378,12 @@ iCLK           |    7.275|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 14.00 secs
-Total CPU time to Xst completion: 13.49 secs
+Total REAL time to Xst completion: 13.00 secs
+Total CPU time to Xst completion: 12.97 secs
  
 --> 
 
-Total memory usage is 261644 kilobytes
+Total memory usage is 262668 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    7 (   0 filtered)

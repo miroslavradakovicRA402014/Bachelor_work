@@ -29,8 +29,8 @@ WARNING:HDLCompiler:946 - "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Seri
 Parsing VHDL file "D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 172076 KB
-Fuse CPU Usage: 359 ms
+Fuse Memory Usage: 171564 KB
+Fuse CPU Usage: 296 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package numeric_std
@@ -74,8 +74,8 @@ Compiling architecture behavioral of entity lcd_driver [\lcd_driver(4,3,2,3,3,4,
 Compiling architecture behavioral of entity i2c_via_uart [\i2c_via_uart(3,2,4,8)\]
 Compiling architecture behavior of entity i2c_via_uart_tb
 Time Resolution for simulation is 1ps.
-Waiting for 1 sub-compilation(s) to finish...
+Waiting for 4 sub-compilation(s) to finish...
 Compiled 70 VHDL Units
 Built simulation executable D:/BSc_workspace/Bachelor_work/I2C_Emulation_Via_Serial/i2c_via_uart_tb_isim_beh.exe
-Fuse Memory Usage: 215404 KB
-Fuse CPU Usage: 1343 ms
+Fuse Memory Usage: 215916 KB
+Fuse CPU Usage: 1296 ms

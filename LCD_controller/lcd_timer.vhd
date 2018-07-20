@@ -44,7 +44,7 @@ begin
 		if (inRST = '0') then
 			sCLK_CNT <= (others => '0'); -- Reset counter
 		elsif (iCLK'event and iCLK = '1') then
-			if (sCLK_CNT = CLK_PERIOD_NUMBER - 1) then
+			if (sCLK_CNT = CLK_PERIOD_NUMBER) then
 				sCLK_CNT <= (others => '0'); -- Reset counter
 			elsif (iTIMER_EN = '1') then
 				sCLK_CNT <= sCLK_CNT + 1; -- Count period
@@ -53,7 +53,7 @@ begin
 	end process clk_cnt;
 	
 	-- Terminal count statement
-	oTC <= '1' when sCLK_CNT = CLK_PERIOD_NUMBER - 1 else
+	oTC <= '1' when sCLK_CNT = CLK_PERIOD_NUMBER else
 			 '0'; 
 
 end Behavioral;

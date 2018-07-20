@@ -21,7 +21,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="45" />
+   <WVObjectSize size="51" />
    <wave_markers>
       <marker time="-2499999999000" label="" />
       <marker time="-2499999999000" label="" />
@@ -34,6 +34,7 @@
       <marker time="259000000000000" label="" />
       <marker time="405156876600000" label="" />
       <marker time="704825297400000" label="" />
+      <marker time="49715595720000" label="" />
    </wave_markers>
    <wvobject fp_name="/i2c_via_uart_tb/iclk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">iclk</obj_property>
@@ -333,6 +334,18 @@
       <obj_property name="ObjectShortName">sbyte_num_reg[7:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/eCLK_FREQ_DIV/sclk_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sclk_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">sclk_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/str_period_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">str_period_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">str_period_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/speriod_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">speriod_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">speriod_cnt[3:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eUART_I2C_BRIDGE/eUART_I2C_MASTER/stc_period_cnt" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">stc_period_cnt</obj_property>
       <obj_property name="ObjectShortName">stc_period_cnt</obj_property>
@@ -534,6 +547,18 @@
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/scurrent_state" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">scurrent_state</obj_property>
       <obj_property name="ObjectShortName">scurrent_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/eCLK_FREQ_DIV/sclk_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sclk_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">sclk_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/str_period_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">str_period_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">str_period_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/speriod_cnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">speriod_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">speriod_cnt[3:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/i2c_via_uart_tb/uut/eI2C_SLAVE/stc_period_cnt" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">stc_period_cnt</obj_property>
